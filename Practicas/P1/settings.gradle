@@ -13,3 +13,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Nonograma"
+include ':Engine'
+include ':PCEngine'
+include ':AndroidEngine'
+include ':PCLauncher'
+include ':androidlauncher'
+include ':Logic'
