@@ -1,4 +1,4 @@
-package com.example.engine;
+package com.nanogram.engine;
 
 public interface Graphics {
     //carga una imagen almacenada en el contenedor de recursos de la aplicación a partir de su nombre.
@@ -28,4 +28,6 @@ public interface Graphics {
     //tamaños de la ventana
     int getWindowWidth();
     int getWindowHeight();
+    //añadir una ventana
+    public void setScene(Scene s);
 }

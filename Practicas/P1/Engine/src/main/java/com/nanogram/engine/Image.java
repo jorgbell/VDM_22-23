@@ -1,4 +1,4 @@
-package com.example.engine;
+package com.nanogram.engine;
 
 public interface Image {
     int getWidth();
