@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/P0_jorgebello.iml" filepath="$PROJECT_DIR$/.idea/modules/P0_jorgebello.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.iml" filepath="$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.test.iml" filepath="$PROJECT_DIR$/.idea/modules/modPC/P0_jorgebello.modPC.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.iml" filepath="$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/modandroid/P0_jorgebello.modandroid.unitTest.iml" />
+    </modules>
+  </component>
+</project>
