@@ -26,12 +26,12 @@ public class PCFont implements Font {
 
     @Override
     public int getSize() {
-        return _size;
+        return _baseFont.getSize();
     }
 
     @Override
     public boolean isBold() {
-        return _bold;
+        return _baseFont.isBold();
     }
 
     //VARIABLES

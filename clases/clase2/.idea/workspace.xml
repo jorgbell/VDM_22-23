@@ -10,13 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc10ab03-b74c-4d83-ac3f-070d6cbf2e0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/PCEngine/src/main/java/com/nanogram/pcengine/PCFont.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/AbstractGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/AbstractGraphics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Graphics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/PCEngine/src/main/java/com/nanogram/pcengine/PCImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Practicas/P1/PCEngine/src/main/java/com/nanogram/pcengine/PCGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/PCEngine/src/main/java/com/nanogram/pcengine/PCGraphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../practicas/P1/Engine/src/main/java/com/nanogram/engine/AbstractGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../practicas/P1/Engine/src/main/java/com/nanogram/engine/AbstractGraphics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../practicas/P1/Engine/src/main/java/com/nanogram/engine/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../practicas/P1/Engine/src/main/java/com/nanogram/engine/Graphics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

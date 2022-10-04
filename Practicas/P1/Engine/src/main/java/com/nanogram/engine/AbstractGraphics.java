@@ -9,7 +9,7 @@ public class AbstractGraphics implements Graphics {
     }
 
     @Override
-    public Image newImage(String name) {
+    public Image newImage(String name) throws IOException {
         return null;
     }
 
@@ -86,6 +86,11 @@ public class AbstractGraphics implements Graphics {
     @Override
     public int getWindowHeight() {
         return 0;
+    }
+
+    @Override
+    public void setResolution() {
+
     }
 
     @Override

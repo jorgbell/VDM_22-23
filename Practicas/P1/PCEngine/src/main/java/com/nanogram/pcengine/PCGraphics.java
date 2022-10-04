@@ -61,6 +61,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
                 //parpadee. Lo que hay que hacer asi es pillar el tamaño de la ventana que le llega al evento,
                 //y cambiar el tamaño del canvas logico
                 //TODO: Cambiar el tamaño del canvas logico
+                //setResolution?¿?¿
             }
         });
 
@@ -94,8 +95,9 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public Image newImage(String name) {
-        return null;
+    public Image newImage(String name) throws IOException {
+        PCImage i = new PCImage(name);
+        return i;
     }
 
     @Override
@@ -137,7 +139,8 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void drawImage(Image image, int x, int y) {
-
+        PCImage i = (PCImage)image;
+        _graphics2D.drawImage(i._baseImage,x,y,null);
     }
 
     @Override

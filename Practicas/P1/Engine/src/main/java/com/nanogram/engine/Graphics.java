@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public interface Graphics {
     //carga una imagen almacenada en el contenedor de recursos de la aplicación a partir de su nombre.
-    Image newImage(String name);
+    Image newImage(String name) throws IOException;
     //crea una nueva fuente del tamaño especificado a partir de un fichero .ttf. Se indica si se desea o no fuente en negrita.
     Font newFont(String filename, int size, boolean isBold) throws IOException, FontFormatException;
     //borra el contenido completo de la ventana, rellenándolo con un color recibido como parámetro.
@@ -33,6 +33,7 @@ public interface Graphics {
     //tamaños de la ventana
     int getWindowWidth();
     int getWindowHeight();
+    void setResolution();
     //añadir una ventana
     public void setScene(Scene s);
 }
