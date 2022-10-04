@@ -1,5 +1,8 @@
 package com.nanogram.engine;
 
+import java.awt.FontFormatException;
+import java.io.IOException;
+
 public class AbstractGraphics implements Graphics {
     public AbstractGraphics(int w, int h){
         _windowHeight = h; _windowWidth = w;
@@ -11,7 +14,7 @@ public class AbstractGraphics implements Graphics {
     }
 
     @Override
-    public Font newFont(String filename, int size, boolean isBold) {
+    public Font newFont(String filename, int size, boolean isBold) throws IOException, FontFormatException {
         return null;
     }
 
@@ -47,7 +50,12 @@ public class AbstractGraphics implements Graphics {
 
     @Override
     public void setColor(int color) {
+        _actualColor = color;
+    }
 
+    @Override
+    public void setActualFont(Font font) {
+        _actualFont = font;
     }
 
     @Override
@@ -61,7 +69,7 @@ public class AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawLine(int initX, int initY, int endX, int endY) {
+    public void drawLine(float initX, float initY, float endX, float endY) {
 
     }
 
@@ -91,4 +99,5 @@ public class AbstractGraphics implements Graphics {
     protected int _windowHeight;
     protected Scene _myScene;
     protected int _actualColor;
+    protected Font _actualFont;
 }

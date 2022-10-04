@@ -5,12 +5,15 @@ import com.nanogram.engine.Font;
 import com.nanogram.engine.Image;
 
 import java.awt.Color;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -96,8 +99,9 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public Font newFont(String filename, int size, boolean isBold) {
-        return null;
+    public Font newFont(String filename, int size, boolean isBold) throws IOException, FontFormatException {
+        PCFont pcfont = new PCFont(filename, size, isBold);
+        return pcfont;
     }
 
     @Override
@@ -138,29 +142,37 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void setColor(int color) {
-        _actualColor = color;
+        super.setColor(color);
         Color jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
 
     @Override
-    public void fillSquare(int cx, int cy, int side) {
+    public void setActualFont(Font font){
+        super.setActualFont(font);
+        PCFont f = (PCFont)font;
+        java.awt.Font javaFont = f._baseFont;
+        _graphics2D.setFont(javaFont);
+    }
 
+    @Override
+    public void fillSquare(int cx, int cy, int side) {
+        _graphics2D.fillRect(cx,cy,side,side);
     }
 
     @Override
     public void drawSquare(int cx, int cy, int side) {
-
+        _graphics2D.drawRect(cx,cy,side,side);
     }
 
     @Override
-    public void drawLine(int initX, int initY, int endX, int endY) {
-
+    public void drawLine(float initX, float initY, float endX, float endY) {
+        Line2D line = new Line2D.Float(initX, initY, endX, endY);
     }
 
     @Override
     public void drawText(String text, int x, int y) {
-
+        _graphics2D.drawString(text, x, y);
     }
 
     @Override
