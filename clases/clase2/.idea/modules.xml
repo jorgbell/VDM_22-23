@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/clase3.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/clase3.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/clase3.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/clase3.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/clase3.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/clase3.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/clase3.mylibrary.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.iml" filepath="$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.test.iml" filepath="$PROJECT_DIR$/.idea/modules/pcexample/clase3.pcexample.test.iml" />

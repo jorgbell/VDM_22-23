@@ -1,11 +1,2 @@
-SOL
-	Lógica
-EVA
-	Lógica
-JORGE
-	Implementar Graphics en Android y PC
-	Implementar Engine en Android y PC
 	
-SIN ASIGNAR (para que paralelicen Sol y Eva)
-	Implementar en Android y PC el resto de interfaces que estan en el modulo Engine (Game.java puede esperar)
-	Crear clases Abstractas en el modulo Engine
+MIRAR QUE ES ESTO DEL STATE
