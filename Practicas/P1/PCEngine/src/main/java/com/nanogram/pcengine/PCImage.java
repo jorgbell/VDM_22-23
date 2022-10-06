@@ -8,8 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class PCImage implements Image {
-    PCImage(String path) throws IOException {
-        _baseImage = ImageIO.read(new File(path));
+    PCImage(String path){
+        try {
+            _baseImage = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
