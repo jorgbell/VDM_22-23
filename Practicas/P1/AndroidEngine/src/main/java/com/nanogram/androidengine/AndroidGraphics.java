@@ -76,7 +76,10 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void setActualFont(Font font) {
-
+        super.setActualFont(font);
+        AndroidFont f = (AndroidFont) font;
+        _paint.setTypeface(f._font);
+        _paint.setTextSize(_actualFont.getSize());
     }
 
     @Override
@@ -100,7 +103,7 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void drawText(String text, int x, int y) {
-
+        _canvas.drawText(text, x, y, _paint);
     }
 
     @Override

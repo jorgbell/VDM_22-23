@@ -17,12 +17,10 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 
-
-
 public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstractGraphics
 
-    public PCGraphics(String windowName, int w, int h){     //el w y el h igual hay que tocarlos, ahora mismo son el de la ventana
-        super(w,h);
+    public PCGraphics(String windowName, int w, int h) {     //el w y el h igual hay que tocarlos, ahora mismo son el de la ventana
+        super(w, h);
         //inicializar JFrame
         _myView = new JFrame(windowName);
         _myView.setSize(_windowWidth, _windowHeight);
@@ -36,29 +34,26 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     private void createBufferStrategy() {
         // Intentamos crear el buffer strategy con 2 buffers.
         int intentos = 100;
-        while(intentos-- > 0) {
+        while (intentos-- > 0) {
             try {
                 _myView.createBufferStrategy(2);
                 break;
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
             }
         } // while pidiendo la creación de la buffeStrategy
         if (intentos == 0) {
             System.err.println("No pude crear la BufferStrategy");
             return;
-        }
-        else {
+        } else {
             // En "modo debug" podríamos querer escribir esto.
             //System.out.println("BufferStrategy tras " + (100 - intentos) + " intentos.");
         }
 
         //esto se ejecuta cada vez que se cambia el tamaño de la ventana
-        _myView.addComponentListener(new ComponentAdapter()
-        {
+        _myView.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent evt) {
                 //Component c = (Component)evt.getSource();
-                System.out.println("componentResized: "+evt.getSource());
+                System.out.println("componentResized: " + evt.getSource());
                 //este codigo que habia aqui (lo elimine) se carga el canvas y lo crea de nuevo, es lo que hacia que en el ejemplo
                 //parpadee. Lo que hay que hacer asi es pillar el tamaño de la ventana que le llega al evento,
                 //y cambiar el tamaño del canvas logico
@@ -67,30 +62,29 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
             }
         });
 
-        _bufferStrategy =_myView.getBufferStrategy();
+        _bufferStrategy = _myView.getBufferStrategy();
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
     }
 
-    public void paintFrame(){
+    public void paintFrame() {
         // Pintamos el frame
         do {
             do {
                 Graphics g = _bufferStrategy.getDrawGraphics();
                 try {
                     render();
-                }
-                finally {
+                } finally {
                     g.dispose(); //Elimina el contexto gráfico y libera recursos del sistema realacionado
                 }
-            } while(_bufferStrategy.contentsRestored());
+            } while (_bufferStrategy.contentsRestored());
             _bufferStrategy.show();
-        } while(_bufferStrategy.contentsLost());
+        } while (_bufferStrategy.contentsLost());
 
     }
 
 
     @Override
-    public Image newImage(String name){
+    public Image newImage(String name) {
         PCImage i = new PCImage(name);
         return i;
     }
@@ -106,19 +100,19 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(color);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0,0, getWindowWidth(), getWindowHeight());
+        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
 
     @Override
     public void translate(int x, int y) {
-        _graphics2D.translate(x,y);
+        _graphics2D.translate(x, y);
     }
 
     @Override
     public void scale(int x, int y) {
-        _graphics2D.scale(x,y);
+        _graphics2D.scale(x, y);
     }
 
     @Override
@@ -128,14 +122,14 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void restore() {
-        if(_save!=null)
+        if (_save != null)
             _graphics2D.setTransform(_save);
     }
 
     @Override
     public void drawImage(Image image, int x, int y) {
-        PCImage i = (PCImage)image;
-        _graphics2D.drawImage(i._baseImage,x,y,null);
+        PCImage i = (PCImage) image;
+        _graphics2D.drawImage(i._baseImage, x, y, null);
     }
 
     @Override
@@ -146,21 +140,21 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void setActualFont(Font font){
+    public void setActualFont(Font font) {
         super.setActualFont(font);
-        PCFont f = (PCFont)font;
+        PCFont f = (PCFont) font;
         java.awt.Font javaFont = f._baseFont;
         _graphics2D.setFont(javaFont);
     }
 
     @Override
     public void fillSquare(int cx, int cy, int side) {
-        _graphics2D.fillRect(cx,cy,side,side);
+        _graphics2D.fillRect(cx, cy, side, side);
     }
 
     @Override
     public void drawSquare(int cx, int cy, int side) {
-        _graphics2D.drawRect(cx,cy,side,side);
+        _graphics2D.drawRect(cx, cy, side, side);
     }
 
     @Override
@@ -192,7 +186,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     public void render() {
         // "Borramos" el fondo.
         _graphics2D.setColor(Color.BLUE);
-        _graphics2D.fillRect(0,0, getWindowWidth(), getWindowHeight());
+        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
         // Pintamos la escena
         _myScene.render();
     }
