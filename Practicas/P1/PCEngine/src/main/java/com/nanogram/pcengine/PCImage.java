@@ -26,8 +26,6 @@ public class PCImage implements Image {
         return _baseImage.getHeight(null);
     }
 
-    //VARIABLES
-    int _width;
-    int _height;
+
     public java.awt.Image _baseImage;
 }
