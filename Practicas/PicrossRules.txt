@@ -1,0 +1,9 @@
+Basicas (Desde 0)
+- linea vacia
+- lines llena
+- Si la suma de los numeros y los espacios = max
+- Si el numero es mayor que la mitad del max, se rellena la diferencia hacia ambos lados = Boolean AND
+- Si la suma de los numeros + espacios es mayor a la mitad del max Y al menos uno de ellos es mayor 
+	que el max - la suma de los numero y los espacios -> Boolean AND
+	(no hace falta probar todas las opciones posibles, se puede tratar la linea(numeros+espacios minimos) como un bloque)
+
