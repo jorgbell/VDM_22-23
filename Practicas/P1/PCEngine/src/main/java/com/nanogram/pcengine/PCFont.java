@@ -1,6 +1,6 @@
 package com.nanogram.pcengine;
 
-import com.nanogram.engine.Font;
+import com.nanogram.engine.AbstractFont;
 
 import java.awt.FontFormatException;
 import java.io.FileInputStream;
@@ -8,12 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PCFont implements Font {
+public class PCFont extends AbstractFont {
 
     public PCFont(String p, int s, boolean b) {
-        _filePath = p;
-        _size = s;
-        _bold = b;
+        super(p,s,b);
         InputStream is = null;
         try {
             is = new FileInputStream(_filePath);
@@ -45,7 +43,5 @@ public class PCFont implements Font {
 
     //VARIABLES
     public java.awt.Font _baseFont;
-    String _filePath;
-    int _size;
-    boolean _bold;
+
 }
