@@ -2,5 +2,5 @@ package com.nonogram.engine;
 
 public interface Scene {
     void render();
-    void update();
+    void update(double deltaTime);
 }

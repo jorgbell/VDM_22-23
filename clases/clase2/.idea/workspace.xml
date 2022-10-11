@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc10ab03-b74c-4d83-ac3f-070d6cbf2e0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nonogram/engine/AbstractEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nonogram/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nonogram/engine/Engine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/PCEngine/src/main/java/com/nonogram/pcengine/PCEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

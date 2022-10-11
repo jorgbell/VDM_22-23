@@ -65,13 +65,14 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
     }
 
-    public void paintFrame() {
+    @Override
+    public void render() {
         // Pintamos el frame
         do {
             do {
                 Graphics g = _bufferStrategy.getDrawGraphics();
                 try {
-                    render();
+                    paintFrame();
                 } finally {
                     g.dispose(); //Elimina el contexto gráfico y libera recursos del sistema realacionado
                 }
@@ -181,8 +182,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     }
 
-    @Override
-    public void render() {
+    protected void paintFrame() {
         // "Borramos" el fondo.
         _graphics2D.setColor(Color.BLUE);
         _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());

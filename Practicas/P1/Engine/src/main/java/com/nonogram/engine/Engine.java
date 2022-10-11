@@ -7,4 +7,7 @@ public interface Engine {
     double getDeltaTime();
     boolean stop();
     void run();
+    void resume();
+    void pause();
+    void update();
 }
