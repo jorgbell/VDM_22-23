@@ -1,4 +1,4 @@
-package com.nanogram.androidengine;
+package com.nonogram.androidengine;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,12 +8,9 @@ import android.view.SurfaceView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nanogram.engine.AbstractGraphics;
-import com.nanogram.engine.Font;
-import com.nanogram.engine.Graphics;
-import com.nanogram.engine.Image;
-import com.nanogram.engine.Scene;
-
+import com.nonogram.engine.AbstractGraphics;
+import com.nonogram.engine.Font;
+import com.nonogram.engine.Image;
 
 
 public class AndroidGraphics extends AbstractGraphics {

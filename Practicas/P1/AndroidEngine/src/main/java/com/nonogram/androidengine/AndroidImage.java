@@ -1,10 +1,10 @@
-package com.nanogram.androidengine;
+package com.nonogram.androidengine;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.nanogram.engine.AbstractImage;
+import com.nonogram.engine.AbstractImage;
 
 import java.io.IOException;
 import java.io.InputStream;

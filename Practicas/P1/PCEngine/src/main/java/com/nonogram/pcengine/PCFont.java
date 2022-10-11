@@ -1,6 +1,6 @@
-package com.nanogram.pcengine;
+package com.nonogram.pcengine;
 
-import com.nanogram.engine.AbstractFont;
+import com.nonogram.engine.AbstractFont;
 
 import java.awt.FontFormatException;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.nanogram.logic;
+package com.nonogram.logic;
 
 public class Tablero {
 

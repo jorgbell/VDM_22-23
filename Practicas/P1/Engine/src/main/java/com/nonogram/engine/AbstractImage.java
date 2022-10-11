@@ -1,4 +1,4 @@
-package com.nanogram.engine;
+package com.nonogram.engine;
 
 public abstract class AbstractImage implements Image{
 

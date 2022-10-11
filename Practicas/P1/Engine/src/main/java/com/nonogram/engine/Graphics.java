@@ -1,7 +1,4 @@
-package com.nanogram.engine;
-
-import java.awt.FontFormatException;
-import java.io.IOException;
+package com.nonogram.engine;
 
 public interface Graphics {
     //carga una imagen almacenada en el contenedor de recursos de la aplicación a partir de su nombre.

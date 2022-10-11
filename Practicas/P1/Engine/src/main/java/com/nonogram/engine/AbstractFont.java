@@ -1,4 +1,4 @@
-package com.nanogram.engine;
+package com.nonogram.engine;
 
 public abstract class AbstractFont implements Font{
     protected AbstractFont(String p, int s, boolean b){

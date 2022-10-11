@@ -1,9 +1,8 @@
-package com.nanogram.pcengine;
+package com.nonogram.pcengine;
 
-import com.nanogram.engine.AbstractGraphics;
-import com.nanogram.engine.Font;
-import com.nanogram.engine.Image;
-import com.nanogram.engine.Scene;
+import com.nonogram.engine.AbstractGraphics;
+import com.nonogram.engine.Font;
+import com.nonogram.engine.Image;
 
 import java.awt.Color;
 import java.awt.Graphics;
