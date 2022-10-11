@@ -14,7 +14,7 @@ import com.nanogram.engine.Graphics;
 import com.nanogram.engine.Image;
 import com.nanogram.engine.Scene;
 
-import java.io.IOException;
+
 
 public class AndroidGraphics extends AbstractGraphics {
     public AndroidGraphics(AppCompatActivity c, int w, int h) {
@@ -30,7 +30,8 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public Image newImage(String name) {
-        return null;
+        AndroidImage aimage = new AndroidImage(name, _context.getAssets());
+        return aimage;
     }
 
     @Override
@@ -66,7 +67,10 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void drawImage(Image image, int x, int y) {
-
+        AndroidImage aI = (AndroidImage) image;
+        if(aI._getBitmap()!=null){
+            _canvas.drawBitmap(aI._getBitmap(),x,y,_paint);
+        }
     }
 
     @Override

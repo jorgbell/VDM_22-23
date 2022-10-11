@@ -22,12 +22,12 @@ public class AndroidFont extends AbstractFont {
 
     @Override
     public int getSize() {
-        return 0;
+        return _size;
     }
 
     @Override
     public boolean isBold() {
-        return false;
+        return _bold;
     }
 
     //VARIABLES

@@ -2,6 +2,10 @@ package com.nanogram.engine;
 
 public abstract class AbstractImage implements Image{
 
+    protected AbstractImage(String s){
+        _path = s;
+    }
+
     @Override
     public int getWidth() {
         return _width;
@@ -12,6 +16,7 @@ public abstract class AbstractImage implements Image{
         return _height;
     }
     //VARIABLES
-    int _width;
-    int _height;
+    protected int _width;
+    protected int _height;
+    protected String _path;
 }

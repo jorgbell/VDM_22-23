@@ -10,22 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc10ab03-b74c-4d83-ac3f-070d6cbf2e0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/AndroidEngine/src/main/java/com/nanogram/androidengine/AndroidGraphics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/consumer-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/src/androidTest/java/com/example/mylibrary/ExampleInstrumentedTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mylibrary/src/test/java/com/example/mylibrary/ExampleUnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/P1/Engine/src/main/java/com/nanogram/engine/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Practicas/TODOP1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practicas/TODOP1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Practicas/P1/AndroidEngine/src/main/java/com/nanogram/androidengine/AndroidImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../practicas/P1/AndroidEngine/src/main/java/com/nanogram/androidengine/AndroidGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../practicas/P1/AndroidEngine/src/main/java/com/nanogram/androidengine/AndroidGraphics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../practicas/P1" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
