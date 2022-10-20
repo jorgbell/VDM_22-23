@@ -184,7 +184,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     protected void paintFrame() {
         // "Borramos" el fondo.
-        _graphics2D.setColor(Color.BLUE);
+        _graphics2D.setColor(Color.WHITE);
         _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
         // Pintamos la escena
         _myScene.render();

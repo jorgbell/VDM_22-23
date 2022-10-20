@@ -1,9 +1,11 @@
 package com.nonogram.engine;
 
-public  class AbstractEngine implements Engine, Runnable /*Arreglar el tema del run. En el metodo run() de Runnable deberia lanzar el run() de PCEngine y AndroidEngine.*/{
+public class AbstractEngine implements Engine, Runnable /*Arreglar el tema del run. En el metodo run() de Runnable deberia lanzar el run() de PCEngine y AndroidEngine.*/ {
 
-    protected AbstractEngine(){
-
+    //TODO: meter input etcetc
+    protected AbstractEngine(Graphics g, Scene inicial) {
+        _myGraphics = g;
+        setScene(inicial);
     }
 
     @Override
@@ -24,9 +26,10 @@ public  class AbstractEngine implements Engine, Runnable /*Arreglar el tema del 
     @Override
     public double getDeltaTime() {
         long currentTime = System.nanoTime();
-        double elapsedTime = (double)(currentTime - _lastFrameTime) / 1.0E9;
+        double elapsedTime = (double) (currentTime - _lastFrameTime) / 1.0E9;
         _lastFrameTime = currentTime;
-        return elapsedTime;    }
+        return elapsedTime;
+    }
 
     @Override
     public boolean stop() {
@@ -43,10 +46,17 @@ public  class AbstractEngine implements Engine, Runnable /*Arreglar el tema del 
         }
         // Si el Thread se pone en marcha
         // muy rápido, la vista podría todavía no estar inicializada.
-        while(_running && _myGraphics.getWindowWidth() == 0);
+        while (_running && _myGraphics.getWindowWidth() == 0) ;
         // Espera activa. Sería más elegante al menos dormir un poco.
         _lastFrameTime = System.nanoTime();
 
+        // Bucle de juego principal.
+        //TODO: COMPROBAR QUE ESTE LLAMANDO A LOS DE ANDROID Y PC
+        while (_running) {
+            update();
+            //input
+            _myGraphics.render();
+        }
     }
 
     @Override
@@ -77,11 +87,17 @@ public  class AbstractEngine implements Engine, Runnable /*Arreglar el tema del 
         }
     }
 
+
     @Override
     public void update() {
         _myScene.update(getDeltaTime());
     }
 
+    @Override
+    public void setScene(Scene s) {
+        _myScene = s;
+        _myGraphics.setScene(s);
+    }
 
 
     //VARIABLES

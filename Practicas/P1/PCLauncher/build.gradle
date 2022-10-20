@@ -8,5 +8,7 @@ java {
 }
 
 dependencies {
-    implementation project(path: ':PCEngine')
+    api project(path: ':Logic')
+    api project(path: ':PCEngine')
+    implementation project(path: ':Engine')
 }

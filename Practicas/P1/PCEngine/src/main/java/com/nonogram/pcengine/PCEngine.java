@@ -1,23 +1,17 @@
 package com.nonogram.pcengine;
 
 import com.nonogram.engine.AbstractEngine;
+import com.nonogram.engine.Scene;
 
-public class PCEngine extends AbstractEngine /*implements Runnable?? preguntar sobre esto*/{
+public class PCEngine extends AbstractEngine{
 
-    public PCEngine(){
-        super();
+    public PCEngine(String windowName, int w, int h, Scene inicial){
+        super(new PCGraphics(windowName, w, h), inicial);
+        _myScene.setEngine(this);
     }
 
     @Override
-    public void run() {
-        super.run();
-        // Bucle de juego principal.
-        while(_running){
-            update();
-            _myGraphics.render();
-        }
-
-
+    public void resume() {
+        super.resume();
     }
-
 }
