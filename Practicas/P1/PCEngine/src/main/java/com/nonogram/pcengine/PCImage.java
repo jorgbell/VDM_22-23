@@ -1,6 +1,6 @@
-package com.nanogram.pcengine;
+package com.nonogram.pcengine;
 
-import com.nanogram.engine.Image;
+import com.nonogram.engine.Image;
 
 import java.io.File;
 import java.io.IOException;

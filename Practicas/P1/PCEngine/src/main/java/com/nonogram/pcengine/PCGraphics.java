@@ -1,9 +1,8 @@
-package com.nanogram.pcengine;
+package com.nonogram.pcengine;
 
-import com.nanogram.engine.AbstractGraphics;
-import com.nanogram.engine.Font;
-import com.nanogram.engine.Image;
-import com.nanogram.engine.Scene;
+import com.nonogram.engine.AbstractGraphics;
+import com.nonogram.engine.Font;
+import com.nonogram.engine.Image;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -66,13 +65,14 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
     }
 
-    public void paintFrame() {
+    @Override
+    public void render() {
         // Pintamos el frame
         do {
             do {
                 Graphics g = _bufferStrategy.getDrawGraphics();
                 try {
-                    render();
+                    paintFrame();
                 } finally {
                     g.dispose(); //Elimina el contexto gráfico y libera recursos del sistema realacionado
                 }
@@ -182,10 +182,9 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     }
 
-    @Override
-    public void render() {
+    protected void paintFrame() {
         // "Borramos" el fondo.
-        _graphics2D.setColor(Color.BLUE);
+        _graphics2D.setColor(Color.WHITE);
         _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
         // Pintamos la escena
         _myScene.render();

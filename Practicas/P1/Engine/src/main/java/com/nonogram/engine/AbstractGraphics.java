@@ -1,7 +1,4 @@
-package com.nanogram.engine;
-
-import java.awt.FontFormatException;
-import java.io.IOException;
+package com.nonogram.engine;
 
 public abstract class AbstractGraphics implements Graphics {
     public AbstractGraphics(int w, int h){

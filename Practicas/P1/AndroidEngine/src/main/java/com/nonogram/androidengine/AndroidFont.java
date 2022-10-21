@@ -1,10 +1,10 @@
-package com.nanogram.androidengine;
+package com.nonogram.androidengine;
 
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
-import com.nanogram.engine.AbstractFont;
+import com.nonogram.engine.AbstractFont;
 
 public class AndroidFont extends AbstractFont {
 
@@ -22,12 +22,12 @@ public class AndroidFont extends AbstractFont {
 
     @Override
     public int getSize() {
-        return 0;
+        return _size;
     }
 
     @Override
     public boolean isBold() {
-        return false;
+        return _bold;
     }
 
     //VARIABLES

@@ -1,4 +1,4 @@
-package com.nanogram.logic;
+package com.nonogram.logic;
 
 import java.util.Vector;
 import java.util.Random;
