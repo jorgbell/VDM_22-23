@@ -160,6 +160,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     @Override
     public void drawLine(float initX, float initY, float endX, float endY) {
         Line2D line = new Line2D.Float(initX, initY, endX, endY);
+        _graphics2D.drawLine((int)initX, (int)initY, (int)endX, (int)endY);
     }
 
     @Override

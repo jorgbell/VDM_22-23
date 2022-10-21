@@ -5,18 +5,71 @@ import com.nonogram.engine.Scene;
 
 public class PruebaScene implements Scene{
 
-    public PruebaScene(){
+    Tablero t;
+    int h;
+    int w;
+    boolean initialized = false;
+    boolean show = false;
+    float time = 20;
+    int size = 15;
 
+    public PruebaScene()
+    {
     }
 
     @Override
     public void render() {
-        _myEngine.getGraphics().clear(0);
+       // _myEngine.getGraphics().clear(255, );
+
+        int width = w - 200;
+        int leftmargin = 20;
+        int downmargin = 50;
+
+
+        _myEngine.getGraphics().setColor(100);
+
+       // _myEngine.getGraphics().drawLine(35, 40, w, w);
+
+        for(int i = 0; i <= size; i++) _myEngine.getGraphics().drawLine(leftmargin + ((leftmargin +width) / size) * i, downmargin, leftmargin + ((leftmargin +width) / size) * i, downmargin + downmargin + width);
+        for(int i = 0; i <= size; i++) _myEngine.getGraphics().drawLine(leftmargin,downmargin + ((downmargin + width) / size) * i, leftmargin + leftmargin + width, downmargin + ((downmargin + width) / size) * i);
+
+        for(int i = 0; i < size; i++)
+        {
+            if(show)
+            {
+                for(int j = 0; j < size; j++)
+                {
+                    if(t.tablero[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
+                }
+            }
+
+            _myEngine.getGraphics().drawText(t.filas[i].numbers, leftmargin + leftmargin + width + 5, 15 + downmargin + ((downmargin + width) / size) * i);
+        }
+
+        for(int i = 0; i < size; i++)
+        {
+            String[] s = t.columnas[i].numbers.split("\\.");
+
+            for(int j = 0; j < s.length; j++) _myEngine.getGraphics().drawText(s[j],5 + leftmargin + ((leftmargin + width) / size) * i, 20 + downmargin + downmargin + width + j * 20);
+        }
+
+        _myEngine.getGraphics().drawText("Show result in: " + (int)time, 285, 200);
     }
 
     @Override
-    public void update(double deltaTime) {
-        System.out.print("aaaaa");
+    public void update(double deltaTime)
+    {
+        if(!initialized)
+        {
+            init();
+            initialized = true;
+        }
+
+        else
+        {
+            if(time <= 0) show = true;
+            else  time -= deltaTime;
+        }
     }
 
     //TODO: AbstractScene
@@ -25,4 +78,13 @@ public class PruebaScene implements Scene{
         _myEngine = e;
     }
     Engine _myEngine;
+
+    void init()
+    {
+        t = new Tablero();
+        t.init(size);
+
+        h =_myEngine.getGraphics().getWindowHeight();
+        w =_myEngine.getGraphics().getWindowWidth();
+    }
 }

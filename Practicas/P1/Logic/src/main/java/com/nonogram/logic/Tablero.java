@@ -71,7 +71,7 @@ public class Tablero {
         switch (tipoFila)
         {
             case 0:
-                n = " ";
+                n = "0";
                 break;
             case 1:
                 n = String.valueOf(size);
@@ -91,7 +91,8 @@ public class Tablero {
         }
 
         filas[fila].generated = true;
-        filas[fila].numbers = "Case: " + tipoFila + "| " + n;
+        filas[fila].numbers = n;
+        //filas[fila].numbers = "Case: " + tipoFila + "| " + n;
     }
 
     private String rellenaFila(int fila, int space, int maxSize, int minSize)
@@ -123,6 +124,7 @@ public class Tablero {
 
             if(counter + 1 <= size) counter++;
         }
+        if(n == "") n = "0";
 
         return n;
     }
