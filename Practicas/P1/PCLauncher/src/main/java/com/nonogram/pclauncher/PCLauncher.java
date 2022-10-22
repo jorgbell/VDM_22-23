@@ -7,7 +7,7 @@ public class PCLauncher {
 
     PCLauncher(){
         sceneinicial = new PruebaScene();
-        _engine = new PCEngine("finestra",400,400, sceneinicial);
+        _engine = new PCEngine("finestra",800,800, sceneinicial);
     }
 
     public static void main(String[] args){
