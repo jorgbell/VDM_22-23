@@ -40,7 +40,7 @@ public class PruebaScene implements Scene{
             {
                 for(int j = 0; j < size; j++)
                 {
-                    if(t.tablero[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
+                   // if(t.solucion[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
                 }
             }
 
