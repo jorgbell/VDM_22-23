@@ -5,6 +5,11 @@ public abstract class AbstractGraphics implements Graphics {
     }
 
     @Override
+    public void setPaths(AbstractEngine.EnginePaths p){
+        _myPaths = p;
+    }
+
+    @Override
     public void setColor(int color) {
         _actualColor = color;
     }
@@ -24,4 +29,5 @@ public abstract class AbstractGraphics implements Graphics {
     protected Scene _myScene;
     protected int _actualColor;
     protected Font _actualFont;
+    protected AbstractEngine.EnginePaths _myPaths;
 }

@@ -1,4 +1,3 @@
-- AndroidLauncher y probar con lo que tengo en pruebasState el Graphics
 - Persistencia en Android para poder meter recursos y
 - Hacer pruebas de imagenes y texto para finiquitar el Graphics
 

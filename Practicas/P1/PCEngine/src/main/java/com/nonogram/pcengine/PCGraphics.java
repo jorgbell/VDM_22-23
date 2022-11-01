@@ -1,5 +1,6 @@
 package com.nonogram.pcengine;
 
+import com.nonogram.engine.AbstractEngine;
 import com.nonogram.engine.AbstractGraphics;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;

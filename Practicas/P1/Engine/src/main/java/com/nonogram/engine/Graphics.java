@@ -34,4 +34,6 @@ public interface Graphics {
     //añadir una ventana
     void setScene(Scene s);
     void render();
+
+    void setPaths(AbstractEngine.EnginePaths myPaths);
 }
