@@ -1,6 +1,6 @@
 package com.nonogram.engine;
 
-public class AbstractEngine implements Engine, Runnable /*Arreglar el tema del run. En el metodo run() de Runnable deberia lanzar el run() de PCEngine y AndroidEngine.*/ {
+public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el tema del run. En el metodo run() de Runnable deberia lanzar el run() de PCEngine y AndroidEngine.*/ {
 
     //TODO: meter input etcetc
     protected AbstractEngine(Graphics g, Scene inicial) {

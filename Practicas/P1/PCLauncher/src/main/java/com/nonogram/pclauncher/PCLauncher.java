@@ -1,13 +1,17 @@
 package com.nonogram.pclauncher;
 
-import com.nonogram.logic.PruebaScene;
+import com.nonogram.logic.PruebasScene;
 import com.nonogram.pcengine.PCEngine;
+import com.nonogram.logic.GameScene;
 
 public class PCLauncher {
 
     PCLauncher(){
-        sceneinicial = new PruebaScene();
+        //sceneinicial = new GameScene();
+        sceneinicial = new PruebasScene();
         _engine = new PCEngine("finestra",800,800, sceneinicial);
+        sceneinicial.init();
+
     }
 
     public static void main(String[] args){
@@ -15,6 +19,7 @@ public class PCLauncher {
         pclauncher._engine.resume();
     }
 
-    PruebaScene sceneinicial;
+    //GameScene sceneinicial;
+    PruebasScene sceneinicial;
     private final PCEngine _engine;
 }

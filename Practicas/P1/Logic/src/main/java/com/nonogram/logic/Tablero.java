@@ -71,15 +71,15 @@ public class Tablero {
 
         Iterator it = blues.iterator();
 
-        //TODO Esto hay que mirarlo: iterar y borrar de la lista
-        while(it.hasNext())
-        {
-            int x = it.next().;
-            int y = blues.get(i).y;
-            if(solucion[y][x]==false){
-                wrong.add(blues.get(i));
-            }
-        }
+//        //TODO Esto hay que mirarlo: iterar y borrar de la lista
+//        while(it.hasNext())
+//        {
+//            int x = it.next().;
+//            int y = blues.get(i).y;
+//            if(solucion[y][x]==false){
+//                wrong.add(blues.get(i));
+//            }
+//        }
 
         for (int i= 0; i< wrong.size(); i++){
             wrong.get(i).estado = State.WRONG;

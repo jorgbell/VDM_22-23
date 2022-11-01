@@ -58,6 +58,9 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
                 //y cambiar el tamaño del canvas logico
                 //TODO: Cambiar el tamaño del canvas logico
                 //setResolution?¿?¿
+                _graphics2D.dispose();
+                _bufferStrategy.show();
+                _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
             }
         });
 
