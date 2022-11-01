@@ -14,8 +14,8 @@ import com.nonogram.engine.Image;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    public AndroidGraphics(AppCompatActivity c, int w, int h) {
-        super(w, h);
+    public AndroidGraphics(AppCompatActivity c) {
+        super();
         _context = c;
         _renderView = new SurfaceView(_context);
         _context.setContentView(_renderView);
@@ -87,14 +87,14 @@ public class AndroidGraphics extends AbstractGraphics {
     @Override
     public void fillSquare(int cx, int cy, int side) {
         _paint.setStyle(Paint.Style.FILL);
-        Rect rectangle = new Rect(cx, cy, side, side);
+        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
         _canvas.drawRect(rectangle, _paint);
     }
 
     @Override
     public void drawSquare(int cx, int cy, int side) {
         _paint.setStyle(Paint.Style.STROKE);
-        Rect rectangle = new Rect(cx, cy, side, side);
+        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
         _canvas.drawRect(rectangle, _paint);
     }
 

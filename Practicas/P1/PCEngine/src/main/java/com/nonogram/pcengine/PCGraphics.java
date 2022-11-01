@@ -19,10 +19,10 @@ import javax.swing.JFrame;
 public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstractGraphics
 
     public PCGraphics(String windowName, int w, int h) {     //el w y el h igual hay que tocarlos, ahora mismo son el de la ventana
-        super(w, h);
+        super();
         //inicializar JFrame
         _myView = new JFrame(windowName);
-        _myView.setSize(_windowWidth, _windowHeight);
+        _myView.setSize(w, h);
         _myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _myView.setIgnoreRepaint(true);
         _myView.setVisible(true);

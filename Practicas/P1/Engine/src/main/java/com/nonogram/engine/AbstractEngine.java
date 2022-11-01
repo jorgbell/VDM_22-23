@@ -6,6 +6,7 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
     protected AbstractEngine(Graphics g, Scene inicial) {
         _myGraphics = g;
         setScene(inicial);
+        inicial.setEngine(this);
     }
 
     @Override
@@ -51,7 +52,6 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
         _lastFrameTime = System.nanoTime();
 
         // Bucle de juego principal.
-        //TODO: COMPROBAR QUE ESTE LLAMANDO A LOS DE ANDROID Y PC
         while (_running) {
             update();
             //input
