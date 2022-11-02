@@ -20,6 +20,7 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
         setScene(inicial);
         inicial.setEngine(this);
         _myGraphics.setPaths(_myPaths);
+        _myScene.init();
 
     }
 

@@ -48,21 +48,18 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
             // En "modo debug" podríamos querer escribir esto.
             //System.out.println("BufferStrategy tras " + (100 - intentos) + " intentos.");
         }
-
-        //esto se ejecuta cada vez que se cambia el tamaño de la ventana
-        _myView.addComponentListener(new ComponentAdapter() {
+        _myView.addComponentListener(new ComponentAdapter()
+        {
             public void componentResized(ComponentEvent evt) {
                 //Component c = (Component)evt.getSource();
-                System.out.println("componentResized: " + evt.getSource());
-                //este codigo que habia aqui (lo elimine) se carga el canvas y lo crea de nuevo, es lo que hacia que en el ejemplo
-                //parpadee. Lo que hay que hacer asi es pillar el tamaño de la ventana que le llega al evento,
-                //y cambiar el tamaño del canvas logico
-                //TODO: Cambiar el tamaño del canvas logico
-                //setResolution?¿?¿
-                render();
+                System.out.println("componentResized: "+evt.getSource());
+                _graphics2D.dispose();
+                _bufferStrategy.show();
+
+                _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
+
             }
         });
-
         _bufferStrategy = _myView.getBufferStrategy();
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
     }
@@ -131,7 +128,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     @Override
     public void drawImage(Image image, int x, int y) {
         PCImage i = (PCImage) image;
-        _graphics2D.drawImage(i._baseImage, x, y, i.getWidth(), i.getHeight(), null);
+        _graphics2D.drawImage(i._baseImage, x, y,null);
     }
 
     @Override

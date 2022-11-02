@@ -27,7 +27,7 @@ public class PruebasScene extends AbstractScene {
         graphics.drawLine(graphics.getWindowWidth()/2, graphics.getWindowHeight()/2, graphics.getWindowWidth(), graphics.getWindowHeight());
         graphics.setColor(0XFFFFFFFF);
         graphics.drawSquare(graphics.getWindowWidth()/4, graphics.getWindowHeight()/4, 40 + growth);
-        graphics.drawText("YAVIN TERRORISTA", growth, growth);
+        graphics.drawText("SAMPLE TEXT", 120, 120);
         graphics.drawImage(i, 120,120);
     }
 
