@@ -27,13 +27,13 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public Image newImage(String name) {
-        AndroidImage aimage = new AndroidImage(name, _context.getAssets());
+        AndroidImage aimage = new AndroidImage(_myPaths._imagesPath + name, _context.getAssets());
         return aimage;
     }
 
     @Override
     public Font newFont(String filename, int size, boolean isBold) {
-        AndroidFont afont = new AndroidFont(filename, size, isBold, _context.getAssets());
+        AndroidFont afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, _context.getAssets());
         return afont;
     }
 

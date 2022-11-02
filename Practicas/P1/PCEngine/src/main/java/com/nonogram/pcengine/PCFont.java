@@ -2,33 +2,23 @@ package com.nonogram.pcengine;
 
 import com.nonogram.engine.AbstractFont;
 
-import java.awt.FontFormatException;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class PCFont extends AbstractFont {
 
     public PCFont(String p, int s, boolean b) {
         super(p,s,b);
-        InputStream is = null;
-        try {
-            is = new FileInputStream(_filePath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
+        try (InputStream is = new FileInputStream(_filePath)) {
             _baseFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, is);
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            if(_bold)
+                _baseFont = _baseFont.deriveFont(java.awt.Font.BOLD, _size);
+            else
+                _baseFont = _baseFont.deriveFont(java.awt.Font.PLAIN, _size);        }
+        catch (Exception e) {
+            // Ouch. No está.
+            System.err.println("Error cargando la fuente: " + e);
         }
-        if(_bold)
-            _baseFont = _baseFont.deriveFont(java.awt.Font.BOLD, _size);
-        else
-            _baseFont = _baseFont.deriveFont(java.awt.Font.PLAIN, _size);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.nonogram.pcengine;
 
+import com.nonogram.engine.AbstractImage;
 import com.nonogram.engine.Image;
 
 import java.io.File;
@@ -7,10 +8,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class PCImage implements Image {
+public class PCImage extends AbstractImage {
     PCImage(String path){
+        super(path);
         try {
-            _baseImage = ImageIO.read(new File(path));
+            _baseImage = ImageIO.read(new File(_path));
         } catch (IOException e) {
             e.printStackTrace();
         }

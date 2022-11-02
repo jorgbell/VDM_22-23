@@ -59,9 +59,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
                 //y cambiar el tamaño del canvas logico
                 //TODO: Cambiar el tamaño del canvas logico
                 //setResolution?¿?¿
-                _graphics2D.dispose();
-                _bufferStrategy.show();
-                _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
+                render();
             }
         });
 
@@ -89,13 +87,13 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public Image newImage(String name) {
-        PCImage i = new PCImage(name);
+        PCImage i = new PCImage(_myPaths._imagesPath + name);
         return i;
     }
 
     @Override
     public Font newFont(String filename, int size, boolean isBold) {
-        PCFont pcfont = new PCFont(filename, size, isBold);
+        PCFont pcfont = new PCFont(_myPaths._fontsPath+ filename, size, isBold);
         return pcfont;
     }
 
@@ -133,7 +131,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     @Override
     public void drawImage(Image image, int x, int y) {
         PCImage i = (PCImage) image;
-        _graphics2D.drawImage(i._baseImage, x, y, null);
+        _graphics2D.drawImage(i._baseImage, x, y, i.getWidth(), i.getHeight(), null);
     }
 
     @Override

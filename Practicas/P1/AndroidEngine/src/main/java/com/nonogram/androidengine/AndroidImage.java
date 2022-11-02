@@ -15,8 +15,6 @@ public class AndroidImage extends AbstractImage {
         _assetManager = ass;
         try (InputStream is = _assetManager.open(_path)) {
             _bitmap = BitmapFactory.decodeStream(is);
-            _width = _bitmap.getWidth();
-            _height = _bitmap.getHeight();
         } catch (IOException e) {
             System.err.println("No se puede cargar la imagen: " + e);
         }
