@@ -7,10 +7,17 @@ import java.util.Random;
 public class Tablero {
 
     enum State {
-        EMPTY,
-        CROSS,
-        PICK,
-        WRONG
+        EMPTY(0), CROSS(1), PICK(2), WRONG(3);
+
+        private final int value;
+
+        private State(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
     class Casilla{
@@ -23,7 +30,11 @@ public class Tablero {
             y = i;
         }
 
-        public void setState(State s) { estado = s; };
+        public void setState(State s)
+        {
+            estado = s;
+            if(estado == State.PICK) blues.add(this);
+        };
         public State getState() { return estado; };
     }
 
@@ -49,15 +60,18 @@ public class Tablero {
     int lineasResolubles = 5;
 
     int size;
-    public Tablero(){};
+    public Tablero() {};
 
     public void  init(int size){
         this.size = size;
+        tablero = new Casilla[size][size];
+        blues = new Vector<Casilla>();
         for (int i =0; i<size;++i){
             for (int j =0; j<size;++j){
                 tablero[i][j] = new Casilla(i,j);
             }
         }
+
         generaSolucion();
     }
 
@@ -66,29 +80,27 @@ public class Tablero {
     - addPick / remove -> estos metodos son publicos, se llaman desde el button casilla
 
     */
-    private void ComprobarTablero(){
+    public void ComprobarTablero(){
         Vector<Casilla> wrong = new Vector<Casilla>();
 
-        Iterator it = blues.iterator();
+        Iterator<Casilla> it = blues.iterator();
 
-//        //TODO Esto hay que mirarlo: iterar y borrar de la lista
-//        while(it.hasNext())
-//        {
-//            int x = it.next().;
-//            int y = blues.get(i).y;
-//            if(solucion[y][x]==false){
-//                wrong.add(blues.get(i));
-//            }
-//        }
+        //TODO Esto hay que mirarlo: iterar y borrar de la lista
+        while(it.hasNext())
+        {
+            Casilla c = it.next();
 
-        for (int i= 0; i< wrong.size(); i++){
+            if(!solucion[c.y][c.x]) { wrong.add(c);}
+       }
+
+        for (int i = 0; i < wrong.size(); i++){
             wrong.get(i).estado = State.WRONG;
         }
         //Wait de X segundos
 
-        for (int i= 0; i< wrong.size(); i++){
-            wrong.get(i).estado = State.EMPTY;
-        }
+        //for (int i= 0; i< wrong.size(); i++){
+          //  wrong.get(i).estado = State.EMPTY;
+        //}
 
     }
 
@@ -303,4 +315,7 @@ public class Tablero {
 
         for(int j = 0; j < size; j++) System.out.print("Column " + j + ": " + columnas[j].numbers + "\n");
     }
+
+    public Boolean getSolution(int i, int j) { return solucion[i][j]; }
+    public Casilla getCasilla(int i, int j) { return tablero[i][j]; }
 }
