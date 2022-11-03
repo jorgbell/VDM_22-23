@@ -4,6 +4,7 @@ import com.nonogram.engine.AbstractEngine;
 import com.nonogram.engine.AbstractGraphics;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
+import com.nonogram.engine.Input;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -79,6 +80,13 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
             _bufferStrategy.show();
         } while (_bufferStrategy.contentsLost());
 
+    }
+
+    @Override
+    public boolean setInputListener(Input listener) {
+        PCInput i = (PCInput) listener;
+        _myView.addMouseListener(i);
+        return true;
     }
 
 

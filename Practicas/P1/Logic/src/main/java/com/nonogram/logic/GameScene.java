@@ -2,6 +2,7 @@ package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Engine;
+import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
@@ -80,6 +81,11 @@ public class GameScene extends AbstractScene {
             if(time <= 0) show = true;
             else  time -= deltaTime;
         }
+    }
+
+    @Override
+    public void processInput(Input.TouchEvent input) {
+
     }
 
 }

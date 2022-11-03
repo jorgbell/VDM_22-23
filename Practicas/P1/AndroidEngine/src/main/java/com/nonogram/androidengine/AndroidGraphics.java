@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nonogram.engine.AbstractGraphics;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
+import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
@@ -132,6 +133,13 @@ public class AndroidGraphics extends AbstractGraphics {
         _canvas.drawColor(0xFF0000FF); // ARGB
         _myScene.render();
         _holder.unlockCanvasAndPost(_canvas);
+    }
+
+    @Override
+    public boolean setInputListener(Input listener) {
+        AndroidInput i = (AndroidInput) listener;
+        _renderView.setOnTouchListener(i);
+        return true;
     }
 
 

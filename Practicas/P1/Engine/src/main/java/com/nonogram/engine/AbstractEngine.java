@@ -14,12 +14,14 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
     }
 
     //TODO: meter input etcetc
-    protected AbstractEngine(Graphics g, Scene inicial, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Scene inicial, EnginePaths paths) {
         _myPaths = paths;
+        _myInput = i;
         _myGraphics = g;
+        _myGraphics.setPaths(_myPaths);
+        _myGraphics.setInputListener(_myInput);
         setScene(inicial);
         inicial.setEngine(this);
-        _myGraphics.setPaths(_myPaths);
         _myScene.init();
 
     }
@@ -68,8 +70,8 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
 
         // Bucle de juego principal.
         while (_running) {
-            update();
-            //input
+            _myScene.update(getDeltaTime());
+            _myScene.getInput();
             _myGraphics.render();
         }
     }
@@ -102,11 +104,6 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
         }
     }
 
-
-    @Override
-    public void update() {
-        _myScene.update(getDeltaTime());
-    }
 
     @Override
     public void setScene(Scene s) {
