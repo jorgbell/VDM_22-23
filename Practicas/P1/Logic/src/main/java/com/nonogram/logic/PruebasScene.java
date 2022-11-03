@@ -6,6 +6,7 @@ import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 
+
 //NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class PruebasScene extends AbstractScene {
 
@@ -42,11 +43,10 @@ public class PruebasScene extends AbstractScene {
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
             case PULSAR:
-                System.out.println("AND THE OSCAR GOES TO");
-                System.out.println("x: " + input.get_posX() + "/y: " + input.get_posY() + "/ID: " + input.get_touchID());
+                growth *= -1;
                 break;
             case SOLTAR:
-                System.out.println("JOSE ALBERTO MESA GUERRERO");
+                System.out.print("JOSE ALBERTO MESA GUERRERO");
                 break;
         }
     }

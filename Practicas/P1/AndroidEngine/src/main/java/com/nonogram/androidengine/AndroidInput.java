@@ -4,19 +4,21 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.nonogram.engine.AbstractInput;
 
 public class AndroidInput extends AbstractInput implements View.OnTouchListener {
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public boolean onTouch(View view, MotionEvent e) {
+    public boolean onTouch(View view, @NonNull MotionEvent e) {
         switch (e.getAction()){
-            case MotionEvent.ACTION_POINTER_DOWN:
+            case MotionEvent.ACTION_DOWN:
                 newEvent((int)e.getX(), (int)e.getY(),
                         e.getPointerId(e.getActionIndex()),
                         TouchEvent.InputType.PULSAR);
                 break;
-            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_UP:
                 newEvent((int)e.getX(), (int)e.getY(),
                         e.getPointerId(e.getActionIndex()),
                         TouchEvent.InputType.SOLTAR);
