@@ -11,11 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nonogram.engine.AbstractGraphics;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
+import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    public AndroidGraphics(AppCompatActivity c, int w, int h) {
-        super(w, h);
+    public AndroidGraphics(AppCompatActivity c) {
+        super();
         _context = c;
         _renderView = new SurfaceView(_context);
         _context.setContentView(_renderView);
@@ -24,16 +25,19 @@ public class AndroidGraphics extends AbstractGraphics {
 
     }
 
+    public void setAudioContext(AndroidAudio a){
+        a._assetManager = _context.getAssets();
+    }
 
     @Override
     public Image newImage(String name) {
-        AndroidImage aimage = new AndroidImage(name, _context.getAssets());
+        AndroidImage aimage = new AndroidImage(_myPaths._imagesPath + name, _context.getAssets());
         return aimage;
     }
 
     @Override
     public Font newFont(String filename, int size, boolean isBold) {
-        AndroidFont afont = new AndroidFont(filename, size, isBold, _context.getAssets());
+        AndroidFont afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, _context.getAssets());
         return afont;
     }
 
@@ -87,14 +91,14 @@ public class AndroidGraphics extends AbstractGraphics {
     @Override
     public void fillSquare(int cx, int cy, int side) {
         _paint.setStyle(Paint.Style.FILL);
-        Rect rectangle = new Rect(cx, cy, side, side);
+        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
         _canvas.drawRect(rectangle, _paint);
     }
 
     @Override
     public void drawSquare(int cx, int cy, int side) {
         _paint.setStyle(Paint.Style.STROKE);
-        Rect rectangle = new Rect(cx, cy, side, side);
+        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
         _canvas.drawRect(rectangle, _paint);
     }
 
@@ -132,6 +136,13 @@ public class AndroidGraphics extends AbstractGraphics {
         _canvas.drawColor(0xFF0000FF); // ARGB
         _myScene.render();
         _holder.unlockCanvasAndPost(_canvas);
+    }
+
+    @Override
+    public boolean setInputListener(Input listener) {
+        AndroidInput i = (AndroidInput) listener;
+        _renderView.setOnTouchListener(i);
+        return true;
     }
 
 

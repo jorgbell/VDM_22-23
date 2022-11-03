@@ -1,8 +1,12 @@
 package com.nonogram.engine;
 
 public abstract class AbstractGraphics implements Graphics {
-    public AbstractGraphics(int w, int h){
-        _windowHeight = h; _windowWidth = w;
+    public AbstractGraphics(){
+    }
+
+    @Override
+    public void setPaths(AbstractEngine.EnginePaths p){
+        _myPaths = p;
     }
 
     @Override
@@ -22,9 +26,8 @@ public abstract class AbstractGraphics implements Graphics {
 
 
     //VARIABLES
-    protected int _windowWidth;
-    protected int _windowHeight;
     protected Scene _myScene;
     protected int _actualColor;
     protected Font _actualFont;
+    protected AbstractEngine.EnginePaths _myPaths;
 }

@@ -2,6 +2,17 @@ plugins {
     id 'com.android.application'
 }
 
+task copyData(type: Copy) {
+    description = 'Copying game data into assets folder...'
+    def fromDir = rootDir.getAbsolutePath() + '/data'
+    from(fromDir) {
+        include "**"
+    }
+    into 'src/main/assets'
+}
+
+preBuild.dependsOn copyData
+
 android {
     compileSdk 32
 
@@ -22,8 +33,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -33,6 +44,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation project(path: ':AndroidEngine')
+    implementation project(path: ':Engine')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

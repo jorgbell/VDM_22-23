@@ -1,9 +1,10 @@
 package com.nonogram.logic;
 
+import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Engine;
-import com.nonogram.engine.Scene;
+import com.nonogram.engine.Input;
 
-public class PruebaScene implements Scene{
+public class GameScene extends AbstractScene {
 
     Tablero t;
     int h;
@@ -13,8 +14,17 @@ public class PruebaScene implements Scene{
     float time = 10;
     int size = 15;
 
-    public PruebaScene()
+    public GameScene()
     {
+    }
+
+    @Override
+    public void init() {
+        t = new Tablero();
+        t.init(size);
+
+        h =_myEngine.getGraphics().getWindowHeight();
+        w =_myEngine.getGraphics().getWindowWidth();
     }
 
     @Override
@@ -40,7 +50,7 @@ public class PruebaScene implements Scene{
             {
                 for(int j = 0; j < size; j++)
                 {
-                    if(t.tablero[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
+                   // if(t.solucion[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
                 }
             }
 
@@ -73,19 +83,9 @@ public class PruebaScene implements Scene{
         }
     }
 
-    //TODO: AbstractScene
     @Override
-    public void setEngine(Engine e) {
-        _myEngine = e;
-    }
-    Engine _myEngine;
+    public void processInput(Input.TouchEvent input) {
 
-    void init()
-    {
-        t = new Tablero();
-        t.init(size);
-
-        h =_myEngine.getGraphics().getWindowHeight();
-        w =_myEngine.getGraphics().getWindowWidth();
     }
+
 }

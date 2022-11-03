@@ -1,16 +1,30 @@
 package com.nonogram.logic;
 
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.Random;
 
-import javax.sound.midi.SysexMessage;
-
 public class Tablero {
 
-    class Casilla{
-        //False es cross, true es negra
-        public boolean type = false;
+    enum State {
+        EMPTY,
+        CROSS,
+        PICK,
+        WRONG
+    }
 
+    class Casilla{
+        int x=-1, y=-1;
+        State estado = State.EMPTY;
+
+        public Casilla(int i, int j)
+        {
+            x = j;
+            y = i;
+        }
+
+        public void setState(State s) { estado = s; };
+        public State getState() { return estado; };
     }
 
     //igual estaria bien tener una clase(struct) linea para guardar en un string los numeros que apareceran en el tablero
@@ -27,20 +41,61 @@ public class Tablero {
     }
 
     Random r;
-    boolean tablero[][];
+    Casilla tablero[][];
+    Vector<Casilla> blues;
+    private boolean solucion[][];
     Linea filas[];
     Linea columnas[];
     int lineasResolubles = 5;
-
 
     int size;
     public Tablero(){};
 
     public void  init(int size){
-
         this.size = size;
+        for (int i =0; i<size;++i){
+            for (int j =0; j<size;++j){
+                tablero[i][j] = new Casilla(i,j);
+            }
+        }
+        generaSolucion();
+    }
+
+    /*
+    - comprobar tablero -> coge la lista de casillas en azul y las compara con la solucion
+    - addPick / remove -> estos metodos son publicos, se llaman desde el button casilla
+
+    */
+    private void ComprobarTablero(){
+        Vector<Casilla> wrong = new Vector<Casilla>();
+
+        Iterator it = blues.iterator();
+
+//        //TODO Esto hay que mirarlo: iterar y borrar de la lista
+//        while(it.hasNext())
+//        {
+//            int x = it.next().;
+//            int y = blues.get(i).y;
+//            if(solucion[y][x]==false){
+//                wrong.add(blues.get(i));
+//            }
+//        }
+
+        for (int i= 0; i< wrong.size(); i++){
+            wrong.get(i).estado = State.WRONG;
+        }
+        //Wait de X segundos
+
+        for (int i= 0; i< wrong.size(); i++){
+            wrong.get(i).estado = State.EMPTY;
+        }
+
+    }
+
+    // --- Metodos de generacion de la solucion ---
+    private void generaSolucion(){
         r = new Random();
-        tablero = new boolean[size][size];
+        solucion = new boolean[size][size];
         filas = new Linea[size];
         columnas = new Linea[size];
 
@@ -61,7 +116,6 @@ public class Tablero {
         //Sacams el tablero por consola
         leeTablero();
     }
-
     //Metodo que genera una linea resoluble por si sola
     private void generaFilaBasica(int fila, int size)
     {
@@ -75,7 +129,7 @@ public class Tablero {
                 break;
             case 1:
                 n = String.valueOf(size);
-                for(int i = 0; i < size; i++) tablero[fila][i] = true;
+                for(int i = 0; i < size; i++) solucion[fila][i] = true;
                 break;
             case 2:
                 n = rellenaFila(fila, 1, size - 2, 1);
@@ -113,7 +167,7 @@ public class Tablero {
             int maxBlockSize = minSize + r.nextInt(maxSize - minSize) + 1;
             int blockSize = Math.min(maxBlockSize, (size - counter));
 
-            for(int i = 0; i < blockSize; i++) tablero[fila][counter + i] = mode;
+            for(int i = 0; i < blockSize; i++) solucion[fila][counter + i] = mode;
 
             if(mode)
             {
@@ -168,7 +222,7 @@ public class Tablero {
                 }
             }
 
-            for(int i = 0; i < blockSize; i++) tablero[fila][counter + i] = true;
+            for(int i = 0; i < blockSize; i++) solucion[fila][counter + i] = true;
 
             counter += blockSize;
             totalCount -= blockSize;
@@ -181,7 +235,7 @@ public class Tablero {
             }
         }
 
-        for(int i = counter; i < size; i++) tablero[fila][i] = false;
+        for(int i = counter; i < size; i++) solucion[fila][i] = false;
 
         return n;
     }
@@ -193,7 +247,7 @@ public class Tablero {
 
         for(int j = 0; j < size; j++)
         {
-            if(tablero[j][columna])
+            if(solucion[j][columna])
             {
                 if (block == 0 && n != "") n += ".";
                 block++;
@@ -235,7 +289,7 @@ public class Tablero {
         {
             for(int j = 0; j < size; ++j)
             {
-                if(tablero[i][j]) System.out.print("X");
+                if(solucion[i][j]) System.out.print("X");
                 else System.out.print("_");
             }
 
