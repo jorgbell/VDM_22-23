@@ -1,6 +1,7 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
+import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Image;
@@ -16,9 +17,12 @@ public class PruebasScene extends AbstractScene {
     @Override
     public void init() {
         graphics = _myEngine.getGraphics();
+        audio = _myEngine.getAudio();
         f = graphics.newFont("JosefinSans-Bold.ttf", 60, false);
         graphics.setActualFont(f);
         i = graphics.newImage("saul.png");
+        audio.newSound("saul.wav");
+        audio.playSound("saul.wav");
     }
 
     @Override
@@ -53,6 +57,7 @@ public class PruebasScene extends AbstractScene {
 
     int growth = 0;
     Graphics graphics;
+    Audio audio;
     Font f;
     Image i;
 }

@@ -3,22 +3,26 @@ package com.nonogram.engine;
 public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el tema del run. En el metodo run() de Runnable deberia lanzar el run() de PCEngine y AndroidEngine.*/ {
 
     public static class EnginePaths{
-        public EnginePaths(String r, String i, String f){
+        public EnginePaths(String r, String i, String f, String a){
             _rootPath = r;
             _imagesPath = i;
             _fontsPath = f;
+            _audioPath = a;
         }
         public String _rootPath;
         public String _imagesPath;
         public String _fontsPath;
+        public String _audioPath;
     }
 
     //TODO: meter input etcetc
-    protected AbstractEngine(Graphics g, Input i, Scene inicial, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, Scene inicial, EnginePaths paths) {
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
+        _myAudio = a;
         _myGraphics.setPaths(_myPaths);
+        _myAudio.setPath(_myPaths._audioPath);
         _myGraphics.setInputListener(_myInput);
         setScene(inicial);
         inicial.setEngine(this);

@@ -8,7 +8,7 @@ import com.nonogram.engine.Scene;
 public class AndroidEngine extends AbstractEngine {
 
     public AndroidEngine(AppCompatActivity context, Scene inicial){
-        super(new AndroidGraphics(context), new AndroidInput(), inicial,  new AbstractEngine.EnginePaths("", "images/", "fonts/"));
+        super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), inicial,  new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/"));
     }
 
 }
