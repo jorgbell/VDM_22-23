@@ -25,6 +25,9 @@ public class AndroidGraphics extends AbstractGraphics {
 
     }
 
+    public void setAudioContext(AndroidAudio a){
+        a._assetManager = _context.getAssets();
+    }
 
     @Override
     public Image newImage(String name) {
