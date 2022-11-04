@@ -9,6 +9,7 @@ public class AndroidAudio extends AbstractAudio {
     @Override
     public Sound newSound(String fileName) {
         AndroidSound sA = new AndroidSound(fileName, _basePath, _assetManager);
+        _loadedSounds.add(sA);
         return sA;
     }
 

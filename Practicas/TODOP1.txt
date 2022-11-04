@@ -1,7 +1,6 @@
 - Hacer pruebas de imagenes y texto para finiquitar el Graphics --> MIRAR QUE PASA EN PC CON EL PROFE
 
 Una vez hecho eso,
-- Hacer Input en PC, probarlo, y despues lo mismo en Android
 - Hacer Audio en PC, probarlo y despues, lo mismo en Android
 
 De manera paralela porque le tengo que preguntar al profe,

@@ -15,6 +15,8 @@ public class AndroidSound extends Sound {
         _clip.reset();
         try{
             AssetFileDescriptor afd = ass.openFd(_audioPath + _id);
+            _clip.setDataSource(afd.getFileDescriptor(),
+                    afd.getStartOffset(), afd.getLength());
             _clip.prepare();
             _clip.setLooping(true);
 

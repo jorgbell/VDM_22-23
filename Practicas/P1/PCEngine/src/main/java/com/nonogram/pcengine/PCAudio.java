@@ -12,6 +12,7 @@ public class PCAudio extends AbstractAudio {
     @Override
     public Sound newSound(String fileName) {
         PCSound sPC = new PCSound(fileName, _basePath);
+        _loadedSounds.add(sPC);
         return sPC;
     }
 

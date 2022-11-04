@@ -16,6 +16,9 @@ public class PCSound extends Sound {
             _clip.open(AudioSystem.getAudioInputStream(new File(_audioPath+_id)));
             _clip.loop(Clip.LOOP_CONTINUOUSLY);
             _clip.setFramePosition(0);
+            if(_clip.isRunning())
+                _clip.stop();
+
         } catch (Exception e){
             System.err.println("Couldn't load audio file");
             e.printStackTrace();

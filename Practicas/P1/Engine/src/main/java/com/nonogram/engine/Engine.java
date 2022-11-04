@@ -8,5 +8,6 @@ public interface Engine {
     boolean stop();
     void resume();
     void pause();
+    boolean init();
     public void setScene(Scene s);
 }

@@ -11,8 +11,6 @@ public class AndroidEngine extends AbstractEngine {
         super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), inicial,  new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/"));
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         aG.setAudioContext((AndroidAudio)_myAudio);
-
-
     }
 
 }

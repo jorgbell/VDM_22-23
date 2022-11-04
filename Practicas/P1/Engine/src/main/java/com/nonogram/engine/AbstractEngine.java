@@ -26,8 +26,13 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
         _myGraphics.setInputListener(_myInput);
         setScene(inicial);
         inicial.setEngine(this);
-        _myScene.init();
 
+    }
+
+    @Override
+    public boolean init(){
+        _myScene.init();
+        return true;
     }
 
     @Override

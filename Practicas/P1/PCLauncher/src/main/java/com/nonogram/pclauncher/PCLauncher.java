@@ -10,6 +10,7 @@ public class PCLauncher {
         //sceneinicial = new GameScene();
         sceneinicial = new PruebasScene();
         _engine = new PCEngine("finestra",1280,720, sceneinicial);
+        _engine.init();
 
     }
 
