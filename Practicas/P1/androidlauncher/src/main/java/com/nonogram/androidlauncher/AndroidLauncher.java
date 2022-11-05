@@ -12,7 +12,7 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PruebasScene g = new PruebasScene(400,400);
+        PruebasScene g = new PruebasScene();
         _myEngine = new AndroidEngine(this,g);
         _myEngine.init();
     }

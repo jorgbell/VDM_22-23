@@ -3,6 +3,7 @@ package com.nonogram.androidengine;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -44,9 +45,9 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void clearGame(int color) {
-        _paint.setStyle(Paint.Style.FILL);
-        Rect rectangle = new Rect(0, 0, getWindowWidth(), getWindowHeight());
-        _canvas.drawRect(rectangle, _paint);
+        _paint.setColor(color);
+        _canvas.drawRect(0,0,_gameWidth,_gameHeight,_paint);
+        _paint.setColor(_actualColor);
     }
 
     @Override
@@ -143,7 +144,8 @@ public class AndroidGraphics extends AbstractGraphics {
         // Pintamos el frame
         while (!_holder.getSurface().isValid())
             ;
-        _canvas = _holder.lockCanvas();
+        Canvas c = _holder.lockCanvas();
+        _canvas = c;
         paintFrame();
         _holder.unlockCanvasAndPost(_canvas);
     }
