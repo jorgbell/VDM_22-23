@@ -30,8 +30,9 @@ public class PruebasScene extends AbstractScene {
     public void render() {
         graphics.clearGame(0xFFA800FF);
         graphics.setColor(0XFF552100);
-        graphics.drawImage(i,0,0, 0.1);
-        graphics.fillSquare(0,0,40);
+        graphics.fillSquare(_gameWidth/2 -20,_gameHeight/2 -20,40);
+        graphics.drawImage(i,_gameWidth/2 -20,_gameHeight/2 -20, 0.1);
+
 
     }
 

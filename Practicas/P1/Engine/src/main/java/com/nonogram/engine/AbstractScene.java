@@ -4,8 +4,8 @@ import java.util.List;
 
 public abstract class AbstractScene implements Scene{
     public AbstractScene(int gameWidth, int gameHeight){
-        _startWidth = gameWidth;
-        _startHeight = gameHeight;
+        _gameWidth = gameWidth;
+        _gameHeight = gameHeight;
     }
 
     @Override
@@ -13,9 +13,9 @@ public abstract class AbstractScene implements Scene{
         _myEngine = e;
     }
     @Override
-    public int getGameWidth(){ return _startWidth;}
+    public int getGameWidth(){ return _gameWidth;}
     @Override
-    public int getGameHeight(){return _startHeight;}
+    public int getGameHeight(){return _gameHeight;}
 
     @Override
     public void getInput() {
@@ -27,5 +27,5 @@ public abstract class AbstractScene implements Scene{
         }
     }
     protected Engine _myEngine;
-    protected int _startWidth, _startHeight;
+    protected int _gameWidth, _gameHeight;
 }
