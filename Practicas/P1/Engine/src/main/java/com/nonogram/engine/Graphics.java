@@ -6,15 +6,16 @@ public interface Graphics {
     //crea una nueva fuente del tamaño especificado a partir de un fichero .ttf. Se indica si se desea o no fuente en negrita.
     Font newFont(String filename, int size, boolean isBold);
     //borra el contenido completo de la ventana, rellenándolo con un color recibido como parámetro.
-    void clear(int color);
+    void clearGame(int color);
+    void clearWindow();
     //Métodos de control de la transformación sobre el canvas
-    void translate(int x, int y);
-    void scale(int x, int y);
+    void translate(float x, float y);
+    void scale(float x, float y);
     void save();
     void restore();
     //recibe una imagen y la muestra en la pantalla. Se pueden necesitar diferentes versiones de este método dependiendo de si se
     // permite o no escalar la imagen, si se permite elegir qué porción de la imagen original se muestra, etc.
-    void drawImage(Image image, int x, int y);
+    void drawImage(Image image, int x, int y, double scale);
     //establece el color a utilizar en las operaciones de dibujado posteriores.
     void setColor(int color);
     //cambia la fuente actual
@@ -35,6 +36,7 @@ public interface Graphics {
     void setScene(Scene s);
     void render();
     boolean setInputListener(Input listener);
+    public void paintFrame();
 
     void setPaths(AbstractEngine.EnginePaths myPaths);
 }

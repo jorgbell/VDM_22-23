@@ -7,4 +7,6 @@ public interface Scene {
     void getInput();
     void processInput(Input.TouchEvent input);
     void setEngine(Engine e);
+    int getGameWidth();
+    int getGameHeight();
 }

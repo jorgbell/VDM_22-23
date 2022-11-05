@@ -49,18 +49,6 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
             // En "modo debug" podríamos querer escribir esto.
             //System.out.println("BufferStrategy tras " + (100 - intentos) + " intentos.");
         }
-        _myView.addComponentListener(new ComponentAdapter()
-        {
-            public void componentResized(ComponentEvent evt) {
-                //Component c = (Component)evt.getSource();
-                System.out.println("componentResized: "+evt.getSource());
-                _graphics2D.dispose();
-                _bufferStrategy.show();
-
-                _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
-
-            }
-        });
         _bufferStrategy = _myView.getBufferStrategy();
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
     }
@@ -71,6 +59,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         do {
             do {
                 Graphics g = _bufferStrategy.getDrawGraphics();
+                _graphics2D = (Graphics2D) g;
                 try {
                     paintFrame();
                 } finally {
@@ -103,9 +92,19 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void clear(int color) {
+    public void clearGame(int color) {
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(color);
+        _graphics2D.setColor(jColor);
+        _graphics2D.fillRect(0, 0, _gameWidth, _gameHeight);
+        jColor = new Color(_actualColor);
+        _graphics2D.setColor(jColor);
+    }
+
+    @Override
+    public void clearWindow() {
+        //Para cambiar el color actual usar el metodo anterior
+        Color jColor = new Color(0xFFFFFF);
         _graphics2D.setColor(jColor);
         _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
         jColor = new Color(_actualColor);
@@ -113,12 +112,12 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void translate(int x, int y) {
+    public void translate(float x, float y) {
         _graphics2D.translate(x, y);
     }
 
     @Override
-    public void scale(int x, int y) {
+    public void scale(float x, float y) {
         _graphics2D.scale(x, y);
     }
 
@@ -134,9 +133,11 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void drawImage(Image image, int x, int y) {
+    public void drawImage(Image image, int x, int y, double scale) {
         PCImage i = (PCImage) image;
-        _graphics2D.drawImage(i._baseImage, x, y,null);
+        int newW = (int)(i._baseImage.getWidth(null) * scale);
+        int newH = (int)(i._baseImage.getHeight(null) * scale);
+        _graphics2D.drawImage(i._baseImage, x, y, newW, newH,null);
     }
 
     @Override
@@ -190,13 +191,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     }
 
-    protected void paintFrame() {
-        // "Borramos" el fondo.
-        _graphics2D.setColor(Color.WHITE);
-        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
-        // Pintamos la escena
-        _myScene.render();
-    }
+
 
 
     //VARIABLES

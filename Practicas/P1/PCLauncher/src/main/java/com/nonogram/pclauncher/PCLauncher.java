@@ -8,8 +8,8 @@ public class PCLauncher {
 
     PCLauncher(){
         //sceneinicial = new GameScene();
-        sceneinicial = new PruebasScene();
-        _engine = new PCEngine("finestra",1280,720, sceneinicial);
+        sceneinicial = new PruebasScene(400,400);
+        _engine = new PCEngine("finestra",500,500, sceneinicial);
         _engine.init();
 
     }

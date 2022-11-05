@@ -11,7 +11,8 @@ import com.nonogram.engine.Input;
 //NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class PruebasScene extends AbstractScene {
 
-    public PruebasScene(){
+    public PruebasScene(int gameWidth, int gameHeight){
+        super(gameWidth,gameHeight);
     }
 
     @Override
@@ -27,14 +28,11 @@ public class PruebasScene extends AbstractScene {
 
     @Override
     public void render() {
-        graphics.clear(0xFFA800FF);
+        graphics.clearGame(0xFFA800FF);
         graphics.setColor(0XFF552100);
-        graphics.fillSquare(graphics.getWindowWidth()/2, graphics.getWindowHeight()/2, 80 + growth);
-        graphics.drawLine(graphics.getWindowWidth()/2, graphics.getWindowHeight()/2, graphics.getWindowWidth(), graphics.getWindowHeight());
-        graphics.setColor(0XFFFFFFFF);
-        graphics.drawSquare(graphics.getWindowWidth()/4, graphics.getWindowHeight()/4, 40 + growth);
-        graphics.drawText("SAMPLE TEXT", 120, 120);
-        graphics.drawImage(i, 120,120);
+        graphics.drawImage(i,0,0, 0.1);
+        graphics.fillSquare(0,0,40);
+
     }
 
     @Override

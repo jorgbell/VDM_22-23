@@ -3,10 +3,20 @@ package com.nonogram.engine;
 import java.util.List;
 
 public abstract class AbstractScene implements Scene{
+    public AbstractScene(int gameWidth, int gameHeight){
+        _startWidth = gameWidth;
+        _startHeight = gameHeight;
+    }
+
     @Override
     public void setEngine(Engine e) {
         _myEngine = e;
     }
+    @Override
+    public int getGameWidth(){ return _startWidth;}
+    @Override
+    public int getGameHeight(){return _startHeight;}
+
     @Override
     public void getInput() {
         List<Input.TouchEvent> inputList = _myEngine.getInput().getTouchEvents();
@@ -17,4 +27,5 @@ public abstract class AbstractScene implements Scene{
         }
     }
     protected Engine _myEngine;
+    protected int _startWidth, _startHeight;
 }

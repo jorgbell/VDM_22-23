@@ -14,8 +14,9 @@ public class GameScene extends AbstractScene {
     float time = 10;
     int size = 15;
 
-    public GameScene()
+    public GameScene(int gameWidth, int gameHeight)
     {
+        super(gameWidth,gameHeight);
     }
 
     @Override

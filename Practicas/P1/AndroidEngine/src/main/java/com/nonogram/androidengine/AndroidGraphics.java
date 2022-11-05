@@ -1,5 +1,6 @@
 package com.nonogram.androidengine;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -42,17 +43,24 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
     @Override
-    public void clear(int color) {
-        _canvas.drawColor(color);
+    public void clearGame(int color) {
+        _paint.setStyle(Paint.Style.FILL);
+        Rect rectangle = new Rect(0, 0, getWindowWidth(), getWindowHeight());
+        _canvas.drawRect(rectangle, _paint);
     }
 
     @Override
-    public void translate(int x, int y) {
+    public void clearWindow() {
+        _canvas.drawColor(0xFFFFFFFF);
+    }
+
+    @Override
+    public void translate(float x, float y) {
         _canvas.translate(x, y);
     }
 
     @Override
-    public void scale(int x, int y) {
+    public void scale(float x, float y) {
         _canvas.scale(x, y);
     }
 
@@ -67,10 +75,13 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
     @Override
-    public void drawImage(Image image, int x, int y) {
+    public void drawImage(Image image, int x, int y,double scale) {
         AndroidImage aI = (AndroidImage) image;
         if(aI._getBitmap()!=null){
-            _canvas.drawBitmap(aI._getBitmap(),x,y,_paint);
+            int newW = (int)(aI._bitmap.getWidth() * scale);
+            int newH = (int)(aI._bitmap.getHeight() * scale);
+            Bitmap newBitmap = Bitmap.createScaledBitmap(aI._bitmap, newW, newH, true);
+            _canvas.drawBitmap(newBitmap,x,y,_paint);
         }
     }
 
@@ -133,8 +144,7 @@ public class AndroidGraphics extends AbstractGraphics {
         while (!_holder.getSurface().isValid())
             ;
         _canvas = _holder.lockCanvas();
-        _canvas.drawColor(0xFF0000FF); // ARGB
-        _myScene.render();
+        paintFrame();
         _holder.unlockCanvasAndPost(_canvas);
     }
 
