@@ -14,12 +14,18 @@ public abstract class AbstractInput implements Input{
     }
 
     @Override
-    public void newEvent(int x, int y, int ID, TouchEvent.InputType tipo) {
-        TouchEvent tE = new TouchEvent(tipo,x, y, ID);
+    public void newEvent(float x, float y, int ID, TouchEvent.InputType tipo) {
+        float gamex = _myGraphics.worldToGameX(x);
+        float gamey = _myGraphics.worldToGameY(y);
+        TouchEvent tE = new TouchEvent(tipo,gamex, gamey, ID);
         synchronized (this){
             _myTouchEvents.add(tE);
         }
     }
 
+    @Override
+    public void setGraphics(Graphics g){_myGraphics = g;}
+
     List<TouchEvent> _myTouchEvents;
+    Graphics _myGraphics;
 }

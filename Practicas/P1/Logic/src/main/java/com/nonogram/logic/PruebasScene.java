@@ -12,7 +12,7 @@ import com.nonogram.engine.Input;
 public class PruebasScene extends AbstractScene {
 
     public PruebasScene(){
-        super(600,1000);
+        super(720,1080);
     }
 
     @Override
@@ -30,19 +30,18 @@ public class PruebasScene extends AbstractScene {
     public void render() {
         graphics.clearGame(0XFF225500);
         graphics.setColor(0XFF2100FF);
-        graphics.fillRect(_gameWidth/2 -20,_gameHeight/2 -20,40,40);
+        graphics.fillRect(graphics.getGameWidth()/2 -20,graphics.getGameHeight()/2 -20,31,31);
         graphics.setActualFont(f2);
-        graphics.drawText("Title Text Sample",_gameWidth/3, _gameHeight/2 -40);
+        graphics.drawText("Title Text Sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 -40);
         graphics.setActualFont(f);
-        graphics.drawText("Normal text sample",_gameWidth/3, _gameHeight/2 +80);
-        //graphics.drawImage(i,_gameWidth/2 -20,_gameHeight/2 -20, 0.1);
-
+        graphics.drawText("Normal text sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 +80);
+        //graphics.drawImage(i,0,1, 0.3,0.3);
+        graphics.fillRect(graphics.getGameWidth()/20,graphics.getGameHeight()/20,40,40);
 
     }
 
     @Override
     public void update(double deltaTime) {
-        growth += 1;
 
     }
 
@@ -50,15 +49,13 @@ public class PruebasScene extends AbstractScene {
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
             case PULSAR:
-                growth *= -1;
+                System.out.println("FIXED X: " + input.get_posX() + "/ FIXED Y: " + input.get_posY());
                 break;
             case SOLTAR:
-                System.out.print("JOSE ALBERTO MESA GUERRERO");
                 break;
         }
     }
 
-    int growth = 0;
     Graphics graphics;
     Audio audio;
     Font f;

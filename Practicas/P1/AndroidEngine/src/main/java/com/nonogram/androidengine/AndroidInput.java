@@ -14,7 +14,7 @@ public class AndroidInput extends AbstractInput implements View.OnTouchListener 
     public boolean onTouch(View view, @NonNull MotionEvent e) {
         switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
-                newEvent((int)e.getX(), (int)e.getY(),
+                newEvent(e.getX(), e.getY(),
                         e.getPointerId(e.getActionIndex()),
                         TouchEvent.InputType.PULSAR);
                 break;

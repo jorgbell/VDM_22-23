@@ -51,6 +51,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         }
         _bufferStrategy = _myView.getBufferStrategy();
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
+
     }
 
     @Override
@@ -73,9 +74,20 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public boolean setInputListener(Input listener) {
+        super.setInputListener(listener);
         PCInput i = (PCInput) listener;
         _myView.addMouseListener(i);
         return true;
+    }
+
+    @Override
+    public float getBorderHeight() {
+        return 31;
+    }
+
+    @Override
+    public float getBorderWidth() {
+        return 0;
     }
 
 
@@ -96,7 +108,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(color);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0, 0, _gameWidth, _gameHeight);
+        _graphics2D.fillRect(0, 0, getGameWidth(), getGameHeight());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
@@ -106,7 +118,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(0xFFFFFF);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight());
+        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight() + (int)getBorderHeight());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
@@ -183,7 +195,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public int getWindowHeight() {
-        return _myView.getHeight();
+        return _myView.getHeight() - (int)getBorderHeight();
     }
 
 

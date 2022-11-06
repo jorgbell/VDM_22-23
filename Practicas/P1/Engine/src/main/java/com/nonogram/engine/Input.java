@@ -29,6 +29,7 @@ public interface Input {
     }//touchevent
 
     List<TouchEvent> getTouchEvents();
-    public void newEvent(int x, int y, int ID, TouchEvent.InputType tipo);
+    public void newEvent(float x, float y, int ID, TouchEvent.InputType tipo);
+    public void setGraphics(Graphics g);
 
 }

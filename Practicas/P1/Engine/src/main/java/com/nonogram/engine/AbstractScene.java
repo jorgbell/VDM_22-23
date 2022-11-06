@@ -27,5 +27,5 @@ public abstract class AbstractScene implements Scene{
         }
     }
     protected Engine _myEngine;
-    protected int _gameWidth, _gameHeight;
+    private int _gameWidth, _gameHeight;
 }

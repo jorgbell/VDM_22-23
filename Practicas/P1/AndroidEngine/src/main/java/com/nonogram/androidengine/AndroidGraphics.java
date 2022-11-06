@@ -46,7 +46,7 @@ public class AndroidGraphics extends AbstractGraphics {
     @Override
     public void clearGame(int color) {
         _paint.setColor(color);
-        _canvas.drawRect(0,0,_gameWidth,_gameHeight,_paint);
+        _canvas.drawRect(0,0,getGameWidth(),getGameHeight(),_paint);
         _paint.setColor(_actualColor);
     }
 
@@ -148,9 +148,20 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public boolean setInputListener(Input listener) {
+        super.setInputListener(listener);
         AndroidInput i = (AndroidInput) listener;
         _renderView.setOnTouchListener(i);
         return true;
+    }
+
+    @Override
+    public float getBorderHeight() {
+        return 0;
+    }
+
+    @Override
+    public float getBorderWidth() {
+        return 0;
     }
 
 

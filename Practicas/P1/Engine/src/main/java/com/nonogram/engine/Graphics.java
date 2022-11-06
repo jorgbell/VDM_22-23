@@ -36,6 +36,12 @@ public interface Graphics {
     void render();
     boolean setInputListener(Input listener);
     public void paintFrame();
-
+    void reScale();
+    public float worldToGameX(float x);
+    public float worldToGameY(float y);
+    public float getBorderHeight();
+    public float getBorderWidth();
+    public int getGameWidth();
+    public int getGameHeight();
     void setPaths(AbstractEngine.EnginePaths myPaths);
 }
