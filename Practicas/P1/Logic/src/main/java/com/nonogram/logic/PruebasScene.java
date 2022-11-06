@@ -19,8 +19,8 @@ public class PruebasScene extends AbstractScene {
     public void init() {
         graphics = _myEngine.getGraphics();
         audio = _myEngine.getAudio();
-        f = graphics.newFont("JosefinSans-Bold.ttf", 60, false);
-        graphics.setActualFont(f);
+        f = graphics.newFont("JosefinSans-Bold.ttf", 20, false);
+        f2 = graphics.newFont("Molle-Regular.ttf", 40, true);
         i = graphics.newImage("saul.png");
         audio.newSound("saul.wav");
         audio.playSound("saul.wav");
@@ -31,6 +31,10 @@ public class PruebasScene extends AbstractScene {
         graphics.clearGame(0XFF225500);
         graphics.setColor(0XFF2100FF);
         graphics.fillRect(_gameWidth/2 -20,_gameHeight/2 -20,40,40);
+        graphics.setActualFont(f2);
+        graphics.drawText("Title Text Sample",_gameWidth/3, _gameHeight/2 -40);
+        graphics.setActualFont(f);
+        graphics.drawText("Normal text sample",_gameWidth/3, _gameHeight/2 +80);
         //graphics.drawImage(i,_gameWidth/2 -20,_gameHeight/2 -20, 0.1);
 
 
@@ -58,5 +62,6 @@ public class PruebasScene extends AbstractScene {
     Graphics graphics;
     Audio audio;
     Font f;
+    Font f2;
     Image i;
 }

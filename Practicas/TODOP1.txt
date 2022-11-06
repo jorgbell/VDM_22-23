@@ -1,6 +1,5 @@
-- Hacer el metodo de drawrectangle
-- Mirar el input ahora que ya reescala
 - Comprobar que funcione el drawtext
+- Mirar el input ahora que ya reescala
 - Hacer lo del stack de estados
 
 TODO FIXES:
