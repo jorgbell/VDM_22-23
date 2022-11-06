@@ -1,8 +1,7 @@
-- Hacer pruebas de imagenes y texto para finiquitar el Graphics --> MIRAR QUE PASA EN PC CON EL PROFE
-
-
-De manera paralela porque le tengo que preguntar al profe,
-- Hacer el sistema del canvas logico y el resize de la ventana
+- Hacer el metodo de drawrectangle
+- Mirar el input ahora que ya reescala
+- Comprobar que funcione el drawtext
+- Hacer lo del stack de estados
 
 TODO FIXES:
 Crear metodos init() para controlar errores en graphics, input y scene, y hacer tambien el init en abstract engine llamando a cada uno de esos inits. Como lo tengo el año pasado vamos.

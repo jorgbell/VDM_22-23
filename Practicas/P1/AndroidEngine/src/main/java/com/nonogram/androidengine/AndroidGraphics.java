@@ -76,11 +76,11 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
     @Override
-    public void drawImage(Image image, int x, int y,double scale) {
+    public void drawImage(Image image, int x, int y,double scaleX, double scaleY) {
         AndroidImage aI = (AndroidImage) image;
         if(aI._getBitmap()!=null){
-            int newW = (int)(aI._bitmap.getWidth() * scale);
-            int newH = (int)(aI._bitmap.getHeight() * scale);
+            int newW = (int)(aI._bitmap.getWidth() * scaleX);
+            int newH = (int)(aI._bitmap.getHeight() * scaleY);
             Bitmap newBitmap = Bitmap.createScaledBitmap(aI._bitmap, newW, newH, true);
             _canvas.drawBitmap(newBitmap,x,y,_paint);
         }
@@ -101,16 +101,16 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
     @Override
-    public void fillSquare(int cx, int cy, int side) {
+    public void fillRect(int cx, int cy, int w, int h) {
         _paint.setStyle(Paint.Style.FILL);
-        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
+        Rect rectangle = new Rect(cx, cy, cx+w, cy+h);
         _canvas.drawRect(rectangle, _paint);
     }
 
     @Override
-    public void drawSquare(int cx, int cy, int side) {
+    public void drawRect(int cx, int cy, int w, int h) {
         _paint.setStyle(Paint.Style.STROKE);
-        Rect rectangle = new Rect(cx, cy, cx+side, cy+side);
+        Rect rectangle = new Rect(cx, cy, cx+w, cy+h);
         _canvas.drawRect(rectangle, _paint);
     }
 
@@ -134,10 +134,6 @@ public class AndroidGraphics extends AbstractGraphics {
         return _renderView.getHeight();
     }
 
-    @Override
-    public void setResolution() {
-
-    }
 
     @Override
     public void render() {

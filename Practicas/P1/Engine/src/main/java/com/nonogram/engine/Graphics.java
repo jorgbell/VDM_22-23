@@ -15,15 +15,15 @@ public interface Graphics {
     void restore();
     //recibe una imagen y la muestra en la pantalla. Se pueden necesitar diferentes versiones de este método dependiendo de si se
     // permite o no escalar la imagen, si se permite elegir qué porción de la imagen original se muestra, etc.
-    void drawImage(Image image, int x, int y, double scale);
+    void drawImage(Image image, int x, int y, double scaleX, double scaleY);
     //establece el color a utilizar en las operaciones de dibujado posteriores.
     void setColor(int color);
     //cambia la fuente actual
     void setActualFont(Font font);
     //dibuja un cuadrado relleno del color activo.
-    void fillSquare(int cx, int cy, int side);
+    void fillRect(int cx, int cy, int w, int h);
     //dibuja un cuadrado sin relleno y con el borde del color activo.
-    void drawSquare(int cx, int cy, int side);
+    void drawRect(int cx, int cy, int w, int h);
     //dibuja una línea recta del color activo.
     void drawLine(float initX, float initY, float endX, float endY);
     //escribe el texto con la fuente y color activos.
@@ -31,7 +31,6 @@ public interface Graphics {
     //tamaños de la ventana
     int getWindowWidth();
     int getWindowHeight();
-    void setResolution();
     //añadir una ventana
     void setScene(Scene s);
     void render();

@@ -133,10 +133,10 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void drawImage(Image image, int x, int y, double scale) {
+    public void drawImage(Image image, int x, int y, double scaleX, double scaleY) {
         PCImage i = (PCImage) image;
-        int newW = (int)(i._baseImage.getWidth(null) * scale);
-        int newH = (int)(i._baseImage.getHeight(null) * scale);
+        int newW = (int)(i._baseImage.getWidth(null) * scaleX);
+        int newH = (int)(i._baseImage.getHeight(null) * scaleY);
         _graphics2D.drawImage(i._baseImage, x, y, newW, newH,null);
     }
 
@@ -156,13 +156,13 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public void fillSquare(int cx, int cy, int side) {
-        _graphics2D.fillRect(cx, cy, side, side);
+    public void fillRect(int cx, int cy, int w, int h) {
+        _graphics2D.fillRect(cx, cy, w, h);
     }
 
     @Override
-    public void drawSquare(int cx, int cy, int side) {
-        _graphics2D.drawRect(cx, cy, side, side);
+    public void drawRect(int cx, int cy, int w, int h) {
+        _graphics2D.drawRect(cx, cy, w, h);
     }
 
     @Override
@@ -185,12 +185,6 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     public int getWindowHeight() {
         return _myView.getHeight();
     }
-
-    @Override
-    public void setResolution() {
-
-    }
-
 
 
 
