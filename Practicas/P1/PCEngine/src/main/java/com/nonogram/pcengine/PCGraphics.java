@@ -161,10 +161,12 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void setActualFont(Font font) {
+        if(font != null){
         super.setActualFont(font);
         PCFont f = (PCFont) font;
         java.awt.Font javaFont = f._baseFont;
         _graphics2D.setFont(javaFont);
+        }
     }
 
     @Override
@@ -185,6 +187,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void drawText(String text, int x, int y) {
+        setActualFont(_actualFont);
         _graphics2D.drawString(text, x, y);
     }
 

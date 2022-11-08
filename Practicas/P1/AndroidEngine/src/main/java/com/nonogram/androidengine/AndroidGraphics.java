@@ -119,6 +119,7 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void drawText(String text, int x, int y) {
+        _paint.setStyle(Paint.Style.FILL_AND_STROKE);
         _canvas.drawText(text, x, y, _paint);
     }
 

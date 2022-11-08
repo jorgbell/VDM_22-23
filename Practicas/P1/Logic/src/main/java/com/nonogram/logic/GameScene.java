@@ -1,6 +1,7 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
+import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
@@ -38,7 +39,8 @@ public class GameScene extends AbstractScene {
         tableroY = (h / 20) * 10;
         t = new Tablero();
         t.init(tileNumber);
-
+        f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        _myEngine.getGraphics().setActualFont(f);
 
         for (int i = 0; i < tileNumber; i++)
         {
@@ -56,7 +58,7 @@ public class GameScene extends AbstractScene {
     @Override
     public void render() {
 
-        _myEngine.getGraphics().clearGame(0XFF225500);
+        _myEngine.getGraphics().clearGame(0XFFFFFFFF);
 
         _myEngine.getGraphics().setColor(0XFF000000);
         _myEngine.getGraphics().drawRect(tableroX - w / 5, tableroY - 3, tableroSize + tableroX - (w / 16), tableroSize - 2);
@@ -70,11 +72,11 @@ public class GameScene extends AbstractScene {
             }
 
         }
-
         botonFF.render(_myEngine.getGraphics());
 
         for(int i = 0; i < tileNumber; i++)
         {
+            _myEngine.getGraphics().setColor(0XFF000000);
             String[] sf = t.filas[i].numbers.split("\\.");
             String[] sc = t.columnas[i].numbers.split("\\.");
 
@@ -150,5 +152,5 @@ public class GameScene extends AbstractScene {
     public boolean release() {
         return true;
     }
-
+    Font f;
 }
