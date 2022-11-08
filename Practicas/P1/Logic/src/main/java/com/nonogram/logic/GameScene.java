@@ -1,7 +1,6 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
-import com.nonogram.engine.Engine;
 import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
@@ -11,61 +10,73 @@ public class GameScene extends AbstractScene {
     int w;
     boolean initialized = false;
     boolean show = false;
-    float time = 10;
-    int size = 15;
+    float showTime = 0;
+    int tileNumber = 15;
+
+    int tableroSize;
+    int tileSize;
+    int tableroX;
+    int tableroY;
+
+    CasillaButton[][] botones;
+    RendirseButton botonFF;
 
     public GameScene(int gameWidth, int gameHeight)
     {
         super(gameWidth,gameHeight);
+        botones = new CasillaButton[tileNumber][tileNumber];
     }
 
     @Override
     public void init() {
-        t = new Tablero();
-        t.init(size);
+        h = getGameHeight();
+        w = getGameWidth();
 
-        h =_myEngine.getGraphics().getWindowHeight();
-        w =_myEngine.getGraphics().getWindowWidth();
+        tableroSize = (w / 5) * 4;
+        tileSize =  tableroSize / tileNumber;
+        tableroX = w / 5;
+        tableroY = (h / 9) * 6;
+        t = new Tablero();
+        t.init(tileNumber);
+
+
+        for (int i = 0; i < tileNumber; i++)
+        {
+            for (int j = 0; j < tileNumber; j++)
+            {
+                botones[i][j] = new CasillaButton(tableroX + tileSize * i, tableroY + tileSize * j, tileSize - 1, tileSize - 1, t.getCasilla(j, i));
+            }
+        }
+
+        botonFF = new RendirseButton( w - 200, h - 1000, 300, 100, this);
     }
 
     @Override
     public void render() {
-       // _myEngine.getGraphics().clear(255, );
 
-        w = _myEngine.getGraphics().getWindowWidth();
-        int width = w - 300;
-        int leftmargin = 20;
-        int downmargin = 50;
-
-
-        _myEngine.getGraphics().setColor(0);
-
-       // _myEngine.getGraphics().drawLine(35, 40, w, w);
-
-        for(int i = 0; i <= size; i++) _myEngine.getGraphics().drawLine(leftmargin + ((leftmargin +width) / size) * i, downmargin, leftmargin + ((leftmargin +width) / size) * i, (downmargin * 4) / 5 + downmargin + width);
-        for(int i = 0; i <= size; i++) _myEngine.getGraphics().drawLine(leftmargin,downmargin + ((downmargin + width) / size) * i, leftmargin / 2 + leftmargin + width, downmargin + ((downmargin + width) / size) * i);
-
-        for(int i = 0; i < size; i++)
+        for (int i = 0; i < tileNumber; i++)
         {
-            if(show)
+            for (int j = 0; j < tileNumber; j++)
             {
-                for(int j = 0; j < size; j++)
-                {
-                   // if(t.solucion[i][j]) _myEngine.getGraphics().fillSquare(leftmargin + ((leftmargin + width) / size) * j, downmargin + ((downmargin + width) / size) * i, ((width + downmargin)  / size));
-                }
+                botones[i][j].render(_myEngine.getGraphics());
             }
 
-            _myEngine.getGraphics().drawText(t.filas[i].numbers, leftmargin + leftmargin + width + 5, 25 + downmargin + ((downmargin + width) / size) * i);
+            _myEngine.getGraphics().setColor(0XFF000000);
+            _myEngine.getGraphics().drawText(t.filas[i].numbers, tableroX - tileSize, tableroY + (tileSize / 2) * i);
         }
 
-        for(int i = 0; i < size; i++)
+        botonFF.render(_myEngine.getGraphics());
+
+        for(int i = 0; i < tileNumber; i++)
         {
             String[] s = t.columnas[i].numbers.split("\\.");
 
-            for(int j = 0; j < s.length; j++) _myEngine.getGraphics().drawText(s[j],15 + leftmargin + ((leftmargin + width) / size) * i, 20 + downmargin + downmargin + width + j * 20);
+            for(int j = s.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(s[j],tableroX + (tileSize / 2) * i, tableroY + (tileSize / 2) * j);
         }
 
-        _myEngine.getGraphics().drawText("Show result in: " + (int)time, 650, 300);
+        _myEngine.getGraphics().setColor(0XFF000000);
+
+        //_myEngine.getGraphics().drawText("Show result in: " + (int) showTime, 650, 300);
     }
 
     @Override
@@ -79,14 +90,51 @@ public class GameScene extends AbstractScene {
 
         else
         {
-            if(time <= 0) show = true;
-            else  time -= deltaTime;
+            if (show)
+            {
+                showTime -= deltaTime;
+                if(showTime <= 0)
+                {
+                    t.LimpiarErrores();
+                    show = false;
+                }
+            }
         }
     }
 
     @Override
     public void processInput(Input.TouchEvent input) {
 
+        if(!show)
+        {
+            switch (input.get_type()){
+                case PULSAR:
+
+                    for (int i = 0; i < botones.length; i++)
+                    {
+                        for (int j = 0; j < botones[0].length; j++)
+                        {
+                            if (botones[i][j].rect.contains(input.get_posX(), input.get_posY()))
+                            {
+                                botones[i][j].handleEvent(input);
+                            }
+                        }
+                    }
+
+                    if(botonFF.rect.contains(input.get_posX(), input.get_posY())) botonFF.handleEvent(input);
+
+                    break;
+                case SOLTAR:
+                    break;
+            }
+        }
+    }
+
+    public void showSolution()
+    {
+        t.ComprobarTablero();
+        show = true;
+        showTime = 3;
     }
 
 }

@@ -7,10 +7,17 @@ import java.util.Random;
 public class Tablero {
 
     enum State {
-        EMPTY,
-        CROSS,
-        PICK,
-        WRONG
+        EMPTY(0), PICK(1), CROSS(2), WRONG(3);
+
+        private final int value;
+
+        private State(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
     class Casilla{
@@ -23,7 +30,14 @@ public class Tablero {
             y = i;
         }
 
-        public void setState(State s) { estado = s; };
+        public void setState(State s)
+        {
+            estado = s;
+            if(estado == State.PICK) blues.add(this);
+            else if(estado == State.WRONG) wrongs.add(this);
+            else blues.remove(this);
+        };
+
         public State getState() { return estado; };
     }
 
@@ -43,21 +57,24 @@ public class Tablero {
     Random r;
     Casilla tablero[][];
     Vector<Casilla> blues;
+    Vector<Casilla> wrongs;
     private boolean solucion[][];
     Linea filas[];
     Linea columnas[];
     int lineasResolubles = 5;
 
     int size;
-    public Tablero(){};
+    public Tablero() {};
 
     public void  init(int size){
         this.size = size;
-        for (int i =0; i<size;++i){
-            for (int j =0; j<size;++j){
-                tablero[i][j] = new Casilla(i,j);
-            }
-        }
+
+        tablero = new Casilla[size][size];
+        blues = new Vector<Casilla>();
+        wrongs = new Vector<Casilla>();
+
+        for (int i =0; i<size;++i){ for (int j =0; j<size;++j) tablero[i][j] = new Casilla(i,j); }
+
         generaSolucion();
     }
 
@@ -66,30 +83,24 @@ public class Tablero {
     - addPick / remove -> estos metodos son publicos, se llaman desde el button casilla
 
     */
-    private void ComprobarTablero(){
-        Vector<Casilla> wrong = new Vector<Casilla>();
 
-        Iterator it = blues.iterator();
+    public Boolean getSolution(int i, int j) { return solucion[i][j]; }
+    public Casilla getCasilla(int i, int j) { return tablero[i][j]; }
 
-//        //TODO Esto hay que mirarlo: iterar y borrar de la lista
-//        while(it.hasNext())
-//        {
-//            int x = it.next().;
-//            int y = blues.get(i).y;
-//            if(solucion[y][x]==false){
-//                wrong.add(blues.get(i));
-//            }
-//        }
+    public void ComprobarTablero()
+    {
+        for(Casilla c : blues) if(!solucion[c.y][c.x]) { c.setState(State.WRONG); }
+    }
 
-        for (int i= 0; i< wrong.size(); i++){
-            wrong.get(i).estado = State.WRONG;
-        }
-        //Wait de X segundos
+    public void LimpiarErrores() {
 
-        for (int i= 0; i< wrong.size(); i++){
-            wrong.get(i).estado = State.EMPTY;
+        for(Casilla c : wrongs)
+        {
+            c.setState(State.EMPTY);
+            blues.remove(c);
         }
 
+        wrongs.clear();
     }
 
     // --- Metodos de generacion de la solucion ---
@@ -116,6 +127,7 @@ public class Tablero {
         //Sacams el tablero por consola
         leeTablero();
     }
+
     //Metodo que genera una linea resoluble por si sola
     private void generaFilaBasica(int fila, int size)
     {
