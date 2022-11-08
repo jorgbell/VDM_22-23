@@ -11,7 +11,7 @@ public class GameScene extends AbstractScene {
     boolean initialized = false;
     boolean show = false;
     float showTime = 0;
-    int tileNumber = 15;
+    int tileNumber = 10;
 
     int tableroSize;
     int tileSize;
@@ -32,10 +32,10 @@ public class GameScene extends AbstractScene {
         h = getGameHeight();
         w = getGameWidth();
 
-        tableroSize = (w / 5) * 4;
+        tableroSize = (w / 20) * 14;
         tileSize =  tableroSize / tileNumber;
-        tableroX = w / 5;
-        tableroY = (h / 9) * 6;
+        tableroX = (w / 20) * 5;
+        tableroY = (h / 20) * 10;
         t = new Tablero();
         t.init(tileNumber);
 
@@ -57,6 +57,10 @@ public class GameScene extends AbstractScene {
     public void render() {
 
         _myEngine.getGraphics().clearGame(0XFF225500);
+
+        _myEngine.getGraphics().setColor(0XFF000000);
+        _myEngine.getGraphics().drawRect(tableroX - w / 5, tableroY - 3, tableroSize + tableroX - (w / 16), tableroSize - 2);
+        _myEngine.getGraphics().drawRect(tableroX - 3, tableroY - h / 10, tableroSize - 5, tableroSize + tableroY - (h * 6 / 15) );
 
         for (int i = 0; i < tileNumber; i++)
         {
