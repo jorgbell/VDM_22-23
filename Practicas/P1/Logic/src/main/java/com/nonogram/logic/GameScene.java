@@ -28,7 +28,7 @@ public class GameScene extends AbstractScene {
     }
 
     @Override
-    public void init() {
+    public boolean init() {
         h = getGameHeight();
         w = getGameWidth();
 
@@ -49,10 +49,14 @@ public class GameScene extends AbstractScene {
         }
 
         botonFF = new RendirseButton( w - 200, h - 1000, 300, 100, this);
+
+        return true;
     }
 
     @Override
     public void render() {
+
+        _myEngine.getGraphics().clearGame(0XFF225500);
 
         for (int i = 0; i < tileNumber; i++)
         {
@@ -109,6 +113,7 @@ public class GameScene extends AbstractScene {
         {
             switch (input.get_type()){
                 case PULSAR:
+                    System.out.println("FIXED X: " + input.get_posX() + "//FIXED Y: " + input.get_posY());
 
                     for (int i = 0; i < botones.length; i++)
                     {

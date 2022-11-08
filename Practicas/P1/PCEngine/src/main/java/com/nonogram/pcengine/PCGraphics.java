@@ -87,7 +87,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public float getBorderWidth() {
-        return 0;
+        return 8;
     }
 
 
@@ -190,7 +190,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public int getWindowWidth() {
-        return _myView.getWidth();
+        return _myView.getWidth() - (int)getBorderWidth();
     }
 
     @Override

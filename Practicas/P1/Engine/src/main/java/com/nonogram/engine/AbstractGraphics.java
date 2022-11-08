@@ -49,7 +49,7 @@ public abstract class AbstractGraphics implements Graphics {
 
         //si ventana y juego tienen el mismo tamaño, el factor de reescalado es 1.
         if(aspectH == 1 && aspectW == 1){
-            translate(0,getBorderHeight());
+            translate(getBorderWidth(),getBorderHeight());
             scale(1,1);
             return;
         }
@@ -60,24 +60,24 @@ public abstract class AbstractGraphics implements Graphics {
         translateX = (int)(getWindowWidth() - getGameWidth() * scaleFactor) /2;
         translateY = (int)(getWindowHeight()  - getGameHeight() * scaleFactor) /2;
 
-        translate(translateX, translateY + getBorderHeight());
+        translate(translateX + getBorderWidth(), translateY + getBorderHeight());
         scale(scaleFactor, scaleFactor);
     }
 
     @Override
     public float worldToGameX(float x) {
-        float nx = (x - translateX)/scaleFactor;
-        return nx- getBorderWidth();
+        float nx = (x - translateX - getBorderWidth())/scaleFactor;
+        return nx;
     }
     @Override
     public float worldToGameY(float y) {
-        float ny =(y - translateY)/scaleFactor;
-        return ny - getBorderHeight();
+        float ny =(y - translateY - getBorderHeight())/scaleFactor;
+        return ny;
     }
 
     @Override
     public int getGameWidth() {
-        return sceneManager.getGameWidth();
+        return sceneManager.getGameWidth() - (int)getBorderWidth();
     }
 
     @Override

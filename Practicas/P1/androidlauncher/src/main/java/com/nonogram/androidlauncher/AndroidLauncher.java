@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.androidengine.AndroidEngine;
 import com.nonogram.engine.AbstractEngine;
+import com.nonogram.logic.GameScene;
 import com.nonogram.logic.PruebasScene;
 
 public class AndroidLauncher extends AppCompatActivity {
@@ -12,7 +13,8 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PruebasScene g = new PruebasScene();
+        //PruebasScene g = new PruebasScene();
+        GameScene g = new GameScene(450,800);
         _myEngine = new AndroidEngine(this);
         _myEngine.init();
         _myEngine.getSceneManager().push(g);
