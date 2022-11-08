@@ -45,9 +45,7 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void clearGame(int color) {
-        _paint.setColor(color);
-        _canvas.drawRect(0,0,getGameWidth(),getGameHeight(),_paint);
-        _paint.setColor(_actualColor);
+        _canvas.drawColor(color);
     }
 
     @Override

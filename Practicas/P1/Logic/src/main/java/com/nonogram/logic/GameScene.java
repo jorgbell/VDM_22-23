@@ -69,17 +69,17 @@ public class GameScene extends AbstractScene {
                 botones[i][j].render(_myEngine.getGraphics());
             }
 
-            _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText(t.filas[i].numbers, tableroX - tileSize, tableroY + (tileSize / 2) * i);
         }
 
         botonFF.render(_myEngine.getGraphics());
 
         for(int i = 0; i < tileNumber; i++)
         {
-            String[] s = t.columnas[i].numbers.split("\\.");
+            String[] sf = t.filas[i].numbers.split("\\.");
+            String[] sc = t.columnas[i].numbers.split("\\.");
 
-            for(int j = s.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(s[j],tableroX + (tileSize / 2) * i, tableroY + (tileSize / 2) * j);
+            for(int j = sf.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j],(tableroX - 20) - (tileSize / 2) * j, tableroY + tileSize / 2 + (tileSize) * i);
+            for(int j = sc.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sc[(sc.length - 1) - j],tableroX + tileSize / 2 + (tileSize) * i, (tableroY - 10) - (tileSize / 2) * j);
         }
 
         _myEngine.getGraphics().setColor(0XFF000000);
