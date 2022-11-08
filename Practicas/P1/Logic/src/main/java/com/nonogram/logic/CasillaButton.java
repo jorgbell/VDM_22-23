@@ -37,11 +37,11 @@ public class CasillaButton extends Button{
 
         if(state == Tablero.State.CROSS)
         {
-            g.drawSquare(rect._x, rect._y, rect._w);
+            g.drawRect(rect._x, rect._y, rect._w, rect._h);
             g.drawLine(rect._x, rect._y, rect._x + rect._w, rect._y + rect._h);
         }
 
-        else g.fillSquare(rect._x, rect._y, rect._w);
+        else g.fillRect(rect._x, rect._y, rect._w, rect._h);
     };
 
     public void handleEvent(Input.TouchEvent e)

@@ -11,33 +11,40 @@ public class GameScene extends AbstractScene {
     boolean initialized = false;
     boolean show = false;
     float showTime = 0;
-    int size = 15;
+    int tileNumber = 15;
+
+    int tableroSize;
+    int tileSize;
+    int tableroX;
+    int tableroY;
+
     CasillaButton[][] botones;
     RendirseButton botonFF;
 
     public GameScene(int gameWidth, int gameHeight)
     {
         super(gameWidth,gameHeight);
-        botones = new CasillaButton[size][size];
+        botones = new CasillaButton[tileNumber][tileNumber];
     }
 
     @Override
     public void init() {
-        h =_myEngine.getGraphics().getWindowHeight();
-        w = _myEngine.getGraphics().getWindowWidth();
+        h = getGameHeight();
+        w = getGameWidth();
 
+        tableroSize = (w / 5) * 4;
+        tileSize =  tableroSize / tileNumber;
+        tableroX = w / 5;
+        tableroY = (h / 9) * 6;
         t = new Tablero();
-        t.init(size);
+        t.init(tileNumber);
 
-        int x = 150;
-        int y = 300;
-        int s = 500 / size;
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < tileNumber; i++)
         {
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < tileNumber; j++)
             {
-                botones[i][j] = new CasillaButton(x + s * i, y + s * j, s - 1, s - 1, t.getCasilla(j, i));
+                botones[i][j] = new CasillaButton(tableroX + tileSize * i, tableroY + tileSize * j, tileSize - 1, tileSize - 1, t.getCasilla(j, i));
             }
         }
 
@@ -47,24 +54,24 @@ public class GameScene extends AbstractScene {
     @Override
     public void render() {
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < tileNumber; i++)
         {
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < tileNumber; j++)
             {
                 botones[i][j].render(_myEngine.getGraphics());
             }
 
             _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText(t.filas[i].numbers, 675, 320 + ((500 / size) * i));
+            _myEngine.getGraphics().drawText(t.filas[i].numbers, tableroX - tileSize, tableroY + (tileSize / 2) * i);
         }
 
         botonFF.render(_myEngine.getGraphics());
 
-        for(int i = 0; i < size; i++)
+        for(int i = 0; i < tileNumber; i++)
         {
             String[] s = t.columnas[i].numbers.split("\\.");
 
-            for(int j = 0; j < s.length; j++) _myEngine.getGraphics().drawText(s[j],165 + ((500 / size) * i), 825 + (20 * j));
+            for(int j = s.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(s[j],tableroX + (tileSize / 2) * i, tableroY + (tileSize / 2) * j);
         }
 
         _myEngine.getGraphics().setColor(0XFF000000);

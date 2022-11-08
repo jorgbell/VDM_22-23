@@ -17,7 +17,7 @@ public class RendirseButton extends Button{
         //g.drawImage(_image, rect._x, rect._y);
         g.setColor(0xFF000000);
         g.drawText("Comprobar", rect._x, rect._y);
-        g.drawSquare(rect._x, rect._y, rect._h);
+        g.drawRect(rect._x, rect._y, rect._w, rect._h);
     }
 
     @Override

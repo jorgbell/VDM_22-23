@@ -7,9 +7,9 @@ import com.nonogram.logic.GameScene;
 public class PCLauncher {
 
     PCLauncher(){
-        //sceneinicial = new GameScene();
-        sceneinicial = new PruebasScene();
-        _engine = new PCEngine("finestra",1280,720, sceneinicial);
+        sceneinicial = new GameScene(450,800);
+        //sceneinicial = new PruebasScene();
+        _engine = new PCEngine("finestra",450,800, sceneinicial);
         _engine.init();
 
     }
