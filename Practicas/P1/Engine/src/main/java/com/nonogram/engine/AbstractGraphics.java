@@ -17,6 +17,8 @@ public abstract class AbstractGraphics implements Graphics {
     public void setPaths(AbstractEngine.EnginePaths p){
         _myPaths = p;
     }
+    @Override
+    public void setSceneManager(SceneManager smng){sceneManager = smng;}
 
     @Override
     public void setColor(int color) {
@@ -29,17 +31,12 @@ public abstract class AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void setScene(Scene s){
-        _myScene = s;
-    }
-
-    @Override
     public void paintFrame() {
         clearWindow();
         //reescalamos
         reScale();
         // Pintamos la escena
-        _myScene.render();
+        sceneManager.render();
     }
 
     @Override
@@ -80,19 +77,19 @@ public abstract class AbstractGraphics implements Graphics {
 
     @Override
     public int getGameWidth() {
-        return _myScene.getGameWidth();
+        return sceneManager.getGameWidth();
     }
 
     @Override
     public int getGameHeight() {
-        return _myScene.getGameHeight() - (int)getBorderHeight();
+        return sceneManager.getGameHeight() - (int)getBorderHeight();
     }
 
     //VARIABLES
-    protected Scene _myScene;
     protected int _actualColor;
     protected Font _actualFont;
     protected AbstractEngine.EnginePaths _myPaths;
     int translateX, translateY;
     float scaleFactor;
+    SceneManager sceneManager;
 }

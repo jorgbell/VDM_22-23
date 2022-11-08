@@ -13,8 +13,9 @@ public class AndroidLauncher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PruebasScene g = new PruebasScene();
-        _myEngine = new AndroidEngine(this,g);
+        _myEngine = new AndroidEngine(this);
         _myEngine.init();
+        _myEngine.getSceneManager().push(g);
     }
 
     @Override

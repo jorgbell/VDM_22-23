@@ -7,6 +7,8 @@ import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 
+import java.util.Stack;
+
 
 //NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class PruebasScene extends AbstractScene {
@@ -16,7 +18,7 @@ public class PruebasScene extends AbstractScene {
     }
 
     @Override
-    public void init() {
+    public boolean init() {
         graphics = _myEngine.getGraphics();
         audio = _myEngine.getAudio();
         f = graphics.newFont("JosefinSans-Bold.ttf", 20, false);
@@ -24,6 +26,7 @@ public class PruebasScene extends AbstractScene {
         i = graphics.newImage("saul.png");
         audio.newSound("saul.wav");
         audio.playSound("saul.wav");
+        return true;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class PruebasScene extends AbstractScene {
         graphics.drawText("Title Text Sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 -40);
         graphics.setActualFont(f);
         graphics.drawText("Normal text sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 +80);
-        //graphics.drawImage(i,0,1, 0.3,0.3);
+        graphics.drawImage(i,0,1, 0.3,0.3);
         graphics.fillRect(graphics.getGameWidth()/20,graphics.getGameHeight()/20,40,40);
 
     }
@@ -52,8 +55,14 @@ public class PruebasScene extends AbstractScene {
                 System.out.println("FIXED X: " + input.get_posX() + "/ FIXED Y: " + input.get_posY());
                 break;
             case SOLTAR:
+                _myEngine.getSceneManager().pop();
                 break;
         }
+    }
+
+    @Override
+    public boolean release() {
+        return true;
     }
 
     Graphics graphics;

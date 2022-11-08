@@ -16,22 +16,21 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
     }
 
     //TODO: meter input etcetc
-    protected AbstractEngine(Graphics g, Input i, Audio a, Scene inicial, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, EnginePaths paths) {
+        _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
         _myAudio = a;
         _myGraphics.setPaths(_myPaths);
+        _myGraphics.setSceneManager(_mySceneManager);
         _myAudio.setPath(_myPaths._audioPath);
         _myGraphics.setInputListener(_myInput);
-        setScene(inicial);
-        inicial.setEngine(this);
 
     }
 
     @Override
     public boolean init(){
-        _myScene.init();
         return true;
     }
 
@@ -79,10 +78,13 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
 
         // Bucle de juego principal.
         while (_running) {
-            _myScene.update(getDeltaTime());
-            _myScene.getInput();
+            _mySceneManager.update(getDeltaTime());
+            _mySceneManager.getInput();
             _myGraphics.render();
         }
+
+        System.exit(0);
+
     }
 
     @Override
@@ -113,13 +115,8 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
         }
     }
 
-
     @Override
-    public void setScene(Scene s) {
-        _myScene = s;
-        _myGraphics.setScene(s);
-    }
-
+    public SceneManager getSceneManager(){return _mySceneManager;}
 
     //VARIABLES
     protected EnginePaths _myPaths;
@@ -127,7 +124,7 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
-    protected Scene _myScene;
+    protected SceneManager _mySceneManager;
     protected long _lastFrameTime;
     protected volatile boolean _running = false;
 }

@@ -32,9 +32,9 @@ public interface Graphics {
     int getWindowWidth();
     int getWindowHeight();
     //añadir una ventana
-    void setScene(Scene s);
     void render();
     boolean setInputListener(Input listener);
+    public void setSceneManager(SceneManager smng);
     public void paintFrame();
     void reScale();
     public float worldToGameX(float x);
