@@ -19,7 +19,7 @@ public class PCLauncher {
         pclauncher._engine.resume();
     }
 
-    //GameScene sceneinicial;
-    PruebasScene sceneinicial;
+    GameScene sceneinicial;
+    //PruebasScene sceneinicial;
     private final PCEngine _engine;
 }
