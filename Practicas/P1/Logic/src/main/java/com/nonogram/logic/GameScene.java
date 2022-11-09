@@ -2,9 +2,8 @@ package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
+import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
-
-import java.util.Vector;
 
 public class GameScene extends AbstractScene {
 
@@ -19,7 +18,9 @@ public class GameScene extends AbstractScene {
     @Override
     public boolean init() {
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
-        if(_f == null)
+        _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
+        _resolverImage = _myEngine.getGraphics().newImage("Lupa.png");
+        if(_f == null || _volverImage == null || _resolverImage == null)
             return false;
 
 
@@ -49,9 +50,9 @@ public class GameScene extends AbstractScene {
         }
 
         //botones de ui
-        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, this);
-        _botonFF = new ChangeSceneButton( _gameWidth / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, "Rendirse", _myEngine);
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine);
+        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, this, _resolverImage);
+        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage);
         return true;
     }
 
@@ -107,9 +108,10 @@ public class GameScene extends AbstractScene {
         }
         else //fin de la partida
         {
-            _f.setSize(20);
+            _f.setSize(40);
             _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 3, _gameHeight * 4 / 20);
+            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 6, _gameHeight * 4 / 20);
+            _f.setSize(20);
             _botonVictoria.render(_myEngine.getGraphics());
         }
 
@@ -202,6 +204,8 @@ public class GameScene extends AbstractScene {
     int _tableroY;
 
     Font _f;
+    Image _volverImage;
+    Image _resolverImage;
     int _numberFontSize;
 
     int _wrongs = 0;

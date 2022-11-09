@@ -2,6 +2,7 @@ package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
+import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
 
@@ -13,7 +14,8 @@ public class DifficultyScene extends AbstractScene {
     @Override
     public boolean init() {
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
-        if(_f ==null)
+        _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
+        if(_f == null || _volverImage == null)
             return false;
 
         _h = getGameHeight();
@@ -24,10 +26,10 @@ public class DifficultyScene extends AbstractScene {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int percentage = 60 - 20 * i;
             Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, _difficulties[i], _myEngine, s);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, _difficulties[i], _myEngine, s, null);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage);
         return true;
     }
 
@@ -68,6 +70,7 @@ public class DifficultyScene extends AbstractScene {
     int _h;
     int _w;
     Font _f;
+    Image _volverImage;
     String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
