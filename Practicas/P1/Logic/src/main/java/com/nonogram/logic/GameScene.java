@@ -69,8 +69,8 @@ public class GameScene extends AbstractScene {
             for(int i = 0; i < _tileNumber; i++) //Numeros
             {
                 _myEngine.getGraphics().setColor(0XFF000000);
-                String[] sf = _t.filas[i].numbers.split("\\.");
-                String[] sc = _t.columnas[i].numbers.split("\\.");
+                String[] sf = _t._filas[i].numbers.split("\\.");
+                String[] sc = _t._columnas[i].numbers.split("\\.");
 
                 int columnaSpace = _tileSize;
                 int columnaXMargin =  _tileSize / 5;
