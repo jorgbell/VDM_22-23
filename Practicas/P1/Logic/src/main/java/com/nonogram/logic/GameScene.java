@@ -51,8 +51,6 @@ public class GameScene extends AbstractScene {
         f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
 
         numberFontSize = 45 - (int)(5.7 * (Math.log(tileNumber) / Math.log(1.595)));
-        numbersf = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", numberFontSize, false);
-
         _myEngine.getGraphics().setActualFont(f);
 
         for (int i = 0; i < tileNumber; i++)
@@ -85,7 +83,7 @@ public class GameScene extends AbstractScene {
             botonResolver.render(_myEngine.getGraphics());
             botonFF.render(_myEngine.getGraphics());
 
-            _myEngine.getGraphics().setActualFont(numbersf);
+            f.setSize(numberFontSize);
             for(int i = 0; i < tileNumber; i++)
             {
                 _myEngine.getGraphics().setColor(0XFF000000);
@@ -115,7 +113,7 @@ public class GameScene extends AbstractScene {
         }
         else
         {
-            _myEngine.getGraphics().setActualFont(f);
+            f.setSize(20);
             _myEngine.getGraphics().setColor(0XFF000000);
             _myEngine.getGraphics().drawText("ENHORABUENA", gameWidth / 3, gameHeight * 4 / 20);
             botonVictoria.render(_myEngine.getGraphics());
