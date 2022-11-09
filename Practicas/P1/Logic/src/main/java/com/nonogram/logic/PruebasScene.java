@@ -22,10 +22,18 @@ public class PruebasScene extends AbstractScene {
         graphics = _myEngine.getGraphics();
         audio = _myEngine.getAudio();
         f = graphics.newFont("JosefinSans-Bold.ttf", 20, false);
-        f2 = graphics.newFont("Molle-Regular.ttf", 40, true);
+        f2 = graphics.newFont("Molle-Regular.ttf", 80, true);
         i = graphics.newImage("saul.png");
         audio.newSound("saul.wav");
         audio.playSound("saul.wav");
+
+
+        f.setBold(true);
+        f.setSize(60);
+
+
+        f.setBold(false);
+        f2.setSize(20);
         return true;
     }
 
@@ -33,13 +41,12 @@ public class PruebasScene extends AbstractScene {
     public void render() {
         graphics.clearGame(0XFF225500);
         graphics.setColor(0XFF2100FF);
-        graphics.fillRect(graphics.getGameWidth()/2 -20,graphics.getGameHeight()/2 -20,31,31);
-        graphics.setActualFont(f2);
-        graphics.drawText("Title Text Sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 -40);
         graphics.setActualFont(f);
-        graphics.drawText("Normal text sample",graphics.getGameWidth()/3, graphics.getGameHeight()/2 +80);
-        graphics.drawImage(i,0,1, 0.3,0.3);
-        graphics.fillRect(graphics.getGameWidth()/20,graphics.getGameHeight()/20,40,40);
+        graphics.drawText("BOLD HUGE TEXT", graphics.getGameWidth()/2, 40);
+
+        graphics.setActualFont(f2);
+        graphics.drawText("am potat", graphics.getGameWidth()/2, graphics.getGameHeight()/2);
+
 
     }
 

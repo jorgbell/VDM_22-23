@@ -11,10 +11,9 @@ public class PCFont extends AbstractFont {
         super(p,s,b);
         try (InputStream is = new FileInputStream(_filePath)) {
             _baseFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, is);
-            if(_bold)
-                _baseFont = _baseFont.deriveFont(java.awt.Font.BOLD, _size);
-            else
-                _baseFont = _baseFont.deriveFont(java.awt.Font.PLAIN, _size);        }
+            setSize(s);
+            setBold(b);
+        }
         catch (Exception e) {
             // Ouch. No está.
             System.err.println("Error cargando la fuente: " + e);
@@ -29,6 +28,21 @@ public class PCFont extends AbstractFont {
     @Override
     public boolean isBold() {
         return _baseFont.isBold();
+    }
+
+    @Override
+    public void setSize(int size) {
+        super.setSize(size);
+        _baseFont = _baseFont.deriveFont(java.awt.Font.BOLD, _size);
+    }
+
+    @Override
+    public void setBold(boolean bold) {
+        super.setBold(bold);
+        if(_bold)
+            _baseFont = _baseFont.deriveFont(java.awt.Font.BOLD, _size);
+        else
+            _baseFont = _baseFont.deriveFont(java.awt.Font.PLAIN, _size);
     }
 
     //VARIABLES

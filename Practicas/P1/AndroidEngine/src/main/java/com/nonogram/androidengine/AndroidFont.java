@@ -20,16 +20,6 @@ public class AndroidFont extends AbstractFont {
     }
 
 
-    @Override
-    public int getSize() {
-        return _size;
-    }
-
-    @Override
-    public boolean isBold() {
-        return _bold;
-    }
-
     //VARIABLES
     AssetManager _assetManager;
     Typeface _font;

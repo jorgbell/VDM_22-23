@@ -120,6 +120,8 @@ public class AndroidGraphics extends AbstractGraphics {
     @Override
     public void drawText(String text, int x, int y) {
         _paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        _paint.setTextSize(_actualFont.getSize());
+        _paint.setFakeBoldText(_actualFont.isBold());
         _canvas.drawText(text, x, y, _paint);
     }
 
