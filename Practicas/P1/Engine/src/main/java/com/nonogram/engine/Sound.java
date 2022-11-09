@@ -1,11 +1,12 @@
 package com.nonogram.engine;
 
+//clase que abstrae los atributos comunes de los sonidos
 public abstract class Sound {
-    public Sound(String name, String audioPath){
-        _id = name;
-        _audioPath = audioPath;
+    public Sound(String id, String fileName){
+        _id = id;
+        _fileName = fileName;
     }
 
     protected String _id;
-    protected String _audioPath;
+    protected String _fileName;
 }

@@ -26,10 +26,15 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         _myView.setIgnoreRepaint(true);
         _myView.setVisible(true);
 
-        createBufferStrategy();
     }
 
-    private void createBufferStrategy() {
+    @Override
+    public boolean init() {
+        return createBufferStrategy();
+    }
+
+
+    private boolean createBufferStrategy() {
         // Intentamos crear el buffer strategy con 2 buffers.
         int intentos = 100;
         while (intentos-- > 0) {
@@ -41,13 +46,11 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         } // while pidiendo la creación de la buffeStrategy
         if (intentos == 0) {
             System.err.println("No pude crear la BufferStrategy");
-            return;
-        } else {
-            // En "modo debug" podríamos querer escribir esto.
-            //System.out.println("BufferStrategy tras " + (100 - intentos) + " intentos.");
+            return false;
         }
         _bufferStrategy = _myView.getBufferStrategy();
         _graphics2D = (Graphics2D) _bufferStrategy.getDrawGraphics();
+        return true;
 
     }
 
@@ -73,6 +76,9 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     public boolean setInputListener(Input listener) {
         super.setInputListener(listener);
         PCInput i = (PCInput) listener;
+        if (i == null)
+            return false;
+
         _myView.addMouseListener(i);
         return true;
     }
@@ -86,6 +92,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     public float getLeftBorder() {
         return _myView.getInsets().left;
     }
+
     @Override
     public float getTopBorder() {
         return _myView.getInsets().top;
@@ -98,13 +105,25 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public Image newImage(String name) {
-        PCImage i = new PCImage(_myPaths._imagesPath + name);
+        PCImage i = null;
+
+        try {
+            i = new PCImage(_myPaths._imagesPath + name);
+        } catch (Exception e) {
+        }
+
         return i;
     }
 
     @Override
     public Font newFont(String filename, int size, boolean isBold) {
-        PCFont pcfont = new PCFont(_myPaths._fontsPath+ filename, size, isBold);
+        PCFont pcfont = null;
+
+        try {
+            pcfont = new PCFont(_myPaths._fontsPath + filename, size, isBold);
+        } catch (Exception e) {
+        }
+
         return pcfont;
     }
 
@@ -123,7 +142,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(0xFFFFFF);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0, 0, getWindowWidth() + (int) getLeftBorder() + (int)getRightBorder(), getWindowHeight() + (int) getBottomBorder() + (int)getTopBorder());
+        _graphics2D.fillRect(0, 0, getWindowWidth() + (int) getLeftBorder() + (int) getRightBorder(), getWindowHeight() + (int) getBottomBorder() + (int) getTopBorder());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
@@ -152,9 +171,14 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     @Override
     public void drawImage(Image image, int x, int y, double scaleX, double scaleY) {
         PCImage i = (PCImage) image;
-        int newW = (int)(i._baseImage.getWidth(null) * scaleX);
-        int newH = (int)(i._baseImage.getHeight(null) * scaleY);
-        _graphics2D.drawImage(i._baseImage, x, y, newW, newH,null);
+        if (i._baseImage == null) {
+            System.err.println("Error dibujando la imagen");
+            return;
+        }
+
+        int newW = (int) (i._baseImage.getWidth(null) * scaleX);
+        int newH = (int) (i._baseImage.getHeight(null) * scaleY);
+        _graphics2D.drawImage(i._baseImage, x, y, newW, newH, null);
     }
 
     @Override
@@ -166,12 +190,14 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public void setActualFont(Font font) {
-        if(font != null){
         super.setActualFont(font);
         PCFont f = (PCFont) font;
+        if(f._baseFont == null){
+            System.err.println("Error seteando el texto de PC");
+            return;
+        }
         java.awt.Font javaFont = f._baseFont;
         _graphics2D.setFont(javaFont);
-        }
     }
 
     @Override
@@ -187,7 +213,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     @Override
     public void drawLine(float initX, float initY, float endX, float endY) {
         Line2D line = new Line2D.Float(initX, initY, endX, endY);
-        _graphics2D.drawLine((int)initX, (int)initY, (int)endX, (int)endY);
+        _graphics2D.drawLine((int) initX, (int) initY, (int) endX, (int) endY);
     }
 
     @Override
@@ -198,14 +224,13 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public int getWindowWidth() {
-        return _myView.getWidth() - (int) getLeftBorder() - (int)getRightBorder();
+        return _myView.getWidth() - (int) getLeftBorder() - (int) getRightBorder();
     }
 
     @Override
     public int getWindowHeight() {
-        return _myView.getHeight() - (int) getBottomBorder() - (int)getTopBorder();
+        return _myView.getHeight() - (int) getBottomBorder() - (int) getTopBorder();
     }
-
 
 
     //VARIABLES

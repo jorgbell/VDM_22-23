@@ -5,22 +5,22 @@ import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
+import com.nonogram.engine.Sound;
 
 public class MenuScene extends AbstractScene {
 
     public MenuScene(int gameWidth, int gameHeight) { super(gameWidth, gameHeight);}
     @Override
     public boolean init() {
-        _h = getGameHeight();
-        _w = getGameWidth();
-
+        Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
+        if(sound == null || _f1 == null || _f2 == null)
+            return false;
 
-        _audio = _myEngine.getAudio();
-        //audio.newSound("saul.wav");
-        //audio.playSound("saul.wav");
-
+        _h = getGameHeight();
+        _w = getGameWidth();
+        _myEngine.getAudio().playSound("bgm.wav");
         Scene s = new SizeScene(getGameWidth(), getGameHeight());
         _botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);
         return true;
@@ -51,13 +51,12 @@ public class MenuScene extends AbstractScene {
     }
 
     @Override
-    public boolean release() {return false;}
+    public boolean release() {return true;}
 
     int _h;
     int _w;
     Font _f1;
     Font _f2;
-    Audio _audio;
     ChangeSceneButton _botonJugar;
 
 }

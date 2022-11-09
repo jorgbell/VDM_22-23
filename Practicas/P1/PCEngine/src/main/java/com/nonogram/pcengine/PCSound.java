@@ -13,7 +13,7 @@ public class PCSound extends Sound {
         super(name, audioPath);
         try {
             _clip = AudioSystem.getClip();
-            _clip.open(AudioSystem.getAudioInputStream(new File(_audioPath+_id)));
+            _clip.open(AudioSystem.getAudioInputStream(new File(_fileName +_id)));
             _clip.loop(Clip.LOOP_CONTINUOUSLY);
             _clip.setFramePosition(0);
             if(_clip.isRunning())

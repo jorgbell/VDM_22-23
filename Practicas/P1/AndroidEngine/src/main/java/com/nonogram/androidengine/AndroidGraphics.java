@@ -20,11 +20,18 @@ public class AndroidGraphics extends AbstractGraphics {
     public AndroidGraphics(AppCompatActivity c) {
         super();
         _context = c;
+    }
+    @Override
+    public boolean init() {
+        if(_context == null){
+            System.err.println("AppCompactActivity null");
+            return false;
+        }
         _renderView = new SurfaceView(_context);
+        _paint = new Paint();
         _context.setContentView(_renderView);
         _holder = _renderView.getHolder();
-        _paint = new Paint();
-
+        return true;
     }
 
     public void setAudioContext(AndroidAudio a){
@@ -33,13 +40,21 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public Image newImage(String name) {
-        AndroidImage aimage = new AndroidImage(_myPaths._imagesPath + name, _context.getAssets());
+        AndroidImage aimage = null;
+        try{
+            aimage = new AndroidImage(_myPaths._imagesPath + name, _context.getAssets());
+        }catch (Exception e){}
+
         return aimage;
     }
 
     @Override
     public Font newFont(String filename, int size, boolean isBold) {
-        AndroidFont afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, _context.getAssets());
+        AndroidFont afont = null;
+        try{
+            afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, _context.getAssets());
+        }catch (Exception e){}
+
         return afont;
     }
 
@@ -79,12 +94,14 @@ public class AndroidGraphics extends AbstractGraphics {
     @Override
     public void drawImage(Image image, int x, int y,double scaleX, double scaleY) {
         AndroidImage aI = (AndroidImage) image;
-        if(aI._getBitmap()!=null){
-            int newW = (int)(aI._bitmap.getWidth() * scaleX);
-            int newH = (int)(aI._bitmap.getHeight() * scaleY);
-            Bitmap newBitmap = Bitmap.createScaledBitmap(aI._bitmap, newW, newH, true);
-            _canvas.drawBitmap(newBitmap,x,y,_paint);
+        if(aI._getBitmap()== null){
+            System.err.println("Error dibujando la imagen");
+            return;
         }
+        int newW = (int)(aI._bitmap.getWidth() * scaleX);
+        int newH = (int)(aI._bitmap.getHeight() * scaleY);
+        Bitmap newBitmap = Bitmap.createScaledBitmap(aI._bitmap, newW, newH, true);
+        _canvas.drawBitmap(newBitmap,x,y,_paint);
     }
 
     @Override
@@ -97,6 +114,11 @@ public class AndroidGraphics extends AbstractGraphics {
     public void setActualFont(Font font) {
         super.setActualFont(font);
         AndroidFont f = (AndroidFont) font;
+
+        if(f._font == null){
+            System.err.println("Error seteando el texto de Android");
+            return;
+        }
         _paint.setTypeface(f._font);
         _paint.setTextSize(_actualFont.getSize());
     }
@@ -149,6 +171,8 @@ public class AndroidGraphics extends AbstractGraphics {
         paintFrame();
         _holder.unlockCanvasAndPost(_canvas);
     }
+
+
 
     @Override
     public boolean setInputListener(Input listener) {

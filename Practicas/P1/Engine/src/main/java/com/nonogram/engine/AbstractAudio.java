@@ -18,6 +18,8 @@ public abstract class AbstractAudio implements Audio{
 
     @Override
     public Sound getSound(String id){
+        //buscamos un sonido en la lista de sonidos según su ID. si existen ID repetidas, devolvera el primero que encuentre
+        //en caso de no encontrarlo, devuelve un sonido nulo
         Sound s = null;
         boolean encontrado = false;
         int i = 0;
@@ -37,6 +39,7 @@ public abstract class AbstractAudio implements Audio{
 
     @Override
     public void stopAll() {
+        //pausa todos los sonidos que haya activos
         for (Sound s: _loadedSounds) {
             pauseSound(s._id);
         }

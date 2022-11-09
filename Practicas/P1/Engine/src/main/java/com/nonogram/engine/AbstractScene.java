@@ -1,6 +1,5 @@
 package com.nonogram.engine;
 
-import java.util.List;
 
 public abstract class AbstractScene implements Scene{
     public AbstractScene(int gameWidth, int gameHeight){

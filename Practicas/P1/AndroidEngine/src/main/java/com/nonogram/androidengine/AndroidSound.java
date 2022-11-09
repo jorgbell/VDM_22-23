@@ -14,7 +14,7 @@ public class AndroidSound extends Sound {
         _clip = new MediaPlayer();
         _clip.reset();
         try{
-            AssetFileDescriptor afd = ass.openFd(_audioPath + _id);
+            AssetFileDescriptor afd = ass.openFd(_fileName + _id);
             _clip.setDataSource(afd.getFileDescriptor(),
                     afd.getStartOffset(), afd.getLength());
             _clip.prepare();

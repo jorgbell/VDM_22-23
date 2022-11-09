@@ -8,18 +8,17 @@ import com.nonogram.engine.Scene;
 
 public class SizeScene extends AbstractScene {
 
-
-
     public SizeScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
 
     @Override
     public boolean init() {
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        if(_f ==null)
+            return false;
+
+
         _h = getGameHeight();
         _w = getGameWidth();
-
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
-        _myEngine.getGraphics().setActualFont(_f);
-
         //Crea los botones de los diferentes tableros
         for (int i = 0; i < _botonesSizes.length; i++)
         {

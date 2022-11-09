@@ -16,9 +16,13 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        if(_f == null)
+            return false;
+
+
         _gameHeight = getGameHeight();
         _gameWidth = getGameWidth();
-
         _casillas = new CasillaButton[_tileNumber][_tileNumber];
 
         //init tamaño del tablero
@@ -29,7 +33,6 @@ public class GameScene extends AbstractScene {
         _t = new Tablero();
         _t.init(_tileNumber);
 
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _numberFontSize = 45 - (int)(5.7 * (Math.log(_tileNumber) / Math.log(1.595)));
         _myEngine.getGraphics().setActualFont(_f);
 
@@ -50,8 +53,6 @@ public class GameScene extends AbstractScene {
 
     @Override
     public void render() {
-
-        _myEngine.getGraphics().clearGame(0XFFFFFFFF);
 
         _myEngine.getGraphics().setColor(0XFF000000);
 
@@ -112,8 +113,6 @@ public class GameScene extends AbstractScene {
             }
         }
 
-        //_myEngine.getGraphics().setColor(0XFF000000);
-        //_myEngine.getGraphics().drawText("Show result in: " + (int) showTime, 650, 300);
     }
 
     @Override
@@ -134,8 +133,6 @@ public class GameScene extends AbstractScene {
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
             case PULSAR:
-                System.out.println("FIXED X: " + input.get_posX() + "//FIXED Y: " + input.get_posY());
-
                 if(!_won)
                 {
                     if(!_showErrors || _wrongs <= 0)

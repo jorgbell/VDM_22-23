@@ -15,8 +15,10 @@ public class AndroidLauncher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MenuScene sceneinicial = new MenuScene(450,800);
         _myEngine = new AndroidEngine(this);
-        _myEngine.init();
-        _myEngine.getSceneManager().push(sceneinicial);
+        //manejo de errores: si se crea mal algo, para antes de empezar.
+        if(!_myEngine.init() || !_myEngine.getSceneManager().push(sceneinicial)){
+            _myEngine.stop();
+        }
     }
 
     @Override

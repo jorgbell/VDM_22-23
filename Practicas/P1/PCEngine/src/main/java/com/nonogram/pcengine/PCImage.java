@@ -20,14 +20,24 @@ public class PCImage extends AbstractImage {
 
     @Override
     public int getWidth() {
-        return _baseImage.getWidth(null);
+        if(_baseImage != null)
+            return _baseImage.getWidth(null);
+        else{
+            System.err.println("no se ha creado bien la imagen, error al coger su ancho");
+            return -1;
+        }
     }
 
     @Override
     public int getHeight() {
-        return _baseImage.getHeight(null);
+        if(_baseImage != null)
+            return _baseImage.getHeight(null);
+        else{
+            System.err.println("no se ha creado bien la imagen, error al coger su alto");
+            return -1;
+        }
     }
 
 
-    public java.awt.Image _baseImage;
+    public java.awt.Image _baseImage = null;
 }

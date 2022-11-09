@@ -3,7 +3,7 @@ package com.nonogram.engine;
 import java.util.List;
 
 public interface Input {
-
+//Clase TouchEvent para abstraer los eventos en pantalla de la plataforma
     public class TouchEvent{
         public enum InputType{
             PULSAR,
@@ -28,6 +28,8 @@ public interface Input {
         InputType _type;
     }//touchevent
 
+    //----------------------------------------------//
+    //metodos de la interfaz Input
     List<TouchEvent> getTouchEvents();
     public void newEvent(float x, float y, int ID, TouchEvent.InputType tipo);
     public void setGraphics(Graphics g);

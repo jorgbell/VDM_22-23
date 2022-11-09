@@ -15,6 +15,7 @@ public abstract class AbstractInput implements Input{
 
     @Override
     public void newEvent(float x, float y, int ID, TouchEvent.InputType tipo) {
+        //transformamos las posiciones que se consiguen de la pantalla a posiciones de juego
         float gamex = _myGraphics.worldToGameX(x);
         float gamey = _myGraphics.worldToGameY(y);
         TouchEvent tE = new TouchEvent(tipo,gamex, gamey, ID);

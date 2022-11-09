@@ -124,7 +124,7 @@ public class Tablero {
         for (int i = 0; i < _size; ++i) completaColumna(i);
 
         //Sacams el tablero por consola
-        leeTablero();
+        //leeTablero();
     }
 
     //Metodo que genera una linea resoluble por si sola
@@ -136,7 +136,6 @@ public class Tablero {
 
         String n = "";
 
-        System.out.print("TipoFila: " + tipoFila + "\n");
 
         switch (tipoFila)
         {

@@ -27,6 +27,10 @@ public abstract class AbstractGraphics implements Graphics {
 
     @Override
     public void setActualFont(Font font) {
+        if (font == null) {
+            System.err.println("Error al setear la fuente actual");
+            return;
+        }
         _actualFont = font;
     }
 
