@@ -1,6 +1,7 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
+import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
@@ -18,7 +19,9 @@ public class MenuScene extends AbstractScene {
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
 
-
+        audio = _myEngine.getAudio();
+        audio.newSound("saul.wav");
+        audio.playSound("saul.wav");
 
         Scene s = new SizeScene(getGameWidth(), getGameHeight());
         botonJugar = new PushSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);
@@ -64,4 +67,5 @@ public class MenuScene extends AbstractScene {
     int _w;
     Font _f1;
     Font _f2;
+    Audio audio;
 }

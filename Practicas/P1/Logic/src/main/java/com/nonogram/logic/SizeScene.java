@@ -28,6 +28,7 @@ public class SizeScene extends AbstractScene {
 
         for (int i = 0; i < botonesSizes.length; i++)
         {
+            //todo: meter tamaño 8x8
             int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), size);
             botonesSizes[i] = new PushSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
