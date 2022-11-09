@@ -7,10 +7,9 @@ import com.nonogram.engine.Input;
 public class GameScene extends AbstractScene {
 
     Tablero t;
-    int h;
-    int w;
-    boolean initialized = false;
-    boolean show = false;
+    int gameHeight;
+    int gameWidth;
+    boolean showErrors = false;
     boolean won = false;
     float showTime = 0;
     int tileNumber;
@@ -34,18 +33,18 @@ public class GameScene extends AbstractScene {
     {
         super(gameWidth,gameHeight);
         tileNumber = size;
-        botones = new CasillaButton[tileNumber][tileNumber];
     }
 
     @Override
     public boolean init() {
-        h = getGameHeight();
-        w = getGameWidth();
+        gameHeight = getGameHeight();
+        gameWidth = getGameWidth();
 
-        tableroSize = (w / 20) * 14;
+        botones = new CasillaButton[tileNumber][tileNumber];
+        tableroSize = (gameWidth / 20) * 14;
         tileSize =  tableroSize / tileNumber;
-        tableroX = (w / 20) * 5;
-        tableroY = (h / 20) * 8;
+        tableroX = (gameWidth / 20) * 5;
+        tableroY = (gameHeight / 20) * 8;
         t = new Tablero();
         t.init(tileNumber);
 
@@ -64,9 +63,9 @@ public class GameScene extends AbstractScene {
             }
         }
 
-        botonResolver = new ResuelveButton( w * 3 / 5, h / 20 , w * 2 / 7, h / 15, this);
-        botonFF = new PopSceneButton( w / 5, h / 20 , w * 2 / 7, h / 15, "Rendirse", _myEngine);
-        botonVictoria = new PopSceneButton(w * 2 / 5, h * 8 / 10, w * 2 / 7, h / 15, "Volver", _myEngine);
+        botonResolver = new ResuelveButton( gameWidth * 3 / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, this);
+        botonFF = new PopSceneButton( gameWidth / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, "Rendirse", _myEngine);
+        botonVictoria = new PopSceneButton(gameWidth * 2 / 5, gameHeight * 8 / 10, gameWidth * 2 / 7, gameHeight / 15, "Volver", _myEngine);
 
         return true;
     }
@@ -80,8 +79,8 @@ public class GameScene extends AbstractScene {
 
         if(!won)
         {
-            _myEngine.getGraphics().drawRect((tableroX - w / 5) + 5, tableroY - 3, tableroSize + tableroX - (w / 16), tableroSize);
-            _myEngine.getGraphics().drawRect(tableroX - 3, tableroY - h / 10, tableroSize, tableroY + tableroSize - (h * 76 / 250) );
+            _myEngine.getGraphics().drawRect((tableroX - gameWidth / 5) + 5, tableroY - 3, tableroSize + tableroX - (gameWidth / 16), tableroSize);
+            _myEngine.getGraphics().drawRect(tableroX - 3, tableroY - gameHeight / 10, tableroSize, tableroY + tableroSize - (gameHeight * 76 / 250) );
 
             botonResolver.render(_myEngine.getGraphics());
             botonFF.render(_myEngine.getGraphics());
@@ -107,18 +106,17 @@ public class GameScene extends AbstractScene {
                 for(int j = sc.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sc[(sc.length - 1) - j],tableroX - columnaXMargin + tileSize / 2 + columnaSpace * i, (tableroY - columnaYMargin) - columnaInterSpace * j);
             }
 
-            _myEngine.getGraphics().setActualFont(f);
-
-            if(show)
+            if(showErrors)
             {
                 _myEngine.getGraphics().setColor(0XFFFF0000);
-                _myEngine.getGraphics().drawText("Te faltan " + remaining + " casillas", w / 3, h * 4 / 20);
-                _myEngine.getGraphics().drawText("Tienes mal " + wrongs + " casillas", w / 3, h * 5 / 20);
+                _myEngine.getGraphics().drawText("Te faltan " + remaining + " casillas", gameWidth / 3, gameHeight * 4 / 20);
+                _myEngine.getGraphics().drawText("Tienes mal " + wrongs + " casillas", gameWidth / 3, gameHeight * 5 / 20);
             }
         }
-
-        if (won)
+        else
         {
+            _myEngine.getGraphics().setActualFont(f);
+
             botonVictoria.render(_myEngine.getGraphics());
         }
 
@@ -139,22 +137,13 @@ public class GameScene extends AbstractScene {
     @Override
     public void update(double deltaTime)
     {
-        if(!initialized)
+        if (showErrors)
         {
-            init();
-            initialized = true;
-        }
-
-        else
-        {
-            if (show)
+            showTime -= deltaTime;
+            if(showTime <= 0)
             {
-                showTime -= deltaTime;
-                if(showTime <= 0)
-                {
-                    t.LimpiarErrores();
-                    show = false;
-                }
+                t.LimpiarErrores();
+                showErrors = false;
             }
         }
     }
@@ -167,7 +156,7 @@ public class GameScene extends AbstractScene {
 
                 if(!won)
                 {
-                    if(!show || wrongs <= 0)
+                    if(!showErrors || wrongs <= 0)
                     {
                         for (int i = 0; i < botones.length; i++) for (int j = 0; j < botones[0].length; j++)
                         {
@@ -195,7 +184,7 @@ public class GameScene extends AbstractScene {
         remaining = t.getRemaining();
         if(wrongs == 0 && remaining == 0) won = true;
         else {
-            show = true;
+            showErrors = true;
             showTime = 3;
         }
     }
