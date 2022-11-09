@@ -5,16 +5,24 @@ import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
 
-public class PushSceneButton extends Button{
-
-    public PushSceneButton(int x, int y, int w, int h, String text, Engine e, Scene ns)
+public class ChangeSceneButton extends Button{
+    //PUSH BUTTON
+    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e, Scene ns)
     {
         super(x, y, w, h);
         _text = text;
         _engine = e;
         _newScene = ns;
+        push= true;
     }
-
+    //POP BUTTON
+    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e)
+    {
+        super(x, y, w, h);
+        _text = text;
+        _engine = e;
+        push=false;
+    }
     @Override
     public void render(Graphics g) {
         g.setColor(0xFF000000);
@@ -29,11 +37,13 @@ public class PushSceneButton extends Button{
 
     @Override
     public void handleEvent(Input.TouchEvent e) {
-        _engine.getSceneManager().push(_newScene);
+        if(push) _engine.getSceneManager().push(_newScene);
+        else _engine.getSceneManager().pop();
     }
 
     //Image _image;
     String _text;
     Engine _engine;
     Scene _newScene;
+    Boolean push= false;
 }

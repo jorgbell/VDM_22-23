@@ -11,11 +11,11 @@ import com.nonogram.engine.Scene;
 import java.util.Stack;
 
 
-//NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class SizeScene extends AbstractScene {
 
-    PopSceneButton botonVolver;
-    PushSceneButton[] botonesSizes = new PushSceneButton[4];
+    int[] sizes ={5,8,10,15};
+    ChangeSceneButton botonVolver;
+    ChangeSceneButton[] botonesSizes = new ChangeSceneButton[sizes.length];
 
     public SizeScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
 
@@ -29,18 +29,24 @@ public class SizeScene extends AbstractScene {
 
         for (int i = 0; i < botonesSizes.length; i++)
         {
-            int size = 5 * (i + 1);
+            //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
+            int size = sizes[i];
+            //int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), size);
-            botonesSizes[i] = new PushSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
+            botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
         }
 
-        botonVolver = new PopSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
+        botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
         return true;
     }
 
     @Override
     public void render() {
+        _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(0xFF000000);
+        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /5, _h /5);
+
+
         botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < botonesSizes.length; i++) botonesSizes[i].render(_myEngine.getGraphics());
 
