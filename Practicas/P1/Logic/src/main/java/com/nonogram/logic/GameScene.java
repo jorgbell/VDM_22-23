@@ -172,8 +172,8 @@ public class GameScene extends AbstractScene {
     }
 
     @Override
-
     public boolean release() {
+        _showTime = 0;
         _won = false;
         return true;
     }
