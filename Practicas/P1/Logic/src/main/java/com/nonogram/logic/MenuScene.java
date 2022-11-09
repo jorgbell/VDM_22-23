@@ -20,8 +20,8 @@ public class MenuScene extends AbstractScene {
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
 
         audio = _myEngine.getAudio();
-        audio.newSound("saul.wav");
-        audio.playSound("saul.wav");
+        //audio.newSound("saul.wav");
+        //audio.playSound("saul.wav");
 
         Scene s = new SizeScene(getGameWidth(), getGameHeight());
         botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);

@@ -1,9 +1,5 @@
 
 EVA:
-Hacer una escena de titulo
-meter una musica desde la escena de titulo
-Texto de enhorabuena en la escena de juego
-juntar pushbutton y popbutton (si es posible) en una especie de changeSceneButton, indicando el tipo de cambio de escena (rollo con un enum o un bool que te diga si hacer push o pop o como sea)
 Comentar, cambiar nombre a variables y refactorizar lo que sea necesario para que no haya codigo repetido o redundante
 Separar en metodos si tal los cachos de codigo gordos para que se entienda mejor
 Cuando este hecho en el motor: 
