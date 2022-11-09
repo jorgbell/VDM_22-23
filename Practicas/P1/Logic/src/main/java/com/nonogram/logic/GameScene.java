@@ -4,6 +4,8 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
 
+import java.util.Vector;
+
 public class GameScene extends AbstractScene {
 
     public GameScene(int gameWidth, int gameHeight, int size)
@@ -17,7 +19,7 @@ public class GameScene extends AbstractScene {
         _gameHeight = getGameHeight();
         _gameWidth = getGameWidth();
 
-        _botones = new CasillaButton[_tileNumber][_tileNumber];
+        _casillas = new CasillaButton[_tileNumber][_tileNumber];
 
         //init tamaño del tablero
         _tableroSize = (_gameWidth / 20) * 14;
@@ -35,7 +37,7 @@ public class GameScene extends AbstractScene {
         {
             for (int j = 0; j < _tileNumber; j++)
             {
-                _botones[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 1, _tileSize - 1, _t.getCasilla(j, i));
+                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 1, _tileSize - 1, _t.getCasilla(j, i));
             }
         }
 
@@ -43,7 +45,6 @@ public class GameScene extends AbstractScene {
         _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, this);
         _botonFF = new ChangeSceneButton( _gameWidth / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, "Rendirse", _myEngine);
         _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine);
-
         return true;
     }
 
@@ -107,7 +108,7 @@ public class GameScene extends AbstractScene {
             for (int j = 0; j < _tileNumber; j++)
             {
                 Tablero.State s = _t.getCasilla(j, i).getState();
-                if(!_won || s == Tablero.State.PICK) _botones[i][j].render(_myEngine.getGraphics());
+                if(!_won || s == Tablero.State.PICK) _casillas[i][j].render(_myEngine.getGraphics());
             }
         }
 
@@ -139,11 +140,11 @@ public class GameScene extends AbstractScene {
                 {
                     if(!_showErrors || _wrongs <= 0)
                     {
-                        for (int i = 0; i < _botones.length; i++) for (int j = 0; j < _botones[0].length; j++)
+                        for (int i = 0; i < _casillas.length; i++) for (int j = 0; j < _casillas[0].length; j++)
                         {
-                            if (_botones[i][j]._rect.contains(input.get_posX(), input.get_posY()))
+                            if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
                             {
-                                _botones[i][j].handleEvent(input);
+                                _casillas[i][j].handleEvent(input);
                             }
                         }
                     }
@@ -196,7 +197,7 @@ public class GameScene extends AbstractScene {
     int _wrongs = 0;
     int _remaining = 0;
 
-    CasillaButton[][] _botones;
+    CasillaButton[][] _casillas;
     ResuelveButton _botonResolver;
     ChangeSceneButton _botonFF;
     ChangeSceneButton _botonVictoria;
