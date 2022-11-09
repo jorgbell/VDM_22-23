@@ -80,6 +80,7 @@ public class GameScene extends AbstractScene {
             _myEngine.getGraphics().drawRect((tableroX - gameWidth / 5) + 5, tableroY - 3, tableroSize + tableroX - (gameWidth / 16), tableroSize);
             _myEngine.getGraphics().drawRect(tableroX - 3, tableroY - gameHeight / 10, tableroSize, tableroY + tableroSize - (gameHeight * 76 / 250) );
 
+            f.setSize(20);
             botonResolver.render(_myEngine.getGraphics());
             botonFF.render(_myEngine.getGraphics());
 
@@ -106,6 +107,7 @@ public class GameScene extends AbstractScene {
 
             if(showErrors)
             {
+                f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
                 _myEngine.getGraphics().drawText("Te faltan " + remaining + " casillas", gameWidth / 3, gameHeight * 4 / 20);
                 _myEngine.getGraphics().drawText("Tienes mal " + wrongs + " casillas", gameWidth / 3, gameHeight * 5 / 20);

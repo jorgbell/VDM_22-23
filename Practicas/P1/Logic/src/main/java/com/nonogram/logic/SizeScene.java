@@ -8,7 +8,7 @@ import com.nonogram.engine.Scene;
 
 public class SizeScene extends AbstractScene {
 
-    int[] sizes ={5,8,10,15};
+    int[] sizes ={5,8,10,15}; //el minimo es 5x5
     ChangeSceneButton botonVolver;
     ChangeSceneButton[] botonesSizes = new ChangeSceneButton[sizes.length];
 
