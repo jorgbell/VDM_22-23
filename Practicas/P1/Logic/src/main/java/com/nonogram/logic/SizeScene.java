@@ -44,6 +44,9 @@ public class SizeScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(0xFF000000);
+        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /5, _h /5);
+
+
         botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < botonesSizes.length; i++) botonesSizes[i].render(_myEngine.getGraphics());
 
