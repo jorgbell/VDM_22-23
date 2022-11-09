@@ -11,7 +11,6 @@ import com.nonogram.engine.Scene;
 import java.util.Stack;
 
 
-//NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class SizeScene extends AbstractScene {
 
     PopSceneButton botonVolver;
