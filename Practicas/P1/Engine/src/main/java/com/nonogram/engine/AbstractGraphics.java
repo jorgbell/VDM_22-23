@@ -1,24 +1,25 @@
 package com.nonogram.engine;
 
 public abstract class AbstractGraphics implements Graphics {
-    public AbstractGraphics(){
+    public AbstractGraphics() {
         scaleFactor = 1;
         translateX = 0;
         translateY = 0;
     }
 
     @Override
-    public boolean setInputListener(Input inputListener){
+    public boolean setInputListener(Input inputListener) {
         inputListener.setGraphics(this);
         return true;
     }
 
     @Override
-    public void setPaths(AbstractEngine.EnginePaths p){
-        _myPaths = p;
+    public void setEngine(Engine e) {
+        _myEngine = e;
+        sceneManager = _myEngine.getSceneManager();
+        AbstractEngine ae = (AbstractEngine)_myEngine;
+        _myPaths = ae._myPaths;
     }
-    @Override
-    public void setSceneManager(SceneManager smng){sceneManager = smng;}
 
     @Override
     public void setColor(int color) {
@@ -44,20 +45,22 @@ public abstract class AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void reScale(){
+    public void reScale() {
 
         //sacamos la relacion de aspecto actual, segun el tamaño de la ventana.
-        float windowHeight = (float) getWindowHeight(); float windowWidth = getWindowWidth();
-        float gameFHeight = sceneManager.getGameHeight(); float gameFWidth = sceneManager.getGameWidth();
+        float windowHeight = (float) getWindowHeight();
+        float windowWidth = getWindowWidth();
+        float gameFHeight = sceneManager.getGameHeight();
+        float gameFWidth = sceneManager.getGameWidth();
 
-        float aspectH = windowHeight/gameFHeight;
-        float aspectW = windowWidth/gameFWidth;
+        float aspectH = windowHeight / gameFHeight;
+        float aspectW = windowWidth / gameFWidth;
 
         //En caso contrario
         scaleFactor = Math.min(aspectH, aspectW);
 
-        translateX = (int)(windowWidth - gameFWidth* scaleFactor) /2;
-        translateY = (int)(windowHeight  - gameFHeight* scaleFactor) /2;
+        translateX = (int) (windowWidth - gameFWidth * scaleFactor) / 2;
+        translateY = (int) (windowHeight - gameFHeight * scaleFactor) / 2;
 
         translate(translateX + getLeftBorder(), translateY + getTopBorder());
         scale(scaleFactor, scaleFactor);
@@ -65,13 +68,20 @@ public abstract class AbstractGraphics implements Graphics {
 
     @Override
     public float worldToGameX(float x) {
-        float nx = (x - translateX - getLeftBorder())/scaleFactor;
+        float nx = (x - translateX - getLeftBorder()) / scaleFactor;
         return nx;
     }
+
     @Override
     public float worldToGameY(float y) {
-        float ny =(y - translateY - getTopBorder())/scaleFactor;
+        float ny = (y - translateY - getTopBorder()) / scaleFactor;
         return ny;
+    }
+
+
+    @Override
+    public void setFullScreen(boolean fullScreen) {
+        ;
     }
 
 
@@ -82,4 +92,5 @@ public abstract class AbstractGraphics implements Graphics {
     int translateX, translateY;
     float scaleFactor;
     protected SceneManager sceneManager;
+    protected Engine _myEngine;
 }

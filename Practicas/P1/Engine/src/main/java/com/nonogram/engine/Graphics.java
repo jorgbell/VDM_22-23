@@ -5,13 +5,11 @@ public interface Graphics {
 
     //setters
     boolean setInputListener(Input listener);
-    //necesita conocer el scenemanager para saber el tamaño de las escenas a pintar
-    public void setSceneManager(SceneManager smng);
-    void setPaths(AbstractEngine.EnginePaths myPaths);
     //establece el color a utilizar en las operaciones de dibujado posteriores.
     void setColor(int color);
     //cambia la fuente actual
     void setActualFont(Font font);
+    void setEngine(Engine e);
 //------------------------------------------------//
     //getters
     //tamaños de la ventana
@@ -22,6 +20,7 @@ public interface Graphics {
     public float getLeftBorder();
     public float getRightBorder();
     public float getTopBorder();
+    public void setFullScreen(boolean fullScreen);
 
     //--------------------------------------------//
     //métodos para el renderizado

@@ -27,8 +27,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public boolean init(){
 
-        _myGraphics.setSceneManager(_mySceneManager);
-        _myGraphics.setPaths(_myPaths);
+        _myGraphics.setEngine(this);
         _myAudio.setPath(_myPaths._audioPath);
 
         if(!_myGraphics.setInputListener(_myInput) || !_myGraphics.init()){
@@ -63,6 +62,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public boolean stop() {
         _running = false;
+        release();
+        System.exit(0);
         return true;
     }
 
@@ -86,8 +87,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
             _myGraphics.render();
         }
 
-        release();
-        System.exit(0);
 
     }
 
@@ -104,7 +103,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
             // (programación defensiva)
             _running = true;
             // Lanzamos la ejecución de nuestro método run() en un nuevo Thread.
-            _myThread = new Thread(this);
+            if(_myThread == null)
+                _myThread = new Thread(this);
             _myThread.start();
         }
     }
@@ -116,7 +116,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
             while (true) {
                 try {
                     _myThread.join();
-                    _myThread = null;
+                    _myThread.stop();
                     break;
                 } catch (InterruptedException ie) {
                     // Esto no debería ocurrir nunca...
@@ -128,13 +128,16 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public SceneManager getSceneManager(){return _mySceneManager;}
 
+    @Override
+    public EnginePaths getEnginePaths(){ return _myPaths;}
+
     //VARIABLES
-    protected EnginePaths _myPaths;
-    private Thread _myThread;
+    public EnginePaths _myPaths;
+    private Thread _myThread = null;
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
     protected SceneManager _mySceneManager;
     protected long _lastFrameTime;
-    protected volatile boolean _running = false;
+    protected boolean _running = false;
 }

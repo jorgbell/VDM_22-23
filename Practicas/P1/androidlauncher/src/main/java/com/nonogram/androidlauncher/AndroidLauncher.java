@@ -4,9 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.androidengine.AndroidEngine;
-import com.nonogram.engine.AbstractEngine;
 import com.nonogram.logic.MenuScene;
-import com.nonogram.logic.PruebasScene;
 
 public class AndroidLauncher extends AppCompatActivity {
 
