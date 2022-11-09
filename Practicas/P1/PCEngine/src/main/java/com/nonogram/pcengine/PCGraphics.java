@@ -82,12 +82,12 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public float getBorderHeight() {
-        return 31;
+        return _myView.getInsets().top;
     }
 
     @Override
     public float getBorderWidth() {
-        return 8;
+        return _myView.getInsets().left;
     }
 
 

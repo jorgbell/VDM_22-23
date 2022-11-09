@@ -87,9 +87,26 @@ public class Tablero {
     public Boolean getSolution(int i, int j) { return solucion[i][j]; }
     public Casilla getCasilla(int i, int j) { return tablero[i][j]; }
 
-    public void ComprobarTablero()
+    public int getRemaining()
+    {
+        int total = 0;
+        int correctCount = 0;
+
+        for(int i = 0; i < size; i++) for(int j = 0; j < size; j++)
+        {
+            if(solucion[i][j])
+            {
+                total++;
+                if(tablero[i][j].getState() == State.PICK) correctCount++;
+            }
+        }
+        return total - correctCount;
+    }
+
+    public int ComprobarTablero()
     {
         for(Casilla c : blues) if(!solucion[c.y][c.x]) { c.setState(State.WRONG); }
+        return wrongs.size();
     }
 
     public void LimpiarErrores() {
@@ -131,8 +148,13 @@ public class Tablero {
     //Metodo que genera una linea resoluble por si sola
     private void generaFilaBasica(int fila, int size)
     {
-        int tipoFila = r.nextInt(5);
+        int tipoFila;
+        if(size > 5) tipoFila = r.nextInt(5);
+        else  tipoFila = r.nextInt(3);
+
         String n = "";
+
+        System.out.print("TipoFila: " + tipoFila + "\n");
 
         switch (tipoFila)
         {

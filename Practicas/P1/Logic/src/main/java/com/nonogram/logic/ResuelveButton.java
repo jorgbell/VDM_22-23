@@ -4,9 +4,9 @@ import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Image;
 
-public class RendirseButton extends Button{
+public class ResuelveButton extends Button{
 
-    public RendirseButton(int x, int y, int w, int h, GameScene g/*, Image img*/) {
+    public ResuelveButton(int x, int y, int w, int h, GameScene g/*, Image img*/) {
         super(x, y, w, h);
         _g = g;
         //_image = img;
@@ -16,7 +16,7 @@ public class RendirseButton extends Button{
     public void render(Graphics g) {
         //g.drawImage(_image, rect._x, rect._y);
         g.setColor(0xFF000000);
-        g.drawText("Comprobar", rect._x, rect._y);
+        g.drawText("Comprobar", rect._x + rect._w / 8, rect._y + rect._h * 3 / 5);
         g.drawRect(rect._x, rect._y, rect._w, rect._h);
     }
 
