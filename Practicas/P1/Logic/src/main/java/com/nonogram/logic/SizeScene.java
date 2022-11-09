@@ -27,10 +27,11 @@ public class SizeScene extends AbstractScene {
         for (int i = 0; i < _botonesSizes.length; i++)
         {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
-            int size = _sizes[i];
+            int rowNumber = _sizes[i][0];
+            int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), size, _solvablePercentage);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
+            Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, rowNumber + "x" + columnNumber, _myEngine, s);
         }
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
@@ -74,7 +75,7 @@ public class SizeScene extends AbstractScene {
     int _h;
     int _w;
     Font _f;
-    int[] _sizes ={5,8,10,15}; //el minimo es 5x5
+    int[][] _sizes = {{5, 5}, {8, 8}, {10, 5}, {10, 8}, {10, 10}, {15, 15}}; //el minimo es 5x5
     int _solvablePercentage;
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];

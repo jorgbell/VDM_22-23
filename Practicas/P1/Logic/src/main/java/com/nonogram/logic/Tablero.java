@@ -50,16 +50,17 @@ public class Tablero {
         }
     }
 
-    public void  init(int size, int percentage){
-        this._size = size;
+    public void  init(int rowNumber, int columnNumber, int percentage){
+        _rowNumber = rowNumber;
+        _columnNumber = columnNumber;
         System.out.print((float)percentage / 100.0 + "\n");
-        _lineasResolubles = (int)(_size * (float)percentage / 100.0);
+        _lineasResolubles = (int)(_rowNumber * (float)percentage / 100.0);
         System.out.print(_lineasResolubles + "\n");
-        _tablero = new Casilla[size][size];
+        _tablero = new Casilla[_rowNumber][_columnNumber];
         _blues = new Vector<Casilla>();
         _wrongs = new Vector<Casilla>();
 
-        for (int i =0; i<size;++i){ for (int j =0; j<size;++j) _tablero[i][j] = new Casilla(i,j); }
+        for (int i =0; i < _rowNumber; ++i){ for (int j = 0; j < _columnNumber; ++j) _tablero[i][j] = new Casilla(i,j); }
 
         generaSolucion();
     }
@@ -76,7 +77,7 @@ public class Tablero {
         int total = 0;
         int correctCount = 0;
 
-        for(int i = 0; i < _size; i++) for(int j = 0; j < _size; j++)
+        for(int i = 0; i < _rowNumber; i++) for(int j = 0; j < _columnNumber; j++)
         {
             if(_solucion[i][j])
             {
@@ -107,23 +108,21 @@ public class Tablero {
     // --- Metodos de generacion de la solucion ---
     private void generaSolucion(){
         _r = new Random();
-        _solucion = new boolean[_size][_size];
-        _filas = new Linea[_size];
-        _columnas = new Linea[_size];
+        _solucion = new boolean[_rowNumber][_columnNumber];
+        _filas = new Linea[_rowNumber];
+        _columnas = new Linea[_columnNumber];
 
-        for(int i = 0; i < _filas.length; i++) //Inicializamos los arrays de lineas
-        {
-            _filas[i] = new Linea();
-            _columnas[i] = new Linea();
-        }
+        //Inicializamos los arrays de lineas
+        for(int i = 0; i < _filas.length; i++) _filas[i] = new Linea();
+        for(int i = 0; i < _columnas.length; i++) _columnas[i] = new Linea();
 
-        this.eligeFilas(_size); //Elegimos las filas basicas
+        this.eligeFilas(_rowNumber); //Elegimos las filas basicas
 
         //Recorremos las filas y las vamos rellenando
-        for (int i = 0; i< _size; ++i) if(!_filas[i].generated) _filas[i].numbers = rellenaFila(i, 1, _size / 2, 0);
+        for (int i = 0; i < _rowNumber; ++i) if(!_filas[i].generated) _filas[i].numbers = rellenaFila(i, 1, _columnNumber / 2, 0);
 
         //Leemos las columnas
-        for (int i = 0; i < _size; ++i) completaColumna(i);
+        for (int i = 0; i < _columnNumber; ++i) completaColumna(i);
 
         //Sacams el tablero por consola
         //leeTablero();
@@ -137,7 +136,7 @@ public class Tablero {
         else  tipoFila = _r.nextInt(3);
 
         String n = "";
-
+        System.out.print("TipoFila: " + tipoFila + "\n");
 
         switch (tipoFila)
         {
@@ -172,7 +171,7 @@ public class Tablero {
         int counter = _r.nextInt(space);
         boolean mode = true;
 
-        while(counter < _size)
+        while(counter < _columnNumber)
         {
 
             if(minSize == 0)
@@ -182,7 +181,7 @@ public class Tablero {
             }
 
             int maxBlockSize = minSize + _r.nextInt(maxSize - minSize) + 1;
-            int blockSize = Math.min(maxBlockSize, (_size - counter));
+            int blockSize = Math.min(maxBlockSize, (_columnNumber - counter));
 
             for(int i = 0; i < blockSize; i++) _solucion[fila][counter + i] = mode;
 
@@ -193,7 +192,7 @@ public class Tablero {
             }
             counter += blockSize;
 
-            if(counter + 1 <= _size) counter++;
+            if(counter + 1 <= _columnNumber) counter++;
         }
         if(n == "") n = "0";
 
@@ -205,24 +204,24 @@ public class Tablero {
         String n = "";
         int counter = _r.nextInt(space);
 
-        int totalCount = (_size / 2) + 1;
-        int minNum = _size - totalCount;
+        int totalCount = (_columnNumber / 2) + 1;
+        int minNum = _columnNumber - totalCount;
 
         boolean minNumPlaced = false;
 
 
-        while(totalCount > 0 && counter < _size)
+        while(totalCount > 0 && counter < _columnNumber)
         {
             if(n != "") n += ".";
 
-            int maxBlockSize = Math.min(minNum, _size - counter);
+            int maxBlockSize = Math.min(minNum, _columnNumber - counter);
             int blockSize = _r.nextInt(maxBlockSize) + 1;
 
             if (blockSize == minNum) minNumPlaced = true;
 
             if(!minNumPlaced)
             {
-                if(_size - (counter + 1 + blockSize) < minNum)
+                if(_columnNumber - (counter + 1 + blockSize) < minNum)
                 {
                     blockSize = maxBlockSize;
                     minNumPlaced = true;
@@ -245,14 +244,14 @@ public class Tablero {
             totalCount -= blockSize;
             n += String.valueOf(blockSize);
 
-            if(counter + 1 <= _size)
+            if(counter + 1 <= _columnNumber)
             {
                 counter++;
                 totalCount--;
             }
         }
 
-        for(int i = counter; i < _size; i++) _solucion[fila][i] = false;
+        for(int i = counter; i < _columnNumber; i++) _solucion[fila][i] = false;
 
         return n;
     }
@@ -262,7 +261,7 @@ public class Tablero {
         int block = 0;
         String n = "";
 
-        for(int j = 0; j < _size; j++)
+        for(int j = 0; j < _rowNumber; j++)
         {
             if(_solucion[j][columna])
             {
@@ -296,16 +295,16 @@ public class Tablero {
             int elem = _r.nextInt(filaPool.size());
             int fila = filaPool.get(elem);
 
-            generaFilaBasica(fila, size);
+            generaFilaBasica(fila, _columnNumber);
             filaPool.remove(elem);
         }
     }
 
     private void leeTablero() //para sacarlo por consola
     {
-        for(int i = 0; i < _size; ++i)
+        for(int i = 0; i < _columnNumber; ++i)
         {
-            for(int j = 0; j < _size; ++j)
+            for(int j = 0; j < _rowNumber; ++j)
             {
                 if(_solucion[i][j]) System.out.print("X");
                 else System.out.print("_");
@@ -319,7 +318,7 @@ public class Tablero {
             System.out.print("\n");
         }
 
-        for(int j = 0; j < _size; j++) System.out.print("Column " + j + ": " + _columnas[j].numbers + "\n");
+        for(int j = 0; j < _rowNumber; j++) System.out.print("Column " + j + ": " + _columnas[j].numbers + "\n");
     }
 
     Random _r;
@@ -330,5 +329,6 @@ public class Tablero {
     Linea _filas[];
     Linea _columnas[];
     int _lineasResolubles;
-    int _size;
+    int _rowNumber;
+    int _columnNumber;
 }

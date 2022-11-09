@@ -8,10 +8,11 @@ import java.util.Vector;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int size, int solvablePercentage)
+    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage)
     {
         super(gameWidth,gameHeight);
-        _tileNumber = size;
+        _rows = rows;
+        _columns = columns;
         _solvablePercentage = solvablePercentage;
     }
 
@@ -24,22 +25,24 @@ public class GameScene extends AbstractScene {
 
         _gameHeight = getGameHeight();
         _gameWidth = getGameWidth();
-        _casillas = new CasillaButton[_tileNumber][_tileNumber];
+        _casillas = new CasillaButton[_columns][_rows];
+
+        _maxDimension = Math.max(_columns, _rows);
 
         //init tamaño del tablero
         _tableroSize = (_gameWidth / 20) * 14;
-        _tileSize =  _tableroSize / _tileNumber;
+        _tileSize =  _tableroSize / _maxDimension;
         _tableroX = (_gameWidth / 20) * 5;
         _tableroY = (_gameHeight / 20) * 8;
         _t = new Tablero();
-        _t.init(_tileNumber, _solvablePercentage);
+        _t.init(_rows, _columns, _solvablePercentage);
 
-        _numberFontSize = 45 - (int)(5.7 * (Math.log(_tileNumber) / Math.log(1.595)));
+        _numberFontSize = 45 - (int)(5.7 * (Math.log(_maxDimension) / Math.log(1.595)));
         _myEngine.getGraphics().setActualFont(_f);
 
-        for (int i = 0; i < _tileNumber; i++) //se crean las casillas "fisicas"
+        for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
         {
-            for (int j = 0; j < _tileNumber; j++)
+            for (int j = 0; j < _rows; j++)
             {
                 _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
             }
@@ -60,8 +63,8 @@ public class GameScene extends AbstractScene {
         if(!_won) //durante la partida
         {
             //Rectagulos para poner los numeros y el tablero
-            _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, _tableroSize + _tableroX - (_gameWidth / 16), _tableroSize);
-            _myEngine.getGraphics().drawRect(_tableroX - 3, _tableroY - _gameHeight / 10, _tableroSize, _tableroY + _tableroSize - (_gameHeight * 76 / 250) );
+            _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, (_tileSize * _columns) + 5 + _tableroX - (_gameWidth / 16), _tableroSize);
+            _myEngine.getGraphics().drawRect(_tableroX - 3, _tableroY - _gameHeight / 10, (_tileSize * _columns) + 5, _tableroY + _tableroSize - (_gameHeight * 76 / 250) );
 
             //UI
             _f.setSize(20);
@@ -69,24 +72,29 @@ public class GameScene extends AbstractScene {
             _botonFF.render(_myEngine.getGraphics());
 
             _f.setSize(_numberFontSize);
-            for(int i = 0; i < _tileNumber; i++) //Numeros
+
+            //Numeros
+            int columnaSpace = _tileSize;
+            int columnaXMargin =  _tileSize / 5;
+            int columnaYMargin =  _tableroSize / 30;
+            int columnaInterSpace = _numberFontSize * 10 / 9;
+
+            int filaSpace = _numberFontSize * 10 / 9;
+            int filaXMargin = _tableroSize / 30;
+            int filaYMargin = _tileSize / 5;
+            int filaInterSpace =_tileSize;
+            _myEngine.getGraphics().setColor(0XFF000000);
+
+            for(int i = 0; i < _columns; i++)
             {
-                _myEngine.getGraphics().setColor(0XFF000000);
-                String[] sf = _t._filas[i].numbers.split("\\.");
                 String[] sc = _t._columnas[i].numbers.split("\\.");
-
-                int columnaSpace = _tileSize;
-                int columnaXMargin =  _tileSize / 5;
-                int columnaYMargin =  _tableroSize / 30;
-                int columnaInterSpace = _numberFontSize * 10 / 9;
-
-                int filaSpace = _numberFontSize * 10 / 9;
-                int filaXMargin = _tableroSize / 30;
-                int filaYMargin = _tileSize / 5;
-                int filaInterSpace =_tileSize;
-
-                for(int j = sf.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j],(_tableroX - filaXMargin) - filaSpace * (j + 1), _tableroY + filaYMargin + _tileSize / 2 + filaInterSpace * i);
                 for(int j = sc.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sc[(sc.length - 1) - j], _tableroX - columnaXMargin + _tileSize / 2 + columnaSpace * i, (_tableroY - columnaYMargin) - columnaInterSpace * j);
+            }
+
+            for(int i = 0; i < _rows; i++)
+            {
+                String[] sf = _t._filas[i].numbers.split("\\.");
+                for(int j = sf.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j],(_tableroX - filaXMargin) - filaSpace * (j + 1), _tableroY + filaYMargin + _tileSize / 2 + filaInterSpace * i);
             }
 
             if(_showErrors) //texto al pulsar comprobar
@@ -105,9 +113,9 @@ public class GameScene extends AbstractScene {
             _botonVictoria.render(_myEngine.getGraphics());
         }
 
-        for (int i = 0; i < _tileNumber; i++) //renderizado de las casillas fisicas
+        for (int i = 0; i < _columns; i++) //renderizado de las casillas fisicas
         {
-            for (int j = 0; j < _tileNumber; j++)
+            for (int j = 0; j < _rows; j++)
             {
                 Tablero.State s = _t.getCasilla(j, i).getState();
                 if(!_won || s == Tablero.State.PICK) _casillas[i][j].render(_myEngine.getGraphics());
@@ -182,7 +190,10 @@ public class GameScene extends AbstractScene {
     boolean _showErrors = false;
     boolean _won = false;
     float _showTime = 0;
-    int _tileNumber;
+    int _rows;
+    int _columns;
+    int _maxDimension;
+
     int _solvablePercentage;
 
     int _tableroSize;
