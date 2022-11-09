@@ -13,8 +13,8 @@ import java.util.Stack;
 
 public class SizeScene extends AbstractScene {
 
-    PopSceneButton botonVolver;
-    PushSceneButton[] botonesSizes = new PushSceneButton[4];
+    ChangeSceneButton botonVolver;
+    ChangeSceneButton[] botonesSizes = new ChangeSceneButton[4];
 
     public SizeScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
 
@@ -31,10 +31,10 @@ public class SizeScene extends AbstractScene {
             //todo: meter tamaño 8x8
             int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), size);
-            botonesSizes[i] = new PushSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
+            botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
         }
 
-        botonVolver = new PopSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
+        botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
         return true;
     }
 

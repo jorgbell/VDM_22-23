@@ -26,8 +26,8 @@ public class GameScene extends AbstractScene {
 
     CasillaButton[][] botones;
     ResuelveButton botonResolver;
-    PopSceneButton botonFF;
-    PopSceneButton botonVictoria;
+    ChangeSceneButton botonFF;
+    ChangeSceneButton botonVictoria;
 
     public GameScene(int gameWidth, int gameHeight, int size)
     {
@@ -64,8 +64,8 @@ public class GameScene extends AbstractScene {
         }
 
         botonResolver = new ResuelveButton( gameWidth * 3 / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, this);
-        botonFF = new PopSceneButton( gameWidth / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, "Rendirse", _myEngine);
-        botonVictoria = new PopSceneButton(gameWidth * 2 / 5, gameHeight * 8 / 10, gameWidth * 2 / 7, gameHeight / 15, "Volver", _myEngine);
+        botonFF = new ChangeSceneButton( gameWidth / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, "Rendirse", _myEngine);
+        botonVictoria = new ChangeSceneButton(gameWidth * 2 / 5, gameHeight * 8 / 10, gameWidth * 2 / 7, gameHeight / 15, "Volver", _myEngine);
 
         return true;
     }

@@ -8,7 +8,7 @@ import com.nonogram.engine.Scene;
 
 public class MenuScene extends AbstractScene {
 
-    PushSceneButton botonJugar;
+    ChangeSceneButton botonJugar;
     public MenuScene(int gameWidth, int gameHeight) { super(gameWidth, gameHeight);}
 
     @Override
@@ -24,7 +24,7 @@ public class MenuScene extends AbstractScene {
         audio.playSound("saul.wav");
 
         Scene s = new SizeScene(getGameWidth(), getGameHeight());
-        botonJugar = new PushSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);
+        botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);
 
 
         return true;
