@@ -13,7 +13,7 @@ public class ChangeSceneButton extends Button{
         _text = text;
         _engine = e;
         _newScene = ns;
-        push= true;
+        _push = true;
     }
     //POP BUTTON
     public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e)
@@ -21,13 +21,13 @@ public class ChangeSceneButton extends Button{
         super(x, y, w, h);
         _text = text;
         _engine = e;
-        push=false;
+        _push =false;
     }
     @Override
     public void render(Graphics g) {
         g.setColor(0xFF000000);
-        g.drawText(_text, rect._x + rect._w / 8, rect._y + rect._h * 3 / 5);
-        g.drawRect(rect._x, rect._y, rect._w, rect._h);
+        g.drawText(_text, _rect._x + _rect._w / 8, _rect._y + _rect._h * 3 / 5);
+        g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ChangeSceneButton extends Button{
 
     @Override
     public void handleEvent(Input.TouchEvent e) {
-        if(push) _engine.getSceneManager().push(_newScene);
+        if(_push) _engine.getSceneManager().push(_newScene);
         else _engine.getSceneManager().pop();
     }
 
@@ -45,5 +45,5 @@ public class ChangeSceneButton extends Button{
     String _text;
     Engine _engine;
     Scene _newScene;
-    Boolean push= false;
+    Boolean _push = false;
 }

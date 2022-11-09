@@ -2,7 +2,6 @@ package com.nonogram.logic;
 
 import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.Image;
 
 public class ResuelveButton extends Button{
 
@@ -16,8 +15,8 @@ public class ResuelveButton extends Button{
     public void render(Graphics g) {
         //g.drawImage(_image, rect._x, rect._y);
         g.setColor(0xFF000000);
-        g.drawText("Comprobar", rect._x + rect._w / 8, rect._y + rect._h * 3 / 5);
-        g.drawRect(rect._x, rect._y, rect._w, rect._h);
+        g.drawText("Comprobar", _rect._x + _rect._w / 8, _rect._y + _rect._h * 3 / 5);
+        g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     }
 
     @Override

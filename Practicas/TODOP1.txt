@@ -4,7 +4,6 @@ Comentar, cambiar nombre a variables y refactorizar lo que sea necesario para qu
 Separar en metodos si tal los cachos de codigo gordos para que se entienda mejor
 Cuando este hecho en el motor: 
 	- SI LES PARECE BIEN: hacer que al hacer click derecho meta directamente una casilla blanca, que el izquierdo haga lo mismo de ciclar pero que el derecho meta eso directamente
-	- en vez de cargar dos fuentes iguales con tamaño distinto, cargar una y hacer un setFontSize(n) cuando es necesario cambiar el tamaño
 	- darle al stop de la musica en el metodo release que hay en la escena de inicio
 
 

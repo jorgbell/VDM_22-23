@@ -6,64 +6,43 @@ import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
-    Tablero t;
-    int gameHeight;
-    int gameWidth;
-    boolean showErrors = false;
-    boolean won = false;
-    float showTime = 0;
-    int tileNumber;
-
-    int tableroSize;
-    int tileSize;
-    int tableroX;
-    int tableroY;
-
-    int numberFontSize;
-
-    int wrongs = 0;
-    int remaining = 0;
-
-    CasillaButton[][] botones;
-    ResuelveButton botonResolver;
-    ChangeSceneButton botonFF;
-    ChangeSceneButton botonVictoria;
-
     public GameScene(int gameWidth, int gameHeight, int size)
     {
         super(gameWidth,gameHeight);
-        tileNumber = size;
+        _tileNumber = size;
     }
 
     @Override
     public boolean init() {
-        gameHeight = getGameHeight();
-        gameWidth = getGameWidth();
+        _gameHeight = getGameHeight();
+        _gameWidth = getGameWidth();
 
-        botones = new CasillaButton[tileNumber][tileNumber];
-        tableroSize = (gameWidth / 20) * 14;
-        tileSize =  tableroSize / tileNumber;
-        tableroX = (gameWidth / 20) * 5;
-        tableroY = (gameHeight / 20) * 8;
-        t = new Tablero();
-        t.init(tileNumber);
+        _botones = new CasillaButton[_tileNumber][_tileNumber];
 
-        f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        //init tamaño del tablero
+        _tableroSize = (_gameWidth / 20) * 14;
+        _tileSize =  _tableroSize / _tileNumber;
+        _tableroX = (_gameWidth / 20) * 5;
+        _tableroY = (_gameHeight / 20) * 8;
+        _t = new Tablero();
+        _t.init(_tileNumber);
 
-        numberFontSize = 45 - (int)(5.7 * (Math.log(tileNumber) / Math.log(1.595)));
-        _myEngine.getGraphics().setActualFont(f);
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        _numberFontSize = 45 - (int)(5.7 * (Math.log(_tileNumber) / Math.log(1.595)));
+        _myEngine.getGraphics().setActualFont(_f);
 
-        for (int i = 0; i < tileNumber; i++)
+        for (int i = 0; i < _tileNumber; i++) //se crean las casillas "fisicas"
         {
-            for (int j = 0; j < tileNumber; j++)
+            for (int j = 0; j < _tileNumber; j++)
             {
-                botones[i][j] = new CasillaButton(tableroX + tileSize * i, tableroY + tileSize * j, tileSize - 1, tileSize - 1, t.getCasilla(j, i));
+                _botones[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 1, _tileSize - 1, _t.getCasilla(j, i));
             }
         }
 
-        botonResolver = new ResuelveButton( gameWidth * 3 / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, this);
-        botonFF = new ChangeSceneButton( gameWidth / 5, gameHeight / 20 , gameWidth * 2 / 7, gameHeight / 15, "Rendirse", _myEngine);
-        botonVictoria = new ChangeSceneButton(gameWidth * 2 / 5, gameHeight * 8 / 10, gameWidth * 2 / 7, gameHeight / 15, "Volver", _myEngine);
+        //botones de ui
+        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, this);
+        _botonFF = new ChangeSceneButton( _gameWidth / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, "Rendirse", _myEngine);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine);
 
         return true;
     }
@@ -75,76 +54,77 @@ public class GameScene extends AbstractScene {
 
         _myEngine.getGraphics().setColor(0XFF000000);
 
-        if(!won)
+        if(!_won) //durante la partida
         {
-            _myEngine.getGraphics().drawRect((tableroX - gameWidth / 5) + 5, tableroY - 3, tableroSize + tableroX - (gameWidth / 16), tableroSize);
-            _myEngine.getGraphics().drawRect(tableroX - 3, tableroY - gameHeight / 10, tableroSize, tableroY + tableroSize - (gameHeight * 76 / 250) );
+            //Rectagulos para poner los numeros y el tablero
+            _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, _tableroSize + _tableroX - (_gameWidth / 16), _tableroSize);
+            _myEngine.getGraphics().drawRect(_tableroX - 3, _tableroY - _gameHeight / 10, _tableroSize, _tableroY + _tableroSize - (_gameHeight * 76 / 250) );
 
-            f.setSize(20);
-            botonResolver.render(_myEngine.getGraphics());
-            botonFF.render(_myEngine.getGraphics());
+            //UI
+            _f.setSize(20);
+            _botonResolver.render(_myEngine.getGraphics());
+            _botonFF.render(_myEngine.getGraphics());
 
-            f.setSize(numberFontSize);
-            for(int i = 0; i < tileNumber; i++)
+            _f.setSize(_numberFontSize);
+            for(int i = 0; i < _tileNumber; i++) //Numeros
             {
                 _myEngine.getGraphics().setColor(0XFF000000);
-                String[] sf = t.filas[i].numbers.split("\\.");
-                String[] sc = t.columnas[i].numbers.split("\\.");
+                String[] sf = _t.filas[i].numbers.split("\\.");
+                String[] sc = _t.columnas[i].numbers.split("\\.");
 
-                int columnaSpace = tileSize;
-                int columnaXMargin =  tileSize / 5;
-                int columnaYMargin =  tableroSize / 30;
-                int columnaInterSpace = numberFontSize * 10 / 9;
+                int columnaSpace = _tileSize;
+                int columnaXMargin =  _tileSize / 5;
+                int columnaYMargin =  _tableroSize / 30;
+                int columnaInterSpace = _numberFontSize * 10 / 9;
 
-                int filaSpace = numberFontSize * 10 / 9;
-                int filaXMargin = tableroSize / 30;
-                int filaYMargin = tileSize / 5;
-                int filaInterSpace = tableroSize / 20;
+                int filaSpace = _numberFontSize * 10 / 9;
+                int filaXMargin = _tableroSize / 30;
+                int filaYMargin = _tileSize / 5;
+                int filaInterSpace =_tileSize;
 
-                for(int j = sf.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j],(tableroX - filaXMargin) - filaSpace * (j + 1), tableroY + filaYMargin + tileSize / 2 + (tileSize) * i);
-                for(int j = sc.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sc[(sc.length - 1) - j],tableroX - columnaXMargin + tileSize / 2 + columnaSpace * i, (tableroY - columnaYMargin) - columnaInterSpace * j);
+                for(int j = sf.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j],(_tableroX - filaXMargin) - filaSpace * (j + 1), _tableroY + filaYMargin + _tileSize / 2 + filaInterSpace * i);
+                for(int j = sc.length - 1; j >= 0; j--) _myEngine.getGraphics().drawText(sc[(sc.length - 1) - j], _tableroX - columnaXMargin + _tileSize / 2 + columnaSpace * i, (_tableroY - columnaYMargin) - columnaInterSpace * j);
             }
 
-            if(showErrors)
+            if(_showErrors) //texto al pulsar comprobar
             {
-                f.setSize(20);
+                _f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
-                _myEngine.getGraphics().drawText("Te faltan " + remaining + " casillas", gameWidth / 3, gameHeight * 4 / 20);
-                _myEngine.getGraphics().drawText("Tienes mal " + wrongs + " casillas", gameWidth / 3, gameHeight * 5 / 20);
+                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 3, _gameHeight * 4 / 20);
+                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 3, _gameHeight * 5 / 20);
             }
         }
-        else
+        else //fin de la partida
         {
-            f.setSize(20);
+            _f.setSize(20);
             _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText("ENHORABUENA", gameWidth / 3, gameHeight * 4 / 20);
-            botonVictoria.render(_myEngine.getGraphics());
+            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 3, _gameHeight * 4 / 20);
+            _botonVictoria.render(_myEngine.getGraphics());
         }
 
-        for (int i = 0; i < tileNumber; i++)
+        for (int i = 0; i < _tileNumber; i++) //renderizado de las casillas fisicas
         {
-            for (int j = 0; j < tileNumber; j++)
+            for (int j = 0; j < _tileNumber; j++)
             {
-                Tablero.State s = t.getCasilla(j, i).getState();
-                if(!won || s == Tablero.State.PICK) botones[i][j].render(_myEngine.getGraphics());
+                Tablero.State s = _t.getCasilla(j, i).getState();
+                if(!_won || s == Tablero.State.PICK) _botones[i][j].render(_myEngine.getGraphics());
             }
         }
 
-        _myEngine.getGraphics().setColor(0XFF000000);
-
+        //_myEngine.getGraphics().setColor(0XFF000000);
         //_myEngine.getGraphics().drawText("Show result in: " + (int) showTime, 650, 300);
     }
 
     @Override
     public void update(double deltaTime)
     {
-        if (showErrors)
+        if (_showErrors)
         {
-            showTime -= deltaTime;
-            if(showTime <= 0)
+            _showTime -= deltaTime;
+            if(_showTime <= 0)
             {
-                t.LimpiarErrores();
-                showErrors = false;
+                _t.LimpiarErrores();
+                _showErrors = false;
             }
         }
     }
@@ -155,24 +135,24 @@ public class GameScene extends AbstractScene {
             case PULSAR:
                 System.out.println("FIXED X: " + input.get_posX() + "//FIXED Y: " + input.get_posY());
 
-                if(!won)
+                if(!_won)
                 {
-                    if(!showErrors || wrongs <= 0)
+                    if(!_showErrors || _wrongs <= 0)
                     {
-                        for (int i = 0; i < botones.length; i++) for (int j = 0; j < botones[0].length; j++)
+                        for (int i = 0; i < _botones.length; i++) for (int j = 0; j < _botones[0].length; j++)
                         {
-                            if (botones[i][j].rect.contains(input.get_posX(), input.get_posY()))
+                            if (_botones[i][j]._rect.contains(input.get_posX(), input.get_posY()))
                             {
-                                botones[i][j].handleEvent(input);
+                                _botones[i][j].handleEvent(input);
                             }
                         }
                     }
 
-                    if(botonResolver.rect.contains(input.get_posX(), input.get_posY())) botonResolver.handleEvent(input);
-                    if(botonFF.rect.contains(input.get_posX(), input.get_posY())) botonFF.handleEvent(input);
+                    if(_botonResolver._rect.contains(input.get_posX(), input.get_posY())) _botonResolver.handleEvent(input);
+                    if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
                 }
 
-                else if(botonVictoria.rect.contains(input.get_posX(), input.get_posY())) botonVictoria.handleEvent(input);
+                else if(_botonVictoria._rect.contains(input.get_posX(), input.get_posY())) _botonVictoria.handleEvent(input);
                 break;
             case SOLTAR:
                 break;
@@ -181,22 +161,43 @@ public class GameScene extends AbstractScene {
 
     public void showSolution()
     {
-        wrongs = t.ComprobarTablero();
-        remaining = t.getRemaining();
-        if(wrongs == 0 && remaining == 0) won = true;
+        _wrongs = _t.ComprobarTablero();
+        _remaining = _t.getRemaining();
+        if(_wrongs == 0 && _remaining == 0) _won = true;
         else {
-            showErrors = true;
-            showTime = 3;
+            _showErrors = true;
+            _showTime = 3;
         }
     }
 
     @Override
 
     public boolean release() {
-        won = false;
+        _won = false;
         return true;
     }
 
-    Font f;
-    Font numbersf;
+    Tablero _t;
+    int _gameHeight;
+    int _gameWidth;
+    boolean _showErrors = false;
+    boolean _won = false;
+    float _showTime = 0;
+    int _tileNumber;
+
+    int _tableroSize;
+    int _tileSize;
+    int _tableroX;
+    int _tableroY;
+
+    Font _f;
+    int _numberFontSize;
+
+    int _wrongs = 0;
+    int _remaining = 0;
+
+    CasillaButton[][] _botones;
+    ResuelveButton _botonResolver;
+    ChangeSceneButton _botonFF;
+    ChangeSceneButton _botonVictoria;
 }

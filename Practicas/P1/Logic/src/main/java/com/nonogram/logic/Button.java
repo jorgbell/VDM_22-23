@@ -1,6 +1,6 @@
 package com.nonogram.logic;
 
-import java.awt.geom.Rectangle2D;
+
 import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Input;
 
@@ -22,9 +22,8 @@ public abstract class Button {
 
     }
 
-    public Button(int x, int y, int w, int h/*, Action ac?*/) {
-        rect = new Rect(x, y, w, h);
-        //action = ac;s
+    public Button(int x, int y, int w, int h) {
+        _rect = new Rect(x, y, w, h);
     }
 
     public abstract void render(Graphics g);
@@ -33,5 +32,5 @@ public abstract class Button {
     public abstract void update(double deltaTime);
 
     //Action action;
-    Rect rect;
+    Rect _rect;
 }
