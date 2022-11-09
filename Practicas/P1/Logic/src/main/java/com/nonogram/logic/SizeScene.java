@@ -13,8 +13,9 @@ import java.util.Stack;
 
 public class SizeScene extends AbstractScene {
 
+    int[] sizes ={5,8,10,15};
     ChangeSceneButton botonVolver;
-    ChangeSceneButton[] botonesSizes = new ChangeSceneButton[4];
+    ChangeSceneButton[] botonesSizes = new ChangeSceneButton[sizes.length];
 
     public SizeScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
 
@@ -28,8 +29,9 @@ public class SizeScene extends AbstractScene {
 
         for (int i = 0; i < botonesSizes.length; i++)
         {
-            //todo: meter tamaño 8x8
-            int size = 5 * (i + 1);
+            //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
+            int size = sizes[i];
+            //int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), size);
             botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
         }
@@ -40,6 +42,7 @@ public class SizeScene extends AbstractScene {
 
     @Override
     public void render() {
+        _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(0xFF000000);
         botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < botonesSizes.length; i++) botonesSizes[i].render(_myEngine.getGraphics());
