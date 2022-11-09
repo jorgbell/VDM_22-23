@@ -116,7 +116,8 @@ public class GameScene extends AbstractScene {
         else
         {
             _myEngine.getGraphics().setActualFont(f);
-
+            _myEngine.getGraphics().setColor(0XFF000000);
+            _myEngine.getGraphics().drawText("ENHORABUENA", gameWidth / 3, gameHeight * 4 / 20);
             botonVictoria.render(_myEngine.getGraphics());
         }
 
@@ -190,7 +191,9 @@ public class GameScene extends AbstractScene {
     }
 
     @Override
+
     public boolean release() {
+        won = false;
         return true;
     }
 
