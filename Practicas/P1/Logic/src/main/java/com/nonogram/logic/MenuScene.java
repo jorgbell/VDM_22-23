@@ -21,7 +21,7 @@ public class MenuScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
-        Scene s = new SizeScene(getGameWidth(), getGameHeight());
+        Scene s = new DifficultyScene(getGameWidth(), getGameHeight());
         _botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s);
         return true;
     }

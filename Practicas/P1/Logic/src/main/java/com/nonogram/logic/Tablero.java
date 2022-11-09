@@ -50,9 +50,11 @@ public class Tablero {
         }
     }
 
-    public void  init(int size){
+    public void  init(int size, int percentage){
         this._size = size;
-
+        System.out.print((float)percentage / 100.0 + "\n");
+        _lineasResolubles = (int)(_size * (float)percentage / 100.0);
+        System.out.print(_lineasResolubles + "\n");
         _tablero = new Casilla[size][size];
         _blues = new Vector<Casilla>();
         _wrongs = new Vector<Casilla>();
@@ -327,6 +329,6 @@ public class Tablero {
     private boolean _solucion[][];
     Linea _filas[];
     Linea _columnas[];
-    int _lineasResolubles = 5;
+    int _lineasResolubles;
     int _size;
 }

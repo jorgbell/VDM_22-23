@@ -8,10 +8,11 @@ import java.util.Vector;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int size)
+    public GameScene(int gameWidth, int gameHeight, int size, int solvablePercentage)
     {
         super(gameWidth,gameHeight);
         _tileNumber = size;
+        _solvablePercentage = solvablePercentage;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class GameScene extends AbstractScene {
         _tableroX = (_gameWidth / 20) * 5;
         _tableroY = (_gameHeight / 20) * 8;
         _t = new Tablero();
-        _t.init(_tileNumber);
+        _t.init(_tileNumber, _solvablePercentage);
 
         _numberFontSize = 45 - (int)(5.7 * (Math.log(_tileNumber) / Math.log(1.595)));
         _myEngine.getGraphics().setActualFont(_f);
@@ -40,7 +41,7 @@ public class GameScene extends AbstractScene {
         {
             for (int j = 0; j < _tileNumber; j++)
             {
-                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 1, _tileSize - 1, _t.getCasilla(j, i));
+                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
             }
         }
 
@@ -182,6 +183,7 @@ public class GameScene extends AbstractScene {
     boolean _won = false;
     float _showTime = 0;
     int _tileNumber;
+    int _solvablePercentage;
 
     int _tableroSize;
     int _tileSize;
