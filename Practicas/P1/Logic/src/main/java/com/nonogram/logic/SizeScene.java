@@ -1,21 +1,14 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
-import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
-import com.nonogram.engine.Graphics;
-import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
-
-import java.util.Stack;
 
 
 public class SizeScene extends AbstractScene {
 
-    int[] sizes ={5,8,10,15}; //el minimo es 5x5
-    ChangeSceneButton botonVolver;
-    ChangeSceneButton[] botonesSizes = new ChangeSceneButton[sizes.length];
+
 
     public SizeScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
 
@@ -27,16 +20,17 @@ public class SizeScene extends AbstractScene {
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _myEngine.getGraphics().setActualFont(_f);
 
-        for (int i = 0; i < botonesSizes.length; i++)
+        //Crea los botones de los diferentes tableros
+        for (int i = 0; i < _botonesSizes.length; i++)
         {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
-            int size = sizes[i];
+            int size = _sizes[i];
             //int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), size);
-            botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, size + "x" + size, _myEngine, s);
         }
 
-        botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine);
         return true;
     }
 
@@ -46,30 +40,25 @@ public class SizeScene extends AbstractScene {
         _myEngine.getGraphics().setColor(0xFF000000);
         _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /5, _h /5);
 
-
-        botonVolver.render(_myEngine.getGraphics());
-        for(int i = 0; i < botonesSizes.length; i++) botonesSizes[i].render(_myEngine.getGraphics());
-
+        _botonVolver.render(_myEngine.getGraphics());
+        for(int i = 0; i < _botonesSizes.length; i++) _botonesSizes[i].render(_myEngine.getGraphics());
     }
 
     @Override
-    public void update(double deltaTime) {
-
-    }
+    public void update(double deltaTime) {}
 
     @Override
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
             case PULSAR:
-                if(botonVolver.rect.contains(input.get_posX(), input.get_posY())) botonVolver.handleEvent(input);
+                if(_botonVolver._rect.contains(input.get_posX(), input.get_posY())) _botonVolver.handleEvent(input);
 
-                for(int i = 0; i < botonesSizes.length; i++)
+                for(int i = 0; i < _botonesSizes.length; i++)
                 {
-                    if(botonesSizes[i].rect.contains(input.get_posX(), input.get_posY())) botonesSizes[i].handleEvent(input);
+                    if(_botonesSizes[i]._rect.contains(input.get_posX(), input.get_posY())) _botonesSizes[i].handleEvent(input);
                 }
                 break;
             case SOLTAR:
-
                 break;
         }
     }
@@ -82,4 +71,7 @@ public class SizeScene extends AbstractScene {
     int _h;
     int _w;
     Font _f;
+    int[] _sizes ={5,8,10,15}; //el minimo es 5x5
+    ChangeSceneButton _botonVolver;
+    ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
 }

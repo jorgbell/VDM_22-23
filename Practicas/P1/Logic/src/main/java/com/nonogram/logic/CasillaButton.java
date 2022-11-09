@@ -8,7 +8,6 @@ public class CasillaButton extends Button{
     public CasillaButton(int x, int y, int w, int h, Tablero.Casilla c) {
         super(x, y, w, h);
         _casilla = c;
-        //_anim = new CasillaAnim(colorCasilla());
     }
 
 
@@ -35,13 +34,13 @@ public class CasillaButton extends Button{
                 break;
         }
 
-        if(state == Tablero.State.CROSS)
+        if(state == Tablero.State.CROSS) //pinta la linea diagonal
         {
-            g.drawRect(rect._x, rect._y, rect._w, rect._h);
-            g.drawLine(rect._x, rect._y, rect._x + rect._w, rect._y + rect._h);
+            g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
+            g.drawLine(_rect._x, _rect._y, _rect._x + _rect._w, _rect._y + _rect._h);
         }
 
-        else g.fillRect(rect._x, rect._y, rect._w, rect._h);
+        else g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
     };
 
     public void handleEvent(Input.TouchEvent e)
@@ -53,7 +52,4 @@ public class CasillaButton extends Button{
     public void update(double deltaTime) {};
 
     Tablero.Casilla _casilla;
-
-   // CasillaAnim _anim = null;
-
 }
