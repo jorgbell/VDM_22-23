@@ -1,14 +1,9 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
-import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
-import com.nonogram.engine.Graphics;
-import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
-
-import java.util.Stack;
 
 
 public class SizeScene extends AbstractScene {

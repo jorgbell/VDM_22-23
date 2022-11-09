@@ -39,9 +39,9 @@ public interface Graphics {
     void reScale();
     public float worldToGameX(float x);
     public float worldToGameY(float y);
-    public float getBorderHeight();
-    public float getBorderWidth();
-    public int getGameWidth();
-    public int getGameHeight();
+    public float getBottomBorder();
+    public float getLeftBorder();
+    public float getRightBorder();
+    public float getTopBorder();
     void setPaths(AbstractEngine.EnginePaths myPaths);
 }

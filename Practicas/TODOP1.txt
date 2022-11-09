@@ -13,7 +13,5 @@ Cuando este hecho en el motor:
 
 
 JORGE:
-Detectar click derecho en el input (en android imagino que el click derecho se traduce a mantener pulsado o algo)
-Metodo para parar la musica
 hacer que getGameSize sea solo desde la escena
 Crear metodos init() para controlar errores en graphics, input y scene, y hacer tambien el init en abstract engine llamando a cada uno de esos inits. Como lo tengo el año pasado vamos.

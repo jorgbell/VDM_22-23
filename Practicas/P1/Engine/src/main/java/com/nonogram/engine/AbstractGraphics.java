@@ -41,49 +41,35 @@ public abstract class AbstractGraphics implements Graphics {
 
     @Override
     public void reScale(){
-        //sacamos la relacion de aspecto actual, segun el tamaño de la ventana.
-        float wh = (float) getWindowHeight(); float ww = getWindowWidth();
-        float gh = (float) getGameHeight(); float gw = getGameWidth();
-        float aspectH = wh/gh;
-        float aspectW = ww/gw;
 
-        //si ventana y juego tienen el mismo tamaño, el factor de reescalado es 1.
-        if(aspectH == 1 && aspectW == 1){
-            translate(getBorderWidth(),getBorderHeight());
-            scale(1,1);
-            return;
-        }
+        //sacamos la relacion de aspecto actual, segun el tamaño de la ventana.
+        float windowHeight = (float) getWindowHeight(); float windowWidth = getWindowWidth();
+        float gameFHeight = sceneManager.getGameHeight(); float gameFWidth = sceneManager.getGameWidth();
+
+        float aspectH = windowHeight/gameFHeight;
+        float aspectW = windowWidth/gameFWidth;
 
         //En caso contrario
         scaleFactor = Math.min(aspectH, aspectW);
 
-        translateX = (int)(getWindowWidth() - getGameWidth() * scaleFactor) /2;
-        translateY = (int)(getWindowHeight()  - getGameHeight() * scaleFactor) /2;
+        translateX = (int)(windowWidth - gameFWidth* scaleFactor) /2;
+        translateY = (int)(windowHeight  - gameFHeight* scaleFactor) /2;
 
-        translate(translateX + getBorderWidth(), translateY + getBorderHeight());
+        translate(translateX + getLeftBorder(), translateY + getTopBorder());
         scale(scaleFactor, scaleFactor);
     }
 
     @Override
     public float worldToGameX(float x) {
-        float nx = (x - translateX - getBorderWidth())/scaleFactor;
+        float nx = (x - translateX - getLeftBorder())/scaleFactor;
         return nx;
     }
     @Override
     public float worldToGameY(float y) {
-        float ny =(y - translateY - getBorderHeight())/scaleFactor;
+        float ny =(y - translateY - getTopBorder())/scaleFactor;
         return ny;
     }
 
-    @Override
-    public int getGameWidth() {
-        return sceneManager.getGameWidth() - (int)getBorderWidth();
-    }
-
-    @Override
-    public int getGameHeight() {
-        return sceneManager.getGameHeight() - (int)getBorderHeight();
-    }
 
     //VARIABLES
     protected int _actualColor;
@@ -91,5 +77,5 @@ public abstract class AbstractGraphics implements Graphics {
     protected AbstractEngine.EnginePaths _myPaths;
     int translateX, translateY;
     float scaleFactor;
-    SceneManager sceneManager;
+    protected SceneManager sceneManager;
 }

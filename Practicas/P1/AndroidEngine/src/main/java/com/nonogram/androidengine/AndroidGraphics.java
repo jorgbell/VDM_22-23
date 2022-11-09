@@ -45,7 +45,10 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void clearGame(int color) {
-        _canvas.drawColor(color);
+        int c = _actualColor;
+        setColor(color);
+        fillRect(0,0,sceneManager.getGameWidth(), sceneManager.getGameHeight());
+        setColor(c);
     }
 
     @Override
@@ -156,12 +159,22 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
     @Override
-    public float getBorderHeight() {
+    public float getBottomBorder() {
         return 0;
     }
 
     @Override
-    public float getBorderWidth() {
+    public float getLeftBorder() {
+        return 0;
+    }
+
+    @Override
+    public float getRightBorder() {
+        return 0;
+    }
+
+    @Override
+    public float getTopBorder() {
         return 0;
     }
 

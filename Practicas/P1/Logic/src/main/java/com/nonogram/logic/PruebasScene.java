@@ -40,10 +40,10 @@ public class PruebasScene extends AbstractScene {
         graphics.clearGame(0XFF225500);
         graphics.setColor(0XFF2100FF);
         graphics.setActualFont(f);
-        graphics.drawText("BOLD HUGE TEXT", graphics.getGameWidth()/2, 40);
+        graphics.drawText("BOLD HUGE TEXT", getGameWidth()/2, 40);
 
         graphics.setActualFont(f2);
-        graphics.drawText("am potat", graphics.getGameWidth()/2, graphics.getGameHeight()/2);
+        graphics.drawText("am potat", getGameWidth()/2, getGameHeight()/2);
 
 
     }

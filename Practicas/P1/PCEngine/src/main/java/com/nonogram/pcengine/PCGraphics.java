@@ -1,6 +1,5 @@
 package com.nonogram.pcengine;
 
-import com.nonogram.engine.AbstractEngine;
 import com.nonogram.engine.AbstractGraphics;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
@@ -9,8 +8,6 @@ import com.nonogram.engine.Input;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
@@ -81,15 +78,23 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
     }
 
     @Override
-    public float getBorderHeight() {
+    public float getBottomBorder() {
+        return _myView.getInsets().bottom;
+    }
+
+    @Override
+    public float getLeftBorder() {
+        return _myView.getInsets().left;
+    }
+    @Override
+    public float getTopBorder() {
         return _myView.getInsets().top;
     }
 
     @Override
-    public float getBorderWidth() {
-        return _myView.getInsets().left;
+    public float getRightBorder() {
+        return _myView.getInsets().right;
     }
-
 
     @Override
     public Image newImage(String name) {
@@ -108,7 +113,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(color);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0, 0, getGameWidth(), getGameHeight());
+        _graphics2D.fillRect(0, 0, sceneManager.getGameWidth(), sceneManager.getGameHeight());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
@@ -118,7 +123,7 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         //Para cambiar el color actual usar el metodo anterior
         Color jColor = new Color(0xFFFFFF);
         _graphics2D.setColor(jColor);
-        _graphics2D.fillRect(0, 0, getWindowWidth(), getWindowHeight() + (int)getBorderHeight());
+        _graphics2D.fillRect(0, 0, getWindowWidth() + (int) getLeftBorder() + (int)getRightBorder(), getWindowHeight() + (int) getBottomBorder() + (int)getTopBorder());
         jColor = new Color(_actualColor);
         _graphics2D.setColor(jColor);
     }
@@ -193,12 +198,12 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
 
     @Override
     public int getWindowWidth() {
-        return _myView.getWidth() - (int)getBorderWidth();
+        return _myView.getWidth() - (int) getLeftBorder() - (int)getRightBorder();
     }
 
     @Override
     public int getWindowHeight() {
-        return _myView.getHeight() - (int)getBorderHeight();
+        return _myView.getHeight() - (int) getBottomBorder() - (int)getTopBorder();
     }
 
 
