@@ -13,7 +13,6 @@ Cuando este hecho en el motor:
 
 
 JORGE:
-Font setSize
 Detectar click derecho en el input (en android imagino que el click derecho se traduce a mantener pulsado o algo)
 Metodo para parar la musica
 hacer que getGameSize sea solo desde la escena

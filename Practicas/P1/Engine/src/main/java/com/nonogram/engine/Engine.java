@@ -8,6 +8,7 @@ public interface Engine {
     boolean stop();
     void resume();
     void pause();
+    boolean release();
     boolean init();
     public SceneManager getSceneManager();
 }

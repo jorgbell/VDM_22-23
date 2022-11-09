@@ -22,5 +22,13 @@ public class AndroidAudio extends AbstractAudio {
         return sA;
     }
 
+    @Override
+    public void pauseSound(String id) {
+        AndroidSound sA = (AndroidSound) getSound(id);
+        if(sA != null){
+            sA._clip.pause();
+        }
+    }
+
     AssetManager _assetManager;
 }

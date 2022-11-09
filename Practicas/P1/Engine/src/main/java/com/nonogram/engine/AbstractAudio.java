@@ -34,6 +34,15 @@ public abstract class AbstractAudio implements Audio{
 
         return s;
     }
+
+    @Override
+    public void stopAll() {
+        for (Sound s: _loadedSounds) {
+            pauseSound(s._id);
+        }
+        _loadedSounds.clear();
+    }
+
     protected List<Sound> _loadedSounds;
     protected String _basePath;
 

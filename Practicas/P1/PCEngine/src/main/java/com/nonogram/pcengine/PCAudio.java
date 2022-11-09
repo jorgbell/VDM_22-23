@@ -24,4 +24,12 @@ public class PCAudio extends AbstractAudio {
         }
         return sPC;
     }
+
+    @Override
+    public void pauseSound(String id) {
+        PCSound sPC = (PCSound) getSound(id);
+        if(sPC != null){
+            sPC._clip.stop();
+        }
+    }
 }

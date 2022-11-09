@@ -83,8 +83,15 @@ public abstract class AbstractEngine implements Engine, Runnable /*Arreglar el t
             _myGraphics.render();
         }
 
+        release();
         System.exit(0);
 
+    }
+
+    @Override
+    public boolean release() {
+        _myAudio.stopAll();
+        return true;
     }
 
     @Override

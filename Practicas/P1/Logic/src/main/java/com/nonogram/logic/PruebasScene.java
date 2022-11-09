@@ -7,8 +7,6 @@ import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
 
-import java.util.Stack;
-
 
 //NO TOCAR ESTA CLASE. No por nada, simplemente es una clase que he creado para ir probando las cosas del motor, hagan el juego en otras
 public class PruebasScene extends AbstractScene {
@@ -52,7 +50,11 @@ public class PruebasScene extends AbstractScene {
 
     @Override
     public void update(double deltaTime) {
-
+        lastTime += deltaTime;
+//        if (lastTime > 5 && !stopped){
+//            audio.pauseSound("saul.wav");
+//            stopped = true;
+//        }
     }
 
     @Override
@@ -77,4 +79,6 @@ public class PruebasScene extends AbstractScene {
     Font f;
     Font f2;
     Image i;
+    double lastTime = 0;
+    boolean stopped = false;
 }
