@@ -11,4 +11,5 @@ public interface Engine {
     boolean release();
     boolean init();
     public SceneManager getSceneManager();
+    AbstractEngine.EnginePaths getEnginePaths();
 }

@@ -31,7 +31,6 @@ public class MenuScene extends AbstractScene {
         _myEngine.getGraphics().setColor(0xFF000000);
         _myEngine.getGraphics().setActualFont(_f2);
         _myEngine.getGraphics().drawText("NONOGRAMAS", _w / 15, _h /6);
-
         _myEngine.getGraphics().setActualFont(_f1);
         _botonJugar.render(_myEngine.getGraphics());
     }

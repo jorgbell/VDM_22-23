@@ -8,6 +8,8 @@ import com.nonogram.engine.Input;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
@@ -15,15 +17,16 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 
-public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstractGraphics
+public class PCGraphics extends AbstractGraphics {
 
-    public PCGraphics(String windowName, int w, int h) {     //el w y el h igual hay que tocarlos, ahora mismo son el de la ventana
+    public PCGraphics(String windowName, int w, int h, boolean fullScreen) {     //el w y el h igual hay que tocarlos, ahora mismo son el de la ventana
         super();
         //inicializar JFrame
         _myView = new JFrame(windowName);
         _myView.setSize(w, h);
         _myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _myView.setIgnoreRepaint(true);
+        setFullScreen(fullScreen);
         _myView.setVisible(true);
 
     }
@@ -33,6 +36,15 @@ public class PCGraphics extends AbstractGraphics { //realmente, extenderá abstr
         return createBufferStrategy();
     }
 
+    @Override
+    public void setFullScreen(boolean fullScreen) {
+        if(fullScreen)
+            _myView.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        else
+            _myView.setExtendedState(JFrame.NORMAL);
+
+        _myView.setUndecorated(fullScreen);
+    }
 
     private boolean createBufferStrategy() {
         // Intentamos crear el buffer strategy con 2 buffers.
