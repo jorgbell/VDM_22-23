@@ -14,7 +14,7 @@ public class ResuelveButton extends Button{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(0x0FF0F0F0);
+        g.setColor(0xFFF0F0F0);
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
 
         g.setColor(0xFF000000);

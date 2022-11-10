@@ -30,7 +30,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         _myGraphics.setEngine(this);
         _myAudio.setPath(_myPaths._audioPath);
 
-        if(!_myGraphics.setInputListener(_myInput) || !_myGraphics.init()){
+        if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput)){
             return false;
         }
         return true;
@@ -92,7 +92,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
     @Override
     public boolean release() {
-        _myAudio.stopAll();
+        _myAudio.pauseAll();
         return true;
     }
 
@@ -102,6 +102,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
             // Solo hacemos algo si no nos estábamos ejecutando ya
             // (programación defensiva)
             _running = true;
+            _myAudio.resumeAll();
             // Lanzamos la ejecución de nuestro método run() en un nuevo Thread.
             if(_myThread == null)
                 _myThread = new Thread(this);
@@ -113,10 +114,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public void pause() {
         if (_running) {
             _running = false;
+            release();
             while (true) {
                 try {
                     _myThread.join();
-                    _myThread.stop();
+                    _myThread = null;
                     break;
                 } catch (InterruptedException ie) {
                     // Esto no debería ocurrir nunca...

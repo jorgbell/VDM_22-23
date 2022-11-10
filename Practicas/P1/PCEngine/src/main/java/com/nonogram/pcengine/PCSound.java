@@ -15,7 +15,6 @@ public class PCSound extends Sound {
             _clip = AudioSystem.getClip();
             _clip.open(AudioSystem.getAudioInputStream(new File(_fileName +_id)));
             _clip.loop(Clip.LOOP_CONTINUOUSLY);
-            _clip.setFramePosition(0);
             if(_clip.isRunning())
                 _clip.stop();
 
