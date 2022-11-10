@@ -1,0 +1,3 @@
+-Leer JSON desde Engine
+-Crear el modelo de JSON para un nivel cualquiera
+-Crear escena de eleccion de modo de juego, eleccion de categorias, y las diferentes páginas de los niveles de cada una de las categorias
