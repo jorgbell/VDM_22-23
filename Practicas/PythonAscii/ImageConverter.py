@@ -2,17 +2,10 @@
 import sys, random, argparse
 import numpy as np
 import math
+import os
+from pathlib import Path
  
 from PIL import Image
- 
-# gray scale level values from:
-# http://paulbourke.net/dataformats/asciiart/
- 
-# 70 levels of gray
-gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
- 
-# 10 levels of gray
-gscale2 = '@%#*+=-:. '
  
 def getAverageL(image):
  
@@ -28,12 +21,10 @@ def getAverageL(image):
     # get average
     return np.average(im.reshape(w*h))
  
-def covertImageToAscii(fileName, cols, scale, moreLevels):
+def convertImageToAscii(fileName, cols, rows):
     """
     Given Image and dims (rows, cols) returns an m*n list of Images
     """
-    # declare globals
-    global gscale1, gscale2
  
     # open image and convert to grayscale
     image = Image.open(fileName).convert('L')
@@ -45,18 +36,15 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
     # compute width of tile
     w = W/cols
  
-    # compute tile height based on aspect ratio and scale
-    h = w/scale
- 
-    # compute number of rows
-    rows = int(H/h)
+    # compute height of tile
+    h = H/rows
      
     print("cols: %d, rows: %d" % (cols, rows))
     print("tile dims: %d x %d" % (w, h))
  
     # check if image size is too small
     if cols > W or rows > H:
-        print("Image too small for specified cols!")
+        print("Image too small for specified dimensions!")
         exit(0)
  
     # ascii image is a list of character strings
@@ -82,18 +70,17 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
             # correct last tile
             if i == cols-1:
                 x2 = W
- 
+
             # crop image to extract tile
             img = image.crop((x1, y1, x2, y2))
  
             # get average luminance
             avg = int(getAverageL(img))
- 
-            # look up ascii char
-            if moreLevels:
-                gsval = gscale1[int((avg*69)/255)]
-            else:
-                gsval = gscale2[int((avg*2)/255)]
+
+            if(int((avg*2)/256) < 1): gsval = '.'
+            else: gsval = '#'
+
+            #gsval = str(int((avg*2)/256) < 1)
  
             # append ascii char to string
             aimg[j] += gsval
@@ -116,10 +103,8 @@ def main():
     # parse args
     #args = parser.parse_args()
    
-    imgFile = "102.png"
+    folder = Path("C:\VDM_22-23\Practicas\Sizes")
  
-    # set output file
-    outFile = '102.txt'
     # if args.outFile:
     #     outFile = args.outFile
  
@@ -129,25 +114,32 @@ def main():
     # if args.scale:
     #     scale = float(args.scale)
  
-    # set cols
-    cols = 20
     # if args.cols:
     #     cols = int(args.cols)
  
     print('generating ASCII art...')
     # convert image to ascii txt
-    aimg = covertImageToAscii(imgFile, cols, scale, False)
- 
-    # open file
-    f = open(outFile, 'w')
- 
-    # write to file
-    for row in aimg:
-        f.write(row + '\n')
- 
-    # cleanup
-    f.close()
-    print("ASCII art written to %s" % outFile)
+
+    for size in os.listdir(folder):    
+        sizePath = folder / size
+        cols = int(size.split("x")[0])
+        rows = int(size.split("x")[1])
+
+        for f in os.listdir(sizePath): 
+            filePath = sizePath / Path(f)
+            if(filePath.suffix == ".png"):
+                print("\nPrinting %s" % str(filePath))
+                aimg = convertImageToAscii(sizePath / filePath, cols, rows)
+
+                outFile =  filePath.with_suffix(".json")
+                f = open(outFile, 'w')
+
+                for row in aimg:
+                    f.write(row + '\n')
+
+                f.close()
+                print("ASCII art written to %s" % outFile)
+
  
 # call main
 if __name__ == '__main__':
