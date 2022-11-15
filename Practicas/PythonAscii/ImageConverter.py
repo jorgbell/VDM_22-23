@@ -5,6 +5,7 @@ import math
 import os
 from pathlib import Path
  
+from tqdm import tqdm
 from PIL import Image
  
 def getAverageL(image):
@@ -31,7 +32,7 @@ def convertImageToAscii(fileName, cols, rows):
  
     # store dimensions
     W, H = image.size[0], image.size[1]
-    print("input image dims: %d x %d" % (W, H))
+    #print("input image dims: %d x %d" % (W, H))
  
     # compute width of tile
     w = W/cols
@@ -39,12 +40,12 @@ def convertImageToAscii(fileName, cols, rows):
     # compute height of tile
     h = H/rows
      
-    print("cols: %d, rows: %d" % (cols, rows))
-    print("tile dims: %d x %d" % (w, h))
+    #print("cols: %d, rows: %d" % (cols, rows))
+    #print("tile dims: %d x %d" % (w, h))
  
     # check if image size is too small
     if cols > W or rows > H:
-        print("Image too small for specified dimensions!")
+        #print("Image too small for specified dimensions!")
         exit(0)
  
     # ascii image is a list of character strings
@@ -120,15 +121,15 @@ def main():
     print('generating ASCII art...')
     # convert image to ascii txt
 
-    for size in os.listdir(folder):    
+    for size in tqdm(os.listdir(folder)):    
         sizePath = folder / size
         cols = int(size.split("x")[0])
         rows = int(size.split("x")[1])
 
-        for f in os.listdir(sizePath): 
+        for f in tqdm(os.listdir(sizePath)): 
             filePath = sizePath / Path(f)
             if(filePath.suffix == ".png"):
-                print("\nPrinting %s" % str(filePath))
+                #print("\nPrinting %s" % str(filePath))
                 aimg = convertImageToAscii(sizePath / filePath, cols, rows)
 
                 outFile =  filePath.with_suffix(".json")
@@ -138,7 +139,7 @@ def main():
                     f.write(row + '\n')
 
                 f.close()
-                print("ASCII art written to %s" % outFile)
+                #print("ASCII art written to %s" % outFile)
 
  
 # call main
