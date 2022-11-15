@@ -78,17 +78,17 @@ def convertImageToAscii(fileName, cols, rows):
             # get average luminance
             avg = int(getAverageL(img))
 
-            if(int((avg*2)/256) < 1): gsval = '.'
-            else: gsval = '#'
+            if(int((avg*2)/256) < 1): gsval = 'true'
+            else: gsval = 'false'
 
             #gsval = str(int((avg*2)/256) < 1)
  
             # append ascii char to string
-            aimg[j] += gsval
+            aimg[j] += gsval + ","
      
     # return txt image
     return aimg
- 
+
 # main() function
 def main():
     # # create parser
@@ -130,14 +130,23 @@ def main():
             filePath = sizePath / Path(f)
             if(filePath.suffix == ".png"):
                 #print("\nPrinting %s" % str(filePath))
-                aimg = convertImageToAscii(sizePath / filePath, cols, rows)
-
                 outFile =  filePath.with_suffix(".json")
                 f = open(outFile, 'w')
+                f.write('{\n\t\"Solucion\": [\n')
+                
 
+                aimg = convertImageToAscii(sizePath / filePath, cols, rows)
+
+                x = 0
                 for row in aimg:
-                    f.write(row + '\n')
-
+                    f.write('\t\t[' + row[:-1] + ']')
+                    if(x < len(aimg) - 1): f.write(',')
+                    f.write('\n')
+                    x += 1
+                
+                f.write('\t],\n\t')
+                f.write('\"Cols\": ' + str(cols) + ',\n')
+                f.write('\t\"Rows\": ' + str(rows) + '\n}')
                 f.close()
                 #print("ASCII art written to %s" % outFile)
 
