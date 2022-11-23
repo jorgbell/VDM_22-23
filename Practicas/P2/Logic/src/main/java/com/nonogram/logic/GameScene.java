@@ -15,8 +15,19 @@ public class GameScene extends AbstractScene {
         _solvablePercentage = solvablePercentage;
     }
 
+    public GameScene(int gameWidth, int gameHeight, String file)
+    {
+        super(gameWidth,gameHeight);
+        _file = file;
+    }
+
+
     @Override
     public boolean init() {
+        //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
+        _t = new TableroCargado("./data/boards/15x15/image-1.png (3).json");
+        _t.init();
+
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _resolverImage = _myEngine.getGraphics().newImage("Lupa.png");
@@ -35,9 +46,6 @@ public class GameScene extends AbstractScene {
         _tileSize =  _tableroSize / _maxDimension;
         _tableroX = (_gameWidth / 20) * 5;
         _tableroY = (_gameHeight / 20) * 8;
-        _t = new Tablero();
-        _t.init(_rows, _columns, _solvablePercentage);
-
         _numberFontSize = 45 - (int)(5.7 * (Math.log(_maxDimension) / Math.log(1.595)));
         _myEngine.getGraphics().setActualFont(_f);
 
@@ -203,6 +211,7 @@ public class GameScene extends AbstractScene {
     int _tableroX;
     int _tableroY;
 
+    String _file;
     Font _f;
     Image _volverImage;
     Image _resolverImage;

@@ -104,7 +104,7 @@ def main():
     # parse args
     #args = parser.parse_args()
    
-    folder = Path("C:\VDM_22-23\Practicas\Sizes")
+    folder = Path("C:\VDM_22-23\Practicas\P2\data\Boards")
  
     # if args.outFile:
     #     outFile = args.outFile
