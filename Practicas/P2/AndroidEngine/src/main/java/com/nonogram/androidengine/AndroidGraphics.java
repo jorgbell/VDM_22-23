@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.engine.AbstractGraphics;
+import com.nonogram.engine.Board;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
@@ -56,6 +57,16 @@ public class AndroidGraphics extends AbstractGraphics {
         }catch (Exception e){}
 
         return afont;
+    }
+
+    public Board newBoard(String name){
+        AndroidBoard aBoard = null;
+
+        try{
+            aBoard = new AndroidBoard(_myPaths._boardsPath + name, _context.getAssets());
+        }catch (Exception e){}
+
+        return aBoard;
     }
 
     @Override

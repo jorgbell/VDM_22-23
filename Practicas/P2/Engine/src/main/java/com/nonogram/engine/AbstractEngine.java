@@ -4,16 +4,18 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
     //clase estatica que usaremos para almacenar las direcciones de las carpetas de assets
     public static class EnginePaths{
-        public EnginePaths(String r, String i, String f, String a){
+        public EnginePaths(String r, String i, String f, String a, String b){
             _rootPath = r;
             _imagesPath = i;
             _fontsPath = f;
             _audioPath = a;
+            _boardsPath = b;
         }
         public String _rootPath;
         public String _imagesPath;
         public String _fontsPath;
         public String _audioPath;
+        public String _boardsPath;
     }
 
     protected AbstractEngine(Graphics g, Input i, Audio a, EnginePaths paths) {
@@ -142,4 +144,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected SceneManager _mySceneManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
+
+    protected Board _myBoard; //??
 }

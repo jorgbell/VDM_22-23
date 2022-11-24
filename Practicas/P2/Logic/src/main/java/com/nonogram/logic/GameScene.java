@@ -25,7 +25,7 @@ public class GameScene extends AbstractScene {
     @Override
     public boolean init() {
         //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
-        _t = new TableroCargado("./data/boards/15x15/image-1.png (3).json");
+        _t = new TableroCargado("Boards/10x10/302.json");
         _t.init();
 
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
