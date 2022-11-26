@@ -21,14 +21,11 @@ public class AndroidBoard extends AbstractBoard {
         super(p);
         _assetManager = ass;
 
-        Gson gson = new Gson();
-        Path path = Paths.get(_file);
-        Path path = Paths.get(p);
-
-
         try {
             InputStream is = _assetManager.open(_path);
             Reader reader = new InputStreamReader(is);
+            Gson gson = new Gson();
+
             _data = gson.fromJson(reader, JsonData.class);
         } catch (IOException e) {
             e.printStackTrace();
