@@ -1,7 +1,7 @@
 package com.nonogram.engine;
 
 
-public class AbstractBoard implements Board {
+public abstract class AbstractBoard implements Board {
 
     protected class JsonData
     {
@@ -39,5 +39,5 @@ public class AbstractBoard implements Board {
         return _data.Solucion;
     }
 
-    JsonData _data;
+    protected JsonData _data;
 }

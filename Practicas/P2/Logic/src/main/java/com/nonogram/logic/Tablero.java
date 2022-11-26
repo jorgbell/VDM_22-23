@@ -1,10 +1,7 @@
 package com.nonogram.logic;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Vector;
 import java.util.Random;
-import com.google.gson.Gson;
 
 public abstract class Tablero {
     public Tablero(int rowNumber, int columnNumber) {
@@ -194,7 +191,6 @@ public abstract class Tablero {
         for(int j = 0; j < _rowNumber; j++) System.out.print("Column " + j + ": " + _columnas[j].numbers + "\n");
     }
 
-    private Gson gson;
     Random _r;
     protected Casilla _tablero[][];
     protected Vector<Casilla> _blues;

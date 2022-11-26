@@ -1,6 +1,7 @@
 package com.nonogram.pcengine;
 
 import com.nonogram.engine.AbstractGraphics;
+import com.nonogram.engine.Board;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
@@ -137,6 +138,17 @@ public class PCGraphics extends AbstractGraphics {
         }
 
         return pcfont;
+    }
+
+    @Override
+    public Board newBoard(String name){
+        PCBoard pcBoard = null;
+
+        try{
+            pcBoard = new PCBoard(_myPaths._boardsPath + name);
+        }catch (Exception e){}
+
+        return pcBoard;
     }
 
     @Override

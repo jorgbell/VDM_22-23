@@ -59,6 +59,7 @@ public class AndroidGraphics extends AbstractGraphics {
         return afont;
     }
 
+    @Override
     public Board newBoard(String name){
         AndroidBoard aBoard = null;
 

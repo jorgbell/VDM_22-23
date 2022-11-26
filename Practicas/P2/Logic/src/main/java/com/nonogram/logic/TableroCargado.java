@@ -1,32 +1,26 @@
 package com.nonogram.logic;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import com.nonogram.engine.Board;
 
 public class TableroCargado extends Tablero{
 
 
 
-    public TableroCargado(String file)
+    public TableroCargado(Board b)
     {
-        super(0, 0);
-        _file = file;
+        super(b.getRows(), b.getCols());
+        _board = b;
     }
 
     @Override
     public void init(){
 
-
+        super.init();
+        _solucion = _board.getSolution();
 
         for(int i = 0; i < _rowNumber; i++) completaFila(i);
         for(int i = 0; i < _columnNumber; i++) completaColumna(i);
     }
 
-    Gson gson;
-    String _file;
+    Board _board;
 }
