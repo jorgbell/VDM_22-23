@@ -60,8 +60,8 @@ public class GameScene extends AbstractScene {
         }
 
         //botones de ui
-        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, this, _resolverImage);
-        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 7, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
+        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, this, _resolverImage);
+        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
         _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage);
         return true;
     }
@@ -112,15 +112,15 @@ public class GameScene extends AbstractScene {
             {
                 _f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
-                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 3, _gameHeight * 4 / 20);
-                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 3, _gameHeight * 5 / 20);
+                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
+                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 2, _gameHeight/4);
             }
         }
         else //fin de la partida
         {
             _f.setSize(40);
             _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 6, _gameHeight * 4 / 20);
+            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
             _botonVictoria.render(_myEngine.getGraphics());
         }

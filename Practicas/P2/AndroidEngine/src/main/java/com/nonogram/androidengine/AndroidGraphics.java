@@ -133,6 +133,7 @@ public class AndroidGraphics extends AbstractGraphics {
         }
         _paint.setTypeface(f._font);
         _paint.setTextSize(_actualFont.getSize());
+        _paint.setTextAlign(Paint.Align.CENTER);
     }
 
     @Override

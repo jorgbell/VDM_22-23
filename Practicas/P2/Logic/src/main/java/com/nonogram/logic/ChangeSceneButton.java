@@ -32,7 +32,7 @@ public class ChangeSceneButton extends Button{
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
 
         g.setColor(0xFF000000);
-        g.drawText(_text, _rect._x + _rect._w * 2 / 9, _rect._y + _rect._h * 3 / 5);
+        g.drawText(_text, _rect._x + _rect._w/2, _rect._y + _rect._h/2);
         if(_image != null) g.drawImage(_image, _rect._x + _rect._w / 20, _rect._y + _rect._w / 9, 0.04, 0.04);
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     }

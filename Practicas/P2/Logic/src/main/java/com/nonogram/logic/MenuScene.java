@@ -21,8 +21,10 @@ public class MenuScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
-        Scene s = new DifficultyScene(getGameWidth(), getGameHeight());
-        _botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s, null);
+        Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight());
+        Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight());
+        _botonJugar = new ChangeSceneButton(_w/6, _h/2, _w / 3, _w / 7, "Juego Rapido", _myEngine, juegoScene, null);
+        _botonHistoria = new ChangeSceneButton(_w/6*3, _h/2, _w / 3, _w / 7, "Modo Historia", _myEngine, historiaScene, null);
         return true;
     }
 
@@ -30,9 +32,10 @@ public class MenuScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setColor(0xFF000000);
         _myEngine.getGraphics().setActualFont(_f2);
-        _myEngine.getGraphics().drawText("NONOGRAMAS", _w / 15, _h /6);
+        _myEngine.getGraphics().drawText("NONOGRAMAS", _w / 2, _h /6);
         _myEngine.getGraphics().setActualFont(_f1);
         _botonJugar.render(_myEngine.getGraphics());
+        _botonHistoria.render(_myEngine.getGraphics());
     }
 
     @Override
@@ -43,6 +46,7 @@ public class MenuScene extends AbstractScene {
         switch (input.get_type()){
             case PULSAR:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
+                if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
                 break;
             case SOLTAR:
                 break;
@@ -57,5 +61,6 @@ public class MenuScene extends AbstractScene {
     Font _f1;
     Font _f2;
     ChangeSceneButton _botonJugar;
+    ChangeSceneButton _botonHistoria;
 
 }
