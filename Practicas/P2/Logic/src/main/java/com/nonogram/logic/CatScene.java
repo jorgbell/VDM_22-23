@@ -30,10 +30,10 @@ public class CatScene extends AbstractScene {
         for(int i = 0; i< _botones.length; i++){
 
             Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,""+(i+1), _myEngine, s, null);
+            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.75);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage,0.04);
 
         return true;
     }
@@ -47,6 +47,11 @@ public class CatScene extends AbstractScene {
         for (int i = 0; i < _botones.length; i++) {
             if (i >= numUnlock) {
                 _botones[i]._image = _candadoImage;
+            }
+            else if(i<numUnlock-1){
+                String path = _size+ "/" + i + ".png";
+                Image _image = _myEngine.getGraphics().newImage(path);
+                _botones[i]._image =_myEngine.getGraphics().newImage(path);
             }
             _botones[i].render(_myEngine.getGraphics());
         }

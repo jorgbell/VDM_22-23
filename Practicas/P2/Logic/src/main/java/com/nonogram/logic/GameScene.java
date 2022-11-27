@@ -74,8 +74,8 @@ public class GameScene extends AbstractScene {
 
         //botones de ui
         _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, this, _resolverImage);
-        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage);
+        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage, 0.04);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage, 0.04);
         return true;
     }
 

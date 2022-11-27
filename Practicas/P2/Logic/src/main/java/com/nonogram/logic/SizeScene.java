@@ -33,10 +33,10 @@ public class SizeScene extends AbstractScene {
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, rowNumber + "x" + columnNumber, _myEngine, s, null);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, rowNumber + "x" + columnNumber, _myEngine, s, null, 0.04);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage, 0.04);
         return true;
     }
 
