@@ -1,0 +1,11 @@
+{
+	"Solucion": [
+		[false,true,true,true,false],
+		[true,true,true,true,true],
+		[true,false,true,false,true],
+		[true,true,true,true,true],
+		[true,false,true,false,true]
+	],
+	"Cols": 5,
+	"Rows": 5
+}

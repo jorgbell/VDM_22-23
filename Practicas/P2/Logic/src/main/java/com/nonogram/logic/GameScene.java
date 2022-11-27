@@ -21,8 +21,7 @@ public class GameScene extends AbstractScene {
         super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
-        int l = 302+level;
-        _path = size + "x" + size + "/" + l + ".json";
+        _path = size + "x" + size + "/" + level + ".json";
         _generado = false;
     }
 
