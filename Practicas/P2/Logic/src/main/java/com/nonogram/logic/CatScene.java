@@ -21,6 +21,7 @@ public class CatScene extends AbstractScene {
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _candadoImage = _myEngine.getGraphics().newImage("lock.png");
+        _newImage = _myEngine.getGraphics().newImage("new.png");
         if(_f == null || _volverImage == null|| _candadoImage == null)
             return false;
 
@@ -30,7 +31,7 @@ public class CatScene extends AbstractScene {
         for(int i = 0; i< _botones.length; i++){
 
             Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.75);
+            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.8);
         }
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage,0.04);
@@ -52,6 +53,9 @@ public class CatScene extends AbstractScene {
                 String path = _size+ "/" + i + ".png";
                 Image _image = _myEngine.getGraphics().newImage(path);
                 _botones[i]._image =_myEngine.getGraphics().newImage(path);
+            }
+            else{
+                _botones[i]._image = _newImage;
             }
             _botones[i].render(_myEngine.getGraphics());
         }
@@ -88,6 +92,7 @@ public class CatScene extends AbstractScene {
     Font _f;
     Image _volverImage;
     Image _candadoImage;
+    Image _newImage;
     int _size;
     ChangeSceneButton _botonVolver;
 
