@@ -22,7 +22,6 @@ public class HistoriaScene extends AbstractScene {
         //Crea los botones de los diferentes tableros
         for (int i = 0; i < _botonesSizes.length; i++)
         {
-            //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int rowNumber = _sizes[i][0];
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);

@@ -7,25 +7,23 @@ import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage)
-    {
-        super(gameWidth,gameHeight);
+    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage) {
+        super(gameWidth, gameHeight);
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
-        //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
+        _generado = true;
 
     }
+
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level)
-    {
-        super(gameWidth,gameHeight);
+    public GameScene(int gameWidth, int gameHeight, int size, int level) {
+        super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
-        _solvablePercentage = 1;
-        _level = level; //nivel a cargar en la categoria
-        //_t = new TableroCargado(_myEngine.getGraphics().newBoard("10x10/302.json"));
-
+        int l = 302+level;
+        _path = size + "x" + size + "/" + l + ".json";
+        _generado = false;
     }
 
     public GameScene(int gameWidth, int gameHeight, String file)
@@ -37,10 +35,13 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean init() {
-        //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
 
-
-        _t = new TableroCargado(_myEngine.getGraphics().newBoard("10x10/302.json"));
+        if (_generado){
+            _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
+        }
+        else {
+            _t = new TableroCargado(_myEngine.getGraphics().newBoard(_path));
+        }
         _t.init();
 
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
@@ -240,5 +241,6 @@ public class GameScene extends AbstractScene {
     ChangeSceneButton _botonFF;
     ChangeSceneButton _botonVictoria;
 
-    int _level;
+    boolean _generado;
+    String _path;
 }

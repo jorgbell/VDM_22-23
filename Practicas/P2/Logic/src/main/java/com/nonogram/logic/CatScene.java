@@ -24,7 +24,6 @@ public class CatScene extends AbstractScene {
         if(_f == null || _volverImage == null|| _candadoImage == null)
             return false;
 
-
         _h = getGameHeight();
         _w = getGameWidth();
 
