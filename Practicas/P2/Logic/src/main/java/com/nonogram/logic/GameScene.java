@@ -13,6 +13,19 @@ public class GameScene extends AbstractScene {
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
+        //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
+
+    }
+    // Constructora para cargado
+    public GameScene(int gameWidth, int gameHeight, int size, int level)
+    {
+        super(gameWidth,gameHeight);
+        _rows = size;
+        _columns = size;
+        _solvablePercentage = 1;
+        _level = level; //nivel a cargar en la categoria
+        //_t = new TableroCargado(_myEngine.getGraphics().newBoard("10x10/302.json"));
+
     }
 
     public GameScene(int gameWidth, int gameHeight, String file)
@@ -226,4 +239,6 @@ public class GameScene extends AbstractScene {
     ResuelveButton _botonResolver;
     ChangeSceneButton _botonFF;
     ChangeSceneButton _botonVictoria;
+
+    int _level;
 }

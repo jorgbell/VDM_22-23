@@ -26,7 +26,7 @@ public class HistoriaScene extends AbstractScene {
             int rowNumber = _sizes[i][0];
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage);
+            Scene s = new CatScene(getGameWidth(), getGameHeight(), rowNumber);
             _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, rowNumber + "x" + columnNumber, _myEngine, s, null);
         }
 
@@ -38,7 +38,7 @@ public class HistoriaScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(0xFF000000);
-        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /5, _h /5);
+        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _botonesSizes.length; i++) _botonesSizes[i].render(_myEngine.getGraphics());
@@ -73,7 +73,6 @@ public class HistoriaScene extends AbstractScene {
     Font _f;
     Image _volverImage;
     int[][] _sizes = {{5, 5}, {10, 10}, {15, 15}, {20,20}}; //el minimo es 5x5
-    int _solvablePercentage;
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
 }
