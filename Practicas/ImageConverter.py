@@ -104,8 +104,7 @@ def main():
     # parse args
     #args = parser.parse_args()
    
-    folder = os.path.dirname(__file__)
-    print(folder)
+    folder = Path(os.path.dirname(__file__) + "\P2\data\Boards")
     # if args.outFile:
     #     outFile = args.outFile
  
