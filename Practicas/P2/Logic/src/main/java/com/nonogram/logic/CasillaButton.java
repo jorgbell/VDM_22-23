@@ -45,8 +45,12 @@ public class CasillaButton extends Button{
 
     public void handleEvent(Input.TouchEvent e)
     {
-        int s =  (_casilla.getState().getValue() + 1) % 3;
-        _casilla.setState(Tablero.State.values()[s]);
+        if(e.get_type() == Input.TouchEvent.InputType.CLICK_CORTO){
+            _casilla.setState(Tablero.State.values()[1]);
+        }
+        else{
+            _casilla.setState(Tablero.State.values()[2]);
+        }
     };
 
     public void update(double deltaTime) {};

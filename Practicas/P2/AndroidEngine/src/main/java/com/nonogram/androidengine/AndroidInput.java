@@ -14,18 +14,28 @@ public class AndroidInput extends AbstractInput implements View.OnTouchListener 
     public boolean onTouch(View view, @NonNull MotionEvent e) {
         switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
-                newEvent(e.getX(), e.getY(),
-                        e.getPointerId(e.getActionIndex()),
-                        TouchEvent.InputType.PULSAR);
+                startTime = e.getEventTime();
                 break;
             case MotionEvent.ACTION_UP:
-                newEvent((int)e.getX(), (int)e.getY(),
-                        e.getPointerId(e.getActionIndex()),
-                        TouchEvent.InputType.SOLTAR);
+                float clickTime = e.getEventTime() - startTime;
+                if(clickTime > longClickTime){
+                    newEvent(e.getX(), e.getY(),
+                            e.getPointerId(e.getActionIndex()),
+                            TouchEvent.InputType.CLICK_LARGO);
+                }
+                else{
+                    newEvent(e.getX(), e.getY(),
+                            e.getPointerId(e.getActionIndex()),
+                            TouchEvent.InputType.CLICK_CORTO);
+                }
                 break;
             default:
                 break;
         }
         return true;
     }
+
+
+    float startTime = 0;
+    float longClickTime = 300; //ms;
 }

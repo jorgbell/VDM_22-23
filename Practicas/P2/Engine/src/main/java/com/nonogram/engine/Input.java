@@ -6,8 +6,8 @@ public interface Input {
 //Clase TouchEvent para abstraer los eventos en pantalla de la plataforma
     public class TouchEvent{
         public enum InputType{
-            PULSAR,
-            SOLTAR
+            CLICK_CORTO,
+            CLICK_LARGO
         }
         public TouchEvent(InputType tipo, float x, float y, int ID){
             _posX = x;

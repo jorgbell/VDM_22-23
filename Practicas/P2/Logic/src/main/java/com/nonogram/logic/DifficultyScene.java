@@ -49,7 +49,7 @@ public class DifficultyScene extends AbstractScene {
     @Override
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
-            case PULSAR:
+            case CLICK_CORTO:
                 if(_botonVolver._rect.contains(input.get_posX(), input.get_posY())) _botonVolver.handleEvent(input);
 
                 for(int i = 0; i < _botonesSizes.length; i++)
@@ -57,7 +57,7 @@ public class DifficultyScene extends AbstractScene {
                     if(_botonesSizes[i]._rect.contains(input.get_posX(), input.get_posY())) _botonesSizes[i].handleEvent(input);
                 }
                 break;
-            case SOLTAR:
+            case CLICK_LARGO:
                 break;
         }
     }

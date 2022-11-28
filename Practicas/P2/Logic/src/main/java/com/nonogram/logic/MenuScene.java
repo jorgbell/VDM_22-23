@@ -1,7 +1,6 @@
 package com.nonogram.logic;
 
 import com.nonogram.engine.AbstractScene;
-import com.nonogram.engine.Audio;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
@@ -44,11 +43,11 @@ public class MenuScene extends AbstractScene {
     @Override
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
-            case PULSAR:
+            case CLICK_CORTO:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
                 if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
                 break;
-            case SOLTAR:
+            case CLICK_LARGO:
                 break;
         }
     }

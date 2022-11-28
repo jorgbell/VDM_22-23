@@ -60,7 +60,6 @@ public class GameScene extends AbstractScene {
         }
 
         //botones de ui
-        _botonResolver = new ResuelveButton( _gameWidth * 3 / 5, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, this, _resolverImage);
         _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
         _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage);
         return true;
@@ -79,7 +78,6 @@ public class GameScene extends AbstractScene {
 
             //UI
             _f.setSize(20);
-            _botonResolver.render(_myEngine.getGraphics());
             _botonFF.render(_myEngine.getGraphics());
 
             _f.setSize(_numberFontSize);
@@ -113,7 +111,7 @@ public class GameScene extends AbstractScene {
                 _f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
-                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 2, _gameHeight/4);
+                //_myEngine.getGraphics().drawText("Te quedan " + _vidas + " vidas", _gameWidth / 2, _gameHeight/4);
             }
         }
         else //fin de la partida
@@ -144,7 +142,8 @@ public class GameScene extends AbstractScene {
             _showTime -= deltaTime;
             if(_showTime <= 0)
             {
-                _t.LimpiarErrores();
+                _t.LimpiarErrores(_wrong.x, _wrong.y);
+                _wrong = null;
                 _showErrors = false;
             }
         }
@@ -152,40 +151,38 @@ public class GameScene extends AbstractScene {
 
     @Override
     public void processInput(Input.TouchEvent input) {
-        switch (input.get_type()){
-            case PULSAR:
-                if(!_won)
+        if(!_won)
+        {
+            if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
+            else if(!_showErrors)
+            {
+                for (int i = 0; i < _casillas.length; i++) for (int j = 0; j < _casillas[0].length; j++)
                 {
-                    if(!_showErrors || _wrongs <= 0)
+                    if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
                     {
-                        for (int i = 0; i < _casillas.length; i++) for (int j = 0; j < _casillas[0].length; j++)
-                        {
-                            if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
-                            {
-                                _casillas[i][j].handleEvent(input);
-                            }
-                        }
+                        _casillas[i][j].handleEvent(input);
+                        checkError(i,j);
                     }
-
-                    if(_botonResolver._rect.contains(input.get_posX(), input.get_posY())) _botonResolver.handleEvent(input);
-                    if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
                 }
-
-                else if(_botonVictoria._rect.contains(input.get_posX(), input.get_posY())) _botonVictoria.handleEvent(input);
-                break;
-            case SOLTAR:
-                break;
+            }
         }
+        else if(_botonVictoria._rect.contains(input.get_posX(), input.get_posY())) _botonVictoria.handleEvent(input);
     }
 
-    public void showSolution()
+    public void checkError(int i, int j)
     {
-        _wrongs = _t.ComprobarTablero();
-        _remaining = _t.getRemaining();
-        if(_wrongs == 0 && _remaining == 0) _won = true;
-        else {
+        if(_t.checkCasilla(i,j)){
+            //es correcta la pulsacion
+            _remaining = _t.getRemaining();
+            if(_remaining == 0) _won = true;
+        }
+        else{
+            //es incorrecta la pulsacion
+            //marca una espera de 2 segundos en la que se muestra la casilla mala
             _showErrors = true;
-            _showTime = 3;
+            _showTime = 2;
+            _wrong = _t.getCasilla(i,j);
+            _wrong.estado = Tablero.State.WRONG;
         }
     }
 
@@ -219,11 +216,11 @@ public class GameScene extends AbstractScene {
     Image _resolverImage;
     int _numberFontSize;
 
-    int _wrongs = 0;
     int _remaining = 0;
 
     CasillaButton[][] _casillas;
-    ResuelveButton _botonResolver;
     ChangeSceneButton _botonFF;
     ChangeSceneButton _botonVictoria;
+
+    Tablero.Casilla _wrong;
 }
