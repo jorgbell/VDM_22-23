@@ -1,3 +1,17 @@
 -Leer JSON desde Engine
 -Crear el modelo de JSON para un nivel cualquiera
 -Crear escena de eleccion de modo de juego, eleccion de categorias, y las diferentes páginas de los niveles de cada una de las categorias
+
+------------------------------------------------------------
+
+- json de persistencia:
+	- configuracion del juego (paleta de color, etc) -> mas adelante
+	- Vidas?
+	- Cats debloqueadas??
+	- Categorias:
+		- Desbloqueada??
+		- size
+		- num Niveles
+		- num Desbloqueados
+			- estado del tablero
+

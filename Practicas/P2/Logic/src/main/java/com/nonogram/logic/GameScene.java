@@ -7,12 +7,22 @@ import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage)
-    {
-        super(gameWidth,gameHeight);
+    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage) {
+        super(gameWidth, gameHeight);
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
+        _generado = true;
+
+    }
+
+    // Constructora para cargado
+    public GameScene(int gameWidth, int gameHeight, int size, int level) {
+        super(gameWidth, gameHeight);
+        _rows = size;
+        _columns = size;
+        _path = size + "x" + size + "/" + level + ".json";
+        _generado = false;
     }
 
     public GameScene(int gameWidth, int gameHeight, String file)
@@ -24,10 +34,13 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean init() {
-        //_t = new TableroGenerado(_rows, _columns, _solvablePercentage);
 
-
-        _t = new TableroCargado(_myEngine.getGraphics().newBoard("10x10/302.json"));
+        if (_generado){
+            _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
+        }
+        else {
+            _t = new TableroCargado(_myEngine.getGraphics().newBoard(_path));
+        }
         _t.init();
 
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
@@ -221,6 +234,9 @@ public class GameScene extends AbstractScene {
     CasillaButton[][] _casillas;
     ChangeSceneButton _botonFF;
     ChangeSceneButton _botonVictoria;
+
+    boolean _generado;
+    String _path;
 
     Tablero.Casilla _wrong;
 }

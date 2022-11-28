@@ -8,7 +8,7 @@ import com.nonogram.engine.Scene;
 
 public class ChangeSceneButton extends Button{
     //PUSH BUTTON
-    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e, Scene ns, Image img )
+    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e, Scene ns, Image img , double scale)
     {
         super(x, y, w, h);
         _text = text;
@@ -16,15 +16,17 @@ public class ChangeSceneButton extends Button{
         _newScene = ns;
         _image = img;
         _push = true;
+        _scale= scale;
     }
     //POP BUTTON
-    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e, Image img)
+    public ChangeSceneButton(int x, int y, int w, int h, String text, Engine e, Image img, double scale)
     {
         super(x, y, w, h);
         _text = text;
         _engine = e;
         _image = img;
         _push = false;
+        _scale = scale;
     }
     @Override
     public void render(Graphics g) {
@@ -33,7 +35,7 @@ public class ChangeSceneButton extends Button{
 
         g.setColor(0xFF000000);
         g.drawText(_text, _rect._x + _rect._w/2, _rect._y + _rect._h/2);
-        if(_image != null) g.drawImage(_image, _rect._x + _rect._w / 20, _rect._y + _rect._w / 9, 0.04, 0.04);
+        if(_image != null) g.drawImage(_image, _rect._x , _rect._y , _scale, _scale);
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     }
 
@@ -53,4 +55,5 @@ public class ChangeSceneButton extends Button{
     Engine _engine;
     Scene _newScene;
     Boolean _push = false;
+    double _scale;
 }

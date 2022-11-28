@@ -22,8 +22,8 @@ public class MenuScene extends AbstractScene {
         _myEngine.getAudio().playSound("bgm.wav");
         Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight());
         Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight());
-        _botonJugar = new ChangeSceneButton(_w/6, _h/2, _w / 3, _w / 7, "Juego Rapido", _myEngine, juegoScene, null);
-        _botonHistoria = new ChangeSceneButton(_w/6*3, _h/2, _w / 3, _w / 7, "Modo Historia", _myEngine, historiaScene, null);
+        _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7, "Juego Rapido", _myEngine, juegoScene, null, 0.04);
+        _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7, "Modo Historia", _myEngine, historiaScene, null, 0.04);
         return true;
     }
 

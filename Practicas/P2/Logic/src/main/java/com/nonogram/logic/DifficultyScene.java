@@ -26,10 +26,10 @@ public class DifficultyScene extends AbstractScene {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int percentage = 60 - 20 * i;
             Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, _difficulties[i], _myEngine, s, null);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, _difficulties[i], _myEngine, s, null, 0.04);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage, 0.04);
         return true;
     }
 
