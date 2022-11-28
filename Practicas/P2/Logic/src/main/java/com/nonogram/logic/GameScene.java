@@ -69,12 +69,13 @@ public class GameScene extends AbstractScene {
             for (int j = 0; j < _rows; j++)
             {
                 _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
+
             }
         }
 
         //botones de ui
-        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage);
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage);
+        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage, 0.04);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage, 0.04);
         return true;
     }
 
@@ -174,7 +175,7 @@ public class GameScene extends AbstractScene {
                     if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
                     {
                         _casillas[i][j].handleEvent(input);
-                        checkError(i,j);
+                        checkError(j,i);
                     }
                 }
             }

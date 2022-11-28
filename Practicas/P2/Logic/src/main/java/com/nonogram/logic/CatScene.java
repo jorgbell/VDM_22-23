@@ -69,7 +69,7 @@ public class CatScene extends AbstractScene {
     @Override
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()){
-            case PULSAR:
+            case CLICK_CORTO:
                 if(_botonVolver._rect.contains(input.get_posX(), input.get_posY())) _botonVolver.handleEvent(input);
 
                 for(int i = 0; i < _botones.length; i++)
@@ -77,7 +77,7 @@ public class CatScene extends AbstractScene {
                     if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<numUnlock) _botones[i].handleEvent(input);
                 }
                 break;
-            case SOLTAR:
+            case CLICK_LARGO:
                 break;
         }
     }

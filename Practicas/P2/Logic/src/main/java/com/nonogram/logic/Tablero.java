@@ -146,9 +146,11 @@ public abstract class Tablero {
             }
         return total - correctCount;
     }
-
     public boolean checkCasilla(int i, int j) {
-        return _solucion[i][j];
+        Casilla c = _tablero[i][j];
+        return (_solucion[i][j] == true && c.estado==State.CROSS) ||
+                (_solucion[i][j] == false && c.estado == State.CROSS);
+
     }
 
 
