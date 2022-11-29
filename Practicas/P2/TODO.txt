@@ -15,3 +15,8 @@
 		- num Desbloqueados
 			- estado del tablero
 
+
+29/11:
+- Terminar mecanica de vidas (sin recuperacion de vidas, que eso es con los anuncios y es para la entrega final)
+- Guardar progreso en el json y cargarlo al iniciar
+- giro de la pantalla modificado? No estoy seguro de si eso es para esta entrega o la proxima
