@@ -144,6 +144,4 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected SceneManager _mySceneManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
-
-    protected Board _myBoard; //??
 }
