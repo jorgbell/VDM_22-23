@@ -104,7 +104,8 @@ def main():
     # parse args
     #args = parser.parse_args()
    
-    folder = Path(os.path.dirname(__file__) + "\P2\data\Boards")
+    imageFolder = Path(os.path.dirname(__file__) + "\P2\data\Images")
+    boardFolder = Path(os.path.dirname(__file__) + "\P2\data\JSON\Boards")
     # if args.outFile:
     #     outFile = args.outFile
  
@@ -120,8 +121,8 @@ def main():
     print('generating ASCII art...')
     # convert image to ascii txt
 
-    for size in tqdm(os.listdir(folder)):    
-        sizePath = folder / size
+    for size in tqdm(os.listdir(imageFolder)):    
+        sizePath = imageFolder / size
         cols = int(size.split("x")[0])
         rows = int(size.split("x")[1])
 
@@ -129,7 +130,8 @@ def main():
             filePath = sizePath / Path(f)
             if(filePath.suffix == ".png"):
                 #print("\nPrinting %s" % str(filePath))
-                outFile =  filePath.with_suffix(".json")
+                outFile =  boardFolder / Path(size) / Path(f)
+                outFile = outFile.with_suffix(".json")
                 f = open(outFile, 'w')
                 f.write('{\n\t\"Solucion\": [\n')
                 
@@ -144,6 +146,23 @@ def main():
                     x += 1
                 
                 f.write('\t],\n\t')
+
+                f.write('\n\t\"Estado\": [\n')
+                
+                aimg = convertImageToAscii(sizePath / filePath, cols, rows)
+
+                x = 0
+                for i in range(rows):
+                    f.write('\t\t[')
+                    for j in range(cols):
+                        f.write('0')
+                        if(j == cols - 1): 
+                            if(i == rows - 1): f.write(']')
+                            else: f.write('],')
+                            f.write('\n')
+                        else: f.write(',')
+
+                f.write('\t],\n\n\t')
                 f.write('\"Cols\": ' + str(cols) + ',\n')
                 f.write('\t\"Rows\": ' + str(rows) + '\n}')
                 f.close()
