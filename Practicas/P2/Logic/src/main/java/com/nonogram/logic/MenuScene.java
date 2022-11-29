@@ -3,6 +3,7 @@ package com.nonogram.logic;
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 import com.nonogram.engine.Sound;
 
@@ -11,6 +12,7 @@ public class MenuScene extends AbstractScene {
     public MenuScene(int gameWidth, int gameHeight) { super(gameWidth, gameHeight);}
     @Override
     public boolean init() {
+        _preferences = _myEngine.getJSONManager().readPreferencesFromJSON("preferences.json");
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
@@ -20,8 +22,8 @@ public class MenuScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
-        Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight());
-        Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight());
+        Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight(), _preferences);
+        Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight(), _preferences);
         _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7, "Juego Rapido", _myEngine, juegoScene, null, 0.04);
         _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7, "Modo Historia", _myEngine, historiaScene, null, 0.04);
         return true;
@@ -61,5 +63,6 @@ public class MenuScene extends AbstractScene {
     Font _f2;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
+    JSONManager.PreferencesData _preferences;
 
 }

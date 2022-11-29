@@ -4,31 +4,28 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.JSONManager;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage) {
+    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage, JSONManager.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
         _generado = true;
+        _preferences = pref;
 
     }
 
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level) {
+    public GameScene(int gameWidth, int gameHeight, int size, int level, JSONManager.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
-        _path = size + "x" + size + "/" + level + ".json";
+        _path =size + "x" + size + "/" + level + ".json";
         _generado = false;
-    }
-
-    public GameScene(int gameWidth, int gameHeight, String file)
-    {
-        super(gameWidth,gameHeight);
-        _file = file;
+        _preferences = pref;
     }
 
 
@@ -265,4 +262,6 @@ public class GameScene extends AbstractScene {
 
     int _lifes;
     int MAX_LIFES = 5;
+
+    JSONManager.PreferencesData _preferences;
 }

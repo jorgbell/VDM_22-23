@@ -31,6 +31,21 @@ public class AndroidJSONManager implements JSONManager {
         return b;
     }
 
+    @Override
+    public PreferencesData readPreferencesFromJSON(String path) {
+        PreferencesData p = null;
+        try {
+            InputStream is = _assetManager.open(_myPaths._JSONPath + path);
+            Reader reader = new InputStreamReader(is);
+
+            p = _gson.fromJson(reader, PreferencesData.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return p;
+    }
+
 
     AssetManager _assetManager;
     AbstractEngine.EnginePaths _myPaths;

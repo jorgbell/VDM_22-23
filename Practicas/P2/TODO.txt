@@ -12,6 +12,10 @@
 
 29/11:
 TODO:
+- cambiar fors por while en los processinput
+- meter variable nueva en boarddata
+- coger la vida desde preferences en gamescene
+- cambiar el boton (o lo que sea) para que se vea bien los candados en historiascene
 - Guardar progreso en el json y cargarlo al iniciar
 - giro de la pantalla modificado? No estoy seguro de si eso es para esta entrega o la proxima
 

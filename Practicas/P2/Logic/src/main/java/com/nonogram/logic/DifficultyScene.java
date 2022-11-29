@@ -4,12 +4,13 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 
 
 public class DifficultyScene extends AbstractScene {
 
-    public DifficultyScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); }
+    public DifficultyScene(int gameWidth, int gameHeight, JSONManager.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref; }
 
     @Override
     public boolean init() {
@@ -25,7 +26,7 @@ public class DifficultyScene extends AbstractScene {
         {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int percentage = 60 - 20 * i;
-            Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage);
+            Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage, _preferences);
             _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, _difficulties[i], _myEngine, s, null, 0.04);
         }
 
@@ -74,4 +75,5 @@ public class DifficultyScene extends AbstractScene {
     String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
+    JSONManager.PreferencesData _preferences;
 }

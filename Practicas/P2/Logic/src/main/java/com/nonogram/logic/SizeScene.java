@@ -4,15 +4,17 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 
 
 public class SizeScene extends AbstractScene {
 
-    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage)
+    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage, JSONManager.PreferencesData pref)
     {
         super(gameWidth,gameHeight);
         _solvablePercentage = solvablePercentage;
+        _preferences = pref;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class SizeScene extends AbstractScene {
             int rowNumber = _sizes[i][0];
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage);
+            Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage, _preferences);
             _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, rowNumber + "x" + columnNumber, _myEngine, s, null, 0.04);
         }
 
@@ -82,4 +84,6 @@ public class SizeScene extends AbstractScene {
     int _solvablePercentage;
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
+
+    JSONManager.PreferencesData _preferences;
 }

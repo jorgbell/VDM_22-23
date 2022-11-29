@@ -4,20 +4,21 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 
 public class CatScene extends AbstractScene {
 
-    public CatScene(int gameWidth, int gameHeight, int size) {
+    public CatScene(int gameWidth, int gameHeight, int size, JSONManager.Category thisc, JSONManager.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _size=size;
-        //carga de la categoria
-        numNiveles=20;
-        numUnlock=3;
+        thiscat = thisc;
+        _preferences = pref;
     }
 
     @Override
     public boolean init() {
+        _botones = new ChangeSceneButton[thiscat.numLevels];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _candadoImage = _myEngine.getGraphics().newImage("lock.png");
@@ -30,7 +31,7 @@ public class CatScene extends AbstractScene {
 
         for(int i = 0; i< _botones.length; i++){
 
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i);
+            Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences);
             _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.8);
         }
 
@@ -46,12 +47,11 @@ public class CatScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for (int i = 0; i < _botones.length; i++) {
-            if (i >= numUnlock) {
+            if (i > thiscat.actualLevel) {
                 _botones[i]._image = _candadoImage;
             }
-            else if(i<numUnlock-1){
+            else if(i<thiscat.actualLevel){
                 String path = _size+ "/" + i + ".png";
-                Image _image = _myEngine.getGraphics().newImage(path);
                 _botones[i]._image =_myEngine.getGraphics().newImage(path);
             }
             else{
@@ -74,7 +74,7 @@ public class CatScene extends AbstractScene {
 
                 for(int i = 0; i < _botones.length; i++)
                 {
-                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<numUnlock) _botones[i].handleEvent(input);
+                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=thiscat.actualLevel) _botones[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -96,8 +96,8 @@ public class CatScene extends AbstractScene {
     int _size;
     ChangeSceneButton _botonVolver;
 
-    int numNiveles =20;
-    int numUnlock =3;
 
-    ChangeSceneButton[] _botones = new ChangeSceneButton[numNiveles];
+    ChangeSceneButton[] _botones;
+    JSONManager.PreferencesData _preferences;
+    JSONManager.Category thiscat;
 }
