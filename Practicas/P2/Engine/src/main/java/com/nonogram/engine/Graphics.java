@@ -31,8 +31,6 @@ public interface Graphics {
     Image newImage(String name);
     //crea una nueva fuente del tamaño especificado a partir de un fichero .ttf. Se indica si se desea o no fuente en negrita.
     Font newFont(String filename, int size, boolean isBold);
-    //Boards
-    Board newBoard(String filename);
     //borra el contenido completo de la ventana, rellenándolo con un color recibido como parámetro, o el contenido de la pantalla de juego para cambiar el color de fondo
     void clearGame(int color);
     void clearWindow();
