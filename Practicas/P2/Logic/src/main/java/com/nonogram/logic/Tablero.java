@@ -128,8 +128,8 @@ public abstract class Tablero {
     }
 
     //public Boolean getSolution(int i, int j) { return _solucion[i][j]; }
-    public Casilla getCasilla(int i, int j) {
-        return _tablero[i][j];
+    public Casilla getCasilla(int columna, int fila) {
+        return _tablero[columna][fila];
     }
 
     public int getRemaining() //cuenta las casillas que faltan por seleccionarse (azul)
@@ -146,10 +146,10 @@ public abstract class Tablero {
             }
         return total - correctCount;
     }
-    public boolean checkCasilla(int i, int j) {
-        Casilla c = _tablero[i][j];
-        return (_solucion[i][j] == true && c.estado==State.CROSS) ||
-                (_solucion[i][j] == false && c.estado == State.CROSS);
+    public boolean checkCasilla(int columna, int fila) {
+        Casilla c = _tablero[columna][fila];
+        return (_solucion[columna][fila] == true && c.estado==State.PICK) ||
+                (_solucion[columna][fila] == false && c.estado == State.CROSS);
 
     }
 

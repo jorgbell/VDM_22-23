@@ -156,7 +156,7 @@ public class GameScene extends AbstractScene {
             _showTime -= deltaTime;
             if(_showTime <= 0)
             {
-                _t.LimpiarErrores(_wrong.x, _wrong.y);
+                _t.LimpiarErrores(_wrong.y, _wrong.x);
                 _wrong = null;
                 _showErrors = false;
             }
@@ -175,7 +175,7 @@ public class GameScene extends AbstractScene {
                     if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
                     {
                         _casillas[i][j].handleEvent(input);
-                        checkError(j,i);
+                        checkError(i,j);
                     }
                 }
             }
@@ -183,9 +183,9 @@ public class GameScene extends AbstractScene {
         else if(_botonVictoria._rect.contains(input.get_posX(), input.get_posY())) _botonVictoria.handleEvent(input);
     }
 
-    public void checkError(int i, int j)
+    public void checkError(int fila, int columna)
     {
-        if(_t.checkCasilla(i,j)){
+        if(_t.checkCasilla(columna,fila)){
             //es correcta la pulsacion
             _remaining = _t.getRemaining();
             if(_remaining == 0) _won = true;
@@ -195,7 +195,7 @@ public class GameScene extends AbstractScene {
             //marca una espera de 2 segundos en la que se muestra la casilla mala
             _showErrors = true;
             _showTime = 2;
-            _wrong = _t.getCasilla(i,j);
+            _wrong = _t.getCasilla(columna,fila);
             _wrong.estado = Tablero.State.WRONG;
         }
     }
