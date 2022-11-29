@@ -35,6 +35,7 @@ public class GameScene extends AbstractScene {
     @Override
     public boolean init() {
 
+        _lifes = MAX_LIFES;
         if (_generado){
             _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
         }
@@ -84,7 +85,7 @@ public class GameScene extends AbstractScene {
 
         _myEngine.getGraphics().setColor(0XFF000000);
 
-        if(!_won) //durante la partida
+        if(!_end) //durante la partida
         {
             //Rectagulos para poner los numeros y el tablero
             _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, (_tileSize * _columns) + 5 + _tableroX - (_gameWidth / 16), _tableroSize);
@@ -125,14 +126,17 @@ public class GameScene extends AbstractScene {
                 _f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
-                //_myEngine.getGraphics().drawText("Te quedan " + _vidas + " vidas", _gameWidth / 2, _gameHeight/4);
+                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_lifes-1) + " vidas", _gameWidth / 2, _gameHeight/4);
             }
         }
         else //fin de la partida
         {
+            String finalText;
+            if(!_won) finalText = "HAS PERDIDO";
+            else finalText = "ENHORABUENA";
             _f.setSize(40);
             _myEngine.getGraphics().setColor(0XFF000000);
-            _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 2, _gameHeight/4);
+            _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
             _botonVictoria.render(_myEngine.getGraphics());
         }
@@ -142,7 +146,7 @@ public class GameScene extends AbstractScene {
             for (int j = 0; j < _rows; j++)
             {
                 Tablero.State s = _t.getCasilla(j, i).getState();
-                if(!_won || s == Tablero.State.PICK) _casillas[i][j].render(_myEngine.getGraphics());
+                if(!_end || s == Tablero.State.PICK) _casillas[i][j].render(_myEngine.getGraphics());
             }
         }
 
@@ -159,23 +163,36 @@ public class GameScene extends AbstractScene {
                 _t.LimpiarErrores(_wrong.y, _wrong.x);
                 _wrong = null;
                 _showErrors = false;
+                _lifes--;
+                if(_lifes == 0){
+                    _end = true; _won = false;
+                }
             }
         }
     }
 
     @Override
     public void processInput(Input.TouchEvent input) {
-        if(!_won)
+        if(!_end) //si la partida no ha terminado
         {
-            if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
-            else if(!_showErrors)
-            {
-                for (int i = 0; i < _casillas.length; i++) for (int j = 0; j < _casillas[0].length; j++)
-                {
-                    if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
-                    {
-                        _casillas[i][j].handleEvent(input);
-                        checkError(i,j);
+            if(!_showErrors){ //si no se esta mostrando los errores, te deja hacer pulsaciones a botones
+                //o pulsas el de volver, o pulsas una casilla
+                if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
+                else{
+                    boolean clicked = false;
+                    int i = 0; int j;
+                    while(!clicked && i< _casillas.length){
+                        j = 0;
+                        while(!clicked && j<_casillas[0].length){
+                            if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY()))
+                            {
+                                clicked = true;
+                                _casillas[i][j].handleEvent(input);
+                                checkError(i,j);
+                            }
+                            j++;
+                        }
+                        i++;
                     }
                 }
             }
@@ -188,7 +205,10 @@ public class GameScene extends AbstractScene {
         if(_t.checkCasilla(columna,fila)){
             //es correcta la pulsacion
             _remaining = _t.getRemaining();
-            if(_remaining == 0) _won = true;
+            if(_remaining == 0) {
+                _end = true;
+                _won = true;
+            }
         }
         else{
             //es incorrecta la pulsacion
@@ -203,7 +223,7 @@ public class GameScene extends AbstractScene {
     @Override
     public boolean release() {
         _showTime = 0;
-        _won = false;
+        _end = false;
         return true;
     }
 
@@ -211,7 +231,7 @@ public class GameScene extends AbstractScene {
     int _gameHeight;
     int _gameWidth;
     boolean _showErrors = false;
-    boolean _won = false;
+    boolean _end = false;
     float _showTime = 0;
     int _rows;
     int _columns;
@@ -240,4 +260,9 @@ public class GameScene extends AbstractScene {
     String _path;
 
     Tablero.Casilla _wrong;
+
+    boolean _won = false;
+
+    int _lifes;
+    int MAX_LIFES = 5;
 }
