@@ -1,9 +1,3 @@
--Leer JSON desde Engine
--Crear el modelo de JSON para un nivel cualquiera
--Crear escena de eleccion de modo de juego, eleccion de categorias, y las diferentes páginas de los niveles de cada una de las categorias
-
-------------------------------------------------------------
-
 - json de persistencia:
 	- configuracion del juego (paleta de color, etc) -> mas adelante
 	- Vidas?
@@ -17,6 +11,9 @@
 
 
 29/11:
-- Terminar mecanica de vidas (sin recuperacion de vidas, que eso es con los anuncios y es para la entrega final)
+TODO:
 - Guardar progreso en el json y cargarlo al iniciar
 - giro de la pantalla modificado? No estoy seguro de si eso es para esta entrega o la proxima
+
+DONE:
+- Terminar mecanica de vidas (sin recuperacion de vidas, que eso es con los anuncios y es para la entrega final)
