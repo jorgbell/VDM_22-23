@@ -40,7 +40,7 @@ public class GameScene extends AbstractScene {
             _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
         }
         else {
-            _t = new TableroCargado(_myEngine.getGraphics().newBoard(_path));
+            _t = new TableroCargado(_myEngine.getJSONManager().readBoardFromJSON(_path));
         }
         _t.init();
 

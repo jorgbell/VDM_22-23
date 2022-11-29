@@ -4,26 +4,27 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
     //clase estatica que usaremos para almacenar las direcciones de las carpetas de assets
     public static class EnginePaths{
-        public EnginePaths(String r, String i, String f, String a, String b){
+        public EnginePaths(String r, String i, String f, String a, String j){
             _rootPath = r;
             _imagesPath = i;
             _fontsPath = f;
             _audioPath = a;
-            _boardsPath = b;
+            _JSONPath = j;
         }
         public String _rootPath;
         public String _imagesPath;
         public String _fontsPath;
         public String _audioPath;
-        public String _boardsPath;
+        public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
         _myAudio = a;
+        _myJSONManager = j;
     }
 
     @Override
@@ -52,6 +53,9 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public Audio getAudio() {
         return _myAudio;
     }
+
+    @Override
+    public JSONManager getJSONManager(){return _myJSONManager;}
 
     @Override
     public double getDeltaTime() {
@@ -142,8 +146,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Input _myInput;
     protected Audio _myAudio;
     protected SceneManager _mySceneManager;
+    protected JSONManager _myJSONManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
-
-    protected Board _myBoard; //??
 }

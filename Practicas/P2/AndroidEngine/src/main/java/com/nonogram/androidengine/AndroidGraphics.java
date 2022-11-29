@@ -3,7 +3,6 @@ package com.nonogram.androidengine;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -11,7 +10,6 @@ import android.view.SurfaceView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.engine.AbstractGraphics;
-import com.nonogram.engine.Board;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
@@ -35,10 +33,6 @@ public class AndroidGraphics extends AbstractGraphics {
         return true;
     }
 
-    public void setAudioContext(AndroidAudio a){
-        a._assetManager = _context.getAssets();
-    }
-
     @Override
     public Image newImage(String name) {
         AndroidImage aimage = null;
@@ -59,16 +53,6 @@ public class AndroidGraphics extends AbstractGraphics {
         return afont;
     }
 
-    @Override
-    public Board newBoard(String name){
-        AndroidBoard aBoard = null;
-
-        try{
-            aBoard = new AndroidBoard(_myPaths._boardsPath + name, _context.getAssets());
-        }catch (Exception e){}
-
-        return aBoard;
-    }
 
     @Override
     public void clearGame(int color) {
@@ -221,6 +205,6 @@ public class AndroidGraphics extends AbstractGraphics {
     private SurfaceHolder _holder;
     private Canvas _canvas;
     private Paint _paint;
-    private AppCompatActivity _context;
+    public AppCompatActivity _context;
 
 }
