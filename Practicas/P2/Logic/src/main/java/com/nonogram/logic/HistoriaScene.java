@@ -12,6 +12,7 @@ public class HistoriaScene extends AbstractScene {
     public HistoriaScene(int gameWidth, int gameHeight, JSONManager.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref;}
     @Override
     public boolean init() {
+        _unlockedCats = _preferences.unlockedCats;
         _categoriesButtons = new ChangeSceneButton[_preferences.cats.length];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
@@ -43,11 +44,13 @@ public class HistoriaScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _categoriesButtons.length; i++) {
-            if (i > _preferences.unlockedCats) {
+            if (i > _unlockedCats) {
+                _categoriesButtons[i].set_textColor(0x00000000);
                 _categoriesButtons[i]._image = _candadoImage;
             }
-            else if(i<=_preferences.unlockedCats && _categoriesButtons[i]._image != null){
+            else if(i<=_unlockedCats && _categoriesButtons[i]._image != null){
                 _categoriesButtons[i]._image = null;
+                _categoriesButtons[i].set_textColor(0xFF000000);
             }
             _categoriesButtons[i].render(_myEngine.getGraphics());
         }
@@ -64,7 +67,7 @@ public class HistoriaScene extends AbstractScene {
 
                 for(int i = 0; i < _categoriesButtons.length; i++)
                 {
-                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_preferences.unlockedCats) _categoriesButtons[i].handleEvent(input);
+                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_unlockedCats) _categoriesButtons[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -86,4 +89,5 @@ public class HistoriaScene extends AbstractScene {
     ChangeSceneButton[] _categoriesButtons;
 
     JSONManager.PreferencesData _preferences;
+    int _unlockedCats;
 }

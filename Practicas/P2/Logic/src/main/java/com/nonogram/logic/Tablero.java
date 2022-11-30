@@ -36,7 +36,7 @@ public abstract class Tablero {
         public void setState(State s) {
             //solo entraran pick o cross
             estado = s;
-            if (estado == State.CROSS) _blues.remove(this);
+            if (estado != State.PICK) _blues.remove(this);
             else _blues.add(this);
         }
 
@@ -148,8 +148,10 @@ public abstract class Tablero {
     }
     public boolean checkCasilla(int columna, int fila) {
         Casilla c = _tablero[columna][fila];
-        return (_solucion[columna][fila] == true && c.estado==State.PICK) ||
-                (_solucion[columna][fila] == false && c.estado == State.CROSS);
+        return (_solucion[columna][fila] == true && c.estado==State.PICK) || (c.estado == State.CROSS) || (c.estado == State.EMPTY)
+                //codigo comentado, si se descomenta, tambien quita vida al poner un CROSS mal
+                //(_solucion[columna][fila] == false && c.estado == State.CROSS)
+        ;
 
     }
 

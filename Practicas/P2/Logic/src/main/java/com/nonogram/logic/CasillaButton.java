@@ -48,10 +48,13 @@ public class CasillaButton extends Button{
         if(e.get_type() == Input.TouchEvent.InputType.CLICK_CORTO){
             _casilla.setState(Tablero.State.values()[1]);
         }
-
-
         else{
-            _casilla.setState(Tablero.State.values()[2]);
+            if(_casilla.getState()== Tablero.State.CROSS){
+                _casilla.setState(Tablero.State.values()[0]);
+            }
+            else{
+                _casilla.setState(Tablero.State.values()[2]);
+            }
         }
     };
 
