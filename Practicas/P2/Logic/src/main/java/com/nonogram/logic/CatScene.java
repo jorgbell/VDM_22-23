@@ -18,6 +18,7 @@ public class CatScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        _actualLevel = thiscat.actualLevel;
         _botones = new ChangeSceneButton[thiscat.numLevels];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
@@ -31,7 +32,7 @@ public class CatScene extends AbstractScene {
 
         for(int i = 0; i< _botones.length; i++){
 
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences);
+            Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences, this);
             _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.8);
         }
 
@@ -47,10 +48,10 @@ public class CatScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for (int i = 0; i < _botones.length; i++) {
-            if (i > thiscat.actualLevel) {
+            if (i > _actualLevel) {
                 _botones[i]._image = _candadoImage;
             }
-            else if(i<thiscat.actualLevel){
+            else if(i<_actualLevel){
                 String path = _size+ "/" + i + ".png";
                 _botones[i]._image =_myEngine.getGraphics().newImage(path);
             }
@@ -74,7 +75,7 @@ public class CatScene extends AbstractScene {
 
                 for(int i = 0; i < _botones.length; i++)
                 {
-                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=thiscat.actualLevel) _botones[i].handleEvent(input);
+                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_actualLevel) _botones[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -100,4 +101,5 @@ public class CatScene extends AbstractScene {
     ChangeSceneButton[] _botones;
     JSONManager.PreferencesData _preferences;
     JSONManager.Category thiscat;
+    public int _actualLevel;
 }

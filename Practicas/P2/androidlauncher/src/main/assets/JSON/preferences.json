@@ -1,4 +1,5 @@
 {
+    "maxLifes" : 5,
     "currentLifes": 5,
     "unlockedCats": 1,
     "cats": [

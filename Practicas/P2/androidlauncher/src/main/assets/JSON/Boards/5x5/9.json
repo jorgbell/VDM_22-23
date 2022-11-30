@@ -6,6 +6,15 @@
 		[false,true,true,true,false],
 		[false,false,true,false,false]
 	],
+	
+	"Estado": [
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0]
+	],
+
 	"Cols": 5,
 	"Rows": 5
 }

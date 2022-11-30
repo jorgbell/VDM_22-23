@@ -19,20 +19,22 @@ public class GameScene extends AbstractScene {
     }
 
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level, JSONManager.PreferencesData pref) {
+    public GameScene(int gameWidth, int gameHeight, int size, int level, JSONManager.PreferencesData pref, CatScene catScene) {
         super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
-        _path =size + "x" + size + "/" + level + ".json";
+        _level = level;
+        _path =size + "x" + size + "/" + _level + ".json";
         _generado = false;
         _preferences = pref;
+        _catScene = catScene;
     }
 
 
     @Override
     public boolean init() {
 
-        _lifes = MAX_LIFES;
+        _currentLifes = _preferences.maxLifes;
         if (_generado){
             _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
         }
@@ -43,8 +45,7 @@ public class GameScene extends AbstractScene {
 
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
-        _resolverImage = _myEngine.getGraphics().newImage("Lupa.png");
-        if(_f == null || _volverImage == null || _resolverImage == null)
+        if(_f == null || _volverImage == null)
             return false;
 
 
@@ -123,7 +124,7 @@ public class GameScene extends AbstractScene {
                 _f.setSize(20);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
-                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_lifes-1) + " vidas", _gameWidth / 2, _gameHeight/4);
+                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes -1) + " vidas", _gameWidth / 2, _gameHeight/4);
             }
         }
         else //fin de la partida
@@ -160,8 +161,8 @@ public class GameScene extends AbstractScene {
                 _t.LimpiarErrores(_wrong.y, _wrong.x);
                 _wrong = null;
                 _showErrors = false;
-                _lifes--;
-                if(_lifes == 0){
+                _currentLifes--;
+                if(_currentLifes == 0){
                     _end = true; _won = false;
                 }
             }
@@ -205,6 +206,9 @@ public class GameScene extends AbstractScene {
             if(_remaining == 0) {
                 _end = true;
                 _won = true;
+                if(_catScene._actualLevel == _level){
+                    _catScene._actualLevel++;
+                }
             }
         }
         else{
@@ -244,7 +248,6 @@ public class GameScene extends AbstractScene {
     String _file;
     Font _f;
     Image _volverImage;
-    Image _resolverImage;
     int _numberFontSize;
 
     int _remaining = 0;
@@ -259,9 +262,9 @@ public class GameScene extends AbstractScene {
     Tablero.Casilla _wrong;
 
     boolean _won = false;
-
-    int _lifes;
-    int MAX_LIFES = 5;
+    int _currentLifes;
 
     JSONManager.PreferencesData _preferences;
+    CatScene _catScene;
+    int _level;
 }
