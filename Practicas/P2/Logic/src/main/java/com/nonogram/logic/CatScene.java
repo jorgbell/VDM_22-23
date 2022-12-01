@@ -94,6 +94,11 @@ public class CatScene extends AbstractScene {
         return true;
     }
 
+    public void increaseLevel(int levelPlayed){
+        if(_actualLevel < thiscat.numLevels-1 && _actualLevel == levelPlayed)
+            _actualLevel++;
+    }
+
     int _h;
     int _w;
     Font _f;

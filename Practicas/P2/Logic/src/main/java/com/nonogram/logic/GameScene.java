@@ -213,9 +213,7 @@ public class GameScene extends AbstractScene {
             if(_remaining == 0) {
                 _end = true;
                 _won = true;
-                if(_catScene._actualLevel == _level){
-                    _catScene._actualLevel++;
-                }
+                _catScene.increaseLevel(_level);
             }
         }
         else{
