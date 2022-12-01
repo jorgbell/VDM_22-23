@@ -20,6 +20,7 @@ public class CatScene extends AbstractScene {
     public boolean init() {
         _actualLevel = thiscat.actualLevel;
         _botones = new ChangeSceneButton[thiscat.numLevels];
+        _boardsImages = new Image[thiscat.numLevels];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _candadoImage = _myEngine.getGraphics().newImage("lock.png");

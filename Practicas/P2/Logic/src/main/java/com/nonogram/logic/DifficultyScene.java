@@ -32,6 +32,7 @@ public class DifficultyScene extends AbstractScene {
         }
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+        _botonVolver.addText("Volver");
 
         return true;
     }
