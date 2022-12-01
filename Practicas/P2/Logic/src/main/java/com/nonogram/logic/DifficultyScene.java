@@ -10,7 +10,7 @@ import com.nonogram.engine.Scene;
 
 public class DifficultyScene extends AbstractScene {
 
-    public DifficultyScene(int gameWidth, int gameHeight, JSONManager.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref; }
+    public DifficultyScene(int gameWidth, int gameHeight, LogicJSON.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref; }
 
     @Override
     public boolean init() {
@@ -77,5 +77,5 @@ public class DifficultyScene extends AbstractScene {
     String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
-    JSONManager.PreferencesData _preferences;
+    LogicJSON.PreferencesData _preferences;
 }

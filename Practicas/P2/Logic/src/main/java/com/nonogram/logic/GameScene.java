@@ -8,7 +8,7 @@ import com.nonogram.engine.JSONManager;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage, JSONManager.PreferencesData pref) {
+    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage, LogicJSON.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _rows = rows;
         _columns = columns;
@@ -19,7 +19,7 @@ public class GameScene extends AbstractScene {
     }
 
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level, JSONManager.PreferencesData pref, CatScene catScene) {
+    public GameScene(int gameWidth, int gameHeight, int size, int level, LogicJSON.PreferencesData pref, CatScene catScene) {
         super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
@@ -39,7 +39,7 @@ public class GameScene extends AbstractScene {
             _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
         }
         else {
-            _t = new TableroCargado(_myEngine.getJSONManager().readBoardFromJSON(_path));
+            _t = new TableroCargado(LogicJSON.readBoardFromJSON(_path));
         }
         _t.init();
 
@@ -269,7 +269,7 @@ public class GameScene extends AbstractScene {
     boolean _won = false;
     int _currentLifes;
 
-    JSONManager.PreferencesData _preferences;
+    LogicJSON.PreferencesData _preferences;
     CatScene _catScene;
     int _level;
 }

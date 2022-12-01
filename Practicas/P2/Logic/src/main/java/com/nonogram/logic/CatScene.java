@@ -9,7 +9,7 @@ import com.nonogram.engine.Scene;
 
 public class CatScene extends AbstractScene {
 
-    public CatScene(int gameWidth, int gameHeight, int size, JSONManager.Category thisc, JSONManager.PreferencesData pref) {
+    public CatScene(int gameWidth, int gameHeight, int size, LogicJSON.Category thisc, LogicJSON.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _size=size;
         thiscat = thisc;
@@ -110,8 +110,8 @@ public class CatScene extends AbstractScene {
 
 
     ChangeSceneButton[] _botones;
-    JSONManager.PreferencesData _preferences;
-    JSONManager.Category thiscat;
+    LogicJSON.PreferencesData _preferences;
+    LogicJSON.Category thiscat;
     public int _actualLevel;
     Image[] _boardsImages;
 }

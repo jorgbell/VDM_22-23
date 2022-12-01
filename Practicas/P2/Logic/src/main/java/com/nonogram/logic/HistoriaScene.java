@@ -9,7 +9,7 @@ import com.nonogram.engine.Scene;
 
 public class HistoriaScene extends AbstractScene {
 
-    public HistoriaScene(int gameWidth, int gameHeight, JSONManager.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref;}
+    public HistoriaScene(int gameWidth, int gameHeight, LogicJSON.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref;}
     @Override
     public boolean init() {
         _unlockedCats = _preferences.unlockedCats;
@@ -90,6 +90,6 @@ public class HistoriaScene extends AbstractScene {
     Image _candadoImage;
     ChangeSceneButton[] _categoriesButtons;
 
-    JSONManager.PreferencesData _preferences;
+    LogicJSON.PreferencesData _preferences;
     int _unlockedCats;
 }

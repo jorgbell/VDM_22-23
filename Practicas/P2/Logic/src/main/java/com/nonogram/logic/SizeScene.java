@@ -10,7 +10,7 @@ import com.nonogram.engine.Scene;
 
 public class SizeScene extends AbstractScene {
 
-    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage, JSONManager.PreferencesData pref)
+    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage, LogicJSON.PreferencesData pref)
     {
         super(gameWidth,gameHeight);
         _solvablePercentage = solvablePercentage;
@@ -89,5 +89,5 @@ public class SizeScene extends AbstractScene {
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
 
-    JSONManager.PreferencesData _preferences;
+    LogicJSON.PreferencesData _preferences;
 }

@@ -12,7 +12,8 @@ public class MenuScene extends AbstractScene {
     public MenuScene(int gameWidth, int gameHeight) { super(gameWidth, gameHeight);}
     @Override
     public boolean init() {
-        _preferences = _myEngine.getJSONManager().readPreferencesFromJSON("preferences.json");
+        LogicJSON.set_myEngine(_myEngine);
+        _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
@@ -65,6 +66,6 @@ public class MenuScene extends AbstractScene {
     Font _f2;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
-    JSONManager.PreferencesData _preferences;
+    LogicJSON.PreferencesData _preferences;
 
 }

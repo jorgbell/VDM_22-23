@@ -4,7 +4,7 @@ import com.nonogram.engine.JSONManager;
 
 public class TableroCargado extends Tablero{
 
-    public TableroCargado(JSONManager.BoardData b)
+    public TableroCargado(LogicJSON.BoardData b)
     {
         super(b.Rows, b.Cols);
         _board = b;
@@ -38,5 +38,5 @@ public class TableroCargado extends Tablero{
 //        }
 //    }
 
-    JSONManager.BoardData _board;
+    LogicJSON.BoardData _board;
 }
