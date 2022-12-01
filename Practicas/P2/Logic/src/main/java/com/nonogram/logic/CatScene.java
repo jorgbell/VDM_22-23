@@ -48,6 +48,10 @@ public class CatScene extends AbstractScene {
                 _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
             }
         }
+        if(_actualLevel >= thiscat.numLevels)
+            _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
+
+
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
         _botonVolver.addText("Volver");
@@ -82,7 +86,8 @@ public class CatScene extends AbstractScene {
 
                 for(int i = 0; i < _botones.length; i++)
                 {
-                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_actualLevel) _botones[i].handleEvent(input);
+                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_actualLevel)
+                        _botones[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -96,8 +101,13 @@ public class CatScene extends AbstractScene {
     }
 
     public void increaseLevel(int levelPlayed){
-        if(_actualLevel < thiscat.numLevels-1 && _actualLevel == levelPlayed)
+        if(_actualLevel < thiscat.numLevels && _actualLevel == levelPlayed){
+            _botones[_actualLevel].addImage(_boardsImages[_actualLevel],0.8,Button.ImagePos.CENTERED );
             _actualLevel++;
+            if(thiscat.numLevels == _actualLevel)
+                return;
+            _botones[_actualLevel].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
+        }
     }
 
     int _h;

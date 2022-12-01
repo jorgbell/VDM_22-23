@@ -12,20 +12,10 @@
 
 29/11:
 TODO:
-- cambiar el boton (o lo que sea) para que se vea bien los candados en historiascene
+- meter seguridad al leer json, para que no pete
 - limpiar un poco gamescene (y otros si hace falta) : separar en metodos, juntar codigo relacionado, etc
 - cambiar fors por while en los processinput
 
 
-DONE:
-- Terminar mecanica de vidas (sin recuperacion de vidas, que eso es con los anuncios y es para la entrega final)
-- meter variable nueva en boarddata
-- coger la vida desde preferences en gamescene
-- avance en los niveles (sin persistencia)
-
-
-ARREGLAR TABLERO GENERADO
 CENTRAR TABLEROS
-JSON FUERA DE ENGINE
 GUARDAR ESTADO FUERA DE ASSETS
-PUSHEAR LO QUE TENGO EN MI PC Y CAMBIAR EN EL METODO ESE DE CATSCENE LA IMAGEN DEL NIVEL DESBLOQUEADO

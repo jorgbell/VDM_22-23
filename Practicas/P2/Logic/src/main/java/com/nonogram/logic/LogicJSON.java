@@ -49,7 +49,7 @@ public class LogicJSON {
     }
 
     public static BoardData readBoardFromJSON(String path){
-        Reader r = _myEngine.getJSONManager().readJSON("Board/"+path);
+        Reader r = _myEngine.getJSONManager().readJSON("Boards/"+path);
         BoardData data = _gson.fromJson(r,BoardData.class);
         return data;
     }
