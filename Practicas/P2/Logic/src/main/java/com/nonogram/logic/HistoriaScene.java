@@ -28,11 +28,20 @@ public class HistoriaScene extends AbstractScene {
         {
             int size = _preferences.cats[i].boardSize;
             Scene s = new CatScene(getGameWidth(), getGameHeight(), size,_preferences.cats[i],  _preferences);
-            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4,
-                    size + "x" +  size, _myEngine, s, null,1);
+            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s);
+
+            if (i > _unlockedCats) {
+                _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
+            }
+            else if(i<=_unlockedCats){
+                _categoriesButtons[i].addText(size + "x" +  size);
+            }
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage, 0.04);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
+        _botonVolver.addText("Volver");
+        _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+
         return true;
     }
 
@@ -44,14 +53,7 @@ public class HistoriaScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _categoriesButtons.length; i++) {
-            if (i > _unlockedCats) {
-                _categoriesButtons[i].set_textColor(0x00000000);
-                _categoriesButtons[i]._image = _candadoImage;
-            }
-            else if(i<=_unlockedCats && _categoriesButtons[i]._image != null){
-                _categoriesButtons[i]._image = null;
-                _categoriesButtons[i].set_textColor(0xFF000000);
-            }
+
             _categoriesButtons[i].render(_myEngine.getGraphics());
         }
     }

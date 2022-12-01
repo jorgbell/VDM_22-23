@@ -73,8 +73,15 @@ public class GameScene extends AbstractScene {
         }
 
         //botones de ui
-        _botonFF = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, "Rendirse", _myEngine, _volverImage, 0.04);
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, "Volver", _myEngine, _volverImage, 0.04);
+        _botonRendirse = new ChangeSceneButton( _gameWidth / 10, _gameHeight / 20 , _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null);
+        _botonRendirse.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+        _botonRendirse.addText("Rendirse");
+
+
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null);
+        _botonVictoria.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+        _botonVictoria.addText("Volver");
+
         return true;
     }
 
@@ -91,7 +98,7 @@ public class GameScene extends AbstractScene {
 
             //UI
             _f.setSize(20);
-            _botonFF.render(_myEngine.getGraphics());
+            _botonRendirse.render(_myEngine.getGraphics());
 
             _f.setSize(_numberFontSize);
 
@@ -175,7 +182,7 @@ public class GameScene extends AbstractScene {
         {
             if(!_showErrors){ //si no se esta mostrando los errores, te deja hacer pulsaciones a botones
                 //o pulsas el de volver, o pulsas una casilla
-                if(_botonFF._rect.contains(input.get_posX(), input.get_posY())) _botonFF.handleEvent(input);
+                if(_botonRendirse._rect.contains(input.get_posX(), input.get_posY())) _botonRendirse.handleEvent(input);
                 else{
                     boolean clicked = false;
                     int i = 0; int j;
@@ -253,7 +260,7 @@ public class GameScene extends AbstractScene {
     int _remaining = 0;
 
     CasillaButton[][] _casillas;
-    ChangeSceneButton _botonFF;
+    ChangeSceneButton _botonRendirse;
     ChangeSceneButton _botonVictoria;
 
     boolean _generado;

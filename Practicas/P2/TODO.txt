@@ -22,3 +22,10 @@ DONE:
 - meter variable nueva en boarddata
 - coger la vida desde preferences en gamescene
 - avance en los niveles (sin persistencia)
+
+
+ARREGLAR TABLERO GENERADO
+CENTRAR TABLEROS
+JSON FUERA DE ENGINE
+GUARDAR ESTADO FUERA DE ASSETS
+PUSHEAR LO QUE TENGO EN MI PC Y CAMBIAR EN EL METODO ESE DE CATSCENE LA IMAGEN DEL NIVEL DESBLOQUEADO

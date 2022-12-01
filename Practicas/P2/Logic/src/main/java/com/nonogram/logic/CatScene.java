@@ -31,12 +31,27 @@ public class CatScene extends AbstractScene {
         _w = getGameWidth();
 
         for(int i = 0; i< _botones.length; i++){
+            String path = _size+ "x"+_size+ "/" + i + ".png";
+            _boardsImages[i]=_myEngine.getGraphics().newImage(path);
 
             Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences, this);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6,"", _myEngine, s, null, 0.8);
+            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, _myEngine, s);
+
+            if (i > _actualLevel) {
+                _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
+            }
+            else if(i<_actualLevel){
+                _botones[i].addImage(_boardsImages[i],0.8,Button.ImagePos.CENTERED );
+            }
+            else{
+                _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
+            }
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, "Volver", _myEngine, _volverImage,0.04);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
+        _botonVolver.addText("Volver");
+        _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+
 
         return true;
     }
@@ -48,16 +63,7 @@ public class CatScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for (int i = 0; i < _botones.length; i++) {
-            if (i > _actualLevel) {
-                _botones[i]._image = _candadoImage;
-            }
-            else if(i<_actualLevel){
-                String path = _size+ "/" + i + ".png";
-                _botones[i]._image =_myEngine.getGraphics().newImage(path);
-            }
-            else{
-                _botones[i]._image = _newImage;
-            }
+
             _botones[i].render(_myEngine.getGraphics());
         }
     }
@@ -102,4 +108,5 @@ public class CatScene extends AbstractScene {
     JSONManager.PreferencesData _preferences;
     JSONManager.Category thiscat;
     public int _actualLevel;
+    Image[] _boardsImages;
 }
