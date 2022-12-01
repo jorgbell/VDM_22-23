@@ -7,13 +7,12 @@ import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
 
 public class ChangeSceneButton extends Button{
-    //PUSH BUTTON
     public ChangeSceneButton(int x, int y, int w, int h, Engine e, Scene ns)
     {
         super(x, y, w, h);
         _engine = e;
         _newScene = ns;
-        if(ns!=null){_push=true;}
+        if(ns!=null){_push=true;} //PUSH
     }
 
 
@@ -25,11 +24,10 @@ public class ChangeSceneButton extends Button{
 
     @Override
     public void update(double deltaTime) {
-
     }
 
     Engine _engine;
     Scene _newScene;
-    Boolean _push = false;
+    Boolean _push = false; //POP
 
 }

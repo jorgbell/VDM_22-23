@@ -160,6 +160,7 @@ public class GameScene extends AbstractScene {
     @Override
     public void update(double deltaTime)
     {
+
         if (_showErrors)
         {
             _showTime -= deltaTime;
@@ -213,7 +214,7 @@ public class GameScene extends AbstractScene {
             if(_remaining == 0) {
                 _end = true;
                 _won = true;
-                _catScene.increaseLevel(_level);
+                if(!_generado){_catScene.increaseLevel(_level);}
             }
         }
         else{

@@ -45,14 +45,11 @@ public abstract class Button {
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     };
 
-    public abstract void handleEvent(Input.TouchEvent e);
-    public abstract void update(double deltaTime);
+    public void handleEvent(Input.TouchEvent e){};
+    public void update(double deltaTime){};
 
     public void addImage(Image img , double scale, ImagePos imagePos){
 
-        if(_image.getWidth()*scale > _rect._w || _image.getHeight()*scale > _rect._h){
-            System.err.print("ESCALA INCORRECTA");
-        }
         _image=img;
         _imageScale = scale;
 
