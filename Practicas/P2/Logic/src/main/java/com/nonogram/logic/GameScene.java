@@ -34,7 +34,7 @@ public class GameScene extends AbstractScene {
     @Override
     public boolean init() {
 
-        _currentLifes = _preferences.maxLifes;
+        _currentLifes = _preferences.currentLifes;
         if (_generado){
             _t = new TableroGenerado(_rows, _columns, _solvablePercentage);
         }
@@ -214,7 +214,9 @@ public class GameScene extends AbstractScene {
             if(_remaining == 0) {
                 _end = true;
                 _won = true;
-                if(!_generado){_catScene.increaseLevel(_level);}
+                if(!_generado){
+                    _catScene.increaseLevel(_level);
+                }
             }
         }
         else{
@@ -231,6 +233,8 @@ public class GameScene extends AbstractScene {
     public boolean release() {
         _showTime = 0;
         _end = false;
+        _preferences.currentLifes = _currentLifes;
+        LogicJSON.writePreferencesToJson("preferences.json",_preferences);
         return true;
     }
 

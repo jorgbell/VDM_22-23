@@ -1,12 +1,12 @@
 {
     "maxLifes" : 5,
     "currentLifes": 5,
-    "unlockedCats": 1,
+    "unlockedCats": 0,
     "cats": [
         {
             "boardSize": 5,
             "numLevels": 20,
-            "actualLevel": 21
+            "actualLevel": 0
         },
         {
             "boardSize": 10,

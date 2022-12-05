@@ -1,0 +1,20 @@
+{
+	"Solucion": [
+		[false,true,false,true,false],
+		[true,false,true,false,true],
+		[false,true,true,true,false],
+		[false,true,false,true,false],
+		[true,false,false,false,true]
+	],
+	
+	"Estado": [
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0],
+		[0,0,0,0,0]
+	],
+
+	"Cols": 5,
+	"Rows": 5
+}

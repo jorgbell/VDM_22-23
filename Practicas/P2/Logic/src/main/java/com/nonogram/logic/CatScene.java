@@ -97,6 +97,8 @@ public class CatScene extends AbstractScene {
 
     @Override
     public boolean release() {
+        thiscat.actualLevel = _actualLevel;
+        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
         return true;
     }
 
@@ -104,8 +106,10 @@ public class CatScene extends AbstractScene {
         if(_actualLevel < thiscat.numLevels && _actualLevel == levelPlayed){
             _botones[_actualLevel].addImage(_boardsImages[_actualLevel],0.8,Button.ImagePos.CENTERED );
             _actualLevel++;
-            if(thiscat.numLevels == _actualLevel)
+            if(thiscat.numLevels == _actualLevel && _preferences.unlockedCats < _preferences.cats.length){
+                _preferences.unlockedCats++;
                 return;
+            }
             _botones[_actualLevel].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
         }
     }
