@@ -68,7 +68,6 @@ public class GameScene extends AbstractScene {
             for (int j = 0; j < _rows; j++)
             {
                 _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
-
             }
         }
 
@@ -88,7 +87,7 @@ public class GameScene extends AbstractScene {
     @Override
     public void render() {
 
-        _myEngine.getGraphics().setColor(0XFF000000);
+        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
 
         if(!_end) //durante la partida
         {
@@ -112,7 +111,7 @@ public class GameScene extends AbstractScene {
             int filaXMargin = _tableroSize / 30;
             int filaYMargin = _tileSize / 5;
             int filaInterSpace =_tileSize;
-            _myEngine.getGraphics().setColor(0XFF000000);
+            _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
 
             for(int i = 0; i < _columns; i++)
             {
@@ -129,7 +128,7 @@ public class GameScene extends AbstractScene {
             if(_showErrors) //texto al pulsar comprobar
             {
                 _f.setSize(20);
-                _myEngine.getGraphics().setColor(0XFFFF0000);
+                _myEngine.getGraphics().setColor(_myEngine.getGraphics().getHLColor());
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
                 _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes -1) + " vidas", _gameWidth / 2, _gameHeight/4);
             }
@@ -140,7 +139,7 @@ public class GameScene extends AbstractScene {
             if(!_won) finalText = "HAS PERDIDO";
             else finalText = "ENHORABUENA";
             _f.setSize(40);
-            _myEngine.getGraphics().setColor(0XFF000000);
+            _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
             _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
             _botonVictoria.render(_myEngine.getGraphics());

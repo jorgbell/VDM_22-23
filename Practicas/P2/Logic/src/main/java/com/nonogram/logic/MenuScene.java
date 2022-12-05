@@ -14,6 +14,11 @@ public class MenuScene extends AbstractScene {
     public boolean init() {
         LogicJSON.set_myEngine(_myEngine);
         _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
+        for(int i=0; i<_preferences.palettes.length; i++){
+            LogicJSON.Palette _palette = _preferences.palettes[i];
+            _myEngine.getGraphics().addPalette(_palette.bgColor,_palette.textColor,_palette.hlColor,_palette.pickColor,_palette.emptyColor);
+        }
+        _myEngine.getGraphics().setPalette(1);
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
@@ -34,7 +39,7 @@ public class MenuScene extends AbstractScene {
 
     @Override
     public void render() {
-        _myEngine.getGraphics().setColor(0xFF000000);
+        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
         _myEngine.getGraphics().setActualFont(_f2);
         _myEngine.getGraphics().drawText("NONOGRAMAS", _w / 2, _h /6);
         _myEngine.getGraphics().setActualFont(_f1);
@@ -67,5 +72,6 @@ public class MenuScene extends AbstractScene {
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
     LogicJSON.PreferencesData _preferences;
+
 
 }

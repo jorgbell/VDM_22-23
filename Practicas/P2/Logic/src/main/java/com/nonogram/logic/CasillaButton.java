@@ -18,13 +18,13 @@ public class CasillaButton extends Button{
         switch(state)
         {
             case EMPTY:
-                g.setColor(0XFFa4a4a4);
+                g.setColor(g.getEmptyColor());
                 break;
             case CROSS:
                 g.setColor(0XFF000000);
                 break;
             case PICK:
-                g.setColor(0XFF2a35cc);
+                g.setColor(g.getPickColor());
                 break;
             case WRONG:
                 g.setColor(0XFFF03434);
@@ -59,6 +59,5 @@ public class CasillaButton extends Button{
     };
 
     public void update(double deltaTime) {};
-
     Tablero.Casilla _casilla;
 }

@@ -29,7 +29,6 @@ public class HistoriaScene extends AbstractScene {
             int size = _preferences.cats[i].boardSize;
             Scene s = new CatScene(getGameWidth(), getGameHeight(), size,_preferences.cats[i],  _preferences);
             _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s);
-
             if (i > _unlockedCats) {
                 _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
             }
@@ -48,7 +47,7 @@ public class HistoriaScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor(0xFF000000);
+        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
         _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
 
         _botonVolver.render(_myEngine.getGraphics());

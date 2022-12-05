@@ -31,17 +31,17 @@ public abstract class Button {
     public void render(Graphics g){
 
         //fondo
-        g.setColor(_bgColor);
+        g.setColor(g.getEmptyColor());
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
         //imagen
         if(_image != null) g.drawImage(_image, (int)_imgX, (int)_imgY, _imageScale, _imageScale);
         //texto
         if(_text!= null) {
-            g.setColor(_textColor);
+            g.setColor(g.getTextColor());
             g.drawText(_text, _rect._x + _rect._w / 2, _rect._y + _rect._h / 2);
         }
         //borde
-        g.setColor(_borderColor);
+        g.setColor(g.getTextColor());
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     };
 
@@ -78,9 +78,7 @@ public abstract class Button {
 
     }
     public void addText(String text){ _text = text;}
-    public void set_bgColor(int c){_bgColor = c;}
-    public void set_textColor(int c){_textColor = c;}
-    public void set_borderColor(int c){_borderColor = c;}
+
 
     //Action action;
     protected String _text = null;
@@ -88,7 +86,4 @@ public abstract class Button {
     protected Image _image = null;
     protected double _imageScale;
     protected double _imgX, _imgY;
-    protected int _bgColor = 0xFFF0F0F0; //default
-    protected int _textColor = 0xFF000000; //default;
-    protected int _borderColor = 0xFF000000; //default;
 }

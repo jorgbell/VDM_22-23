@@ -64,7 +64,7 @@ public class CatScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor(0xFF000000);
+        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
 
         _botonVolver.render(_myEngine.getGraphics());
         for (int i = 0; i < _botones.length; i++) {

@@ -27,12 +27,14 @@ public class LogicJSON {
         public int currentLifes;
         public int unlockedCats;
         public Category[] cats;
+        public Palette[] palettes;
 
-        public PreferencesData(int mL, int cl, int ucat, Category[] cs){
+        public PreferencesData(int mL, int cl, int ucat, Category[] cs, Palette[] p){
             maxLifes = mL;
             currentLifes = cl;
             unlockedCats = ucat;
             cats = cs;
+            palettes = p;
         }
     }
 
@@ -47,7 +49,21 @@ public class LogicJSON {
             actualLevel = al;
         }
     }
+    class Palette{
+        public String bgColor;
+        public String textColor;
+        public String hlColor;
+        public String pickColor;
+        public String emptyColor;
 
+        public Palette(String b, String  t, String  h, String p, String e){
+            bgColor = b;
+            textColor= t;
+            hlColor = h;
+            pickColor = p;
+            emptyColor = e;
+        }
+    }
     public static BoardData readBoardFromJSON(String path){
         Reader r = _myEngine.getJSONManager().readJSON("Boards/"+path);
         BoardData data = _gson.fromJson(r,BoardData.class);
