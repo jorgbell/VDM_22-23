@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.nonogram.androidengine.AndroidEngine;
 import com.nonogram.logic.MenuScene;
 
@@ -13,6 +12,7 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         MenuScene sceneinicial = new MenuScene(450,800);
         _myEngine = new AndroidEngine(this);
         //manejo de errores: si se crea mal algo, para antes de empezar.
@@ -43,5 +43,4 @@ public class AndroidLauncher extends AppCompatActivity {
 
     MenuScene sceneinicial;
     private AndroidEngine _myEngine;
-
 }

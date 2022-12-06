@@ -18,13 +18,14 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AdManager aM, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
         _myAudio = a;
         _myJSONManager = j;
+        _myAdManager = aM;
     }
 
     @Override
@@ -33,7 +34,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         _myGraphics.setEngine(this);
         _myAudio.setPath(_myPaths._audioPath);
 
-        if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput)){
+        if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput) || !_myAdManager.init()){
             return false;
         }
         return true;
@@ -147,6 +148,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Audio _myAudio;
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
+    protected AdManager _myAdManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
 }
