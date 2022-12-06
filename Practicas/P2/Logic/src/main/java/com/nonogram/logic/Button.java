@@ -31,7 +31,7 @@ public abstract class Button {
     public void render(Graphics g){
 
         //fondo
-        g.setColor(g.getEmptyColor());
+        g.setColor(g.getBgColor());
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
         //imagen
         if(_image != null) g.drawImage(_image, (int)_imgX, (int)_imgY, _imageScale, _imageScale);

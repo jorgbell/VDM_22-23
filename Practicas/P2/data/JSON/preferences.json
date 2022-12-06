@@ -38,6 +38,13 @@
             "hlColor": "0XFF4e784c",
             "pickColor": "0xFF4e784c",
             "emptyColor":"0xFF749672"
+        },
+        {
+            "bgColor" : "0xFFaacbda",
+            "textColor": "0xFFFFFFFF",
+            "hlColor": "0XFFc65076",
+            "pickColor": "0xFFc65076",
+            "emptyColor":"0xFFb9a4ab"
         }
     ]
 }

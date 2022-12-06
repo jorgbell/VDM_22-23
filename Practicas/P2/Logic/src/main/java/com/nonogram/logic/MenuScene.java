@@ -18,7 +18,7 @@ public class MenuScene extends AbstractScene {
             LogicJSON.Palette _palette = _preferences.palettes[i];
             _myEngine.getGraphics().addPalette(_palette.bgColor,_palette.textColor,_palette.hlColor,_palette.pickColor,_palette.emptyColor);
         }
-        _myEngine.getGraphics().setPalette(1);
+        _myEngine.getGraphics().setPalette(2);
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
