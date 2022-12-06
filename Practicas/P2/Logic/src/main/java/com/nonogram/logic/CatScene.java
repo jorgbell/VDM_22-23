@@ -9,11 +9,12 @@ import com.nonogram.engine.Scene;
 
 public class CatScene extends AbstractScene {
 
-    public CatScene(int gameWidth, int gameHeight, int size, LogicJSON.Category thisc, LogicJSON.PreferencesData pref) {
+    public CatScene(int gameWidth, int gameHeight, int size, HistoriaScene h,LogicJSON.Category thisc, LogicJSON.PreferencesData pref) {
         super(gameWidth, gameHeight);
         _size=size;
         thiscat = thisc;
         _preferences = pref;
+        _historiaScene = h;
     }
 
     @Override
@@ -106,8 +107,8 @@ public class CatScene extends AbstractScene {
         if(_actualLevel < thiscat.numLevels && _actualLevel == levelPlayed){
             _botones[_actualLevel].addImage(_boardsImages[_actualLevel],0.8,Button.ImagePos.CENTERED );
             _actualLevel++;
-            if(thiscat.numLevels == _actualLevel && _preferences.unlockedCats < _preferences.cats.length){
-                _preferences.unlockedCats++;
+            if(thiscat.numLevels == _actualLevel){
+                _historiaScene.increaseCat();
                 return;
             }
             _botones[_actualLevel].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
@@ -129,4 +130,5 @@ public class CatScene extends AbstractScene {
     LogicJSON.Category thiscat;
     public int _actualLevel;
     Image[] _boardsImages;
+    HistoriaScene _historiaScene;
 }

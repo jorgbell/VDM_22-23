@@ -7,6 +7,7 @@ import java.io.Reader;
 
 public interface JSONManager {
 
-    String readJSON(String path);
+    String readJSON(String path, boolean asset);
     void writeJSON(String path, String content);
+    boolean isInInternalStorage(String path);
 }

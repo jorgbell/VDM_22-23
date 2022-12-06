@@ -12,7 +12,6 @@ public class HistoriaScene extends AbstractScene {
     public HistoriaScene(int gameWidth, int gameHeight, LogicJSON.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref;}
     @Override
     public boolean init() {
-        _unlockedCats = _preferences.unlockedCats;
         _categoriesButtons = new ChangeSceneButton[_preferences.cats.length];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
@@ -27,13 +26,13 @@ public class HistoriaScene extends AbstractScene {
         for (int i = 0; i < _categoriesButtons.length; i++)
         {
             int size = _preferences.cats[i].boardSize;
-            Scene s = new CatScene(getGameWidth(), getGameHeight(), size,_preferences.cats[i],  _preferences);
+            Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i],  _preferences);
             _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s);
 
-            if (i > _unlockedCats) {
+            if (i > _preferences.unlockedCats) {
                 _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
             }
-            else if(i<=_unlockedCats){
+            else if(i<=_preferences.unlockedCats){
                 _categoriesButtons[i].addText(size + "x" +  size);
             }
         }
@@ -69,7 +68,7 @@ public class HistoriaScene extends AbstractScene {
 
                 for(int i = 0; i < _categoriesButtons.length; i++)
                 {
-                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=_unlockedCats) _categoriesButtons[i].handleEvent(input);
+                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<= _preferences.unlockedCats) _categoriesButtons[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -79,7 +78,20 @@ public class HistoriaScene extends AbstractScene {
 
     @Override
     public boolean release() {
+        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
         return true;
+    }
+
+    public void increaseCat(){
+        if(_preferences.unlockedCats >= _preferences.cats.length-1)
+            return;
+
+        _preferences.unlockedCats++;
+        int i = _preferences.unlockedCats;
+        _categoriesButtons[i].deleteImage();
+        int size = _preferences.cats[i].boardSize;
+        _categoriesButtons[i].addText(size + "x" +  size);
+
     }
 
     int _h;
@@ -91,5 +103,4 @@ public class HistoriaScene extends AbstractScene {
     ChangeSceneButton[] _categoriesButtons;
 
     LogicJSON.PreferencesData _preferences;
-    int _unlockedCats;
 }
