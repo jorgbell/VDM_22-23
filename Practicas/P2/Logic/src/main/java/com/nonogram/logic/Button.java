@@ -24,24 +24,25 @@ public abstract class Button {
 
     }
 
-    public Button(int x, int y, int w, int h) {
+    public Button(int x, int y, int w, int h, LogicJSON.Palette aP) {
         _rect = new Rect(x, y, w, h);
+        _actualPalette = aP;
     }
 
     public void render(Graphics g){
 
         //fondo
-        g.setColor(g.getBgColor());
+        g.setColor((int)_actualPalette.bgColor);
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
         //imagen
         if(_image != null) g.drawImage(_image, (int)_imgX, (int)_imgY, _imageScale, _imageScale);
         //texto
         if(_text!= null) {
-            g.setColor(g.getTextColor());
+            g.setColor((int)_actualPalette.textColor);
             g.drawText(_text, _rect._x + _rect._w / 2, _rect._y + _rect._h / 2);
         }
         //borde
-        g.setColor(g.getTextColor());
+        g.setColor((int)_actualPalette.textColor);
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     };
 
@@ -90,4 +91,5 @@ public abstract class Button {
     protected Image _image = null;
     protected double _imageScale;
     protected double _imgX, _imgY;
+    protected LogicJSON.Palette  _actualPalette;
 }

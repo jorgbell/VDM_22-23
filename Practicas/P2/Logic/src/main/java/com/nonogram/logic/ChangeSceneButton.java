@@ -7,9 +7,9 @@ import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
 
 public class ChangeSceneButton extends Button{
-    public ChangeSceneButton(int x, int y, int w, int h, Engine e, Scene ns)
+    public ChangeSceneButton(int x, int y, int w, int h, Engine e, Scene ns, LogicJSON.Palette aP)
     {
-        super(x, y, w, h);
+        super(x, y, w, h, aP);
         _engine = e;
         _newScene = ns;
         if(ns!=null){_push=true;} //PUSH

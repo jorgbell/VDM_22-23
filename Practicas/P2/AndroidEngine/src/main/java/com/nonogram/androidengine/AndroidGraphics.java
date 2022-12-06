@@ -200,15 +200,6 @@ public class AndroidGraphics extends AbstractGraphics {
         return 0;
     }
 
-    @Override
-    public void addPalette(String b,String t, String h , String p, String e){
-        super.addPalette(b,t,h,p,e);
-    }
-
-    @Override
-    public void setPalette(int i) {
-        super.setPalette(i);
-    }
 
     //VARIABLES
     private SurfaceView _renderView;

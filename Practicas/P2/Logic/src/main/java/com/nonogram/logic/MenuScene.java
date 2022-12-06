@@ -14,11 +14,8 @@ public class MenuScene extends AbstractScene {
     public boolean init() {
         LogicJSON.set_myEngine(_myEngine);
         _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
-        for(int i=0; i<_preferences.palettes.length; i++){
-            LogicJSON.Palette _palette = _preferences.palettes[i];
-            _myEngine.getGraphics().addPalette(_palette.bgColor,_palette.textColor,_palette.hlColor,_palette.pickColor,_palette.emptyColor);
-        }
-        _myEngine.getGraphics().setPalette(2);
+
+        _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
@@ -30,16 +27,16 @@ public class MenuScene extends AbstractScene {
         _myEngine.getAudio().playSound("bgm.wav");
         Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight(), _preferences);
         Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight(), _preferences);
-        _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7,  _myEngine, juegoScene);
+        _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7,  _myEngine, juegoScene, _preferences.palettes[_preferences.actualPalette]);
         _botonJugar.addText("Juego Rapido");
-        _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7,  _myEngine, historiaScene);
+        _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7,  _myEngine, historiaScene, _preferences.palettes[_preferences.actualPalette]);
         _botonHistoria.addText("Modo Historia");
         return true;
     }
 
     @Override
     public void render() {
-        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
         _myEngine.getGraphics().setActualFont(_f2);
         _myEngine.getGraphics().drawText("NONOGRAMAS", _w / 2, _h /6);
         _myEngine.getGraphics().setActualFont(_f1);

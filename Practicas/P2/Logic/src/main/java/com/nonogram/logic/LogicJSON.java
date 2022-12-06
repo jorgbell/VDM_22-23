@@ -52,13 +52,15 @@ public class LogicJSON {
         public Category[] cats;
         public EstadoData estado;
         public Palette[] palettes;
+        int actualPalette;
 
-        public PreferencesData(int mL, int cl, int ucat, Category[] cs, EstadoData e, Palette[] p) {
+        public PreferencesData(int mL, int cl, int ucat, Category[] cs, EstadoData e, Palette[] p, int aP) {
             maxLifes = mL;
             currentLifes = cl;
             unlockedCats = ucat;
             cats = cs;
             palettes = p;
+            actualPalette=aP;
             estado = e;
         }
         //constructor vacio que te devuelve un estado inicial de preferencias
@@ -75,6 +77,11 @@ public class LogicJSON {
             cats[2].boardSize = 15;
             cats[3].boardSize = 20;
             estado = new EstadoData();
+            actualPalette = 1;
+            palettes = new Palette[3];
+            palettes[0] = new Palette("0xFFF0F0F0", "0xFF000000", "0XFFFF0000", "0XFF2a35cc", "0XFFa4a4a4");
+            palettes[1] = new Palette("0xFF88cb84", "0xFF000000", "0XFF4e784c", "0xFF4e784c", "0xFF749672");
+            palettes[2] = new Palette("0xFFaacbda", "0xFFFFFFFF", "0XFFc65076", "0xFFc65076", "0xFFb9a4ab");
         }
     }
 
@@ -94,20 +101,20 @@ public class LogicJSON {
             actualLevel = 0;
         }
     }
-    class Palette{
-        public String bgColor;
-        public String textColor;
-        public String hlColor;
-        public String pickColor;
-        public String emptyColor;
+    static class Palette{
+        public long  bgColor;
+        public long  textColor;
+        public long  hlColor;
+        public long  pickColor;
+        public long  emptyColor;
 
 
         public Palette(String b, String  t, String  h, String p, String e){
-            bgColor = b;
-            textColor= t;
-            pickColor = p;
-            hlColor = h;
-            emptyColor = e;
+            bgColor = Long.decode(b);
+            textColor=Long.decode(t);
+            hlColor = Long.decode(h);
+            pickColor = Long.decode(p);
+            emptyColor = Long.decode(e);
         }
     }
 
@@ -151,6 +158,7 @@ public class LogicJSON {
     static Type boardTypeToken = new TypeToken<BoardData>() {}.getType();
     static Type preferencesTypeToken = new TypeToken<PreferencesData>() {}.getType();
     static Type categoryTypeToken = new TypeToken<Category>() {}.getType();
+    static Type PaletteTypeToken = new TypeToken<Palette>() {}.getType();
 
 
 }

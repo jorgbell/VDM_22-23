@@ -27,7 +27,7 @@ public class HistoriaScene extends AbstractScene {
         {
             int size = _preferences.cats[i].boardSize;
             Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i],  _preferences);
-            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s);
+            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s, _preferences.palettes[_preferences.actualPalette]);
 
             if (i > _preferences.unlockedCats) {
                 _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
@@ -37,7 +37,7 @@ public class HistoriaScene extends AbstractScene {
             }
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
 
@@ -47,7 +47,7 @@ public class HistoriaScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
         _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
 
         _botonVolver.render(_myEngine.getGraphics());

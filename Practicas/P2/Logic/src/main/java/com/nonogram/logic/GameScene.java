@@ -71,17 +71,17 @@ public class GameScene extends AbstractScene {
         for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
         {
             for (int j = 0; j < _rows; j++) {
-                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
+                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i), _preferences.palettes[_preferences.actualPalette]);
             }
         }
 
         //botones de ui
-        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null);
+        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
         _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonRendirse.addText("Rendirse");
 
 
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
         _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonVictoria.addText("Volver");
 
@@ -97,7 +97,7 @@ public class GameScene extends AbstractScene {
     @Override
     public void render() {
 
-        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
 
         if (!_end) //durante la partida
         {
@@ -121,7 +121,7 @@ public class GameScene extends AbstractScene {
             int filaXMargin = _tableroSize / 30;
             int filaYMargin = _tileSize / 5;
             int filaInterSpace =_tileSize;
-            _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+            _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
 
             for (int i = 0; i < _columns; i++) {
                 String[] sc = _t._columnas[i].numbers.split("\\.");
@@ -138,7 +138,7 @@ public class GameScene extends AbstractScene {
             if (_showErrors) //texto al pulsar comprobar
             {
                 _f.setSize(20);
-                _myEngine.getGraphics().setColor(_myEngine.getGraphics().getHLColor());
+                _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].hlColor);
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
                 _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes -1) + " vidas", _gameWidth / 2, _gameHeight/4);
             }
@@ -148,7 +148,7 @@ public class GameScene extends AbstractScene {
             if (!_won) finalText = "HAS PERDIDO";
             else finalText = "ENHORABUENA";
             _f.setSize(40);
-            _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+            _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
             _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
             _botonVictoria.render(_myEngine.getGraphics());

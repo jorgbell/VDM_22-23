@@ -36,7 +36,7 @@ public class CatScene extends AbstractScene {
             _boardsImages[i]=_myEngine.getGraphics().newImage(path);
 
             Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences, this);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, _myEngine, s);
+            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, _myEngine, s, _preferences.palettes[_preferences.actualPalette]);
 
             if (i > thiscat.actualLevel) {
                 _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
@@ -53,7 +53,7 @@ public class CatScene extends AbstractScene {
 
 
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
 
@@ -64,7 +64,7 @@ public class CatScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
 
         _botonVolver.render(_myEngine.getGraphics());
         for (int i = 0; i < _botones.length; i++) {

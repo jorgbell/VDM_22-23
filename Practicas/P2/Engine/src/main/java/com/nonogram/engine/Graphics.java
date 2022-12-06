@@ -7,13 +7,7 @@ public interface Graphics {
     boolean setInputListener(Input listener);
     //establece el color a utilizar en las operaciones de dibujado posteriores.
     void setColor(int color);
-    void addPalette(String b, String t,String h, String p , String e);
-    void setPalette(int i);
-    int getBgColor();
-    int getTextColor();
-    int getHLColor();
-    int getPickColor();
-    int getEmptyColor();
+    void setBGColor(int color);
     //cambia la fuente actual
     void setActualFont(Font font);
     void setEngine(Engine e);
