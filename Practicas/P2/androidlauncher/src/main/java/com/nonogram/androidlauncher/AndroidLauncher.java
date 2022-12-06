@@ -33,6 +33,18 @@ public class AndroidLauncher extends AppCompatActivity {
         _myEngine.resume();
     }
 
+    @Override
+    protected void onDestroy() {
+        _myEngine.stop();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        _myEngine.stop();
+        super.onStop();
+    }
+
     MenuScene sceneinicial;
     private AndroidEngine _myEngine;
 

@@ -77,6 +77,14 @@ public class SceneManager {
         return true;
     }
 
+    public boolean release(){
+        while(!sceneStack.empty()){
+            if(!pop())
+                return false;
+        }
+        return true;
+    }
+
     Stack<Scene> sceneStack;
     Engine _myEngine;
 }

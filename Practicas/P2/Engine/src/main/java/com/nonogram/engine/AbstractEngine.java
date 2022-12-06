@@ -99,6 +99,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public boolean release() {
         _myAudio.pauseAll();
+        _mySceneManager.release();
         return true;
     }
 
