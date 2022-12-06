@@ -48,6 +48,10 @@ public abstract class Button {
     public void handleEvent(Input.TouchEvent e){};
     public void update(double deltaTime){};
 
+    public void deleteImage(){
+        _image = null;
+    }
+
     public void addImage(Image img , double scale, ImagePos imagePos){
 
         _image=img;

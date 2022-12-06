@@ -10,7 +10,7 @@ public class AndroidEngine extends AbstractEngine {
         super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), new AndroidJSONManager(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/", "JSON/"));
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         ((AndroidAudio)_myAudio)._assetManager = aG._context.getAssets();
-        ((AndroidJSONManager)_myJSONManager)._assetManager = aG._context.getAssets();
+        ((AndroidJSONManager)_myJSONManager)._context = aG._context;
         ((AndroidJSONManager)_myJSONManager)._myPaths = _myPaths;
     }
 }
