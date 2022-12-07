@@ -78,7 +78,7 @@ public class GameScene extends AbstractScene {
         //botones de ui
         _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null, _preferences);
         _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
-        _botonRendirse.addText("Rendirse");
+        _botonRendirse.addText("Volver");
 
 
         _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null, _preferences);

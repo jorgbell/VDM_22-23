@@ -86,7 +86,7 @@ public class CatScene extends AbstractScene {
 
                 for(int i = 0; i < _botones.length; i++)
                 {
-                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=thiscat.actualLevel)
+                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=thiscat.actualLevel && _preferences.currentLifes>0)
                         _botones[i].handleEvent(input);
                 }
                 break;
