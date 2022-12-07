@@ -18,13 +18,14 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, Sensors s, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
         _myAudio = a;
         _myJSONManager = j;
+        _mySensors = s;
     }
 
     @Override
@@ -37,6 +38,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Sensors getSensors() {
+        return _mySensors;
     }
 
     @Override
@@ -146,6 +152,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
+    protected Sensors _mySensors;
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
     protected long _lastFrameTime;

@@ -33,6 +33,7 @@ public class MenuScene extends AbstractScene {
         _botonHistoria.addText("Modo Historia");
         _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine.getGraphics());
         _botonPaletas.addText("Cambiar paleta");
+
         return true;
     }
 
@@ -45,6 +46,7 @@ public class MenuScene extends AbstractScene {
         _botonJugar.render(_myEngine.getGraphics());
         _botonHistoria.render(_myEngine.getGraphics());
         _botonPaletas.render(_myEngine.getGraphics());
+        _myEngine.getGraphics().drawText(String.valueOf(_myEngine.getSensors().getTemperature()) + "°C", _w/2, _h/5);
     }
 
     @Override

@@ -5,6 +5,7 @@ public interface Engine {
     Input getInput();
     Audio getAudio();
     JSONManager getJSONManager();
+    Sensors getSensors();
     double getDeltaTime();
     boolean stop();
     void resume();
