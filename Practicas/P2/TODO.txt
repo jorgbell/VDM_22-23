@@ -1,3 +1,6 @@
+COSAS QUE PREGUNTAR A TONI EL VIERNES
+- Como detectar si un movil tiene el sensor de ambiente o no
+
 
 ---------------------------------------------------
 TODO limpieza:
@@ -6,8 +9,6 @@ TODO limpieza:
 ----------------------------------------------------
 TODO Correcciones de Toni:
 CENTRAR TABLEROS
-GUARDAR ESTADO FUERA DE ASSETS
-QUITAR BORDE DE LA PANTALLA DE ANDROID CON EL NOMBRE DE LA APP
 ----------------------------------------------------
 TODO GENERAL DEL ENUNCIADO:
 
@@ -21,9 +22,6 @@ TODO GENERAL DEL ENUNCIADO:
 	- Hacer algo en el motor que permita mandar una notificacion push
 	- Si la aplicacion sigue instalada y lleva tiempo sin entrar, manda una notificacion push
 	- Si entra a traves de la notificacion push, se le suman vidas / paletas de colores / lo que prefiramos
-- Crear sistema de sensores: 
-	- Usar el sensor que queramos, se me ocurre detectar la geolocalización y cambiar un mensajito o una imagen de una banderita en el menu principal. 
-		Lo que se nos ocurra
 
 - Adaptar el giro de la pantalla:
 	- Si está en horizontal, no dibujar bordes y que la logica sepa detectarlo para colocar la UI donde vayamos
@@ -39,3 +37,6 @@ DONE:
 - Crear sistema de paleta de colores
 	- Tener diferentes set de colores (color de fondo / colores de casillas / lo que se nos ocurra
 	- Que se completen al completar x niveles o una categoria, lo que prefiramos según el numero de paletas que vayamos a meter
+- Crear sistema de sensores: 
+	- Usar el sensor que queramos, se me ocurre detectar la geolocalización y cambiar un mensajito o una imagen de una banderita en el menu principal. 
+		Lo que se nos ocurra
