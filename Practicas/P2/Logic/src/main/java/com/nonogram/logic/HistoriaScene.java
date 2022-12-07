@@ -87,7 +87,7 @@ public class HistoriaScene extends AbstractScene {
             return false;
 
         _preferences.unlockedCats++;
-        int i = _preferences.unlockedCats;
+        int i = _preferences.unlockedCats-1;
         _categoriesButtons[i].deleteImage();
         int size = _preferences.cats[i].boardSize;
         _categoriesButtons[i].addText(size + "x" +  size);
