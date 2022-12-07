@@ -36,7 +36,7 @@ public class MenuScene extends AbstractScene {
         _botonHistoria.addText("Modo Historia");
         _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine.getGraphics());
         _botonPaletas.addText("Cambiar paleta");
-
+        _myEngine.getNotificationManager().sendNotification("My title", "This is the content of my notification bro", true, -1);
         return true;
     }
 
@@ -67,7 +67,9 @@ public class MenuScene extends AbstractScene {
             case CLICK_CORTO:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
                 if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
-                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) _botonPaletas.handleEvent(input);
+                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())){
+                    _botonPaletas.handleEvent(input);
+                }
                 break;
             case CLICK_LARGO:
                 break;

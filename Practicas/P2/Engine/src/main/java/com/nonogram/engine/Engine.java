@@ -5,6 +5,7 @@ public interface Engine {
     Input getInput();
     Audio getAudio();
     JSONManager getJSONManager();
+    NotificationMngr getNotificationManager();
     Sensors getSensors();
     double getDeltaTime();
     boolean stop();
