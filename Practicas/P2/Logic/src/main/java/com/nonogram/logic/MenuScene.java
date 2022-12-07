@@ -27,10 +27,12 @@ public class MenuScene extends AbstractScene {
         _myEngine.getAudio().playSound("bgm.wav");
         Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight(), _preferences);
         Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight(), _preferences);
-        _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7,  _myEngine, juegoScene, _preferences.palettes[_preferences.actualPalette]);
+        _botonJugar = new ChangeSceneButton(_w/7, _h/2, _w / 3, _w / 7,  _myEngine, juegoScene, _preferences);
         _botonJugar.addText("Juego Rapido");
-        _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7,  _myEngine, historiaScene, _preferences.palettes[_preferences.actualPalette]);
+        _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7,  _myEngine, historiaScene, _preferences);
         _botonHistoria.addText("Modo Historia");
+        _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine.getGraphics());
+        _botonPaletas.addText("Cambiar paleta");
         return true;
     }
 
@@ -42,6 +44,7 @@ public class MenuScene extends AbstractScene {
         _myEngine.getGraphics().setActualFont(_f1);
         _botonJugar.render(_myEngine.getGraphics());
         _botonHistoria.render(_myEngine.getGraphics());
+        _botonPaletas.render(_myEngine.getGraphics());
     }
 
     @Override
@@ -53,6 +56,7 @@ public class MenuScene extends AbstractScene {
             case CLICK_CORTO:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
                 if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
+                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) _botonPaletas.handleEvent(input);
                 break;
             case CLICK_LARGO:
                 break;
@@ -60,7 +64,10 @@ public class MenuScene extends AbstractScene {
     }
 
     @Override
-    public boolean release() {return true;}
+    public boolean release() {
+        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
+        return true;
+    }
 
     int _h;
     int _w;
@@ -68,6 +75,7 @@ public class MenuScene extends AbstractScene {
     Font _f2;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
+    ChangePaletteButton _botonPaletas;
     LogicJSON.PreferencesData _preferences;
 
 

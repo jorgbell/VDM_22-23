@@ -36,7 +36,7 @@ public class CatScene extends AbstractScene {
             _boardsImages[i]=_myEngine.getGraphics().newImage(path);
 
             Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, _preferences, this);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, _myEngine, s, _preferences.palettes[_preferences.actualPalette]);
+            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, _myEngine, s, _preferences);
 
             if (i > thiscat.actualLevel) {
                 _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
@@ -53,7 +53,7 @@ public class CatScene extends AbstractScene {
 
 
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
 
@@ -101,16 +101,16 @@ public class CatScene extends AbstractScene {
         return true;
     }
 
-    public void increaseLevel(int levelPlayed){
+    public boolean increaseLevel(int levelPlayed){
         if(thiscat.actualLevel < thiscat.numLevels && thiscat.actualLevel == levelPlayed){
             _botones[thiscat.actualLevel].addImage(_boardsImages[thiscat.actualLevel],0.8,Button.ImagePos.CENTERED );
             thiscat.actualLevel++;
             if(thiscat.numLevels == thiscat.actualLevel){
-                _historiaScene.increaseCat();
-                return;
+                return _historiaScene.increaseCat();
             }
             _botones[thiscat.actualLevel].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
         }
+        return false;
     }
 
     int _h;

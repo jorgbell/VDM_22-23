@@ -27,17 +27,17 @@ public class HistoriaScene extends AbstractScene {
         {
             int size = _preferences.cats[i].boardSize;
             Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i],  _preferences);
-            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s, _preferences.palettes[_preferences.actualPalette]);
+            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, _myEngine, s, _preferences);
 
-            if (i > _preferences.unlockedCats) {
+            if (i > _preferences.unlockedCats-1) {
                 _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
             }
-            else if(i<=_preferences.unlockedCats){
+            else if(i<=_preferences.unlockedCats-1){
                 _categoriesButtons[i].addText(size + "x" +  size);
             }
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
 
@@ -68,7 +68,7 @@ public class HistoriaScene extends AbstractScene {
 
                 for(int i = 0; i < _categoriesButtons.length; i++)
                 {
-                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<= _preferences.unlockedCats) _categoriesButtons[i].handleEvent(input);
+                    if(_categoriesButtons[i]._rect.contains(input.get_posX(), input.get_posY()) && i<= _preferences.unlockedCats-1) _categoriesButtons[i].handleEvent(input);
                 }
                 break;
             case CLICK_LARGO:
@@ -82,9 +82,9 @@ public class HistoriaScene extends AbstractScene {
         return true;
     }
 
-    public void increaseCat(){
-        if(_preferences.unlockedCats >= _preferences.cats.length-1)
-            return;
+    public boolean increaseCat(){
+        if(_preferences.unlockedCats >= _preferences.cats.length)
+            return false;
 
         _preferences.unlockedCats++;
         int i = _preferences.unlockedCats;
@@ -92,6 +92,13 @@ public class HistoriaScene extends AbstractScene {
         int size = _preferences.cats[i].boardSize;
         _categoriesButtons[i].addText(size + "x" +  size);
 
+        //desbloquea nueva paleta en caso de haber sin desbloquear
+        if(_preferences.unlockedPalettes < _preferences.palettes.length){
+            _preferences.unlockedPalettes++;
+            return true;
+        }
+
+        return false;
     }
 
     int _h;

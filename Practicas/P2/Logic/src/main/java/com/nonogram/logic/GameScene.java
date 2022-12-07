@@ -71,17 +71,17 @@ public class GameScene extends AbstractScene {
         for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
         {
             for (int j = 0; j < _rows; j++) {
-                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i), _preferences.palettes[_preferences.actualPalette]);
+                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i), _preferences);
             }
         }
 
         //botones de ui
-        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
+        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null, _preferences);
         _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonRendirse.addText("Rendirse");
 
 
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null, _preferences.palettes[_preferences.actualPalette]);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null, _preferences);
         _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonVictoria.addText("Volver");
 
@@ -151,6 +151,10 @@ public class GameScene extends AbstractScene {
             _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
             _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
+            if(paletaDesbloqueada){
+                _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _gameWidth / 2, _gameHeight/8);
+                _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _gameWidth / 2, _gameHeight/6);
+            }
             _botonVictoria.render(_myEngine.getGraphics());
         }
 
@@ -221,7 +225,11 @@ public class GameScene extends AbstractScene {
                 _end = true;
                 _won = true;
                 if (!_generado) {
-                    _catScene.increaseLevel(_level);
+                    //si devuelve true, es que ha desbloqueado una paleta. Asi mostramos el texto en pantalla.
+                    //Si devuelve false es en cualquier otro caso
+                    if(_catScene.increaseLevel(_level)){
+                        paletaDesbloqueada = true;
+                    }
                 }
             }
         } else {
@@ -295,4 +303,6 @@ public class GameScene extends AbstractScene {
     LogicJSON.PreferencesData _preferences;
     CatScene _catScene;
     int _level;
+
+    boolean paletaDesbloqueada = false;
 }
