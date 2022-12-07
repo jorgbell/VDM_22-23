@@ -1,28 +1,22 @@
 package com.nonogram.androidlauncher;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.nonogram.androidengine.AndroidEngine;
 import com.nonogram.logic.MenuScene;
 
 public class AndroidLauncher extends AppCompatActivity implements SensorEventListener {
 
-    Sensor sensor;
+    Sensor tempSensor;
+    Sensor luxSensor;
     SensorManager sensorManager;
 
     @Override
@@ -30,8 +24,12 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
         super.onCreate(savedInstanceState);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
-        sensorManager.registerListener(this,sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        tempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        sensorManager.registerListener(this, tempSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        luxSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sensorManager.registerListener(this, luxSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+
 
         MenuScene sceneinicial = new MenuScene(450,800);
         _myEngine = new AndroidEngine(this);
@@ -59,7 +57,8 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
         // Avisamos a la vista (que es la encargada del active render)
         // de lo que está pasando.
         super.onResume();
-        sensorManager.registerListener(this,sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, tempSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, luxSensor, SensorManager.SENSOR_DELAY_NORMAL);
         _myEngine.resume();
 
     }
@@ -79,10 +78,15 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
     MenuScene sceneinicial;
     private AndroidEngine _myEngine;
 
+
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         //do something
-        _myEngine.getSensors().setTemperature(sensorEvent.values[0]);
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT)
+            _myEngine.getSensors().setLux(sensorEvent.values[0]);
+        else if(sensorEvent.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE)
+            _myEngine.getSensors().setTemperature(sensorEvent.values[0]);
     }
 
     @Override

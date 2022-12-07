@@ -235,6 +235,7 @@ public class GameScene extends AbstractScene {
         } else {
             //es incorrecta la pulsacion
             //marca una espera de 2 segundos en la que se muestra la casilla mala
+            _remaining = _t.getRemaining();
             _showErrors = true;
             _showTime = 2;
             _wrong = _t.getCasilla(columna, fila);

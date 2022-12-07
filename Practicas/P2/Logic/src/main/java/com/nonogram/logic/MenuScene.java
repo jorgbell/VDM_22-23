@@ -15,6 +15,9 @@ public class MenuScene extends AbstractScene {
         LogicJSON.set_myEngine(_myEngine);
         _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
 
+        if(_myEngine.getSensors().isDark())
+            _preferences.actualPalette = 1;
+
         _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
@@ -50,7 +53,13 @@ public class MenuScene extends AbstractScene {
     }
 
     @Override
-    public void update(double deltaTime) {}
+    public void update(double deltaTime) {
+        if(_myEngine.getSensors().isDark()){
+            _preferences.actualPalette = 1;
+            _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
+        }
+
+    }
 
     @Override
     public void processInput(Input.TouchEvent input) {
