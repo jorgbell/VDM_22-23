@@ -13,7 +13,7 @@ import com.nonogram.engine.AdManager;
 
 public class AndroidAdManager implements AdManager {
 
-    public AndroidAdManager() {}
+    public AndroidAdManager(Context c) {_context = c;}
 
     public void SetContext(Context c) { _context = c; }
 

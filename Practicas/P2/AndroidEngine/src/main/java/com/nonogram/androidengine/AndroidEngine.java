@@ -7,11 +7,10 @@ import com.nonogram.engine.AbstractEngine;
 public class AndroidEngine extends AbstractEngine {
 
     public AndroidEngine(AppCompatActivity context){
-        super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), new AndroidJSONManager(), new AndroidAdManager(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/", "JSON/"));
+        super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), new AndroidJSONManager(), new AndroidAdManager(context), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/", "JSON/"));
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         ((AndroidAudio)_myAudio)._assetManager = aG._context.getAssets();
         ((AndroidJSONManager)_myJSONManager)._assetManager = aG._context.getAssets();
         ((AndroidJSONManager)_myJSONManager)._myPaths = _myPaths;
-        ((AndroidAdManager)_myAdManager).SetContext(aG._context);
     }
 }
