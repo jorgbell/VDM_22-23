@@ -1,23 +1,17 @@
 package com.nonogram.androidlauncher;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import com.nonogram.androidengine.AndroidEngine;
-import com.nonogram.androidengine.AndroidNotification;
-import com.nonogram.androidengine.AndroidNotificationManager;
 import com.nonogram.logic.MenuScene;
 
 public class AndroidLauncher extends AppCompatActivity implements SensorEventListener {
@@ -25,7 +19,7 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
     Sensor tempSensor;
     Sensor luxSensor;
     SensorManager sensorManager;
-
+    FirebaseMang firebase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +33,8 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
 
         MenuScene sceneinicial = new MenuScene(450,800);
         _myEngine = new AndroidEngine(this);
+        firebase = new FirebaseMang(this, _myEngine);
+
         //manejo de errores: si se crea mal algo, para antes de empezar.
         if(!_myEngine.init() || !_myEngine.getSceneManager().push(sceneinicial)){
             _myEngine.stop();
@@ -46,7 +42,9 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
 
         getSupportActionBar().hide();
 
+
         View decorView = getWindow().getDecorView();
+
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
@@ -74,13 +72,22 @@ public class AndroidLauncher extends AppCompatActivity implements SensorEventLis
     @Override
     protected void onDestroy() {
         _myEngine.stop();
+
         super.onDestroy();
     }
 
     @Override
     protected void onStop() {
+
         _myEngine.stop();
         super.onStop();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        _myEngine.getSceneManager().handleNotifications("key");
+        super.onNewIntent(intent);
+
     }
 
     MenuScene sceneinicial;

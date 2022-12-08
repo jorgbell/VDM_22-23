@@ -36,6 +36,11 @@ public class SceneManager {
             sceneStack.peek().processInput(input);
     }
 
+    public void handleNotifications(String key){
+        if(sceneStack.size()>0)
+            sceneStack.peek().handleNotifications(key);
+    }
+
 
     public int getGameWidth() {
         if(sceneStack.size()>0)

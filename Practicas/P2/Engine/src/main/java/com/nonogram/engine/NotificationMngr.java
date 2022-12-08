@@ -1,5 +1,7 @@
 package com.nonogram.engine;
 
 public interface NotificationMngr {
-    void sendNotification(String title, String contentText, boolean autoCancel, int daysToNotify);
+    MyNotification createNotification(String title, String contentText,boolean autoCancel);
+    void send(int id);
+    void setEngine(Engine e);
 }

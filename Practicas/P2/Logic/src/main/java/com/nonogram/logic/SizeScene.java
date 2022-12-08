@@ -81,6 +81,11 @@ public class SizeScene extends AbstractScene {
         return true;
     }
 
+    @Override
+    public void handleNotifications(String key) {
+
+    }
+
     int _h;
     int _w;
     Font _f;

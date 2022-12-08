@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "656453438023",
+    "project_id": "nonograma-91eb3",
+    "storage_bucket": "nonograma-91eb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656453438023:android:c44a52763714831b0e3f62",
+        "android_client_info": {
+          "package_name": "com.example.androidlauncher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656453438023-jbn0ffsqmefdei69p0gqolam1k5a4uqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPf4OwyFZaKGbq_ZncYtQr5wdlWZF38nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656453438023-jbn0ffsqmefdei69p0gqolam1k5a4uqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

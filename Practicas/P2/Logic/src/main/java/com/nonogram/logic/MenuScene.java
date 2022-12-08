@@ -3,7 +3,6 @@ package com.nonogram.logic;
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 import com.nonogram.engine.Sound;
 
@@ -36,7 +35,9 @@ public class MenuScene extends AbstractScene {
         _botonHistoria.addText("Modo Historia");
         _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine.getGraphics());
         _botonPaletas.addText("Cambiar paleta");
-        _myEngine.getNotificationManager().sendNotification("My title", "This is the content of my notification bro", true, -1);
+
+        _myEngine.getNotificationManager().createNotification("ABREME", "PLIS",true);
+
         return true;
     }
 
@@ -54,11 +55,6 @@ public class MenuScene extends AbstractScene {
 
     @Override
     public void update(double deltaTime) {
-        if(_myEngine.getSensors().isDark()){
-            _preferences.actualPalette = 1;
-            _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
-        }
-
     }
 
     @Override
@@ -80,6 +76,11 @@ public class MenuScene extends AbstractScene {
     public boolean release() {
         LogicJSON.writePreferencesToJson("preferences.json", _preferences);
         return true;
+    }
+
+    @Override
+    public void handleNotifications(String key) {
+        _preferences.currentLifes++;
     }
 
     int _h;
