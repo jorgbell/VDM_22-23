@@ -18,14 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nonograma">
 
-        <service
-            android:name=".AndroidNotificationManager"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-
         <activity
             android:name=".AndroidLauncher"
             android:exported="true"

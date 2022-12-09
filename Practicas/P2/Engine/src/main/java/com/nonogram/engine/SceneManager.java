@@ -36,9 +36,9 @@ public class SceneManager {
             sceneStack.peek().processInput(input);
     }
 
-    public void handleNotifications(String key){
+    public void handelClosingNotifications(){
         if(sceneStack.size()>0)
-            sceneStack.peek().handleNotifications(key);
+            sceneStack.peek().handleClosingNotifications();
     }
 
 
@@ -78,6 +78,7 @@ public class SceneManager {
             System.err.println("Error al liberar la escena");
             return false;
         }
+        handelClosingNotifications();
         sceneStack.pop();
         return true;
     }

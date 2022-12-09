@@ -53,9 +53,10 @@ public class LogicJSON {
         public Category[] cats;
         public EstadoData estado;
         public Palette[] palettes;
+        public Palette light,dark;
         int actualPalette;
 
-        public PreferencesData(int mL, int cl, int ucat, int upal, Category[] cs, EstadoData e, Palette[] p, int aP) {
+        public PreferencesData(int mL, int cl, int ucat, int upal, Category[] cs, EstadoData e, Palette[] p, Palette light, Palette dark, int aP) {
             maxLifes = mL;
             currentLifes = cl;
             unlockedCats = ucat;
@@ -70,7 +71,7 @@ public class LogicJSON {
             maxLifes = 5; //de 1 a maxlifes
             currentLifes = 5; //de 0 a maxLifes-1
             unlockedCats = 1; //de 1 a ncategorias
-            unlockedPalettes = 2; //de 1 a npaletas
+            unlockedPalettes = 1; //de 1 a npaletas
             actualPalette = 0; //de 0 a npaletas-1
             cats = new Category[4];
             for(int i = 0; i<cats.length; i++){
@@ -81,12 +82,13 @@ public class LogicJSON {
             cats[2].boardSize = 15;
             cats[3].boardSize = 20;
             estado = new EstadoData();
-            palettes = new Palette[5];
-            palettes[0] = new Palette("0xFFF0F0F0", "0xFF000000", "0XFFf4d35e", "0XFF2a35cc", "0XFFa4a4a4");
-            palettes[1] = new Palette("0xFF343763", "0xFFFFFFFF", "0XFF854b86", "0xFF8e91bf", "0xFF56586e");
-            palettes[2] = new Palette("0xFF88cb84", "0xFF000000", "0XFF81b29a", "0xFF4e784c", "0xFF749672");
-            palettes[3] = new Palette("0xFFaacbda", "0xFFFFFFFF", "0XFFc65076", "0xFFc65076", "0xFFff758f");
-            palettes[4] = new Palette("0xFFf1e3d3", "0xFF000000", "0XFFd88c9a", "0xFF8e7dbe", "0xFFffccd5");
+            palettes = new Palette[4];
+            light = new Palette("0xFFF0F0F0", "0xFF000000", "0XFFf4d35e", "0XFF2a35cc", "0XFFa4a4a4");
+            dark = new Palette("0xFF343763", "0xFFFFFFFF", "0XFF854b86", "0xFF8e91bf", "0xFF56586e");
+            palettes[0] = light;
+            palettes[1] = new Palette("0xFF88cb84", "0xFF000000", "0XFF81b29a", "0xFF4e784c", "0xFF749672");
+            palettes[2] = new Palette("0xFFaacbda", "0xFFFFFFFF", "0XFFc65076", "0xFFc65076", "0xFFff758f");
+            palettes[3] = new Palette("0xFFf1e3d3", "0xFF000000", "0XFFd88c9a", "0xFF8e7dbe", "0xFFffccd5");
 
         }
     }

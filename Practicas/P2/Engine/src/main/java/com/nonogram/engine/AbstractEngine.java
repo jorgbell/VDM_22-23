@@ -1,5 +1,7 @@
 package com.nonogram.engine;
 
+import java.util.Stack;
+
 public abstract class AbstractEngine implements Engine, Runnable {
 
     //clase estatica que usaremos para almacenar las direcciones de las carpetas de assets
@@ -18,7 +20,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, Sensors s, NotificationMngr nmng, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
@@ -42,7 +44,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     @Override
-    public Sensors getSensors() {
+    public AbstractSensors getSensors() {
         return _mySensors;
     }
 
@@ -79,7 +81,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public boolean stop() {
         _running = false;
-        release();
         System.exit(0);
         return true;
     }
@@ -146,6 +147,14 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     @Override
+    public void addClosingNotification(NotificationData data) {
+        closingNotifications.push(data);
+    }
+
+    @Override
+    public Stack<NotificationData> getClosingNotifications(){ return closingNotifications;}
+
+    @Override
     public SceneManager getSceneManager(){return _mySceneManager;}
 
     @Override
@@ -157,10 +166,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
-    protected Sensors _mySensors;
+    protected AbstractSensors _mySensors;
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
     protected NotificationMngr _myNotificationManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
+    protected Stack<NotificationData> closingNotifications = new Stack<NotificationData>();
 }

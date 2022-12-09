@@ -73,7 +73,12 @@ public class DifficultyScene extends AbstractScene {
     }
 
     @Override
-    public void handleNotifications(String key) {
+    public void handleClosingNotifications() {
+
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
 
     }
 

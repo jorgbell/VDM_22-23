@@ -1,12 +1,14 @@
 package com.nonogram.engine;
 
+import java.util.Stack;
+
 public interface Engine {
     Graphics getGraphics();
     Input getInput();
     Audio getAudio();
     JSONManager getJSONManager();
     NotificationMngr getNotificationManager();
-    Sensors getSensors();
+    AbstractSensors getSensors();
     double getDeltaTime();
     boolean stop();
     void resume();
@@ -15,4 +17,6 @@ public interface Engine {
     boolean init();
     public SceneManager getSceneManager();
     AbstractEngine.EnginePaths getEnginePaths();
+    void addClosingNotification(NotificationData data);
+    Stack<NotificationData> getClosingNotifications();
 }
