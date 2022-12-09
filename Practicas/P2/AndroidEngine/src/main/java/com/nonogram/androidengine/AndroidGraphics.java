@@ -16,9 +16,11 @@ import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    public AndroidGraphics(AppCompatActivity c) {
+    public AndroidGraphics(AppCompatActivity c, SurfaceView view) {
         super();
         _context = c;
+        _renderView = view;
+
     }
     @Override
     public boolean init() {
@@ -26,9 +28,9 @@ public class AndroidGraphics extends AbstractGraphics {
             System.err.println("AppCompactActivity null");
             return false;
         }
-        _renderView = new SurfaceView(_context);
+        //_context.setContentView(_renderView);
+
         _paint = new Paint();
-        _context.setContentView(_renderView);
         _holder = _renderView.getHolder();
         return true;
     }

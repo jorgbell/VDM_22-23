@@ -19,19 +19,7 @@ public class AndroidAdManager implements AdManager {
 
     @Override
     public boolean init() {
-        _mAdView = new AdView(_context);
-        _mAdView.setAdSize(AdSize.FULL_BANNER);
-        _mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 
-        MobileAds.initialize(_context, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                // cargamos los anuncios
-                AdRequest adRequest = new AdRequest.Builder().build();
-                _mAdView.loadAd(adRequest);
-                //_mAdView.bringToFront();
-            }
-        });
 
         return true;
     }
