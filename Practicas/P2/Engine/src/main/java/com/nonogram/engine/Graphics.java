@@ -2,6 +2,7 @@ package com.nonogram.engine;
 
 public interface Graphics {
     boolean init();
+    boolean isWindowHorizontal();
 
     //setters
     boolean setInputListener(Input listener);

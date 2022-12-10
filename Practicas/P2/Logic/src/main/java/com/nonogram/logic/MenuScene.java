@@ -13,7 +13,6 @@ public class MenuScene extends AbstractScene {
     public MenuScene(int gameWidth, int gameHeight) {
         super(gameWidth, gameHeight);
     }
-
     @Override
     public boolean init() {
         LogicJSON.set_myEngine(_myEngine);
@@ -136,6 +135,7 @@ public class MenuScene extends AbstractScene {
     public static LogicJSON.Palette[] allPalettes;
     static int UNLOCK_PALETTE_EVERY = 1;
     boolean changed = false;
+    boolean landscape = true;
 
 
 }
