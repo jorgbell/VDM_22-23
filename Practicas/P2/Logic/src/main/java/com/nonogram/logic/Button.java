@@ -1,9 +1,13 @@
 package com.nonogram.logic;
 
 
+import com.nonogram.engine.AbstractEngine;
+import com.nonogram.engine.Engine;
 import com.nonogram.engine.Graphics;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+
+import java.awt.Menu;
 
 public abstract class Button {
     public enum ImagePos{CENTERED, UP, DOWN, RIGHT, LEFT}
@@ -24,25 +28,26 @@ public abstract class Button {
 
     }
 
-    public Button(int x, int y, int w, int h, LogicJSON.PreferencesData pref) {
+    public Button(int x, int y, int w, int h) {
         _rect = new Rect(x, y, w, h);
-        _preferences = pref;
+        _preferences = MenuScene._preferences;
+        _engine = MenuScene.getEngine();
     }
 
     public void render(Graphics g){
 
         //fondo
-        g.setColor((int)_preferences.palettes[_preferences.actualPalette].hlColor);
+        g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
         g.fillRect(_rect._x, _rect._y, _rect._w, _rect._h);
         //imagen
         if(_image != null) g.drawImage(_image, (int)_imgX, (int)_imgY, _imageScale, _imageScale);
         //texto
         if(_text!= null) {
-            g.setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+            g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
             g.drawText(_text, _rect._x + _rect._w / 2, _rect._y + _rect._h / 2);
         }
         //borde
-        g.setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+        g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
         g.drawRect(_rect._x, _rect._y, _rect._w, _rect._h);
     };
 
@@ -92,4 +97,5 @@ public abstract class Button {
     protected double _imageScale;
     protected double _imgX, _imgY;
     protected LogicJSON.PreferencesData _preferences;
+    protected Engine _engine;
 }

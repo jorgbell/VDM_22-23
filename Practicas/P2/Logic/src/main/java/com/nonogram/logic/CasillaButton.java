@@ -5,8 +5,8 @@ import com.nonogram.engine.Input;
 
 public class CasillaButton extends Button{
 
-    public CasillaButton(int x, int y, int w, int h, Tablero.Casilla c, LogicJSON.PreferencesData pref) {
-        super(x, y, w, h, pref);
+    public CasillaButton(int x, int y, int w, int h, Tablero.Casilla c) {
+        super(x, y, w, h);
         _casilla = c;
     }
 
@@ -18,13 +18,13 @@ public class CasillaButton extends Button{
         switch(state)
         {
             case EMPTY:
-                g.setColor((int)_preferences.palettes[_preferences.actualPalette].emptyColor);
+                g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).emptyColor));
                 break;
             case CROSS:
                 g.setColor(0XFF000000);
                 break;
             case PICK:
-                g.setColor((int)_preferences.palettes[_preferences.actualPalette].pickColor);
+                g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).pickColor));
                 break;
             case WRONG:
                 g.setColor(0XFFF03434);

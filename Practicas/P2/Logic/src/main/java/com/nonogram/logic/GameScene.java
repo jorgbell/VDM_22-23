@@ -4,7 +4,6 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.JSONManager;
 
 public class GameScene extends AbstractScene {
 
@@ -19,14 +18,14 @@ public class GameScene extends AbstractScene {
     }
 
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level, LogicJSON.PreferencesData pref, CatScene catScene) {
+    public GameScene(int gameWidth, int gameHeight, int size, int level, CatScene catScene) {
         super(gameWidth, gameHeight);
         _rows = size;
         _columns = size;
         _level = level;
         _path = size + "x" + size + "/" + _level + ".json";
         _generado = false;
-        _preferences = pref;
+        _preferences = MenuScene._preferences;
         _catScene = catScene;
     }
 
@@ -71,17 +70,17 @@ public class GameScene extends AbstractScene {
         for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
         {
             for (int j = 0; j < _rows; j++) {
-                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i), _preferences);
+                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
             }
         }
 
         //botones de ui
-        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, _myEngine, null, _preferences);
+        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, null);
         _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonRendirse.addText("Volver");
 
 
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, _myEngine, null, _preferences);
+        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, null);
         _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonVictoria.addText("Volver");
 
@@ -97,7 +96,7 @@ public class GameScene extends AbstractScene {
     @Override
     public void render() {
 
-        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+        _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
 
         if (!_end) //durante la partida
         {
@@ -121,7 +120,7 @@ public class GameScene extends AbstractScene {
             int filaXMargin = _tableroSize / 30;
             int filaYMargin = _tileSize / 5;
             int filaInterSpace =_tileSize;
-            _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+            _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
 
             for (int i = 0; i < _columns; i++) {
                 String[] sc = _t._columnas[i].numbers.split("\\.");
@@ -138,7 +137,7 @@ public class GameScene extends AbstractScene {
             if (_showErrors) //texto al pulsar comprobar
             {
                 _f.setSize(20);
-                _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].hlColor);
+                _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
                 _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes -1) + " vidas", _gameWidth / 2, _gameHeight/4);
             }
@@ -148,7 +147,7 @@ public class GameScene extends AbstractScene {
             if (!_won) finalText = "HAS PERDIDO";
             else finalText = "ENHORABUENA";
             _f.setSize(40);
-            _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+            _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
             _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
             _f.setSize(20);
             if(paletaDesbloqueada){
@@ -171,6 +170,7 @@ public class GameScene extends AbstractScene {
 
     @Override
     public void update(double deltaTime) {
+        MenuScene.changeToDarkMode();
 
         if (_showErrors) {
             _showTime -= deltaTime;

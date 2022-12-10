@@ -15,7 +15,8 @@ public abstract class AbstractScene implements Scene{
     public int getGameWidth(){ return _gameWidth;}
     @Override
     public int getGameHeight(){return _gameHeight;}
+    public static Engine getEngine(){return _myEngine;}
 
-    protected Engine _myEngine;
+    protected static Engine _myEngine;
     private int _gameWidth, _gameHeight;
 }

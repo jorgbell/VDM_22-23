@@ -7,10 +7,9 @@ import com.nonogram.engine.Input;
 import com.nonogram.engine.Scene;
 
 public class ChangeSceneButton extends Button{
-    public ChangeSceneButton(int x, int y, int w, int h, Engine e, Scene ns, LogicJSON.PreferencesData pref)
+    public ChangeSceneButton(int x, int y, int w, int h, Scene ns)
     {
-        super(x, y, w, h, pref);
-        _engine = e;
+        super(x, y, w, h);
         _newScene = ns;
         if(ns!=null){_push=true;} //PUSH
     }
@@ -26,7 +25,6 @@ public class ChangeSceneButton extends Button{
     public void update(double deltaTime) {
     }
 
-    Engine _engine;
     Scene _newScene;
     Boolean _push = false; //POP
 

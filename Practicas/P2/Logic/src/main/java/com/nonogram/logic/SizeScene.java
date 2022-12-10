@@ -4,17 +4,16 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 
 
 public class SizeScene extends AbstractScene {
 
-    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage, LogicJSON.PreferencesData pref)
+    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage)
     {
         super(gameWidth,gameHeight);
         _solvablePercentage = solvablePercentage;
-        _preferences = pref;
+        _preferences = MenuScene._preferences;
     }
 
     @Override
@@ -35,11 +34,11 @@ public class SizeScene extends AbstractScene {
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
             Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage, _preferences);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4,  _myEngine, s, _preferences);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
             _botonesSizes[i].addText(rowNumber + "x" + columnNumber);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null, _preferences);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
 
@@ -49,7 +48,7 @@ public class SizeScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor((int)_preferences.palettes[_preferences.actualPalette].textColor);
+        _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
         _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
 
         _botonVolver.render(_myEngine.getGraphics());
@@ -57,7 +56,10 @@ public class SizeScene extends AbstractScene {
     }
 
     @Override
-    public void update(double deltaTime) {}
+    public void update(double deltaTime) {
+        MenuScene.changeToDarkMode();
+
+    }
 
     @Override
     public void processInput(Input.TouchEvent input) {

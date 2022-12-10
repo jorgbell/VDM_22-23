@@ -1,50 +1,36 @@
 {
-    "maxLifes" : 5,
-    "currentLifes": 5,
-    "unlockedCats": 0,
-    "cats": [
+    "actualPalette":0,
+    "cats":
+    [
         {
-            "boardSize": 5,
-            "numLevels": 20,
-            "actualLevel": 0
+            "actualLevel":19,
+            "boardSize":5,
+            "numLevels":20
         },
         {
-            "boardSize": 10,
-            "numLevels": 20,
-            "actualLevel": 0
+            "actualLevel":19,
+            "boardSize":10,
+            "numLevels":20
         },
         {
-            "boardSize": 15,
-            "numLevels": 20,
-            "actualLevel": 0
+            "actualLevel":19,
+            "boardSize":15,
+            "numLevels":20
         },
         {
-            "boardSize": 20,
-            "numLevels": 20,
-            "actualLevel": 0
+            "actualLevel":19,
+            "boardSize":20,
+            "numLevels":20
         }
     ],
-    "palettes": [
-        {
-            "bgColor" : "0xFFF0F0F0",
-            "textColor": "0xFF000000",
-            "hlColor": "0XFFFF0000",
-            "pickColor":"0XFF2a35cc",
-            "emptyColor":"0XFFa4a4a4"
-        },
-        {
-            "bgColor" : "0xFF88cb84",
-            "textColor": "0xFF000000",
-            "hlColor": "0XFF4e784c",
-            "pickColor": "0xFF4e784c",
-            "emptyColor":"0xFF749672"
-        },
-        {
-            "bgColor" : "0xFFaacbda",
-            "textColor": "0xFFFFFFFF",
-            "hlColor": "0XFFc65076",
-            "pickColor": "0xFFc65076",
-            "emptyColor":"0xFFb9a4ab"
-        }
-    ]
+    "currentLifes":5,
+    "estado":
+    {
+        "Estado":[],
+        "level":-1,
+        "size":-1
+    },
+    "maxLifes":5,
+    "unlockedCats":1,
+    "unlockedPalettes":[]
 }
