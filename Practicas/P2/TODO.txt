@@ -1,5 +1,9 @@
 COSAS QUE PREGUNTAR A TONI EL VIERNES
 - Como detectar si un movil tiene el sensor de ambiente o no
+- Notificaciones:
+	- Como detectar cuando entra con el pendingIntent para así sumar una vida
+	- Como mandar la notificacion como pide en el enunciado
+- Anuncios
 
 
 ---------------------------------------------------

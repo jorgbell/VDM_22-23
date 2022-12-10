@@ -1,25 +1,11 @@
 package com.nonogram.engine;
 
-public class Sensors {
-
-    public Sensors(){
-        _temperature = 0;
-        _lux = 200;
-    }
-    public void setTemperature(float t){
-        _temperature = t;
-    };
-    public float getTemperature(){
-        return _temperature;
-    }
-    public boolean isDark(){
-        return _lux<=150;
-    }
-    public float getLux(){
-        return _lux;
-    }
-    public void setLux(float lx){_lux = lx;}
-
-    float _temperature; //celcius
-    float _lux;
+public interface Sensors {
+    public void setTemperature(float t);
+    public float getTemperature();
+    public boolean isDark();
+    public float getLux();
+    public void setLux(float lx);
+    void unregisterAll();
+    void registerAll();
 }

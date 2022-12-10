@@ -265,6 +265,16 @@ public class GameScene extends AbstractScene {
         return true;
     }
 
+    @Override
+    public void handleClosingNotifications() {
+
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
+
+    }
+
     Tablero _t;
     int _gameHeight;
     int _gameWidth;

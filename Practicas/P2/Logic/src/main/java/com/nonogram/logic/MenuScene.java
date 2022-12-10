@@ -3,9 +3,11 @@ package com.nonogram.logic;
 import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.JSONManager;
+import com.nonogram.engine.NotificationData;
 import com.nonogram.engine.Scene;
 import com.nonogram.engine.Sound;
+
+import javax.management.Notification;
 
 public class MenuScene extends AbstractScene {
 
@@ -15,9 +17,7 @@ public class MenuScene extends AbstractScene {
         LogicJSON.set_myEngine(_myEngine);
         _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
 
-        if(_myEngine.getSensors().isDark())
-            _preferences.actualPalette = 1;
-
+        changeToDarkMode();
         _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
@@ -34,7 +34,7 @@ public class MenuScene extends AbstractScene {
         _botonJugar.addText("Juego Rapido");
         _botonHistoria = new ChangeSceneButton(_w/7*4, _h/2, _w / 3, _w / 7,  _myEngine, historiaScene, _preferences);
         _botonHistoria.addText("Modo Historia");
-        _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine.getGraphics());
+        _botonPaletas = new ChangePaletteButton(_w/3, _h/4, _w/3, _w/7, _preferences, _myEngine);
         _botonPaletas.addText("Cambiar paleta");
 
         return true;
@@ -54,11 +54,21 @@ public class MenuScene extends AbstractScene {
 
     @Override
     public void update(double deltaTime) {
-        if(_myEngine.getSensors().isDark()){
-            _preferences.actualPalette = 1;
-            _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
-        }
+        changeToDarkMode();
+    }
 
+    void changeToDarkMode(){
+        int index = _preferences.actualPalette;
+        if(index == 0){
+            if(_myEngine.getSensors().isDark()){
+                _preferences.palettes[0] = _preferences.dark;
+                _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
+            }
+            else{
+                _preferences.palettes[0] = _preferences.light;
+                _myEngine.getGraphics().setBGColor((int)_preferences.palettes[_preferences.actualPalette].bgColor);
+            }
+        }
     }
 
     @Override
@@ -67,7 +77,9 @@ public class MenuScene extends AbstractScene {
             case CLICK_CORTO:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
                 if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
-                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) _botonPaletas.handleEvent(input);
+                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())){
+                    _botonPaletas.handleEvent(input);
+                }
                 break;
             case CLICK_LARGO:
                 break;
@@ -80,6 +92,17 @@ public class MenuScene extends AbstractScene {
         return true;
     }
 
+    @Override
+    public void handleClosingNotifications() {
+        _myEngine.addClosingNotification(new NotificationData("Nonogramas", "TE ECHAMOS DE MENOS!", "Entra ahora y consigue una vida extra GRATIS. Ven y disfruta de nuestros Nonogramas. Bombón", 2));
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
+        _preferences.currentLifes++;
+    }
+
+
     int _h;
     int _w;
     Font _f1;
@@ -88,6 +111,8 @@ public class MenuScene extends AbstractScene {
     ChangeSceneButton _botonHistoria;
     ChangePaletteButton _botonPaletas;
     LogicJSON.PreferencesData _preferences;
+
+    boolean changed = false;
 
 
 }

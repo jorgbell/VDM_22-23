@@ -9,4 +9,6 @@ public interface Scene {
     int getGameWidth();
     int getGameHeight();
     boolean release();
+    void handleClosingNotifications();
+    void handleOpeningNotifications();
 }

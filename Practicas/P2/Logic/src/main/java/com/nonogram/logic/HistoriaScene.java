@@ -82,6 +82,16 @@ public class HistoriaScene extends AbstractScene {
         return true;
     }
 
+    @Override
+    public void handleClosingNotifications() {
+
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
+
+    }
+
     public boolean increaseCat(){
         if(_preferences.unlockedCats >= _preferences.cats.length)
             return false;

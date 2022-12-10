@@ -101,6 +101,16 @@ public class CatScene extends AbstractScene {
         return true;
     }
 
+    @Override
+    public void handleClosingNotifications() {
+
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
+
+    }
+
     public boolean increaseLevel(int levelPlayed){
         if(thiscat.actualLevel < thiscat.numLevels && thiscat.actualLevel == levelPlayed){
             _botones[thiscat.actualLevel].addImage(_boardsImages[thiscat.actualLevel],0.8,Button.ImagePos.CENTERED );

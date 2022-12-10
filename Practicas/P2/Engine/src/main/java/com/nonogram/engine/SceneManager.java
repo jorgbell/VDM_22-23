@@ -36,6 +36,11 @@ public class SceneManager {
             sceneStack.peek().processInput(input);
     }
 
+    public void handelClosingNotifications(){
+        if(sceneStack.size()>0)
+            sceneStack.peek().handleClosingNotifications();
+    }
+
 
     public int getGameWidth() {
         if(sceneStack.size()>0)
@@ -73,6 +78,7 @@ public class SceneManager {
             System.err.println("Error al liberar la escena");
             return false;
         }
+        handelClosingNotifications();
         sceneStack.pop();
         return true;
     }
