@@ -18,7 +18,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, Sensors s, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, Sensors s, IntentManager in, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
@@ -26,6 +26,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         _myAudio = a;
         _myJSONManager = j;
         _mySensors = s;
+        _myIntentManager = in;
     }
 
     @Override
@@ -62,6 +63,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
     @Override
     public JSONManager getJSONManager(){return _myJSONManager;}
+
+    public IntentManager getIntentManager(){return _myIntentManager;}
 
     @Override
     public double getDeltaTime() {
@@ -155,6 +158,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Sensors _mySensors;
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
+    protected IntentManager _myIntentManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
 }

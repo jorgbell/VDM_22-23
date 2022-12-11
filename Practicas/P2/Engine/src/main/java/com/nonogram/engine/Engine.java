@@ -6,6 +6,7 @@ public interface Engine {
     Audio getAudio();
     JSONManager getJSONManager();
     Sensors getSensors();
+    IntentManager getIntentManager();
     double getDeltaTime();
     boolean stop();
     void resume();
