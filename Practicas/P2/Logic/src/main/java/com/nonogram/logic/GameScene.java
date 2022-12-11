@@ -85,6 +85,12 @@ public class GameScene extends AbstractScene {
         _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonVictoria.addText("Volver");
 
+        if(!_generado)
+        {
+            _botonCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 8 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _preferences, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+            _botonCompartir.addText("Compartir");
+        }
+
         return true;
     }
 
@@ -156,6 +162,7 @@ public class GameScene extends AbstractScene {
                 _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _gameWidth / 2, _gameHeight/6);
             }
             _botonVictoria.render(_myEngine.getGraphics());
+            if(!_generado) _botonCompartir.render(_myEngine.getGraphics());
         }
 
         for (int i = 0; i < _columns; i++) //renderizado de las casillas fisicas
@@ -213,8 +220,12 @@ public class GameScene extends AbstractScene {
                     }
                 }
             }
-        } else if (_botonVictoria._rect.contains(input.get_posX(), input.get_posY()))
-            _botonVictoria.handleEvent(input);
+        } else {
+            if (_botonVictoria._rect.contains(input.get_posX(), input.get_posY()))
+                _botonVictoria.handleEvent(input);
+            if (!_generado && _botonCompartir._rect.contains(input.get_posX(), input.get_posY()))
+                _botonCompartir.handleEvent(input);
+        }
     }
 
     public void checkError(int fila, int columna) {
@@ -291,6 +302,7 @@ public class GameScene extends AbstractScene {
     CasillaButton[][] _casillas;
     ChangeSceneButton _botonRendirse;
     ChangeSceneButton _botonVictoria;
+    ShareImageButton _botonCompartir;
 
     boolean _generado;
     String _path;

@@ -58,7 +58,7 @@ public class MenuScene extends AbstractScene {
             case CLICK_CORTO:
                 if(_botonJugar._rect.contains(input.get_posX(), input.get_posY())) _botonJugar.handleEvent(input);
                 if(_botonHistoria._rect.contains(input.get_posX(), input.get_posY())) _botonHistoria.handleEvent(input);
-                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) _myEngine.getIntentManager().shareImage();
+                if(_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) _botonPaletas.handleEvent(input);
                 break;
             case CLICK_LARGO:
                 break;
