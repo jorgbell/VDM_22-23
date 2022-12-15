@@ -55,14 +55,6 @@ public class SceneManager {
         else
             return _myEngine.getGraphics().getWindowHeight();
     }
-    public void setGameHeight(int height){
-        if(sceneStack.size()>0)
-            sceneStack.peek().setGameHeight(height);
-    }
-    public void setGameWidth(int width){
-        if(sceneStack.size()>0)
-            sceneStack.peek().setGameWidth(width);
-    }
 
     public boolean push(Scene s) {
         if(s==null){

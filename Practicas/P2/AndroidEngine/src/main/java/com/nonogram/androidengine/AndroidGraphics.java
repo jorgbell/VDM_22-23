@@ -1,7 +1,5 @@
 package com.nonogram.androidengine;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -18,12 +16,9 @@ import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    private final Resources _resources;
-
-    public AndroidGraphics(AppCompatActivity c, Resources r) {
+    public AndroidGraphics(AppCompatActivity c) {
         super();
         _context = c;
-        _resources = r;
     }
     @Override
     public boolean init() {
@@ -176,31 +171,6 @@ public class AndroidGraphics extends AbstractGraphics {
     }
 
 
-    @Override
-    public void reScale() {
-        isWindowHorizontal();
-        float windowHeight = (float) getWindowHeight();
-        float windowWidth = getWindowWidth();
-        float gameFHeight = sceneManager.getGameHeight();
-        float gameFWidth = sceneManager.getGameWidth();
-
-        scaleH = windowHeight / gameFHeight;
-        scaleW = windowWidth / gameFWidth;
-
-        translateX = (int) (windowWidth - gameFWidth * scaleW) / 2;
-        translateY = (int) (windowHeight - gameFHeight * scaleH) / 2;
-
-        translate(translateX + getLeftBorder(), translateY + getTopBorder());
-        scale(scaleW, scaleH);
-    }
-
-    @Override
-    public boolean isWindowHorizontal() {
-        if(_resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-                return false;
-        else
-            return true;
-    }
 
     @Override
     public boolean setInputListener(Input listener) {

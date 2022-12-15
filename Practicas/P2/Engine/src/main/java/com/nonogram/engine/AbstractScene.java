@@ -8,16 +8,6 @@ public abstract class AbstractScene implements Scene{
     }
 
     @Override
-    public void setGameWidth(int w) {
-        _gameWidth = w;
-    }
-
-    @Override
-    public void setGameHeight(int h) {
-        _gameHeight = h;
-    }
-
-    @Override
     public void setEngine(Engine e) {
         _myEngine = e;
     }

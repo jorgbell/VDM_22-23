@@ -56,14 +56,11 @@ public abstract class AbstractGraphics implements Graphics {
         float gameFHeight = sceneManager.getGameHeight();
         float gameFWidth = sceneManager.getGameWidth();
 
-        scaleH = windowHeight / gameFHeight;
-        scaleW = windowWidth / gameFWidth;
-
-        if(scaleH > scaleW) horizontal = true;
-        else horizontal = false;
+        float aspectH = windowHeight / gameFHeight;
+        float aspectW = windowWidth / gameFWidth;
 
         //En caso contrario
-        scaleFactor = Math.min(scaleH, scaleW);
+        scaleFactor = Math.min(aspectH, aspectW);
 
         translateX = (int) (windowWidth - gameFWidth * scaleFactor) / 2;
         translateY = (int) (windowHeight - gameFHeight * scaleFactor) / 2;
@@ -74,13 +71,13 @@ public abstract class AbstractGraphics implements Graphics {
 
     @Override
     public float worldToGameX(float x) {
-        float nx = (x - translateX - getLeftBorder()) / scaleW;
+        float nx = (x - translateX - getLeftBorder()) / scaleFactor;
         return nx;
     }
 
     @Override
     public float worldToGameY(float y) {
-        float ny = (y - translateY - getTopBorder()) / scaleH;
+        float ny = (y - translateY - getTopBorder()) / scaleFactor;
         return ny;
     }
 
@@ -95,23 +92,16 @@ public abstract class AbstractGraphics implements Graphics {
         _bgColor = color;
     }
 
-    @Override
-    public boolean isWindowHorizontal() {
-        return horizontal;
-    }
-
     //VARIABLES
     protected int _actualColor;
     protected int _bgColor = 0xFFFFFFFF;
     protected int _actualPalette;
     protected Font _actualFont;
     protected AbstractEngine.EnginePaths _myPaths;
-    protected int translateX, translateY;
-    protected float scaleW, scaleH;
+    int translateX, translateY;
     float scaleFactor;
     protected SceneManager sceneManager;
     protected Engine _myEngine;
-    protected boolean horizontal = false;
 
 
 }

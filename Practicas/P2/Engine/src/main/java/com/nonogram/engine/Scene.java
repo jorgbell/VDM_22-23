@@ -8,8 +8,6 @@ public interface Scene {
     void setEngine(Engine e);
     int getGameWidth();
     int getGameHeight();
-    void setGameWidth(int w);
-    void setGameHeight(int h);
     boolean release();
     void handleClosingNotifications();
     void handleOpeningNotifications();
