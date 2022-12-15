@@ -24,18 +24,6 @@ public class AndroidIntentManager implements IntentManager {
     public AndroidIntentManager(){};
 
     @Override
-    public void newTweet() {
-        //TweetComposer
-        Uri builtURI = Uri. parse("https://twitter.com/intent/tweet" ).buildUpon()
-                .appendQueryParameter( "text", "Este es mi texto a tweettear")
-                .build() ; //Genera la URl https://twitter.com/intent/tweet?text=Este%20es%20mi%20texto%20a%20tweettear
-        Intent intent = new Intent(Intent. ACTION_VIEW, builtURI);
-        InputStream is;
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File("//android_asset + _myPaths._imagesPath + \"15x15/0.png\")")));
-        _context.startActivity(intent); // startActivity es un método de Context
-    }
-
-    @Override
     public void shareImage(String imagePath) {
 
         Bitmap bitmap = null;
