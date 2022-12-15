@@ -86,7 +86,7 @@ public class GameScene extends AbstractScene {
 
         if(!_generado)
         {
-            _botonCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 8 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _preferences, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+            _botonCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 8 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
             _botonCompartir.addText("Compartir");
         }
 
