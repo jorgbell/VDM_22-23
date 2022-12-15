@@ -3,6 +3,7 @@ package com.nonogram.androidlauncher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Data;

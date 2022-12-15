@@ -20,7 +20,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
@@ -29,6 +29,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         _myJSONManager = j;
         _mySensors = s;
         _myNotificationManager = nmng;
+        _myIntentManager = in;
     }
 
     @Override
@@ -69,6 +70,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
     @Override
     public JSONManager getJSONManager(){return _myJSONManager;}
+
+    public IntentManager getIntentManager(){return _myIntentManager;}
 
     @Override
     public double getDeltaTime() {
@@ -170,6 +173,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
     protected NotificationMngr _myNotificationManager;
+    protected IntentManager _myIntentManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
     protected Stack<NotificationData> closingNotifications = new Stack<NotificationData>();

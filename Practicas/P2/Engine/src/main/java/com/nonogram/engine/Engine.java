@@ -9,6 +9,7 @@ public interface Engine {
     JSONManager getJSONManager();
     NotificationMngr getNotificationManager();
     AbstractSensors getSensors();
+    IntentManager getIntentManager();
     double getDeltaTime();
     boolean stop();
     void resume();
