@@ -91,6 +91,14 @@ public class SceneManager {
         return true;
     }
 
+    public boolean persist(){
+        if(sceneStack.size()>0){
+            sceneStack.peek().persist();
+            return true;
+        }
+        return false;
+    }
+
     Stack<Scene> sceneStack;
     Engine _myEngine;
 }
