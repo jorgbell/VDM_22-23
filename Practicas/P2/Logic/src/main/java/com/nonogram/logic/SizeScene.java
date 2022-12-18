@@ -9,9 +9,9 @@ import com.nonogram.engine.Scene;
 
 public class SizeScene extends AbstractScene {
 
-    public SizeScene(int gameWidth, int gameHeight, int solvablePercentage)
+    public SizeScene(int solvablePercentage)
     {
-        super(gameWidth,gameHeight);
+        super();
         _solvablePercentage = solvablePercentage;
         _preferences = MenuScene._preferences;
     }
@@ -33,7 +33,7 @@ public class SizeScene extends AbstractScene {
             int rowNumber = _sizes[i][0];
             int columnNumber = _sizes[i][1];
             //int size = 5 * (i + 1);
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), rowNumber, columnNumber, _solvablePercentage, _preferences);
+            Scene s = new GameScene(rowNumber, columnNumber, _solvablePercentage, _preferences);
             _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
             _botonesSizes[i].addText(rowNumber + "x" + columnNumber);
         }

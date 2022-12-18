@@ -43,17 +43,25 @@ public class SceneManager {
 
 
     public int getGameWidth() {
-        if(sceneStack.size()>0)
-            return sceneStack.peek().getGameWidth();
-        else
-            return _myEngine.getGraphics().getWindowWidth();
+        return _gameWidth;
     }
 
     public int getGameHeight() {
-        if(sceneStack.size()>0)
-            return sceneStack.peek().getGameHeight();
-        else
-            return _myEngine.getGraphics().getWindowHeight();
+        return _gameHeight;
+    }
+
+    public void rotate(){
+        int aux = _gameHeight;
+        _gameHeight = _gameWidth;
+        _gameWidth = aux;
+        for(Scene s : sceneStack){
+            s.rotate();
+        }
+    }
+
+    public void setGameSize(int w, int h){
+        _gameWidth = w;
+        _gameHeight = h;
     }
 
     public boolean push(Scene s) {
@@ -101,4 +109,6 @@ public class SceneManager {
 
     Stack<Scene> sceneStack;
     Engine _myEngine;
+    static int _gameWidth = 0;
+    static int _gameHeight = 0;
 }

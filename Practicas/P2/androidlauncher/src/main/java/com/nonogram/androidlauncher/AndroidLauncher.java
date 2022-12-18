@@ -2,9 +2,13 @@ package com.nonogram.androidlauncher;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
@@ -22,11 +26,20 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MenuScene sceneinicial = new MenuScene(450,800);
+        //creamos e inicializamos el motor
         _myEngine = new AndroidEngine(this);
-
         //manejo de errores: si se crea mal algo, para antes de empezar.
-        if(!_myEngine.init() || !_myEngine.getSceneManager().push(sceneinicial)){
+        if(!_myEngine.init()){
+            _myEngine.stop();
+        }
+        //inicializamos el tamaño del scenemanager para darle el tamaño al resto de escenas a partir de ahi
+        //valores similares a los que teniamos previamente para poder verlo todo mejor hasta que redimensionemos los objetos bien
+        int fullw = (int) (Resources.getSystem().getDisplayMetrics().widthPixels * 0.4);
+        int fullh = (int)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
+        _myEngine.getSceneManager().setGameSize(fullw,fullh);
+        //inicializamos la primera escena
+        MenuScene sceneinicial = new MenuScene(fullw,fullh);
+        if(!_myEngine.getSceneManager().push(sceneinicial)){
             _myEngine.stop();
         }
 
@@ -57,6 +70,12 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         _myEngine.getSceneManager().pop();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        _myEngine.getSceneManager().rotate();
     }
 
     @Override

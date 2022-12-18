@@ -34,7 +34,7 @@ public class CatScene extends AbstractScene {
             String path = _size+ "x"+_size+ "/" + i + ".png";
             _boardsImages[i]=_myEngine.getGraphics().newImage(path);
 
-            Scene s = new GameScene(getGameWidth(), getGameHeight(), _size, i, this);
+            Scene s = new GameScene(_size, i, this);
             _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, s);
 
             if (i > thiscat.actualLevel) {

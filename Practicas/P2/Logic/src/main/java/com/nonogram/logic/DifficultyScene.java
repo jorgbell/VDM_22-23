@@ -9,11 +9,11 @@ import com.nonogram.engine.Scene;
 
 public class DifficultyScene extends AbstractScene {
 
-    public DifficultyScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); _preferences = MenuScene._preferences; }
+    public DifficultyScene() { super(); _preferences = MenuScene._preferences; }
 
     @Override
     public boolean init() {
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15 * SCALE, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         if(_f == null || _volverImage == null)
             return false;
@@ -25,7 +25,7 @@ public class DifficultyScene extends AbstractScene {
         {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int percentage = 60 - 20 * i;
-            Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage);
+            Scene s = new SizeScene(percentage);
             _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, s);
             _botonesSizes[i].addText(_difficulties[i]);
         }
