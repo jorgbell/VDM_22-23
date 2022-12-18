@@ -96,8 +96,14 @@ public class CatScene extends AbstractScene {
 
     @Override
     public boolean release() {
-        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
+        persist();
         return true;
+    }
+
+    @Override
+    public boolean persist() {
+        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
+        return false;
     }
 
     @Override

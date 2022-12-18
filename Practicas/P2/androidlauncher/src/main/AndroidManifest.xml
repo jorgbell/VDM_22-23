@@ -10,7 +10,7 @@
 
     <application
 
-
+        android:persistent="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Nonograma"
@@ -19,6 +19,7 @@
         android:theme="@style/Theme.Nonograma">
 
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".AndroidLauncher"
             android:exported="true"
             android:label="@string/app_name">

@@ -55,6 +55,11 @@ public class AndroidLauncher extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        _myEngine.getSceneManager().pop();
+    }
+
+    @Override
     protected void onResume() {
         // Avisamos a la vista (que es la encargada del active render)
         // de lo que está pasando.
@@ -72,7 +77,7 @@ public class AndroidLauncher extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        _myEngine.stop();
+        _myEngine.pause();
         super.onStop();
     }
 
@@ -101,7 +106,6 @@ public class AndroidLauncher extends AppCompatActivity {
         }
     }
 
-    MenuScene sceneinicial;
     private AndroidEngine _myEngine;
 
 }

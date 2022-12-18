@@ -84,6 +84,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public boolean stop() {
         _running = false;
+        release();
         System.exit(0);
         return true;
     }
@@ -107,8 +108,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
             _mySceneManager.getInput();
             _myGraphics.render();
         }
-
-
     }
 
     @Override
@@ -136,7 +135,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public void pause() {
         if (_running) {
             _running = false;
-            release();
+            _myAudio.pauseAll();
+            _mySceneManager.persist();
             while (true) {
                 try {
                     _myThread.join();
@@ -148,6 +148,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
             }
         }
     }
+
+
 
     @Override
     public void addClosingNotification(NotificationData data) {

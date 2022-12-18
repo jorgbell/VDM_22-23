@@ -84,8 +84,7 @@ public class GameScene extends AbstractScene {
         _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
         _botonVictoria.addText("Volver");
 
-        if(!_generado)
-        {
+        if (!_generado) {
             _botonCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 8 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
             _botonCompartir.addText("Compartir");
         }
@@ -125,7 +124,7 @@ public class GameScene extends AbstractScene {
             int filaSpace = _numberFontSize * 10 / 9;
             int filaXMargin = _tableroSize / 30;
             int filaYMargin = _tileSize / 5;
-            int filaInterSpace =_tileSize;
+            int filaInterSpace = _tileSize;
             _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
 
             for (int i = 0; i < _columns; i++) {
@@ -144,8 +143,8 @@ public class GameScene extends AbstractScene {
             {
                 _f.setSize(20);
                 _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
-                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight/5);
-                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes -1) + " vidas", _gameWidth / 2, _gameHeight/4);
+                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight / 5);
+                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes - 1) + " vidas", _gameWidth / 2, _gameHeight / 4);
             }
         } else //fin de la partida
         {
@@ -154,14 +153,14 @@ public class GameScene extends AbstractScene {
             else finalText = "ENHORABUENA";
             _f.setSize(40);
             _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
-            _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight/4);
+            _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight / 4);
             _f.setSize(20);
-            if(paletaDesbloqueada){
-                _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _gameWidth / 2, _gameHeight/8);
-                _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _gameWidth / 2, _gameHeight/6);
+            if (paletaDesbloqueada) {
+                _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _gameWidth / 2, _gameHeight / 8);
+                _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _gameWidth / 2, _gameHeight / 6);
             }
             _botonVictoria.render(_myEngine.getGraphics());
-            if(!_generado) _botonCompartir.render(_myEngine.getGraphics());
+            if (!_generado) _botonCompartir.render(_myEngine.getGraphics());
         }
 
         for (int i = 0; i < _columns; i++) //renderizado de las casillas fisicas
@@ -211,6 +210,7 @@ public class GameScene extends AbstractScene {
                         while (!clicked && j < _casillas[0].length) {
                             if (_casillas[i][j]._rect.contains(input.get_posX(), input.get_posY())) {
                                 clicked = true;
+                                canPersist = true;
                                 _casillas[i][j].handleEvent(input);
                                 checkError(i, j);
                             }
@@ -238,7 +238,7 @@ public class GameScene extends AbstractScene {
                 if (!_generado) {
                     //si devuelve true, es que ha desbloqueado una paleta. Asi mostramos el texto en pantalla.
                     //Si devuelve false es en cualquier otro caso
-                    if(_catScene.increaseLevel(_level)){
+                    if (_catScene.increaseLevel(_level)) {
                         paletaDesbloqueada = true;
                     }
                 }
@@ -256,24 +256,33 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean release() {
-        //si es un tablero cargado, debe guardar cosas en preferencias que no hace un generado.
-        if (!_generado) {
-            LogicJSON.EstadoData e = new LogicJSON.EstadoData();
-            //si no ha terminado la partida, debe guardar el estado. Si la termina, lo debe sustituir por uno vacio
-            if (!_end) {
-                //crea el estado actual
-                TableroCargado tc = (TableroCargado) _t;
-                e.level = _level;
-                e.size = _catScene._size;
-                e.Estado = tc.guardaEstadoTablero();
-            }
-            _preferences.estado = e;
-        }
+        persist();
         _showTime = 0;
         _end = false;
+        canPersist = false;
+        return true;
+    }
+
+    @Override
+    public boolean persist() {
+        if (!_generado) {
+            //si puedes realizar la persistencia del estado del tablero (ha colocado al menos un cuadrado), la realiza.
+            if(canPersist){
+                LogicJSON.EstadoData e = new LogicJSON.EstadoData();
+                //si no ha terminado la partida, debe guardar el estado. Si la termina, lo debe sustituir por uno vacio
+                if (!_end) {
+                    //crea el estado actual
+                    TableroCargado tc = (TableroCargado) _t;
+                    e.level = _level;
+                    e.size = _catScene._size;
+                    e.Estado = tc.guardaEstadoTablero();
+                }
+                _preferences.estado = e;
+            }
+        }
         _preferences.currentLifes = _currentLifes;
         LogicJSON.writePreferencesToJson("preferences.json", _preferences);
-        return true;
+        return false;
     }
 
     @Override
@@ -328,4 +337,5 @@ public class GameScene extends AbstractScene {
     int _level;
 
     boolean paletaDesbloqueada = false;
+    boolean canPersist = false;
 }
