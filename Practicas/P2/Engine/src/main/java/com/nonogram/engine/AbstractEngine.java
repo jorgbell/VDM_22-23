@@ -166,6 +166,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public EnginePaths getEnginePaths(){ return _myPaths;}
 
+
+
     //VARIABLES
     public EnginePaths _myPaths;
     private Thread _myThread = null;

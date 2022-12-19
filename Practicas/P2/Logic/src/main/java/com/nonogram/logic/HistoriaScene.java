@@ -8,7 +8,7 @@ import com.nonogram.engine.Scene;
 
 public class HistoriaScene extends AbstractScene {
 
-    public HistoriaScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); _preferences = MenuScene._preferences;}
+    public HistoriaScene() { super(); _preferences = MenuScene._preferences;}
     @Override
     public boolean init() {
         _categoriesButtons = new ChangeSceneButton[_preferences.cats.length];

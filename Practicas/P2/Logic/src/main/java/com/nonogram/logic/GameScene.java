@@ -7,8 +7,8 @@ import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage, LogicJSON.PreferencesData pref) {
-        super(gameWidth, gameHeight);
+    public GameScene(int rows, int columns, int solvablePercentage, LogicJSON.PreferencesData pref) {
+        super();
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
@@ -18,8 +18,8 @@ public class GameScene extends AbstractScene {
     }
 
     // Constructora para cargado
-    public GameScene(int gameWidth, int gameHeight, int size, int level, CatScene catScene) {
-        super(gameWidth, gameHeight);
+    public GameScene(int size, int level, CatScene catScene) {
+        super();
         _rows = size;
         _columns = size;
         _level = level;
@@ -47,7 +47,7 @@ public class GameScene extends AbstractScene {
             }
         }
 
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15*SCALE, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         if (_f == null || _volverImage == null)
             return false;

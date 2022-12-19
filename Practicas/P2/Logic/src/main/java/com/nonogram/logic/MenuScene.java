@@ -13,6 +13,9 @@ public class MenuScene extends AbstractScene {
     public MenuScene(int gameWidth, int gameHeight) {
         super(gameWidth, gameHeight);
     }
+    public MenuScene() {
+        super();
+    }
 
     @Override
     public boolean init() {
@@ -26,16 +29,16 @@ public class MenuScene extends AbstractScene {
         }
         _myEngine.getGraphics().setBGColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).bgColor));
         Sound sound = _myEngine.getAudio().newSound("bgm.wav");
-        _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
-        _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
+        _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15, false);
+        _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 30, true);
         if (sound == null || _f1 == null || _f2 == null)
             return false;
 
         _h = getGameHeight();
         _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
-        Scene juegoScene = new DifficultyScene(getGameWidth(), getGameHeight());
-        Scene historiaScene = new HistoriaScene(getGameWidth(), getGameHeight());
+        juegoScene = new DifficultyScene();
+        historiaScene = new HistoriaScene();
         _botonJugar = new ChangeSceneButton(_w / 7, _h / 2, _w / 3, _w / 7, juegoScene);
         _botonJugar.addText("Juego Rapido");
         _botonHistoria = new ChangeSceneButton(_w / 7 * 4, _h / 2, _w / 3, _w / 7, historiaScene);
@@ -55,6 +58,12 @@ public class MenuScene extends AbstractScene {
         _botonHistoria.render(_myEngine.getGraphics());
         _botonPaletas.render(_myEngine.getGraphics());
         _myEngine.getGraphics().drawText(String.valueOf(_myEngine.getSensors().getTemperature()) + "°C", _w / 2, _h / 5);
+    }
+
+    @Override
+    public void rotate() {
+        super.rotate();
+
     }
 
     @Override
@@ -137,6 +146,7 @@ public class MenuScene extends AbstractScene {
     Font _f2;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
+    Scene juegoScene, historiaScene;
     static ChangePaletteButton _botonPaletas;
     public static LogicJSON.PreferencesData _preferences;
     public static LogicJSON.Palette[] allPalettes;

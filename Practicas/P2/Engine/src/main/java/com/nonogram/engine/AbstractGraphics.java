@@ -69,6 +69,7 @@ public abstract class AbstractGraphics implements Graphics {
         scale(scaleFactor, scaleFactor);
     }
 
+
     @Override
     public float worldToGameX(float x) {
         float nx = (x - translateX - getLeftBorder()) / scaleFactor;
