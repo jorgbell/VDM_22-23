@@ -30,27 +30,7 @@ public class CatScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
 
-        for(int i = 0; i< _botones.length; i++){
-            String path = _size+ "x"+_size+ "/" + i + ".png";
-            _boardsImages[i]=_myEngine.getGraphics().newImage(path);
-
-            Scene s = new GameScene(_size, i, this);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, s);
-
-            if (i > thiscat.actualLevel) {
-                _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
-            }
-            else if(i<thiscat.actualLevel){
-                _botones[i].addImage(_boardsImages[i],0.8,Button.ImagePos.CENTERED );
-            }
-            else{
-                _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
-            }
-        }
-        if(thiscat.actualLevel >= thiscat.numLevels)
-            _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
-
-
+        CreateButtons();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
@@ -70,6 +50,18 @@ public class CatScene extends AbstractScene {
 
             _botones[i].render(_myEngine.getGraphics());
         }
+    }
+
+    @Override
+    public void rotate() {
+        super.rotate();
+        _w = super.getGameWidth();
+        _h = super.getGameHeight();
+
+        CreateButtons();
+
+        if(!super.landscape)  _botonVolver.setDimensions(_w / 10, _h / 20 , _w * 2 / 7, _h / 15);
+        else  _botonVolver.setDimensions(_w / 10, _h / 20 , _h * 2 / 7, _w / 15);
     }
 
     @Override
@@ -131,6 +123,53 @@ public class CatScene extends AbstractScene {
             return MenuScene.UnlockNewPalette(levelPlayed);
         }
         return false;
+    }
+
+    private void CreateButtons()
+    {
+        for (int i = 0; i < _botones.length; i++)
+        {
+            int x = 0;
+            int y = 0;
+            int w = 0;
+
+            if(!super.landscape) {
+                x = _w / 4 * (i % 4);
+                y = _h * (1 + i / 4) / 6;
+                w = _w / 6;
+            }
+
+            else{
+                x = _w / 7 + _w / 6 * (i % 5);
+                y = (_h + _h / 4) * (1 + i / 5) / 6;
+                w = _w / 10;
+            }
+
+            if(_botones[i] == null) {
+
+                String path = _size+ "x"+_size+ "/" + i + ".png";
+                _boardsImages[i]=_myEngine.getGraphics().newImage(path);
+
+                Scene s = new GameScene(_size, i, this);
+                _botones[i] = new ChangeSceneButton(x, y, w, w, s);
+
+                if (i > thiscat.actualLevel) {
+                    _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
+                }
+                else if(i<thiscat.actualLevel){
+                    _botones[i].addImage(_boardsImages[i],0.8,Button.ImagePos.CENTERED );
+                }
+                else{
+                    _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
+                }
+
+                if(thiscat.actualLevel >= thiscat.numLevels){
+                    _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
+                }
+            }
+
+            else _botones[i].setDimensions(x, y, w, w);
+        }
     }
 
     int _h;

@@ -26,17 +26,8 @@ public class SizeScene extends AbstractScene {
 
         _h = getGameHeight();
         _w = getGameWidth();
-        //Crea los botones de los diferentes tableros
-        for (int i = 0; i < _botonesSizes.length; i++)
-        {
-            //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
-            int rowNumber = _sizes[i][0];
-            int columnNumber = _sizes[i][1];
-            //int size = 5 * (i + 1);
-            Scene s = new GameScene(rowNumber, columnNumber, _solvablePercentage, _preferences);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
-            _botonesSizes[i].addText(rowNumber + "x" + columnNumber);
-        }
+
+        CreateButtons();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
@@ -53,6 +44,19 @@ public class SizeScene extends AbstractScene {
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _botonesSizes.length; i++) _botonesSizes[i].render(_myEngine.getGraphics());
+    }
+
+    @Override
+    public void rotate() {
+        super.rotate();
+        _w = super.getGameWidth();
+        _h = super.getGameHeight();
+
+        CreateButtons();
+
+        if(!super.landscape) _botonVolver.setDimensions(_w / 10, _h / 20 , _w * 2 / 7, _h / 15);
+
+        else _botonVolver.setDimensions(_w / 10, _h / 20 , _h * 2 / 7, _w / 15);
     }
 
     @Override
@@ -98,6 +102,40 @@ public class SizeScene extends AbstractScene {
     @Override
     public void handleOpeningNotifications() {
 
+    }
+
+    private void CreateButtons()
+    {
+        for (int i = 0; i < _botonesSizes.length; i++)
+        {
+            int x = 0;
+            int y = 0;
+            int w = 0;
+
+            if(!super.landscape) {
+                x = (_w / 20 + 150) * (1 + i % 2) - 100;
+                y = _h * (1 + i / 2) / 4;
+                w = _w / 4;
+            }
+
+            else{
+                x = (_w / 20 + 150) * (1 + i % 3);
+                y = (_h * (1 + i / 3)) / 3;
+                w = _h / 4;
+            }
+
+            if(_botonesSizes[i] == null) {
+                //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
+                int rowNumber = _sizes[i][0];
+                int columnNumber = _sizes[i][1];
+                //int size = 5 * (i + 1);
+                Scene s = new GameScene(rowNumber, columnNumber, _solvablePercentage, _preferences);
+                _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
+                _botonesSizes[i].addText(rowNumber + "x" + columnNumber);
+            }
+
+            else _botonesSizes[i].setDimensions(x, y, w, w);
+        }
     }
 
     int _h;

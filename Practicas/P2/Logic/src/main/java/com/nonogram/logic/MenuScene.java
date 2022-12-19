@@ -63,7 +63,20 @@ public class MenuScene extends AbstractScene {
     @Override
     public void rotate() {
         super.rotate();
+        _w = super.getGameWidth();
+        _h = super.getGameHeight();
 
+        if(!super.landscape) {
+            _botonJugar.setDimensions(_w / 7, _h / 2, _w / 3, _w / 7);
+            _botonHistoria.setDimensions(_w / 7 * 4, _h / 2, _w / 3, _w / 7);
+        }
+
+        else{
+            _botonJugar.setDimensions(_w / 7, _h * 2 / 3, _w / 3, _w / 7);
+            _botonHistoria.setDimensions(_w / 7 * 4, _h * 2 / 3, _w / 3, _w / 7);
+        }
+
+        _botonPaletas.setDimensions(_w / 3, _h / 4, _w / 3, _w / 7);
     }
 
     @Override

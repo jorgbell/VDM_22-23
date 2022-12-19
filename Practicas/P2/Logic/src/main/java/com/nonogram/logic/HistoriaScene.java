@@ -57,6 +57,13 @@ public class HistoriaScene extends AbstractScene {
     }
 
     @Override
+    public void rotate() {
+        super.rotate();
+        _w = super.getGameWidth();
+        _h = super.getGameHeight();
+    }
+
+    @Override
     public void update(double deltaTime) {
         MenuScene.changeToDarkMode();
 

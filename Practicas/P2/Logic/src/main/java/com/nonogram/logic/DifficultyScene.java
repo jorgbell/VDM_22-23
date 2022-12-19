@@ -47,6 +47,13 @@ public class DifficultyScene extends AbstractScene {
     }
 
     @Override
+    public void rotate() {
+        super.rotate();
+//        _w = super.getGameWidth();
+//        _h = super.getGameHeight();
+    }
+
+    @Override
     public void update(double deltaTime) {
         MenuScene.changeToDarkMode();
     }
@@ -93,7 +100,7 @@ public class DifficultyScene extends AbstractScene {
     int _w;
     Font _f;
     Image _volverImage;
-    String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
+    String[] _difficulties ={"Facil", "Normal", "Difzzzzzicil"}; //el minimo es 5x5
     ChangeSceneButton _botonVolver;
     ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
     LogicJSON.PreferencesData _preferences;

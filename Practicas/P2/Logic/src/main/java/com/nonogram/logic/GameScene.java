@@ -99,6 +99,13 @@ public class GameScene extends AbstractScene {
     }
 
     @Override
+    public void rotate() {
+        super.rotate();
+        _gameWidth = super.getGameWidth();
+        _gameHeight = super.getGameHeight();
+    }
+
+    @Override
     public void render() {
 
         _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));

@@ -34,6 +34,12 @@ public abstract class Button {
         _engine = MenuScene.getEngine();
     }
 
+    public void setDimensions(int x, int y, int w, int h)
+    {
+        _rect = new Rect(x, y, w, h);
+        if(_image != null) addImage(_image, _imageScale, _imagePos);
+    }
+
     public void render(Graphics g){
 
         //fondo
@@ -62,6 +68,7 @@ public abstract class Button {
 
         _image=img;
         _imageScale = scale;
+        _imagePos = imagePos;
 
         switch (imagePos){
             case CENTERED:
@@ -96,6 +103,7 @@ public abstract class Button {
     protected Image _image = null;
     protected double _imageScale;
     protected double _imgX, _imgY;
+    protected ImagePos _imagePos = null;
     protected LogicJSON.PreferencesData _preferences;
     protected Engine _engine;
 }

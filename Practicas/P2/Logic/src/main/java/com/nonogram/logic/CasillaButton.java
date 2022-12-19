@@ -10,7 +10,6 @@ public class CasillaButton extends Button{
         _casilla = c;
     }
 
-
     public void render(Graphics g)
     {
         Tablero.State state =  _casilla.getState();
