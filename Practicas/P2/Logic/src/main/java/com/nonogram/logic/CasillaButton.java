@@ -18,13 +18,13 @@ public class CasillaButton extends Button{
         switch(state)
         {
             case EMPTY:
-                g.setColor(g.getEmptyColor());
+                g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).emptyColor));
                 break;
             case CROSS:
                 g.setColor(0XFF000000);
                 break;
             case PICK:
-                g.setColor(g.getPickColor());
+                g.setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).pickColor));
                 break;
             case WRONG:
                 g.setColor(0XFFF03434);

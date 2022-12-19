@@ -12,15 +12,34 @@ public abstract class Tablero {
     ;
 
     enum State { //Estados de las casillas
-        EMPTY(0), PICK(1), CROSS(2), WRONG(3);
-        private final int value;
-
-        State(int value) {
-            this.value = value;
+        EMPTY, PICK, CROSS, WRONG;
+        public static State fromInt(int value) {
+            switch (value){
+                case 0:
+                    return EMPTY;
+                case 1:
+                    return PICK;
+                case 2:
+                    return CROSS;
+                case 3:
+                    return WRONG;
+                default:
+                    return EMPTY;
+            }
         }
-
-        public int getValue() {
-            return value;
+        public static int fromState(State s){
+            switch (s){
+                case EMPTY:
+                    return 0;
+                case PICK:
+                    return 1;
+                case CROSS:
+                    return 2;
+                case WRONG:
+                    return 3;
+                default:
+                    return 0;
+            }
         }
     }
 

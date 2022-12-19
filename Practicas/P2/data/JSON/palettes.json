@@ -1,0 +1,93 @@
+{
+    "palettes":[
+        {
+            "id":"Light",
+            "bgColor":"0xFFF0F0F0",
+            "textColor":"0xFF000000",
+            "hlColor":"0XFFf4d35e",
+            "pickColor":"0XFF2a35cc",
+            "emptyColor":"0XFFa4a4a4"
+        },
+        {
+            "id":"Dark",
+            "bgColor": "0xFF343763",
+            "textColor": "0xFFFFFFFF",
+            "hlColor" : "0XFF854b86",
+            "pickColor" : "0xFF8e91bf",
+            "emptyColor": "0xFF56586e"
+        },
+        {
+            "id" : "Forest",
+            "bgColor": "0xFF88cb84",
+            "textColor": "0xFF000000",
+            "hlColor" : "0XFF81b29a",
+            "pickColor" : "0xFF4e784c",
+            "emptyColor": "0xFF749672"
+        },
+        {
+            "id" : "Trans Rights",
+            "bgColor": "0xFFaacbda",
+            "textColor": "0xFFFFFFFF",
+            "hlColor" : "0XFFc65076",
+            "pickColor" : "0xFFc65076",
+            "emptyColor": "0xFFff758f"
+        },
+        {
+            "id" : "Kirby",
+            "bgColor": "0xFFf1e3d3",
+            "textColor": "0xFF000000",
+            "hlColor" : "0XFFd88c9a",
+            "pickColor" : "0xFF8e7dbe",
+            "emptyColor": "0xFFffccd5"
+        },
+        {
+            "id" : "Will-o-wisp",
+            "bgColor": "0xFFdcdcef",
+            "textColor": "0xFF000000",
+            "hlColor" : "0XFF8a8aeb",
+            "pickColor" : "0xFF5858ef",
+            "emptyColor": "0xFFcacaec"
+        },
+        {
+            "id" : "Hot Chocolate",
+            "bgColor": "0xFF492b22",
+            "textColor": "0xFFeee6d8",
+            "hlColor" : "0XFF86563c",
+            "pickColor" : "0xFFd6914e",
+            "emptyColor": "0xFF784a36"
+        },
+        {
+            "id" : "VaporWave",
+            "bgColor": "0xFFb967ff",
+            "textColor": "0xFFfffb96",
+            "hlColor" : "0XFFff71ce",
+            "pickColor" : "0xFF05ffa1",
+            "emptyColor": "0xFF01cdfe"
+        },
+        {
+            "id" : "Beach",
+            "bgColor": "0xFFffcc5c",
+            "textColor": "0xFFFFFFFF",
+            "hlColor" : "0XFFff6f69",
+            "pickColor" : "0xFF88d8b0",
+            "emptyColor": "0xFFffeead"
+        },
+
+        {
+            "id" : "Christmas",
+            "bgColor": "0xFF378b29",
+            "textColor": "0xFF000000",
+            "hlColor" : "0XFFff7878",
+            "pickColor" : "0xFFffffff",
+            "emptyColor": "0xFF74d680"
+        },
+        {
+            "id" : "24K GOLD",
+            "bgColor": "0xFFa67c00",
+            "textColor": "0xFFFFFFFF",
+            "hlColor" : "0XFfffcf40",
+            "pickColor" : "0xFFffbf00",
+            "emptyColor": "0xFFbf9b30"
+        }
+    ]
+}

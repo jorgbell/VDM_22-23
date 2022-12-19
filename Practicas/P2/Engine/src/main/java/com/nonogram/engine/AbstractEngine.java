@@ -1,5 +1,7 @@
 package com.nonogram.engine;
 
+import java.util.Stack;
+
 public abstract class AbstractEngine implements Engine, Runnable {
 
     //clase estatica que usaremos para almacenar las direcciones de las carpetas de assets
@@ -18,13 +20,16 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AdManager aM, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
         _myAudio = a;
         _myJSONManager = j;
+        _mySensors = s;
+        _myNotificationManager = nmng;
+        _myIntentManager = in;
         _myAdManager = aM;
     }
 
@@ -41,6 +46,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     @Override
+    public AbstractSensors getSensors() {
+        return _mySensors;
+    }
+
+    @Override
     public Graphics getGraphics() {
         return _myGraphics;
     }
@@ -54,9 +64,15 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public Audio getAudio() {
         return _myAudio;
     }
+    @Override
+    public NotificationMngr getNotificationManager() {
+        return _myNotificationManager;
+    }
 
     @Override
     public JSONManager getJSONManager(){return _myJSONManager;}
+
+    public IntentManager getIntentManager(){return _myIntentManager;}
 
     @Override
     public double getDeltaTime() {
@@ -93,13 +109,12 @@ public abstract class AbstractEngine implements Engine, Runnable {
             _mySceneManager.getInput();
             _myGraphics.render();
         }
-
-
     }
 
     @Override
     public boolean release() {
         _myAudio.pauseAll();
+        _mySceneManager.release();
         return true;
     }
 
@@ -121,7 +136,8 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public void pause() {
         if (_running) {
             _running = false;
-            release();
+            _myAudio.pauseAll();
+            _mySceneManager.persist();
             while (true) {
                 try {
                     _myThread.join();
@@ -133,6 +149,16 @@ public abstract class AbstractEngine implements Engine, Runnable {
             }
         }
     }
+
+
+
+    @Override
+    public void addClosingNotification(NotificationData data) {
+        closingNotifications.push(data);
+    }
+
+    @Override
+    public Stack<NotificationData> getClosingNotifications(){ return closingNotifications;}
 
     @Override
     public SceneManager getSceneManager(){return _mySceneManager;}
@@ -146,9 +172,13 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
+    protected AbstractSensors _mySensors;
     protected SceneManager _mySceneManager;
     protected JSONManager _myJSONManager;
+    protected NotificationMngr _myNotificationManager;
+    protected IntentManager _myIntentManager;
     protected AdManager _myAdManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
+    protected Stack<NotificationData> closingNotifications = new Stack<NotificationData>();
 }

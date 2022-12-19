@@ -4,13 +4,12 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.JSONManager;
 import com.nonogram.engine.Scene;
 
 
 public class DifficultyScene extends AbstractScene {
 
-    public DifficultyScene(int gameWidth, int gameHeight, LogicJSON.PreferencesData pref) { super(gameWidth,gameHeight); _preferences = pref; }
+    public DifficultyScene(int gameWidth, int gameHeight) { super(gameWidth,gameHeight); _preferences = MenuScene._preferences; }
 
     @Override
     public boolean init() {
@@ -26,11 +25,11 @@ public class DifficultyScene extends AbstractScene {
         {
             //todo: igual meter que dependiendo del numero de sizes se dispongan mas o menos en la misma fila?
             int percentage = 60 - 20 * i;
-            Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage, _preferences);
-            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4,  _myEngine, s);
+            Scene s = new SizeScene(getGameWidth(), getGameHeight(), percentage);
+            _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 120) * (1 + i) - 115, _h / 3, _w / 4, _w / 4, s);
             _botonesSizes[i].addText(_difficulties[i]);
         }
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, _myEngine, null);
+        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
         _botonVolver.addText("Volver");
 
@@ -40,7 +39,7 @@ public class DifficultyScene extends AbstractScene {
     @Override
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
-        _myEngine.getGraphics().setColor(_myEngine.getGraphics().getTextColor());
+        _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
         _myEngine.getGraphics().drawText("Selecciona la dificultad del puzzle", _w /2, _h /5);
 
         _botonVolver.render(_myEngine.getGraphics());
@@ -48,7 +47,9 @@ public class DifficultyScene extends AbstractScene {
     }
 
     @Override
-    public void update(double deltaTime) {}
+    public void update(double deltaTime) {
+        MenuScene.changeToDarkMode();
+    }
 
     @Override
     public void processInput(Input.TouchEvent input) {
@@ -68,7 +69,24 @@ public class DifficultyScene extends AbstractScene {
 
     @Override
     public boolean release() {
+        persist();
         return true;
+    }
+
+    @Override
+    public boolean persist() {
+        LogicJSON.writePreferencesToJson("preferences.json", _preferences);
+        return false;
+    }
+
+    @Override
+    public void handleClosingNotifications() {
+
+    }
+
+    @Override
+    public void handleOpeningNotifications() {
+
     }
 
     int _h;

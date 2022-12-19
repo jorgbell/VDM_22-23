@@ -36,6 +36,11 @@ public class SceneManager {
             sceneStack.peek().processInput(input);
     }
 
+    public void handelClosingNotifications(){
+        if(sceneStack.size()>0)
+            sceneStack.peek().handleClosingNotifications();
+    }
+
 
     public int getGameWidth() {
         if(sceneStack.size()>0)
@@ -73,8 +78,25 @@ public class SceneManager {
             System.err.println("Error al liberar la escena");
             return false;
         }
+        handelClosingNotifications();
         sceneStack.pop();
         return true;
+    }
+
+    public boolean release(){
+        while(!sceneStack.empty()){
+            if(!pop())
+                return false;
+        }
+        return true;
+    }
+
+    public boolean persist(){
+        if(sceneStack.size()>0){
+            sceneStack.peek().persist();
+            return true;
+        }
+        return false;
     }
 
     Stack<Scene> sceneStack;
