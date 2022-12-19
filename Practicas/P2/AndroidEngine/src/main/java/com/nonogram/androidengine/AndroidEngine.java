@@ -9,7 +9,7 @@ import com.nonogram.engine.AbstractSensors;
 
 public class AndroidEngine extends AbstractEngine{
 
-    public AndroidEngine(AppCompatActivity context){
+    public AndroidEngine(AppCompatActivity context, SurfaceView view){
         super(new AndroidGraphics(context, view), new AndroidInput(), new AndroidAudio(), new AndroidJSONManager(), new AndroidAdManager(context), new AndroidSensors(context), new AndroidNotificationManager(context),  new AndroidIntentManager(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/", "JSON/"));
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         ((AndroidAudio)_myAudio)._assetManager = aG._context.getAssets();

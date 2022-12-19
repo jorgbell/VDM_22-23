@@ -20,7 +20,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AdManager aM, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;

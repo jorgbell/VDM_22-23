@@ -2,6 +2,7 @@ package com.nonogram.androidlauncher;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.SurfaceView;
@@ -30,13 +31,13 @@ public class AndroidLauncher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MenuScene sceneinicial = new MenuScene(450,800);
         setContentView(R.layout.androidlauncher);
-        _myEngine = new AndroidEngine(this, findViewById(R.id.surfaceView));
+        SurfaceView gameView = findViewById(R.id.surfaceView);
+        _myEngine = new AndroidEngine(this, gameView);
 
-//        _mAdView.setAdSize(AdSize.FULL_BANNER);
-//        _mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-
+        int fullw = (int) (Resources.getSystem().getDisplayMetrics().widthPixels * 0.4);
+        int fullh = (int)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
+        MenuScene sceneinicial = new MenuScene(fullw, fullh);
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
