@@ -15,16 +15,16 @@ public class DifficultyScene extends AbstractScene {
     public boolean init() {
         super.init();
 
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15 /** SCALE*/, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
-        if(_f == null || _volverImage == null)
-            return false;
 
         _h = getGameHeight();
         _w = getGameWidth();
         //Crea los botones de los diferentes tableros
 
         ResizeElements();
+
+        if(_f == null || _volverImage == null)
+            return false;
 
         return true;
     }
@@ -103,12 +103,16 @@ public class DifficultyScene extends AbstractScene {
                 x = _w * 1 / 3;
                 y = _h * 1 / 4 + _h / 4 * i;
                 w = _w / 3;
+
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
             }
 
             else {
                 x = _w / 15 + _w * 5 / 16 *  i;
                 y = _h * 5 / 12;
                 w = _w / 4;
+
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 30 , false);
             }
 
             if(_botonesSizes[i] == null){
@@ -122,9 +126,19 @@ public class DifficultyScene extends AbstractScene {
             else _botonesSizes[i].setDimensions(x, y, w, w);
         }
 
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
-        _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
-        _botonVolver.addText("Volver");
+        ChangeSceneButton auxVolver;
+
+        if(!super.landscape) auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
+
+        else auxVolver = new ChangeSceneButton( _w / 20, _h / 15 , _w  / 7, _h / 10, null);
+
+        if(_botonVolver == null) {
+            _botonVolver = auxVolver;
+            _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+            _botonVolver.addText("Volver");
+        }
+
+        else _botonVolver.setDimensions(auxVolver._rect._x, auxVolver._rect._y, auxVolver._rect._w, auxVolver._rect._h);
     }
 
     int _h;

@@ -31,21 +31,21 @@ public class MenuScene extends AbstractScene {
         }
         _myEngine.getGraphics().setBGColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).bgColor));
         Sound sound = _myEngine.getAudio().newSound("bgm.wav");
-        _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 30, true);
-        if (sound == null || _f1 == null || _f2 == null)
-            return false;
 
         _h = getGameHeight();
         _w = getGameWidth();
-        _myEngine.getAudio().playSound("bgm.wav");
+
         juegoScene = new DifficultyScene();
         historiaScene = new HistoriaScene();
-        _botonJugar = new ChangeSceneButton(_w / 7, _h / 2, _w / 3, _w / 7, juegoScene);
-        _botonJugar.addText("Juego Rapido");
-        _botonHistoria = new ChangeSceneButton(_w / 7 * 4, _h / 2, _w / 3, _w / 7, historiaScene);
-        _botonHistoria.addText("Modo Historia");
-        _botonPaletas = new ChangePaletteButton(_w / 3, _h / 4, _w / 3, _w / 7);
+
+        ResizeElements();
+
+        if (sound == null || _f1 == null || _f2 == null)
+            return false;
+
+        _myEngine.getAudio().playSound("bgm.wav");
+
 
         return true;
     }
@@ -68,17 +68,7 @@ public class MenuScene extends AbstractScene {
         _w = super.getGameWidth();
         _h = super.getGameHeight();
 
-        if(!super.landscape) {
-            _botonJugar.setDimensions(_w / 7, _h / 2, _w / 3, _w / 7);
-            _botonHistoria.setDimensions(_w / 7 * 4, _h / 2, _w / 3, _w / 7);
-        }
-
-        else{
-            _botonJugar.setDimensions(_w / 7, _h * 2 / 3, _w / 3, _w / 7);
-            _botonHistoria.setDimensions(_w / 7 * 4, _h * 2 / 3, _w / 3, _w / 7);
-        }
-
-        _botonPaletas.setDimensions(_w / 3, _h / 4, _w / 3, _w / 7);
+        ResizeElements();
     }
 
     @Override
@@ -155,12 +145,51 @@ public class MenuScene extends AbstractScene {
         _preferences.currentLifes++;
     }
 
-    void ResizeElements(){}
+    void ResizeElements(){
+        ChangeSceneButton auxJugar;
+        ChangeSceneButton auxHistoria;
+        ChangePaletteButton auxPaletas;
+
+        if(!super.landscape){
+            auxJugar = new ChangeSceneButton(_w / 4, _h * 9 / 20, _w / 2, _h / 10, juegoScene);
+            auxHistoria = new ChangeSceneButton(_w / 4, _h * 6 / 20, _w / 2, _h / 10, historiaScene);
+            auxPaletas = new ChangePaletteButton(_w / 4, _h * 12 / 20, _w / 2, _h / 10);
+
+            _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15, false);
+        }
+
+        else{
+            auxJugar = new ChangeSceneButton(_w / 4, _h / 2, _w / 2, _w / 9, juegoScene);
+            auxHistoria = new ChangeSceneButton(_w / 4, _h / 4, _w / 2, _w / 9, historiaScene);
+            auxPaletas = new ChangePaletteButton(_w / 4, _h * 3 / 4, _w / 2, _w / 9);
+
+            _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20, false);
+        }
+
+        if(_botonJugar == null) {
+            _botonJugar = auxJugar;
+            _botonJugar.addText("Juego Rapido");
+        }
+
+        else _botonJugar.setDimensions(auxJugar._rect._x, auxJugar._rect._y, auxJugar._rect._w, auxJugar._rect._h);
+
+        if(_botonHistoria == null) {
+            _botonHistoria = auxHistoria;
+            _botonHistoria.addText("Modo Historia");
+        }
+
+        else _botonHistoria.setDimensions(auxHistoria._rect._x, auxHistoria._rect._y, auxHistoria._rect._w, auxHistoria._rect._h);
+
+        if(_botonPaletas == null) _botonPaletas = auxPaletas;
+
+        else _botonPaletas.setDimensions(auxPaletas._rect._x, auxPaletas._rect._y, auxPaletas._rect._w, auxPaletas._rect._h);
+    }
 
     int _h;
     int _w;
     Font _f1;
     Font _f2;
+
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
     Scene juegoScene, historiaScene;
