@@ -15,8 +15,18 @@ public abstract class AbstractScene implements Scene{
         else
             landscape =false;
 
-        System.out.println("init: " +  landscape);
         return true;
+    }
+
+    @Override
+    public void ResizeElements()
+    {
+        _gameWidth = _myEngine.getSceneManager().getGameWidth();
+        _gameHeight = _myEngine.getSceneManager().getGameHeight();
+        if(_gameHeight<_gameWidth)
+            landscape = true;
+        else
+            landscape =false;
     }
 
     @Override

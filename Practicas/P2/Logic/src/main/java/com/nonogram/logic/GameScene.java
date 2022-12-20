@@ -297,6 +297,8 @@ public class GameScene extends AbstractScene {
     @Override
     public void ResizeElements()
     {
+        super.ResizeElements();
+
         _gameHeight = getGameHeight();
         _gameWidth = getGameWidth();
         ChangeSceneButton auxVictoria;
