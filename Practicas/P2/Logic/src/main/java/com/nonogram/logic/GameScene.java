@@ -48,20 +48,19 @@ public class GameScene extends AbstractScene {
             }
         }
 
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15*SCALE, false);
-        _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
-        if (_f == null || _volverImage == null)
-            return false;
-
-
         _gameHeight = getGameHeight();
         _gameWidth = getGameWidth();
         _casillas = new CasillaButton[_columns][_rows];
 
         _maxDimension = Math.max(_columns, _rows);
 
+        _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15, false);
         //init tamaño del tablero
         ResizeElements();
+
+        if (_f == null || _messageFont == null || _volverImage == null)
+            return false;
 
         return true;
     }
@@ -88,9 +87,6 @@ public class GameScene extends AbstractScene {
 
         if (!_end) //durante la partida
         {
-            //Rectagulos para poner los numeros y el tablero
-            _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, (_tileSize * _columns) + 5 + _tableroX - (_gameWidth / 16), _tableroSize);
-            _myEngine.getGraphics().drawRect(_tableroX - 3, _tableroY - _gameHeight / 10, (_tileSize * _columns) + 5, _tableroY + _tableroSize - (_gameHeight * 76 / 250));
 
             //UI
             _f.setSize(20);
@@ -124,10 +120,11 @@ public class GameScene extends AbstractScene {
 
             if (_showErrors) //texto al pulsar comprobar
             {
-                _f.setSize(20);
+                _myEngine.getGraphics().setActualFont(_messageFont);
                 _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
-                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 2, _gameHeight / 5);
-                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes - 1) + " vidas", _gameWidth / 2, _gameHeight / 4);
+                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _messageX, _messageY);
+                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes - 1) + " vidas", _messageX , _messageY + _messageFont.getSize() * 2);
+                _myEngine.getGraphics().setActualFont(_f);
             }
         } else //fin de la partida
         {
@@ -137,11 +134,15 @@ public class GameScene extends AbstractScene {
             _f.setSize(40);
             _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
             _myEngine.getGraphics().drawText(finalText, _finalTextX, _finalTextY);
-            _f.setSize(20);
+
+            _myEngine.getGraphics().setActualFont(_messageFont);
+            _messageFont.setSize((int)(_messageFont.getSize() * 0.8));
             if (paletaDesbloqueada) {
-                _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _gameWidth / 2, _gameHeight / 8);
-                _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _gameWidth / 2, _gameHeight / 6);
+                _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _paletaX, _paletaY);
+                _myEngine.getGraphics().drawText("Cámbiala en el menú principal.", _paletaX, _paletaY + _messageFont.getSize() * 2);
             }
+            _messageFont.setSize((int)(_messageFont.getSize() / 0.8));
+            _myEngine.getGraphics().setActualFont(_f);
             _botonVictoria.render(_myEngine.getGraphics());
             if (!_generado) _botonCompartir.render(_myEngine.getGraphics());
         }
@@ -293,18 +294,31 @@ public class GameScene extends AbstractScene {
             _tableroX = (_gameWidth / 20) * 5;
             _tableroY = (_gameHeight / 20) * 8;
             _finalTextX = _gameWidth / 2;
-            _finalTextY = _gameHeight / 4;
+            _finalTextY = _gameHeight / 6;
+            _messageX = _gameWidth * 6 / 11;
+            _messageY = _gameHeight / 5;
+            _paletaX = _gameWidth * 6 / 11;
+            _paletaY = _gameHeight / 4;
 
-            auxVictoria =  new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 9 / 10, _gameWidth * 2 / 7, _gameHeight / 15, null);
+
+            _messageFont = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _gameWidth / 15, false);
+
+            auxVictoria =  new ChangeSceneButton(_gameWidth / 6, _gameHeight * 17 / 20, _gameWidth * 2 / 6, _gameHeight / 10, null);
             auxRendirse =  new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, null);
-            auxCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 9 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+            auxCompartir = new ShareImageButton(_gameWidth * 11 / 20, _gameHeight * 17 / 20, _gameWidth * 2 / 5, _gameHeight / 10, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
         }
         else {
             _tableroSize = (_gameHeight / 20) * 14;
             _tableroX = (_gameWidth / 20) * 8;
             _tableroY = (_gameHeight / 20) * 4;
             _finalTextX = _gameWidth / 5;
-            _finalTextY = _gameHeight * 2 / 5;
+            _finalTextY = _gameHeight * 1 / 5;
+            _messageX = _gameWidth / 7;
+            _messageY = _gameHeight / 3;
+            _paletaX = _gameWidth * 4 / 20;
+            _paletaY = _gameHeight * 2 / 5;
+
+            _messageFont = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _gameWidth / 30, false);
 
             auxVictoria =  new ChangeSceneButton(_gameWidth / 15, _gameHeight * 8 / 10, _gameHeight * 3 / 7, _gameWidth / 15, null);
             auxRendirse =  new ChangeSceneButton(_gameWidth / 15, _gameHeight / 20, _gameHeight * 1 / 5, _gameWidth / 15, null);
@@ -368,8 +382,15 @@ public class GameScene extends AbstractScene {
     int _finalTextX;
     int _finalTextY;
 
+    int _messageX;
+    int _messageY;
+
+    int _paletaX;
+    int _paletaY;
+
     String _file;
     Font _f;
+    Font _messageFont;
     Image _volverImage;
     int _numberFontSize;
 
