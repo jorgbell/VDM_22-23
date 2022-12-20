@@ -18,6 +18,8 @@ public class SizeScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
+
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         if(_f == null || _volverImage == null)

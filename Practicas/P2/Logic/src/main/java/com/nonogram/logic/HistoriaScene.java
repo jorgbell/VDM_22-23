@@ -11,6 +11,8 @@ public class HistoriaScene extends AbstractScene {
     public HistoriaScene() { super(); _preferences = MenuScene._preferences;}
     @Override
     public boolean init() {
+        super.init();
+
         _categoriesButtons = new ChangeSceneButton[_preferences.cats.length];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");

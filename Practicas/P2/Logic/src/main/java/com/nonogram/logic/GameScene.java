@@ -33,6 +33,7 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
 
         _currentLifes = _preferences.currentLifes;
         if (_generado) {

@@ -14,6 +14,16 @@ public abstract class AbstractScene implements Scene{
             if(_gameHeight<_gameWidth)
                 landscape = true;
     }
+
+    @Override
+    public boolean init(){
+        _gameWidth = _myEngine.getSceneManager().getGameWidth();
+        _gameHeight = _myEngine.getSceneManager().getGameHeight();
+        if(_gameHeight<_gameWidth)
+            landscape = true;
+        return true;
+    }
+
     @Override
     public void rotate() {
         int aux = _gameWidth;

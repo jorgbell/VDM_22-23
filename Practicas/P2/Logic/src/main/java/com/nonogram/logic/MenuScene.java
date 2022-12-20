@@ -19,6 +19,8 @@ public class MenuScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
+
         LogicJSON.set_myEngine(_myEngine);
         _preferences = LogicJSON.readPreferencesFromJSON("preferences.json");
         LogicJSON.writePreferencesToJson("preferences.json", _preferences);

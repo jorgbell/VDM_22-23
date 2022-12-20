@@ -18,6 +18,8 @@ public class CatScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
+
         _botones = new ChangeSceneButton[thiscat.numLevels];
         _boardsImages = new Image[thiscat.numLevels];
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);

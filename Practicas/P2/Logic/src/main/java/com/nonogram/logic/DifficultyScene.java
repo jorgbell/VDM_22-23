@@ -13,6 +13,8 @@ public class DifficultyScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
+
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 15 /** SCALE*/, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         if(_f == null || _volverImage == null)
