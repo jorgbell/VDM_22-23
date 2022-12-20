@@ -59,7 +59,7 @@ public class MenuScene extends AbstractScene {
         _botonJugar.render(_myEngine.getGraphics());
         _botonHistoria.render(_myEngine.getGraphics());
         _botonPaletas.render(_myEngine.getGraphics());
-        _myEngine.getGraphics().drawText(String.valueOf(_myEngine.getSensors().getTemperature()) + "°C", _w / 2, _h / 5);
+        _myEngine.getGraphics().drawText(String.valueOf(_myEngine.getSensors().getTemperature()) + "°C", _w / 2, tempY);
     }
 
     @Override
@@ -156,6 +156,7 @@ public class MenuScene extends AbstractScene {
             auxPaletas = new ChangePaletteButton(_w / 4, _h * 12 / 20, _w / 2, _h / 10);
 
             _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15, false);
+            tempY=_h / 5;
         }
 
         else{
@@ -163,7 +164,8 @@ public class MenuScene extends AbstractScene {
             auxHistoria = new ChangeSceneButton(_w / 4, _h / 4, _w / 2, _w / 9, historiaScene);
             auxPaletas = new ChangePaletteButton(_w / 4, _h * 3 / 4, _w / 2, _w / 9);
 
-            _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20, false);
+            _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 25, false);
+            tempY=_h *2/9;
         }
 
         if(_botonJugar == null) {
@@ -189,7 +191,7 @@ public class MenuScene extends AbstractScene {
     int _w;
     Font _f1;
     Font _f2;
-
+    int tempY;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
     Scene juegoScene, historiaScene;

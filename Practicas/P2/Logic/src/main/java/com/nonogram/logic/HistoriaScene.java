@@ -36,7 +36,7 @@ public class HistoriaScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
-        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
+        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, textY);
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _categoriesButtons.length; i++) {
@@ -122,12 +122,19 @@ public class HistoriaScene extends AbstractScene {
                 x = (_w / 7) * (1 + i % 2 * 3);
                 y = _h * (1 + i / 2) / 4;
                 w = _w / 4;
+                textY=_h /6;
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15 , false);
+
             }
 
             else {
                 x =  _w / 15 + (_w * 2 / 9) * i;
                 y = _h / 2;
                 w = _w * 2 / 11;
+                textY=_h /4;
+
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
+
             }
 
             if(_categoriesButtons[i] == null){
@@ -149,6 +156,7 @@ public class HistoriaScene extends AbstractScene {
 
     int _h;
     int _w;
+    int textY;
     Font _f;
     Image _volverImage;
     ChangeSceneButton _botonVolver;

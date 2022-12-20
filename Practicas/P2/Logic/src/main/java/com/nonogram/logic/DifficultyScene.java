@@ -33,7 +33,7 @@ public class DifficultyScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
-        _myEngine.getGraphics().drawText("Selecciona la dificultad del puzzle", _w /2, _h /5);
+        _myEngine.getGraphics().drawText("Selecciona la dificultad del puzzle", _w /2, textY);
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _botonesSizes.length; i++) _botonesSizes[i].render(_myEngine.getGraphics());
@@ -103,8 +103,9 @@ public class DifficultyScene extends AbstractScene {
                 x = _w * 1 / 3;
                 y = _h * 1 / 4 + _h / 4 * i;
                 w = _w / 3;
+                textY=_h /6;
 
-                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15 , false);
             }
 
             else {
@@ -112,7 +113,9 @@ public class DifficultyScene extends AbstractScene {
                 y = _h * 5 / 12;
                 w = _w / 4;
 
-                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 30 , false);
+                textY=_h /4;
+
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
             }
 
             if(_botonesSizes[i] == null){
@@ -144,6 +147,8 @@ public class DifficultyScene extends AbstractScene {
     int _h;
     int _w;
     Font _f;
+    int textY;
+
     Image _volverImage;
     String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
     ChangeSceneButton _botonVolver;

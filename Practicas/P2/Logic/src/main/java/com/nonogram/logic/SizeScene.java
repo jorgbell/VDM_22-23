@@ -42,7 +42,7 @@ public class SizeScene extends AbstractScene {
     public void render() {
         _myEngine.getGraphics().setActualFont(_f);
         _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
-        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, _h /5);
+        _myEngine.getGraphics().drawText("Selecciona el tamaño del puzzle", _w /2, textY);
 
         _botonVolver.render(_myEngine.getGraphics());
         for(int i = 0; i < _botonesSizes.length; i++) _botonesSizes[i].render(_myEngine.getGraphics());
@@ -118,12 +118,17 @@ public class SizeScene extends AbstractScene {
                 x = (_w / 7) * (1 + i % 2 * 3);
                 y = _h * (1 + i / 2) / 4;
                 w = _w / 4;
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15 , false);
+                textY=_h /6;
             }
 
             else{
                 x = (_w / 20 ) +(_w*1/5) * (1 + i % 3);
                 y = (_h * (1 + i / 3)) / 3;
                 w = _h / 4;
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
+                textY=_h /4;
+
             }
 
             if(_botonesSizes[i] == null) {
@@ -143,6 +148,7 @@ public class SizeScene extends AbstractScene {
     int _h;
     int _w;
     Font _f;
+    int textY;
     Image _volverImage;
     int[][] _sizes = {{5, 5}, {8, 8}, {10, 5}, {10, 8}, {10, 10}, {15, 15}}; //el minimo es 5x5
     int _solvablePercentage;
