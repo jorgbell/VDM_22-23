@@ -119,7 +119,7 @@ public class HistoriaScene extends AbstractScene {
             int w;
 
             if(!super.landscape){
-                x = (_w / 20 + 150) * (1 + i % 2) - 100;
+                x = (_w / 7) * (1 + i % 2 * 3);
                 y = _h * (1 + i / 2) / 4;
                 w = _w / 4;
             }

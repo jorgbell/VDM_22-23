@@ -115,13 +115,13 @@ public class SizeScene extends AbstractScene {
             int w = 0;
 
             if(!super.landscape) {
-                x = (_w / 20 + 150) * (1 + i % 2) - 100;
+                x = (_w / 7) * (1 + i % 2 * 3);
                 y = _h * (1 + i / 2) / 4;
                 w = _w / 4;
             }
 
             else{
-                x = (_w / 20 + 150) * (1 + i % 3);
+                x = (_w / 20 ) +(_w*1/5) * (1 + i % 3);
                 y = (_h * (1 + i / 3)) / 3;
                 w = _h / 4;
             }
