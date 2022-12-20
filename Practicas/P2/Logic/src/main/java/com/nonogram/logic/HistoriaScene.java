@@ -154,7 +154,7 @@ public class HistoriaScene extends AbstractScene {
 
             if(_categoriesButtons[i] == null){
                 int size = _preferences.cats[i].boardSize;
-                Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i]);
+                Scene s = new CatScene(size, this, _preferences.cats[i]);
                 _categoriesButtons[i] = new ChangeSceneButton(x, y, w, w, s);
 
                 if (i > _preferences.unlockedCats-1) {

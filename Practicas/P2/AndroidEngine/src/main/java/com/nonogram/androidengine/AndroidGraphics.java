@@ -67,7 +67,7 @@ public class AndroidGraphics extends AbstractGraphics {
 
     @Override
     public void clearWindow() {
-        _canvas.drawColor(0xFFFFFFFF);
+        _canvas.drawColor(_bgColor);
     }
 
     @Override

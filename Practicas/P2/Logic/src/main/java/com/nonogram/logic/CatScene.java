@@ -8,8 +8,8 @@ import com.nonogram.engine.Scene;
 
 public class CatScene extends AbstractScene {
 
-    public CatScene(int gameWidth, int gameHeight, int size, HistoriaScene h, LogicJSON.Category thisc) {
-        super(gameWidth, gameHeight);
+    public CatScene(int size, HistoriaScene h, LogicJSON.Category thisc) {
+        super();
         _size = size;
         thiscat = thisc;
         _preferences = MenuScene._preferences;

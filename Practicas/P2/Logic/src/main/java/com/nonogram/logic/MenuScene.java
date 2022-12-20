@@ -9,11 +9,6 @@ import com.nonogram.engine.Scene;
 import com.nonogram.engine.Sound;
 
 public class MenuScene extends AbstractScene {
-
-    public MenuScene(int gameWidth, int gameHeight) {
-        super(gameWidth, gameHeight);
-    }
-
     public MenuScene() {
         super();
     }
