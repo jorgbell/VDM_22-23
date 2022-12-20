@@ -161,7 +161,15 @@ public class LogicJSON {
         //si el archivo existe, lo lee
         if (_myEngine.getJSONManager().isInInternalStorage(path)) {
             String json = _myEngine.getJSONManager().readJSON(path, false);
-            data = _gson.fromJson(json, preferencesTypeToken);
+            //comprueba el checksum. Si es igual al anterior, lo lee.
+            String actualChecksum = _myEngine.getJSONManager().getChecksum(path);
+            String correctChecksum = _myEngine.getJSONManager().readJSON("checksum.json", false);
+            if(actualChecksum.equals(correctChecksum)){
+                data = _gson.fromJson(json, preferencesTypeToken);
+            }
+            else{
+                data = new PreferencesData();
+            }
         }
         //si no, crea un inicial que se guardará en el internal storage posteriormente, cuando se produzca el guardado de datos
         else {
@@ -178,11 +186,14 @@ public class LogicJSON {
     public static void writePreferencesToJson(String path, PreferencesData d) {
         String json = _gson.toJson(d, preferencesTypeToken);
         _myEngine.getJSONManager().writeJSON(path, json);
+        //guarda el checksum del actual archivo de guardado.
+        _myEngine.getJSONManager().writeJSON("checksum.json", _myEngine.getJSONManager().getChecksum(path));
     }
 
     public static void set_myEngine(Engine engine) {
         _myEngine = engine;
     }
+
 
     static Engine _myEngine;
     static Gson _gson = new Gson();

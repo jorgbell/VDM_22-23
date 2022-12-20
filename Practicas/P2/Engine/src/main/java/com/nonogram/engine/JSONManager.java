@@ -10,4 +10,5 @@ public interface JSONManager {
     String readJSON(String path, boolean asset);
     void writeJSON(String path, String content);
     boolean isInInternalStorage(String path);
+    String getChecksum(String json);
 }
