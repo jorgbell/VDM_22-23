@@ -89,11 +89,12 @@ public class GameScene extends AbstractScene {
         {
 
             //UI
-            _f.setSize(20);
+            _myEngine.getGraphics().setActualFont(_messageFont);
+
             _botonRendirse.render(_myEngine.getGraphics());
-
             _f.setSize(_numberFontSize);
-
+            _myEngine.getGraphics().setActualFont(_f);
+            
             //Numeros
             int columnaSpace = _tileSize;
             int columnaXMargin = _tileSize / 5;
@@ -229,10 +230,10 @@ public class GameScene extends AbstractScene {
             }
         } else {
             //es incorrecta la pulsacion
-            //marca una espera de 2 segundos en la que se muestra la casilla mala
+            //marca una espera en la que se muestra la casilla mala
             _remaining = _t.getRemaining();
             _showErrors = true;
-            _showTime = 2;
+            _showTime = 1f;
             _wrong = _t.getCasilla(columna, fila);
             _wrong.estado = Tablero.State.WRONG;
         }
@@ -304,8 +305,9 @@ public class GameScene extends AbstractScene {
             _messageFont = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _gameWidth / 15, false);
 
             auxVictoria =  new ChangeSceneButton(_gameWidth / 6, _gameHeight * 17 / 20, _gameWidth * 2 / 6, _gameHeight / 10, null);
-            auxRendirse =  new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, null);
+            auxRendirse =  new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 7, _gameHeight / 15, null);
             auxCompartir = new ShareImageButton(_gameWidth * 11 / 20, _gameHeight * 17 / 20, _gameWidth * 2 / 5, _gameHeight / 10, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+
         }
         else {
             _tableroSize = (_gameHeight / 20) * 14;
@@ -321,8 +323,9 @@ public class GameScene extends AbstractScene {
             _messageFont = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _gameWidth / 30, false);
 
             auxVictoria =  new ChangeSceneButton(_gameWidth / 15, _gameHeight * 8 / 10, _gameHeight * 3 / 7, _gameWidth / 15, null);
-            auxRendirse =  new ChangeSceneButton(_gameWidth / 15, _gameHeight / 20, _gameHeight * 1 / 5, _gameWidth / 15, null);
+            auxRendirse =  new ChangeSceneButton(_gameWidth / 20, _gameHeight / 15, _gameWidth /7, _gameHeight / 8, null);
             auxCompartir = new ShareImageButton(_gameWidth / 15, _gameHeight * 13 / 20, _gameHeight * 3 / 7, _gameWidth / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+
         }
 
         _tileSize = _tableroSize / _maxDimension;
@@ -360,6 +363,7 @@ public class GameScene extends AbstractScene {
             }
             else _botonCompartir.setDimensions(auxCompartir._rect._x, auxCompartir._rect._y, auxCompartir._rect._w, auxCompartir._rect._h);
         }
+
     }
 
     Tablero _t;
