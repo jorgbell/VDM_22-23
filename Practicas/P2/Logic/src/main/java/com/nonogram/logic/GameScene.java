@@ -4,7 +4,6 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
-import com.nonogram.engine.Scene;
 
 public class GameScene extends AbstractScene {
 
@@ -62,7 +61,7 @@ public class GameScene extends AbstractScene {
         _maxDimension = Math.max(_columns, _rows);
 
         //init tamaño del tablero
-        CreateButtons();
+        ResizeElements();
 
         return true;
     }
@@ -79,7 +78,7 @@ public class GameScene extends AbstractScene {
         _gameWidth = super.getGameWidth();
         _gameHeight = super.getGameHeight();
 
-        CreateButtons();
+        ResizeElements();
     }
 
     @Override
@@ -279,7 +278,7 @@ public class GameScene extends AbstractScene {
 
     }
 
-    private void CreateButtons()
+    private void ResizeElements()
     {
         ChangeSceneButton auxVictoria;
         ChangeSceneButton auxRendirse;

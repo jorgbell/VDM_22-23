@@ -23,7 +23,7 @@ public class HistoriaScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
 
-        CreateButtons();
+        ResizeElements();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
@@ -51,7 +51,7 @@ public class HistoriaScene extends AbstractScene {
         _w = super.getGameWidth();
         _h = super.getGameHeight();
 
-        CreateButtons();
+        ResizeElements();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class HistoriaScene extends AbstractScene {
 
     }
 
-    void CreateButtons()
+    void ResizeElements()
     {
         for (int i = 0; i < _categoriesButtons.length; i++)
         {

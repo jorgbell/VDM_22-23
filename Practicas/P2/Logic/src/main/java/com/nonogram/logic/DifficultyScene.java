@@ -24,7 +24,7 @@ public class DifficultyScene extends AbstractScene {
         _w = getGameWidth();
         //Crea los botones de los diferentes tableros
 
-        CreateButtons();
+        ResizeElements();
 
         return true;
     }
@@ -66,7 +66,7 @@ public class DifficultyScene extends AbstractScene {
         _w = super.getGameWidth();
         _h = super.getGameHeight();
 
-        CreateButtons();
+        ResizeElements();
     }
 
     @Override
@@ -91,7 +91,7 @@ public class DifficultyScene extends AbstractScene {
 
     }
 
-    void CreateButtons()
+    void ResizeElements()
     {
         for (int i = 0; i < _botonesSizes.length; i++)
         {

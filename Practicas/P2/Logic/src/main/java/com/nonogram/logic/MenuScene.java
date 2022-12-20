@@ -155,6 +155,8 @@ public class MenuScene extends AbstractScene {
         _preferences.currentLifes++;
     }
 
+    void ResizeElements(){}
+
     int _h;
     int _w;
     Font _f1;

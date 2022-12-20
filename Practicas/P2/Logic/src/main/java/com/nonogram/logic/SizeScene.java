@@ -29,7 +29,7 @@ public class SizeScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
 
-        CreateButtons();
+        ResizeElements();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
@@ -54,7 +54,7 @@ public class SizeScene extends AbstractScene {
         _w = super.getGameWidth();
         _h = super.getGameHeight();
 
-        CreateButtons();
+        ResizeElements();
 
         if(!super.landscape) _botonVolver.setDimensions(_w / 10, _h / 20 , _w * 2 / 7, _h / 15);
 
@@ -106,7 +106,7 @@ public class SizeScene extends AbstractScene {
 
     }
 
-    private void CreateButtons()
+    private void ResizeElements()
     {
         for (int i = 0; i < _botonesSizes.length; i++)
         {
