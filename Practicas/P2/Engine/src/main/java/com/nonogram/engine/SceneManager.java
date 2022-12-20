@@ -54,9 +54,8 @@ public class SceneManager {
         int aux = _gameHeight;
         _gameHeight = _gameWidth;
         _gameWidth = aux;
-        for(Scene s : sceneStack){
-            s.rotate();
-        }
+
+        sceneStack.peek().rotate();
     }
 
     public void setGameSize(int w, int h){
@@ -88,6 +87,7 @@ public class SceneManager {
         }
         handelClosingNotifications();
         sceneStack.pop();
+        sceneStack.peek().init();
         return true;
     }
 
