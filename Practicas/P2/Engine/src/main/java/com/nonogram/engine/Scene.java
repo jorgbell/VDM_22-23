@@ -14,4 +14,5 @@ public interface Scene {
     void ResizeElements();
     void handleClosingNotifications();
     void handleOpeningNotifications();
+    void handleAdd();
 }

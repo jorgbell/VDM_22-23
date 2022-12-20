@@ -1,5 +1,6 @@
 package com.nonogram.androidengine;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -16,9 +17,11 @@ import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    public AndroidGraphics(AppCompatActivity c) {
+    public AndroidGraphics(AppCompatActivity c, SurfaceView view) {
         super();
         _context = c;
+        _renderView = view;
+
     }
     @Override
     public boolean init() {
@@ -26,9 +29,9 @@ public class AndroidGraphics extends AbstractGraphics {
             System.err.println("AppCompactActivity null");
             return false;
         }
-        _renderView = new SurfaceView(_context);
+        //_context.setContentView(_renderView);
+
         _paint = new Paint();
-        _context.setContentView(_renderView);
         _holder = _renderView.getHolder();
         return true;
     }
@@ -119,6 +122,13 @@ public class AndroidGraphics extends AbstractGraphics {
         _paint.setTypeface(f._font);
         _paint.setTextSize(_actualFont.getSize());
         _paint.setTextAlign(Paint.Align.CENTER);
+    }
+
+    @Override
+    public boolean isWindowInitialized() {
+        if(getWindowHeight() != 0 && getWindowWidth() != 0)
+            return true;
+        return false;
     }
 
     @Override

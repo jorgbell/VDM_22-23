@@ -281,6 +281,12 @@ public class GameScene extends AbstractScene {
     }
 
     @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
+
+    }
+
+    @Override
     public void ResizeElements()
     {
         _gameHeight = getGameHeight();

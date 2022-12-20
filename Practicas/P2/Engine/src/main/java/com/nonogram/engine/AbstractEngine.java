@@ -20,7 +20,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         public String _JSONPath;
     }
 
-    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
+    protected AbstractEngine(Graphics g, Input i, Audio a, JSONManager j, AdManager aM, AbstractSensors s, NotificationMngr nmng, IntentManager in, EnginePaths paths) {
         _mySceneManager = new SceneManager(this);
         _myPaths = paths;
         _myInput = i;
@@ -30,15 +30,17 @@ public abstract class AbstractEngine implements Engine, Runnable {
         _mySensors = s;
         _myNotificationManager = nmng;
         _myIntentManager = in;
+        _myAdManager = aM;
     }
 
     @Override
     public boolean init(){
 
         _myGraphics.setEngine(this);
+        _myAdManager.setSceneManager(_mySceneManager);
         _myAudio.setPath(_myPaths._audioPath);
 
-        if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput)){
+        if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput) || !_myAdManager.init()){
             return false;
         }
         return true;
@@ -71,6 +73,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public NotificationMngr getNotificationManager() {
         return _myNotificationManager;
+    }
+
+    @Override
+    public AdManager getAdManager() {
+        return _myAdManager;
     }
 
     @Override
@@ -183,6 +190,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected JSONManager _myJSONManager;
     protected NotificationMngr _myNotificationManager;
     protected IntentManager _myIntentManager;
+    protected AdManager _myAdManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
     protected Stack<NotificationData> closingNotifications = new Stack<NotificationData>();

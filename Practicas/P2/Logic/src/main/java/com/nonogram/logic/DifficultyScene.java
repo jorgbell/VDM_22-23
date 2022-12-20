@@ -72,6 +72,9 @@ public class DifficultyScene extends AbstractScene {
     @Override
     public boolean release() {
         persist();
+        if (!_myEngine.getAdManager().isBannerOn()) {
+            _myEngine.getAdManager().createBanner();
+        }
         return true;
     }
 
@@ -145,6 +148,12 @@ public class DifficultyScene extends AbstractScene {
         }
 
         else _botonVolver.setDimensions(auxVolver._rect._x, auxVolver._rect._y, auxVolver._rect._w, auxVolver._rect._h);
+    }
+
+    @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
+
     }
 
     int _h;

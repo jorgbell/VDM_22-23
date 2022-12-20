@@ -13,6 +13,7 @@ public class MenuScene extends AbstractScene {
     public MenuScene(int gameWidth, int gameHeight) {
         super(gameWidth, gameHeight);
     }
+
     public MenuScene() {
         super();
     }
@@ -29,6 +30,9 @@ public class MenuScene extends AbstractScene {
             //añade la paleta default en caso de no tenerlas guardadas de una partida anterior
             LogicJSON.Palette.AddPaletteToList(_preferences.unlockedPalettes, allPalettes[0]);
         }
+//        if (!_myEngine.getAdManager().isBannerOn()) {
+//            _myEngine.getAdManager().createBanner();
+//        }
         _myEngine.getGraphics().setBGColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).bgColor));
         Sound sound = _myEngine.getAudio().newSound("bgm.wav");
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 30, true);
@@ -96,7 +100,7 @@ public class MenuScene extends AbstractScene {
 
     public static boolean UnlockNewPalette(int levelPlayed) {
         //desbloqueara una paleta cada UNLOCK_PALETTE_EVERY niveles
-        int unlock = (levelPlayed+1)%UNLOCK_PALETTE_EVERY;
+        int unlock = (levelPlayed + 1) % UNLOCK_PALETTE_EVERY;
         if (_preferences.unlockedPalettes.size() < allPalettes.length - 1 && unlock == 0) { //restamos uno ya que la paleta default son dos paletas (light y dark)
             //siempre tendrá como minimo una paleta desbloqueada (default), por lo que se puede acceder a la nueva paleta haciendo unlocked.size()+1
             //ejemplo: tiene 1 paleta desbloqueada (light y dark, posiciones 0 y 1 de allpaletes), por lo que se accede a la siguiente con allPaletes[2]
@@ -110,10 +114,14 @@ public class MenuScene extends AbstractScene {
     public void processInput(Input.TouchEvent input) {
         switch (input.get_type()) {
             case CLICK_CORTO:
-                if (_botonJugar._rect.contains(input.get_posX(), input.get_posY()))
+                if (_botonJugar._rect.contains(input.get_posX(), input.get_posY())){
                     _botonJugar.handleEvent(input);
-                if (_botonHistoria._rect.contains(input.get_posX(), input.get_posY()))
+                    //_myEngine.getAdManager().deleteBanner();
+                }
+                if (_botonHistoria._rect.contains(input.get_posX(), input.get_posY())){
                     _botonHistoria.handleEvent(input);
+                    //_myEngine.getAdManager().deleteBanner();
+                }
                 if (_botonPaletas._rect.contains(input.get_posX(), input.get_posY())) {
                     _botonPaletas.handleEvent(input);
                 }
@@ -143,6 +151,11 @@ public class MenuScene extends AbstractScene {
 
     @Override
     public void handleOpeningNotifications() {
+        _preferences.currentLifes++;
+    }
+
+    @Override
+    public void handleAdd() {
         _preferences.currentLifes++;
     }
 

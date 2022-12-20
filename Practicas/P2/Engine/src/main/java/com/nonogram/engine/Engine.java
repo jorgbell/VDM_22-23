@@ -10,6 +10,7 @@ public interface Engine {
     NotificationMngr getNotificationManager();
     AbstractSensors getSensors();
     IntentManager getIntentManager();
+    AdManager getAdManager();
     double getDeltaTime();
     boolean stop();
     void close();
