@@ -35,7 +35,11 @@ public class AndroidLauncher extends AppCompatActivity {
         //inicializamos el tamaño del scenemanager para darle el tamaño al resto de escenas a partir de ahi
         //valores similares a los que teniamos previamente para poder verlo todo mejor hasta que redimensionemos los objetos bien
         int fullw = (int) (Resources.getSystem().getDisplayMetrics().widthPixels * 0.4);
-        int fullh = (int)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
+        int fullh = (int) (Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
+
+        if(fullw > fullh)  fullw = (int)(fullh / 0.602);
+        else if(fullw < fullh)  fullh = (int)(fullw / 0.6);
+
         _myEngine.getSceneManager().setGameSize(fullw,fullh);
         //inicializamos la primera escena
         MenuScene sceneinicial = new MenuScene(fullw,fullh);
