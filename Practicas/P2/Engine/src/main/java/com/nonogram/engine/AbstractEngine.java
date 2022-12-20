@@ -45,6 +45,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     @Override
+    public void close(){
+        System.exit(0);
+    }
+
+    @Override
     public AbstractSensors getSensors() {
         return _mySensors;
     }
@@ -85,7 +90,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public boolean stop() {
         _running = false;
         release();
-        System.exit(0);
         return true;
     }
 
@@ -108,6 +112,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
             _mySceneManager.getInput();
             _myGraphics.render();
         }
+
     }
 
     @Override

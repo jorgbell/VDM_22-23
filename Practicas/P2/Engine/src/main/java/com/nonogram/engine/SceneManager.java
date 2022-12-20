@@ -16,9 +16,7 @@ public class SceneManager {
     }
 
     public void update(double deltaTime) {
-        if (sceneStack.size() == 0)
-            _myEngine.stop();
-        else
+        if (sceneStack.size() != 0)
             sceneStack.peek().update(deltaTime);
     }
 
@@ -109,6 +107,10 @@ public class SceneManager {
             return true;
         }
         return false;
+    }
+
+    public boolean empty(){
+        return sceneStack.empty();
     }
 
     Stack<Scene> sceneStack;

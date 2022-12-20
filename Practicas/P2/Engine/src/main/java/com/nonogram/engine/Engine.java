@@ -12,6 +12,7 @@ public interface Engine {
     IntentManager getIntentManager();
     double getDeltaTime();
     boolean stop();
+    void close();
     void resume();
     void pause();
     boolean release();

@@ -7,8 +7,10 @@ import com.nonogram.engine.AbstractSensors;
 
 public class AndroidEngine extends AbstractEngine{
 
+    AppCompatActivity activity;
     public AndroidEngine(AppCompatActivity context){
         super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), new AndroidJSONManager(), new AndroidSensors(context), new AndroidNotificationManager(context),  new AndroidIntentManager(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/", "JSON/"));
+        activity = context;
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         ((AndroidAudio)_myAudio)._assetManager = aG._context.getAssets();
         ((AndroidJSONManager)_myJSONManager)._context = aG._context;
@@ -20,5 +22,12 @@ public class AndroidEngine extends AbstractEngine{
     public AndroidNotificationManager getAndroidNotificationManager(){
         AndroidNotificationManager anmng = (AndroidNotificationManager) getNotificationManager();
         return anmng;
+    }
+
+    @Override
+    public boolean stop() {
+        super.stop();
+        activity.finishAndRemoveTask();
+        return true;
     }
 }

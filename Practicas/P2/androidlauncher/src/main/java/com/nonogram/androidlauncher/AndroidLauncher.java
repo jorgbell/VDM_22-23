@@ -30,7 +30,7 @@ public class AndroidLauncher extends AppCompatActivity {
         _myEngine = new AndroidEngine(this);
         //manejo de errores: si se crea mal algo, para antes de empezar.
         if(!_myEngine.init()){
-            _myEngine.stop();
+            _myEngine.close();
         }
         //inicializamos el tamaño del scenemanager para darle el tamaño al resto de escenas a partir de ahi
         //valores similares a los que teniamos previamente para poder verlo todo mejor hasta que redimensionemos los objetos bien
@@ -44,7 +44,7 @@ public class AndroidLauncher extends AppCompatActivity {
         //inicializamos la primera escena
         MenuScene sceneinicial = new MenuScene(fullw,fullh);
         if(!_myEngine.getSceneManager().push(sceneinicial)){
-            _myEngine.stop();
+            _myEngine.close();
         }
 
         //detecta si ha entrado mediante una notificacion
@@ -67,13 +67,15 @@ public class AndroidLauncher extends AppCompatActivity {
         super.onPause();
         _myEngine.getSensors().unregisterAll();
         _myEngine.pause();
-        handleClosingNotifications();
-
     }
 
     @Override
     public void onBackPressed() {
         _myEngine.getSceneManager().pop();
+        if(_myEngine.getSceneManager().empty()){
+            handleClosingNotifications();
+            _myEngine.stop();
+        }
     }
 
     @Override
@@ -95,12 +97,14 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         _myEngine.stop();
+        handleClosingNotifications();
         super.onDestroy();
     }
 
     @Override
     protected void onStop() {
         _myEngine.pause();
+        handleClosingNotifications();
         super.onStop();
     }
 
