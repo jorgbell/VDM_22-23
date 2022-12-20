@@ -130,8 +130,14 @@ public class GameScene extends AbstractScene {
         } else //fin de la partida
         {
             String finalText;
-            if (!_won) finalText = "HAS PERDIDO";
-            else finalText = "ENHORABUENA";
+            if (!_won){
+                finalText = "HAS PERDIDO";
+                _botonAd.render(_myEngine.getGraphics());
+            }
+            else{
+                finalText = "ENHORABUENA";
+                if (!_generado) _botonCompartir.render(_myEngine.getGraphics());
+            }
             _f.setSize(40);
             _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
             _myEngine.getGraphics().drawText(finalText, _finalTextX, _finalTextY);
@@ -145,7 +151,6 @@ public class GameScene extends AbstractScene {
             _messageFont.setSize((int)(_messageFont.getSize() / 0.8));
             _myEngine.getGraphics().setActualFont(_f);
             _botonVictoria.render(_myEngine.getGraphics());
-            if (!_generado) _botonCompartir.render(_myEngine.getGraphics());
         }
 
         for (int i = 0; i < _columns; i++) //renderizado de las casillas fisicas
@@ -208,8 +213,11 @@ public class GameScene extends AbstractScene {
         } else {
             if (_botonVictoria._rect.contains(input.get_posX(), input.get_posY()))
                 _botonVictoria.handleEvent(input);
-            if (!_generado && _botonCompartir._rect.contains(input.get_posX(), input.get_posY()))
+            if(_won && !_generado && _botonCompartir._rect.contains(input.get_posX(), input.get_posY()))
                 _botonCompartir.handleEvent(input);
+            if(!_won && _botonAd._rect.contains(input.get_posX(), input.get_posY()))
+                _botonAd.handleEvent(input);
+
         }
     }
 
@@ -293,6 +301,7 @@ public class GameScene extends AbstractScene {
         _gameWidth = getGameWidth();
         ChangeSceneButton auxVictoria;
         ChangeSceneButton auxRendirse;
+        RewarderButton auxAd;
         ShareImageButton auxCompartir;
 
         // Valores a cambiar
@@ -312,6 +321,7 @@ public class GameScene extends AbstractScene {
 
             auxVictoria =  new ChangeSceneButton(_gameWidth / 6, _gameHeight * 17 / 20, _gameWidth * 2 / 6, _gameHeight / 10, null);
             auxRendirse =  new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 7, _gameHeight / 15, null);
+            auxAd = new RewarderButton(_gameWidth * 11 / 20, _gameHeight * 17 / 20, _gameWidth * 2 / 5, _gameHeight / 10);
             auxCompartir = new ShareImageButton(_gameWidth * 11 / 20, _gameHeight * 17 / 20, _gameWidth * 2 / 5, _gameHeight / 10, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
 
         }
@@ -330,6 +340,7 @@ public class GameScene extends AbstractScene {
 
             auxVictoria =  new ChangeSceneButton(_gameWidth / 15, _gameHeight * 8 / 10, _gameHeight * 3 / 7, _gameWidth / 15, null);
             auxRendirse =  new ChangeSceneButton(_gameWidth / 20, _gameHeight / 15, _gameWidth /7, _gameHeight / 8, null);
+            auxAd = new RewarderButton(_gameWidth / 15, _gameHeight * 13 / 20, _gameHeight * 3 / 7, _gameWidth / 15);
             auxCompartir = new ShareImageButton(_gameWidth / 15, _gameHeight * 13 / 20, _gameHeight * 3 / 7, _gameWidth / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
 
         }
@@ -362,6 +373,12 @@ public class GameScene extends AbstractScene {
         }
         else _botonVictoria.setDimensions(auxVictoria._rect._x, auxVictoria._rect._y, auxVictoria._rect._w, auxVictoria._rect._h);
 
+        if(_botonAd == null){
+            _botonAd = auxAd;
+            _botonAd.addText("+1 Vida");
+        }
+        else _botonAd.setDimensions(auxAd._rect._x, auxAd._rect._y, auxAd._rect._w, auxAd._rect._h);
+
         if (!_generado) {
             if(_botonCompartir == null){
                 _botonCompartir = auxCompartir;
@@ -369,6 +386,7 @@ public class GameScene extends AbstractScene {
             }
             else _botonCompartir.setDimensions(auxCompartir._rect._x, auxCompartir._rect._y, auxCompartir._rect._w, auxCompartir._rect._h);
         }
+
 
     }
 
@@ -409,6 +427,7 @@ public class GameScene extends AbstractScene {
     CasillaButton[][] _casillas;
     ChangeSceneButton _botonRendirse;
     ChangeSceneButton _botonVictoria;
+    RewarderButton _botonAd;
     ShareImageButton _botonCompartir;
 
     boolean _generado;
