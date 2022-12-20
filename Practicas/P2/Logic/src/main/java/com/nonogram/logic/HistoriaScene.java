@@ -23,11 +23,11 @@ public class HistoriaScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
 
-        ResizeElements();
-
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+
+        ResizeElements();
 
         return true;
     }
@@ -117,6 +117,7 @@ public class HistoriaScene extends AbstractScene {
             int x;
             int y;
             int w;
+            ChangeSceneButton auxVolver;
 
             if(!super.landscape){
                 x = (_w / 7) * (1 + i % 2 * 3);
@@ -124,6 +125,7 @@ public class HistoriaScene extends AbstractScene {
                 w = _w / 4;
                 textY=_h /6;
                 _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15 , false);
+                auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
 
             }
 
@@ -134,6 +136,7 @@ public class HistoriaScene extends AbstractScene {
                 textY=_h /4;
 
                 _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
+                auxVolver = new ChangeSceneButton( _w / 20, _h / 15, _w / 7, _h / 8, null);
 
             }
 
@@ -151,6 +154,15 @@ public class HistoriaScene extends AbstractScene {
             }
 
             else _categoriesButtons[i].setDimensions(x, y, w, w);
+
+            if(_botonVolver == null){
+                _botonVolver = auxVolver;
+                _botonVolver.addText("Volver");
+                _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+            }
+
+            else _botonVolver.setDimensions(auxVolver._rect._x, auxVolver._rect._y, auxVolver._rect._w, auxVolver._rect._h);
+
         }
     }
 

@@ -25,15 +25,14 @@ public class SizeScene extends AbstractScene {
         if(_f == null || _volverImage == null)
             return false;
 
-
         _h = getGameHeight();
         _w = getGameWidth();
-
-        ResizeElements();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
         _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+
+        ResizeElements();
 
         return true;
     }
@@ -56,9 +55,6 @@ public class SizeScene extends AbstractScene {
 
         ResizeElements();
 
-        if(!super.landscape) _botonVolver.setDimensions(_w / 10, _h / 20 , _w * 2 / 7, _h / 15);
-
-        else _botonVolver.setDimensions(_w / 10, _h / 20 , _h * 2 / 7, _w / 15);
     }
 
     @Override
@@ -113,6 +109,7 @@ public class SizeScene extends AbstractScene {
             int x = 0;
             int y = 0;
             int w = 0;
+            ChangeSceneButton auxVolver;
 
             if(!super.landscape) {
                 x = (_w / 7) * (1 + i % 2 * 3);
@@ -120,6 +117,7 @@ public class SizeScene extends AbstractScene {
                 w = _w / 4;
                 _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15 , false);
                 textY=_h /6;
+                auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
             }
 
             else{
@@ -128,7 +126,7 @@ public class SizeScene extends AbstractScene {
                 w = _h / 4;
                 _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20 , false);
                 textY=_h /4;
-
+                auxVolver = new ChangeSceneButton( _w / 20, _h / 15, _w / 7, _h / 8, null);
             }
 
             if(_botonesSizes[i] == null) {
@@ -142,6 +140,14 @@ public class SizeScene extends AbstractScene {
             }
 
             else _botonesSizes[i].setDimensions(x, y, w, w);
+            if(_botonVolver == null){
+                _botonVolver = auxVolver;
+                _botonVolver.addText("Volver");
+                _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+            }
+
+            else _botonVolver.setDimensions(auxVolver._rect._x, auxVolver._rect._y, auxVolver._rect._w, auxVolver._rect._h);
+
         }
     }
 

@@ -133,7 +133,7 @@ public class DifficultyScene extends AbstractScene {
 
         if(!super.landscape) auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
 
-        else auxVolver = new ChangeSceneButton( _w / 20, _h / 15 , _w  / 7, _h / 10, null);
+        else auxVolver = new ChangeSceneButton( _w / 20, _h / 15 , _w  / 7, _h / 8, null);
 
         if(_botonVolver == null) {
             _botonVolver = auxVolver;
