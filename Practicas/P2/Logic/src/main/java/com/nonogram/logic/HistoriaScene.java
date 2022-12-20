@@ -18,23 +18,10 @@ public class HistoriaScene extends AbstractScene {
         if(_f == null || _volverImage == null)
             return false;
 
-
         _h = getGameHeight();
         _w = getGameWidth();
-        //Crea los botones de los diferentes tableros
-        for (int i = 0; i < _categoriesButtons.length; i++)
-        {
-            int size = _preferences.cats[i].boardSize;
-            Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i]);
-            _categoriesButtons[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
 
-            if (i > _preferences.unlockedCats-1) {
-                _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
-            }
-            else if(i<=_preferences.unlockedCats-1){
-                _categoriesButtons[i].addText(size + "x" +  size);
-            }
-        }
+        CreateButtons();
 
         _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
@@ -61,6 +48,8 @@ public class HistoriaScene extends AbstractScene {
         super.rotate();
         _w = super.getGameWidth();
         _h = super.getGameHeight();
+
+        CreateButtons();
     }
 
     @Override
@@ -117,6 +106,43 @@ public class HistoriaScene extends AbstractScene {
         int size = _preferences.cats[i].boardSize;
         _categoriesButtons[i].addText(size + "x" +  size);
 
+    }
+
+    void CreateButtons()
+    {
+        for (int i = 0; i < _categoriesButtons.length; i++)
+        {
+            int x;
+            int y;
+            int w;
+
+            if(!super.landscape){
+                x = (_w / 20 + 150) * (1 + i % 2) - 100;
+                y = _h * (1 + i / 2) / 4;
+                w = _w / 4;
+            }
+
+            else {
+                x =  _w / 15 + (_w * 2 / 9) * i;
+                y = _h / 2;
+                w = _w * 2 / 11;
+            }
+
+            if(_categoriesButtons[i] == null){
+                int size = _preferences.cats[i].boardSize;
+                Scene s = new CatScene(getGameWidth(), getGameHeight(), size, this, _preferences.cats[i]);
+                _categoriesButtons[i] = new ChangeSceneButton(x, y, w, w, s);
+
+                if (i > _preferences.unlockedCats-1) {
+                    _categoriesButtons[i].addImage(_candadoImage,0.8, Button.ImagePos.CENTERED);
+                }
+                else if(i<=_preferences.unlockedCats-1){
+                    _categoriesButtons[i].addText(size + "x" +  size);
+                }
+            }
+
+            else _categoriesButtons[i].setDimensions(x, y, w, w);
+        }
     }
 
     int _h;

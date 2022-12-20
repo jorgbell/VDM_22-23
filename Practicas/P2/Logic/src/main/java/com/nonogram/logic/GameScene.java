@@ -4,6 +4,7 @@ import com.nonogram.engine.AbstractScene;
 import com.nonogram.engine.Font;
 import com.nonogram.engine.Image;
 import com.nonogram.engine.Input;
+import com.nonogram.engine.Scene;
 
 public class GameScene extends AbstractScene {
 
@@ -60,34 +61,7 @@ public class GameScene extends AbstractScene {
         _maxDimension = Math.max(_columns, _rows);
 
         //init tamaño del tablero
-        _tableroSize = (_gameWidth / 20) * 14;
-        _tileSize = _tableroSize / _maxDimension;
-        _tableroX = (_gameWidth / 20) * 5;
-        _tableroY = (_gameHeight / 20) * 8;
-        _numberFontSize = 45 - (int) (5.7 * (Math.log(_maxDimension) / Math.log(1.595)));
-        _myEngine.getGraphics().setActualFont(_f);
-
-        for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
-        {
-            for (int j = 0; j < _rows; j++) {
-                _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
-            }
-        }
-
-        //botones de ui
-        _botonRendirse = new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, null);
-        _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
-        _botonRendirse.addText("Volver");
-
-
-        _botonVictoria = new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 8 / 10, _gameWidth * 2 / 7, _gameHeight / 15, null);
-        _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
-        _botonVictoria.addText("Volver");
-
-        if (!_generado) {
-            _botonCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 8 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
-            _botonCompartir.addText("Compartir");
-        }
+        CreateButtons();
 
         return true;
     }
@@ -103,6 +77,8 @@ public class GameScene extends AbstractScene {
         super.rotate();
         _gameWidth = super.getGameWidth();
         _gameHeight = super.getGameHeight();
+
+        CreateButtons();
     }
 
     @Override
@@ -160,7 +136,7 @@ public class GameScene extends AbstractScene {
             else finalText = "ENHORABUENA";
             _f.setSize(40);
             _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).textColor));
-            _myEngine.getGraphics().drawText(finalText, _gameWidth / 2, _gameHeight / 4);
+            _myEngine.getGraphics().drawText(finalText, _finalTextX, _finalTextY);
             _f.setSize(20);
             if (paletaDesbloqueada) {
                 _myEngine.getGraphics().drawText("¡Desbloqueaste una nueva paleta!", _gameWidth / 2, _gameHeight / 8);
@@ -302,6 +278,73 @@ public class GameScene extends AbstractScene {
 
     }
 
+    private void CreateButtons()
+    {
+        ChangeSceneButton auxVictoria;
+        ChangeSceneButton auxRendirse;
+        ShareImageButton auxCompartir;
+
+        // Valores a cambiar
+        if(!super.landscape) {
+            _tableroSize = (_gameWidth / 20) * 14;
+            _tableroX = (_gameWidth / 20) * 5;
+            _tableroY = (_gameHeight / 20) * 8;
+            _finalTextX = _gameWidth / 2;
+            _finalTextY = _gameHeight / 4;
+
+            auxVictoria =  new ChangeSceneButton(_gameWidth * 2 / 5, _gameHeight * 9 / 10, _gameWidth * 2 / 7, _gameHeight / 15, null);
+            auxRendirse =  new ChangeSceneButton(_gameWidth / 10, _gameHeight / 20, _gameWidth * 2 / 5, _gameHeight / 15, null);
+            auxCompartir = new ShareImageButton(_gameWidth * 4 / 5, _gameHeight * 9 / 10, _gameWidth * 1 / 7, _gameHeight / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+        }
+        else {
+            _tableroSize = (_gameHeight / 20) * 14;
+            _tableroX = (_gameWidth / 20) * 8;
+            _tableroY = (_gameHeight / 20) * 4;
+            _finalTextX = _gameWidth / 5;
+            _finalTextY = _gameHeight * 2 / 5;
+
+            auxVictoria =  new ChangeSceneButton(_gameWidth / 15, _gameHeight * 8 / 10, _gameHeight * 3 / 7, _gameWidth / 15, null);
+            auxRendirse =  new ChangeSceneButton(_gameWidth / 15, _gameHeight / 20, _gameHeight * 1 / 5, _gameWidth / 15, null);
+            auxCompartir = new ShareImageButton(_gameWidth / 15, _gameHeight * 13 / 20, _gameHeight * 3 / 7, _gameWidth / 15, _myEngine.getIntentManager(), _rows + "x" + _columns + "/" + _level + ".png");
+        }
+
+        _tileSize = _tableroSize / _maxDimension;
+        _numberFontSize = 45 - (int) (5.7 * (Math.log(_maxDimension) / Math.log(1.595)));
+
+        for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
+        {
+            for (int j = 0; j < _rows; j++) {
+
+                if(_casillas[i][j] == null) _casillas[i][j] = new CasillaButton(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2, _t.getCasilla(j, i));
+                else _casillas[i][j].setDimensions(_tableroX + _tileSize * i, _tableroY + _tileSize * j, _tileSize - 2, _tileSize - 2);
+            }
+        }
+
+        _myEngine.getGraphics().setActualFont(_f);
+
+        if(_botonRendirse == null) {
+            _botonRendirse = auxRendirse;
+            _botonRendirse.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
+            _botonRendirse.addText("Volver");
+        }
+        else _botonRendirse.setDimensions(auxRendirse._rect._x, auxRendirse._rect._y, auxRendirse._rect._w, auxRendirse._rect._h);
+
+        if(_botonVictoria == null) {
+            _botonVictoria = auxVictoria;
+            _botonVictoria.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
+            _botonVictoria.addText("Volver");
+        }
+        else _botonVictoria.setDimensions(auxVictoria._rect._x, auxVictoria._rect._y, auxVictoria._rect._w, auxVictoria._rect._h);
+
+        if (!_generado) {
+            if(_botonCompartir == null){
+                _botonCompartir = auxCompartir;
+                _botonCompartir.addText("Compartir");
+            }
+            else _botonCompartir.setDimensions(auxCompartir._rect._x, auxCompartir._rect._y, auxCompartir._rect._w, auxCompartir._rect._h);
+        }
+    }
+
     Tablero _t;
     int _gameHeight;
     int _gameWidth;
@@ -318,6 +361,9 @@ public class GameScene extends AbstractScene {
     int _tileSize;
     int _tableroX;
     int _tableroY;
+
+    int _finalTextX;
+    int _finalTextY;
 
     String _file;
     Font _f;
