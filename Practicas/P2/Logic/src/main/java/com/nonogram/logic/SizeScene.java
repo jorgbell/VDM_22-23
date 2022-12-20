@@ -132,7 +132,7 @@ public class SizeScene extends AbstractScene {
                 int columnNumber = _sizes[i][1];
                 //int size = 5 * (i + 1);
                 Scene s = new GameScene(rowNumber, columnNumber, _solvablePercentage, _preferences);
-                _botonesSizes[i] = new ChangeSceneButton((_w / 20 + 150) * (1 + i % 2) - 100, _h * (1 + i / 2) / 4, _w / 4, _w / 4, s);
+                _botonesSizes[i] = new ChangeSceneButton(x, y, w, w, s);
                 _botonesSizes[i].addText(rowNumber + "x" + columnNumber);
             }
 
