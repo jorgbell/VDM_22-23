@@ -87,7 +87,7 @@ public class SceneManager {
         }
         handelClosingNotifications();
         sceneStack.pop();
-        sceneStack.peek().init();
+        if(!sceneStack.empty())sceneStack.peek().init();
         return true;
     }
 

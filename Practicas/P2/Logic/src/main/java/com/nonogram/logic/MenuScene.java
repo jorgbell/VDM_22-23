@@ -182,7 +182,8 @@ public class MenuScene extends AbstractScene {
 
         else _botonHistoria.setDimensions(auxHistoria._rect._x, auxHistoria._rect._y, auxHistoria._rect._w, auxHistoria._rect._h);
 
-        if(_botonPaletas == null) _botonPaletas = auxPaletas;
+        if(_botonPaletas == null){
+            _botonPaletas = auxPaletas;}
 
         else _botonPaletas.setDimensions(auxPaletas._rect._x, auxPaletas._rect._y, auxPaletas._rect._w, auxPaletas._rect._h);
     }
