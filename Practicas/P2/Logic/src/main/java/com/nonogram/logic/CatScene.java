@@ -132,11 +132,11 @@ public class CatScene extends AbstractScene {
             ChangeSceneButton auxVolver;
 
             if(!super.landscape) {
-                x = _w / 4 * (i % 4);
+                x = _w / 20 + _w / 4 * (i % 4);
                 y = _h * (1 + i / 4) / 6;
                 w = _w / 6;
 
-                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 20, false);
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15, false);
 
                 auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
             }
@@ -146,9 +146,9 @@ public class CatScene extends AbstractScene {
                 y = (_h + _h / 4) * (1 + i / 5) / 6;
                 w = _w / 10;
 
-                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _h / 20, false);
+                _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 30, false);
 
-                auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
+                auxVolver = new ChangeSceneButton( 0, _h / 20 , _w * 2 / 7, _h / 15, null);
             }
 
             if(_botones[i] == null) {
