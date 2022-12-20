@@ -3,16 +3,18 @@ package com.nonogram.engine;
 
 public abstract class AbstractScene implements Scene{
     public AbstractScene(int gameWidth, int gameHeight){
-        _gameWidth = gameWidth;
-        _gameHeight = gameHeight;
-        if(_gameHeight<_gameWidth)
-            landscape = true;
+//        _gameWidth = gameWidth;
+//        _gameHeight = gameHeight;
+//        if(_gameHeight<_gameWidth)
+//            landscape = true;
+//        System.out.println("Constructor 1: " + landscape);
     }
     public AbstractScene(){
-        _gameWidth = _myEngine.getSceneManager().getGameWidth();
-        _gameHeight = _myEngine.getSceneManager().getGameHeight();
-            if(_gameHeight<_gameWidth)
-                landscape = true;
+//        _gameWidth = _myEngine.getSceneManager().getGameWidth();
+//        _gameHeight = _myEngine.getSceneManager().getGameHeight();
+//            if(_gameHeight<_gameWidth)
+//                landscape = true;
+//        System.out.println("Constructor 2: " + landscape);
     }
 
     @Override
@@ -21,6 +23,7 @@ public abstract class AbstractScene implements Scene{
         _gameHeight = _myEngine.getSceneManager().getGameHeight();
         if(_gameHeight<_gameWidth)
             landscape = true;
+        System.out.println("init: " +  landscape);
         return true;
     }
 
@@ -30,6 +33,8 @@ public abstract class AbstractScene implements Scene{
         _gameWidth = _gameHeight;
         _gameHeight = aux;
         landscape = !landscape;
+        System.out.println("rotate: " + landscape);
+
     }
 
     @Override

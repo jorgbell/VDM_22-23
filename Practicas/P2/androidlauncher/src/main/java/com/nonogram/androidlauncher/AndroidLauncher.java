@@ -38,7 +38,7 @@ public class AndroidLauncher extends AppCompatActivity {
         int fullh = (int) (Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
 
         if(fullw > fullh)  fullw = (int)(fullh / 0.602);
-        else if(fullw < fullh)  fullh = (int)(fullw / 0.6);
+        else if(fullw < fullh)  fullh = (int)(fullw / 0.602);
 
         _myEngine.getSceneManager().setGameSize(fullw,fullh);
         //inicializamos la primera escena
