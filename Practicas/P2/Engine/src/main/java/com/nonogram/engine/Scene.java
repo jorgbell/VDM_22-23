@@ -13,4 +13,5 @@ public interface Scene {
     boolean persist();
     void handleClosingNotifications();
     void handleOpeningNotifications();
+    void handleAdd();
 }

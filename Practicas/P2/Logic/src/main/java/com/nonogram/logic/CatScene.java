@@ -8,9 +8,9 @@ import com.nonogram.engine.Scene;
 
 public class CatScene extends AbstractScene {
 
-    public CatScene(int gameWidth, int gameHeight, int size, HistoriaScene h,LogicJSON.Category thisc) {
+    public CatScene(int gameWidth, int gameHeight, int size, HistoriaScene h, LogicJSON.Category thisc) {
         super(gameWidth, gameHeight);
-        _size=size;
+        _size = size;
         thiscat = thisc;
         _preferences = MenuScene._preferences;
         _historiaScene = h;
@@ -24,37 +24,34 @@ public class CatScene extends AbstractScene {
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _candadoImage = _myEngine.getGraphics().newImage("lock.png");
         _newImage = _myEngine.getGraphics().newImage("new.png");
-        if(_f == null || _volverImage == null|| _candadoImage == null)
+        if (_f == null || _volverImage == null || _candadoImage == null)
             return false;
 
         _h = getGameHeight();
         _w = getGameWidth();
 
-        for(int i = 0; i< _botones.length; i++){
-            String path = _size+ "x"+_size+ "/" + i + ".png";
-            _boardsImages[i]=_myEngine.getGraphics().newImage(path);
+        for (int i = 0; i < _botones.length; i++) {
+            String path = _size + "x" + _size + "/" + i + ".png";
+            _boardsImages[i] = _myEngine.getGraphics().newImage(path);
 
             Scene s = new GameScene(_size, i, this);
-            _botones[i] = new ChangeSceneButton(_w/4*(i%4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, s);
+            _botones[i] = new ChangeSceneButton(_w / 4 * (i % 4), _h * (1 + i / 4) / 6, _w / 6, _w / 6, s);
 
             if (i > thiscat.actualLevel) {
-                _botones[i].addImage(_candadoImage,0.8,Button.ImagePos.CENTERED );
-            }
-            else if(i<thiscat.actualLevel){
-                _botones[i].addImage(_boardsImages[i],0.8,Button.ImagePos.CENTERED );
-            }
-            else{
-                _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
+                _botones[i].addImage(_candadoImage, 0.8, Button.ImagePos.CENTERED);
+            } else if (i < thiscat.actualLevel) {
+                _botones[i].addImage(_boardsImages[i], 0.8, Button.ImagePos.CENTERED);
+            } else {
+                _botones[i].addImage(_newImage, 0.8, Button.ImagePos.CENTERED);
             }
         }
-        if(thiscat.actualLevel >= thiscat.numLevels)
-            _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
+        if (thiscat.actualLevel >= thiscat.numLevels)
+            _botones[_botones.length - 1].addImage(_boardsImages[_botones.length - 1], 0.8, Button.ImagePos.CENTERED);
 
 
-
-        _botonVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
+        _botonVolver = new ChangeSceneButton(_w / 10, _h / 20, _w * 2 / 7, _h / 15, null);
         _botonVolver.addText("Volver");
-        _botonVolver.addImage(_volverImage,0.04, Button.ImagePos.LEFT);
+        _botonVolver.addImage(_volverImage, 0.04, Button.ImagePos.LEFT);
 
 
         return true;
@@ -79,13 +76,13 @@ public class CatScene extends AbstractScene {
 
     @Override
     public void processInput(Input.TouchEvent input) {
-        switch (input.get_type()){
+        switch (input.get_type()) {
             case CLICK_CORTO:
-                if(_botonVolver._rect.contains(input.get_posX(), input.get_posY())) _botonVolver.handleEvent(input);
+                if (_botonVolver._rect.contains(input.get_posX(), input.get_posY()))
+                    _botonVolver.handleEvent(input);
 
-                for(int i = 0; i < _botones.length; i++)
-                {
-                    if(_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i<=thiscat.actualLevel && _preferences.currentLifes>0)
+                for (int i = 0; i < _botones.length; i++) {
+                    if (_botones[i]._rect.contains(input.get_posX(), input.get_posY()) && i <= thiscat.actualLevel && _preferences.currentLifes > 0)
                         _botones[i].handleEvent(input);
                 }
                 break;
@@ -116,15 +113,20 @@ public class CatScene extends AbstractScene {
 
     }
 
-    public boolean increaseLevel(int levelPlayed){
-        if(thiscat.actualLevel < thiscat.numLevels && thiscat.actualLevel == levelPlayed){
-            _botones[thiscat.actualLevel].addImage(_boardsImages[thiscat.actualLevel],0.8,Button.ImagePos.CENTERED );
+    @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
+
+    }
+
+    public boolean increaseLevel(int levelPlayed) {
+        if (thiscat.actualLevel < thiscat.numLevels && thiscat.actualLevel == levelPlayed) {
+            _botones[thiscat.actualLevel].addImage(_boardsImages[thiscat.actualLevel], 0.8, Button.ImagePos.CENTERED);
             thiscat.actualLevel++;
-            if(thiscat.numLevels == thiscat.actualLevel){
+            if (thiscat.numLevels == thiscat.actualLevel) {
                 _historiaScene.increaseCat();
-            }
-            else{
-                _botones[thiscat.actualLevel].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
+            } else {
+                _botones[thiscat.actualLevel].addImage(_newImage, 0.8, Button.ImagePos.CENTERED);
             }
 
             //desbloquea nueva paleta en caso de haber sin desbloquear

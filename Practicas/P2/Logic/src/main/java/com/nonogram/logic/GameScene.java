@@ -295,6 +295,12 @@ public class GameScene extends AbstractScene {
 
     }
 
+    @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
+
+    }
+
     Tablero _t;
     int _gameHeight;
     int _gameWidth;

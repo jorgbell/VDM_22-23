@@ -11,6 +11,7 @@ public interface Graphics {
     //cambia la fuente actual
     void setActualFont(Font font);
     void setEngine(Engine e);
+    boolean isWindowInitialized();
 //------------------------------------------------//
     //getters
     //tamaños de la ventana

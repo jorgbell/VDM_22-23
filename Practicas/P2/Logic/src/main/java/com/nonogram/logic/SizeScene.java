@@ -100,6 +100,11 @@ public class SizeScene extends AbstractScene {
 
     }
 
+    @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
+    }
+
     int _h;
     int _w;
     Font _f;

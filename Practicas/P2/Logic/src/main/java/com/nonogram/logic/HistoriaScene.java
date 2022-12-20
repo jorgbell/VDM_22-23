@@ -81,6 +81,9 @@ public class HistoriaScene extends AbstractScene {
     @Override
     public boolean release() {
         persist();
+        if (!_myEngine.getAdManager().isBannerOn()) {
+            _myEngine.getAdManager().createBanner();
+        }
         return true;
     }
 
@@ -97,6 +100,12 @@ public class HistoriaScene extends AbstractScene {
 
     @Override
     public void handleOpeningNotifications() {
+
+    }
+
+    @Override
+    public void handleAdd() {
+        _preferences.currentLifes++;
 
     }
 

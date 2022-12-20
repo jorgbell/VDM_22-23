@@ -6,21 +6,30 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.android.gms.ads.rewarded.ServerSideVerificationOptions;
+import com.nonogram.androidengine.AndroidAdManager;
 import com.nonogram.androidengine.AndroidEngine;
 import com.nonogram.engine.NotificationData;
 import com.nonogram.logic.MenuScene;
@@ -30,38 +39,35 @@ import java.util.concurrent.TimeUnit;
 
 public class AndroidLauncher extends AppCompatActivity {
 
+    SurfaceView gameView;
+    AdView _mAdView;
+    RewardedAd mRewardedAd;
+    ConstraintLayout c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.androidlauncher);
-        SurfaceView gameView = findViewById(R.id.surfaceView);
+        c = (ConstraintLayout) findViewById(R.id.parent_linear_layout);
+
+
+        gameView = findViewById(R.id.surfaceView);
+        _mAdView = findViewById(R.id.adView);
         _myEngine = new AndroidEngine(this, gameView);
 
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                // cargamos los anuncios
-                AdView _mAdView = findViewById(R.id.adView);
-                AdRequest adRequest = new AdRequest.Builder().build();
-                _mAdView.loadAd(adRequest);
-            }
-        });
 
 
         //manejo de errores: si se crea mal algo, para antes de empezar.
         if(!_myEngine.init()){
             _myEngine.stop();
         }
-        //inicializamos el tamaño del scenemanager para darle el tamaño al resto de escenas a partir de ahi
-        //valores similares a los que teniamos previamente para poder verlo todo mejor hasta que redimensionemos los objetos bien
-        int fullw = (int) (Resources.getSystem().getDisplayMetrics().widthPixels * 0.4);
-        int fullh = (int)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.4);
-        _myEngine.getSceneManager().setGameSize(fullw,fullh);
+
+        ((AndroidAdManager)_myEngine.getAdManager()).setAdView(_mAdView, c);
+        _myEngine.getAdManager().loadAds();
+
+
+        _myEngine.getSceneManager().setGameSize(450,800);
         //inicializamos la primera escena
-        MenuScene sceneinicial = new MenuScene(fullw,fullh);
+        MenuScene sceneinicial = new MenuScene(450,800);
         if(!_myEngine.getSceneManager().push(sceneinicial)){
             _myEngine.stop();
         }
@@ -80,6 +86,8 @@ public class AndroidLauncher extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
     }
+
+
 
     @Override
     protected void onPause() {
@@ -108,7 +116,6 @@ public class AndroidLauncher extends AppCompatActivity {
         super.onResume();
         _myEngine.getSensors().registerAll();
         _myEngine.resume();
-
     }
 
     @Override
@@ -119,6 +126,8 @@ public class AndroidLauncher extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        int w = gameView.getMeasuredWidth();
+        int h = gameView.getMeasuredHeight();
         _myEngine.pause();
         super.onStop();
     }

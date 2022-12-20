@@ -15,6 +15,10 @@ public class SceneManager {
             sceneStack.peek().render();
     }
 
+    public void handleAdd(){
+        sceneStack.peek().handleAdd();
+    }
+
     public void update(double deltaTime) {
         if(sceneStack.size() == 0)
             _myEngine.stop();

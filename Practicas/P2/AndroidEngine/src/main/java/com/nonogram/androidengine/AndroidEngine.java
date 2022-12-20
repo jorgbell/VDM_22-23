@@ -1,9 +1,11 @@
 package com.nonogram.androidengine;
 
+import android.app.Activity;
 import android.view.SurfaceView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdView;
 import com.nonogram.engine.AbstractEngine;
 import com.nonogram.engine.AbstractSensors;
 

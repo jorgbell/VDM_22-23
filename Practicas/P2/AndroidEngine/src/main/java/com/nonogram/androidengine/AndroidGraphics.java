@@ -1,5 +1,6 @@
 package com.nonogram.androidengine;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -121,6 +122,13 @@ public class AndroidGraphics extends AbstractGraphics {
         _paint.setTypeface(f._font);
         _paint.setTextSize(_actualFont.getSize());
         _paint.setTextAlign(Paint.Align.CENTER);
+    }
+
+    @Override
+    public boolean isWindowInitialized() {
+        if(getWindowHeight() != 0 && getWindowWidth() != 0)
+            return true;
+        return false;
     }
 
     @Override

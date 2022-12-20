@@ -37,6 +37,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public boolean init(){
 
         _myGraphics.setEngine(this);
+        _myAdManager.setSceneManager(_mySceneManager);
         _myAudio.setPath(_myPaths._audioPath);
 
         if(!_myGraphics.init() || !_myGraphics.setInputListener(_myInput) || !_myAdManager.init()){
@@ -67,6 +68,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     @Override
     public NotificationMngr getNotificationManager() {
         return _myNotificationManager;
+    }
+
+    @Override
+    public AdManager getAdManager() {
+        return _myAdManager;
     }
 
     @Override
