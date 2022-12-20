@@ -11,6 +11,7 @@ public interface Scene {
     void rotate();
     boolean release();
     boolean persist();
+    void ResizeElements();
     void handleClosingNotifications();
     void handleOpeningNotifications();
 }

@@ -105,9 +105,12 @@ public class SizeScene extends AbstractScene {
     public void handleOpeningNotifications() {
 
     }
-
-    private void ResizeElements()
+    @Override
+    public void ResizeElements()
     {
+
+        _h = getGameHeight();
+        _w = getGameWidth();
         for (int i = 0; i < _botonesSizes.length; i++)
         {
             int x = 0;

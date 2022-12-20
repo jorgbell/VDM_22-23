@@ -135,6 +135,7 @@ public class MenuScene extends AbstractScene {
         return false;
     }
 
+
     @Override
     public void handleClosingNotifications() {
         _myEngine.addClosingNotification(new NotificationData("Nonogramas", "TE ECHAMOS DE MENOS!", "Entra ahora y consigue una vida extra GRATIS. Ven y disfruta de nuestros Nonogramas. Bombón", 2));
@@ -145,7 +146,11 @@ public class MenuScene extends AbstractScene {
         _preferences.currentLifes++;
     }
 
-    void ResizeElements(){
+    @Override
+    public void ResizeElements(){
+        _h = getGameHeight();
+        _w = getGameWidth();
+
         ChangeSceneButton auxJugar;
         ChangeSceneButton auxHistoria;
         ChangePaletteButton auxPaletas;

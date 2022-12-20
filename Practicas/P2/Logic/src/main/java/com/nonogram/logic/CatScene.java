@@ -121,9 +121,13 @@ public class CatScene extends AbstractScene {
         }
         return false;
     }
-
-    private void ResizeElements()
+    @Override
+    public void ResizeElements()
     {
+
+        _h = getGameHeight();
+        _w = getGameWidth();
+
         for (int i = 0; i < _botones.length; i++)
         {
             int x = 0;

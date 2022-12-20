@@ -90,9 +90,12 @@ public class DifficultyScene extends AbstractScene {
     public void handleOpeningNotifications() {
 
     }
-
-    void ResizeElements()
+    @Override
+    public void ResizeElements()
     {
+
+        _h = getGameHeight();
+        _w = getGameWidth();
         for (int i = 0; i < _botonesSizes.length; i++)
         {
             int x;
