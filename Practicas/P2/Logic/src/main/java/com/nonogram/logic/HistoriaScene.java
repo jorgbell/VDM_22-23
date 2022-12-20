@@ -121,6 +121,7 @@ public class HistoriaScene extends AbstractScene {
     @Override
     public void ResizeElements()
     {
+        super.ResizeElements();
 
         _h = getGameHeight();
         _w = getGameWidth();
