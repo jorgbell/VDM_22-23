@@ -57,6 +57,7 @@ public class MenuScene extends AbstractScene {
         _botonJugar.render(_myEngine.getGraphics());
         _botonHistoria.render(_myEngine.getGraphics());
         _botonPaletas.render(_myEngine.getGraphics());
+        _botonAd.render(_myEngine.getGraphics());
         _myEngine.getGraphics().drawText(String.valueOf(_myEngine.getSensors().getTemperature()) + "°C", _w / 2, tempY);
     }
 
@@ -163,20 +164,23 @@ public class MenuScene extends AbstractScene {
         ChangeSceneButton auxJugar;
         ChangeSceneButton auxHistoria;
         ChangePaletteButton auxPaletas;
+        RewarderButton auxAd;
 
         if(!super.landscape){
             auxJugar = new ChangeSceneButton(_w / 4, _h * 9 / 20, _w / 2, _h / 10, juegoScene);
             auxHistoria = new ChangeSceneButton(_w / 4, _h * 6 / 20, _w / 2, _h / 10, historiaScene);
             auxPaletas = new ChangePaletteButton(_w / 4, _h * 12 / 20, _w / 2, _h / 10);
+            auxAd = new RewarderButton(_w / 4, _h * 15 / 20, _w / 2, _h / 10);
 
             _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15, false);
             tempY=_h / 5;
         }
 
         else{
-            auxJugar = new ChangeSceneButton(_w / 4, _h / 2, _w / 2, _w / 9, juegoScene);
-            auxHistoria = new ChangeSceneButton(_w / 4, _h / 4, _w / 2, _w / 9, historiaScene);
-            auxPaletas = new ChangePaletteButton(_w / 4, _h * 3 / 4, _w / 2, _w / 9);
+            auxJugar = new ChangeSceneButton(_w * 1 / 16, _h * 7 / 20, _w * 2 / 5, _w / 9, juegoScene);
+            auxHistoria = new ChangeSceneButton(_w * 3 / 5, _h * 7 / 20, _w * 2 / 5, _w / 9, historiaScene);
+            auxPaletas = new ChangePaletteButton(_w * 1 / 16, _h * 13 / 20, _w * 2 / 5, _w / 9);
+            auxAd = new RewarderButton(_w * 3 / 5, _h * 13 / 20, _w * 2 / 5, _w / 9);
 
             _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 25, false);
             tempY=_h *2/9;
@@ -200,6 +204,13 @@ public class MenuScene extends AbstractScene {
             _botonPaletas = auxPaletas;}
 
         else _botonPaletas.setDimensions(auxPaletas._rect._x, auxPaletas._rect._y, auxPaletas._rect._w, auxPaletas._rect._h);
+
+        if(_botonAd == null){
+            _botonAd = auxAd;
+            _botonAd.addText("+1 Vida");
+        }
+
+        else _botonAd.setDimensions(auxAd._rect._x, auxAd._rect._y, auxAd._rect._w, auxAd._rect._h);
     }
 
     int _h;
@@ -209,11 +220,12 @@ public class MenuScene extends AbstractScene {
     int tempY;
     ChangeSceneButton _botonJugar;
     ChangeSceneButton _botonHistoria;
+    RewarderButton _botonAd;
     Scene juegoScene, historiaScene;
     static ChangePaletteButton _botonPaletas;
     public static LogicJSON.PreferencesData _preferences;
     public static LogicJSON.Palette[] allPalettes;
-    static int UNLOCK_PALETTE_EVERY = 1;
+    static int UNLOCK_PALETTE_EVERY = 5;
     boolean changed = false;
 
 
