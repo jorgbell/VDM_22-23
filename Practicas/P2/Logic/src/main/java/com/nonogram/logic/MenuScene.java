@@ -23,8 +23,7 @@ public class MenuScene extends AbstractScene {
         allPalettes = LogicJSON.readAllPalettesFromJSON("palettes.json");
         if (_preferences.unlockedPalettes.size() == 0) {
             //añade la paleta default en caso de no tenerlas guardadas de una partida anterior
-            for(int i = 0; i< allPalettes.length; i++)
-                LogicJSON.Palette.AddPaletteToList(_preferences.unlockedPalettes, allPalettes[i]);
+            LogicJSON.Palette.AddPaletteToList(_preferences.unlockedPalettes, allPalettes[0]);
         }
 
         _myEngine.getGraphics().setBGColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).bgColor));
