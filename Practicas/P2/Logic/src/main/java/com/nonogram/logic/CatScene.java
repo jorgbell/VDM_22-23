@@ -147,7 +147,6 @@ public class CatScene extends AbstractScene {
                 _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 15, false);
                 auxVolver = new ChangeSceneButton( _w / 10, _h / 20 , _w * 2 / 7, _h / 15, null);
             }
-
             else{
                 x = _w / 7 + _w / 6 * (i % 5);
                 y = (_h + _h / 4) * (1 + i / 5) / 6;
@@ -174,10 +173,6 @@ public class CatScene extends AbstractScene {
                 else{
                     _botones[i].addImage(_newImage,0.8,Button.ImagePos.CENTERED );
                 }
-
-                if(thiscat.actualLevel >= thiscat.numLevels){
-                    _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
-                }
             }
 
             else _botones[i].setDimensions(x, y, w, w);
@@ -189,6 +184,9 @@ public class CatScene extends AbstractScene {
             }
 
             else _botonVolver.setDimensions(auxVolver._rect._x, auxVolver._rect._y, auxVolver._rect._w, auxVolver._rect._h);
+        }
+        if(thiscat.actualLevel >= thiscat.numLevels){
+            _botones[_botones.length-1].addImage(_boardsImages[_botones.length-1],0.8,Button.ImagePos.CENTERED );
         }
     }
 

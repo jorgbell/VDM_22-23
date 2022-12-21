@@ -23,11 +23,10 @@ public class MenuScene extends AbstractScene {
         allPalettes = LogicJSON.readAllPalettesFromJSON("palettes.json");
         if (_preferences.unlockedPalettes.size() == 0) {
             //añade la paleta default en caso de no tenerlas guardadas de una partida anterior
-            LogicJSON.Palette.AddPaletteToList(_preferences.unlockedPalettes, allPalettes[0]);
+            for(int i = 0; i< allPalettes.length; i++)
+                LogicJSON.Palette.AddPaletteToList(_preferences.unlockedPalettes, allPalettes[i]);
         }
-//        if (!_myEngine.getAdManager().isBannerOn()) {
-//            _myEngine.getAdManager().createBanner();
-//        }
+
         _myEngine.getGraphics().setBGColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).bgColor));
         Sound sound = _myEngine.getAudio().newSound("bgm.wav");
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 30, true);

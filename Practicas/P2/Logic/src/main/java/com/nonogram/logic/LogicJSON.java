@@ -94,7 +94,7 @@ public class LogicJSON {
         //constructor vacio que te devuelve un estado inicial de categoria
         public Category() {
             numLevels = 20;
-            actualLevel = 0;
+            actualLevel = 19;
         }
     }
 

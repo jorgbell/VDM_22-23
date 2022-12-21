@@ -41,44 +41,39 @@ public class AndroidLauncher extends AppCompatActivity {
 
     SurfaceView gameView;
     AdView _mAdView;
-    RewardedAd mRewardedAd;
     ConstraintLayout c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Accedemos a las dos vistas
         setContentView(R.layout.androidlauncher);
         c = (ConstraintLayout) findViewById(R.id.parent_linear_layout);
-
-
         gameView = findViewById(R.id.surfaceView);
         _mAdView = findViewById(R.id.adView);
+        //creamos el motor
         _myEngine = new AndroidEngine(this, gameView);
-
-
-
         //manejo de errores: si se crea mal algo, para antes de empezar.
         if(!_myEngine.init()){
             _myEngine.close();
         }
+        //cargamos los anuncios
         ((AndroidAdManager)_myEngine.getAdManager()).setAdView(_mAdView, c);
         _myEngine.getAdManager().loadAds();
-
+        //creamos e inicializamos la escena principal
         _myEngine.getSceneManager().setGameSize(450,800);
         //inicializamos la primera escena
         MenuScene sceneinicial = new MenuScene();
         if(!_myEngine.getSceneManager().push(sceneinicial)){
             _myEngine.close();
         }
-
         //detecta si ha entrado mediante una notificacion
         Intent intent = getIntent();
         if(intent.getExtras()!=null && intent.getExtras().containsKey("notification")){
             sceneinicial.handleOpeningNotifications();
         }
-
+        //gestión de la barra de notificaciones
         getSupportActionBar().hide();
         View decorView = getWindow().getDecorView();
-
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
