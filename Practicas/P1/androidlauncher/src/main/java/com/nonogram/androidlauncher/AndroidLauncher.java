@@ -1,6 +1,7 @@
 package com.nonogram.androidlauncher;
 
 import android.os.Bundle;
+import android.view.SurfaceView;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;

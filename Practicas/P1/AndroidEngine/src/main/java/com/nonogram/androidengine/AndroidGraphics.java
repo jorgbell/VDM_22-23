@@ -1,5 +1,6 @@
 package com.nonogram.androidengine;
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -17,32 +18,28 @@ import com.nonogram.engine.Input;
 
 
 public class AndroidGraphics extends AbstractGraphics {
-    public AndroidGraphics(AppCompatActivity c) {
+    public AndroidGraphics() {
         super();
-        _context = c;
     }
     @Override
     public boolean init() {
-        if(_context == null){
-            System.err.println("AppCompactActivity null");
-            return false;
-        }
-        _renderView = new SurfaceView(_context);
+        assetManager = ((AndroidEngine)_myEngine).activity.getAssets();
+        _renderView = new SurfaceView(((AndroidEngine)_myEngine).activity);
+        ((AndroidEngine)_myEngine).activity.setContentView(_renderView);
         _paint = new Paint();
-        _context.setContentView(_renderView);
         _holder = _renderView.getHolder();
         return true;
     }
 
     public void setAudioContext(AndroidAudio a){
-        a._assetManager = _context.getAssets();
+        a._assetManager = assetManager;
     }
 
     @Override
     public Image newImage(String name) {
         AndroidImage aimage = null;
         try{
-            aimage = new AndroidImage(_myPaths._imagesPath + name, _context.getAssets());
+            aimage = new AndroidImage(_myPaths._imagesPath + name, assetManager);
         }catch (Exception e){}
 
         return aimage;
@@ -52,7 +49,7 @@ public class AndroidGraphics extends AbstractGraphics {
     public Font newFont(String filename, int size, boolean isBold) {
         AndroidFont afont = null;
         try{
-            afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, _context.getAssets());
+            afont = new AndroidFont(_myPaths._fontsPath+ filename, size, isBold, assetManager);
         }catch (Exception e){}
 
         return afont;
@@ -208,6 +205,6 @@ public class AndroidGraphics extends AbstractGraphics {
     private SurfaceHolder _holder;
     private Canvas _canvas;
     private Paint _paint;
-    private AppCompatActivity _context;
+    private AssetManager assetManager;
 
 }

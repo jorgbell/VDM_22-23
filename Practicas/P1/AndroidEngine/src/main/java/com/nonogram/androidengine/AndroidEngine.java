@@ -1,5 +1,7 @@
 package com.nonogram.androidengine;
 
+import android.view.SurfaceView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.engine.AbstractEngine;
@@ -10,12 +12,18 @@ public class AndroidEngine extends AbstractEngine {
     AppCompatActivity activity;
 
     public AndroidEngine(AppCompatActivity context){
-        super(new AndroidGraphics(context), new AndroidInput(), new AndroidAudio(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/"));
+        super(new AndroidGraphics(), new AndroidInput(), new AndroidAudio(), new AbstractEngine.EnginePaths("", "images/", "fonts/", "audio/"));
         activity = context;
 
+    }
 
+    @Override
+    public boolean init() {
+        if (!super.init())
+            return false;
         AndroidGraphics aG = (AndroidGraphics) _myGraphics;
         aG.setAudioContext((AndroidAudio)_myAudio);
+        return true;
     }
 
     @Override
