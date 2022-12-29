@@ -17,7 +17,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     protected AbstractEngine(Graphics g, Input i, Audio a, EnginePaths paths) {
-        _mySceneManager = new SceneManager(this);
+        _mySceneManager = new AbstractSceneManager(this);
         _myPaths = paths;
         _myInput = i;
         _myGraphics = g;
@@ -134,7 +134,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
 
 
     @Override
-    public SceneManager getSceneManager(){return _mySceneManager;}
+    public AbstractSceneManager getSceneManager(){return _mySceneManager;}
 
     //VARIABLES
     public EnginePaths _myPaths;
@@ -142,7 +142,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     protected Graphics _myGraphics;
     protected Input _myInput;
     protected Audio _myAudio;
-    protected SceneManager _mySceneManager;
+    protected AbstractSceneManager _mySceneManager;
     protected long _lastFrameTime;
     protected boolean _running = false;
 }

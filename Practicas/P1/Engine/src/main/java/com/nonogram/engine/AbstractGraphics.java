@@ -91,6 +91,6 @@ public abstract class AbstractGraphics implements Graphics {
     protected AbstractEngine.EnginePaths _myPaths;
     int translateX, translateY;
     float scaleFactor;
-    protected SceneManager sceneManager;
+    protected AbstractSceneManager sceneManager;
     protected Engine _myEngine;
 }

@@ -11,5 +11,5 @@ public interface Engine {
     void pause();
     boolean release();
     boolean init();
-    public SceneManager getSceneManager();
+    public AbstractSceneManager getSceneManager();
 }
