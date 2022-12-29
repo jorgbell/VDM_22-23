@@ -1,6 +1,8 @@
 package com.nonogram.androidlauncher;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nonogram.androidengine.AndroidEngine;
@@ -21,6 +23,11 @@ public class AndroidLauncher extends AppCompatActivity {
         if(!_myEngine.getSceneManager().push(sceneinicial)){
             _myEngine.close();
         }
+        getSupportActionBar().hide();
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
