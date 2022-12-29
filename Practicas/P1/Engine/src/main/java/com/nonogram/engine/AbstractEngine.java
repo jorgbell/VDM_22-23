@@ -42,6 +42,11 @@ public abstract class AbstractEngine implements Engine, Runnable {
     }
 
     @Override
+    public void close(){
+        System.exit(0);
+    }
+
+    @Override
     public Input getInput() {
         return _myInput;
     }
@@ -63,7 +68,6 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public boolean stop() {
         _running = false;
         release();
-        System.exit(0);
         return true;
     }
 
@@ -87,12 +91,12 @@ public abstract class AbstractEngine implements Engine, Runnable {
             _myGraphics.render();
         }
 
-
     }
 
     @Override
     public boolean release() {
         _myAudio.pauseAll();
+        _mySceneManager.release();
         return true;
     }
 
@@ -114,7 +118,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
     public void pause() {
         if (_running) {
             _running = false;
-            release();
+            _myAudio.pauseAll();
             while (true) {
                 try {
                     _myThread.join();
@@ -127,11 +131,10 @@ public abstract class AbstractEngine implements Engine, Runnable {
         }
     }
 
-    @Override
-    public SceneManager getSceneManager(){return _mySceneManager;}
+
 
     @Override
-    public EnginePaths getEnginePaths(){ return _myPaths;}
+    public SceneManager getSceneManager(){return _mySceneManager;}
 
     //VARIABLES
     public EnginePaths _myPaths;

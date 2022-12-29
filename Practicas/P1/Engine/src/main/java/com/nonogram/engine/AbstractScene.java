@@ -2,10 +2,16 @@ package com.nonogram.engine;
 
 
 public abstract class AbstractScene implements Scene{
-    public AbstractScene(int gameWidth, int gameHeight){
-        _gameWidth = gameWidth;
-        _gameHeight = gameHeight;
+    public AbstractScene(){
     }
+
+    @Override
+    public boolean init(){
+        _gameWidth = _myEngine.getSceneManager().getGameWidth();
+        _gameHeight = _myEngine.getSceneManager().getGameHeight();
+        return true;
+    }
+
 
     @Override
     public void setEngine(Engine e) {

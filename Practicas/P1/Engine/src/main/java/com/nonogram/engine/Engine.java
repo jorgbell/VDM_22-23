@@ -6,10 +6,10 @@ public interface Engine {
     Audio getAudio();
     double getDeltaTime();
     boolean stop();
+    void close();
     void resume();
     void pause();
     boolean release();
     boolean init();
     public SceneManager getSceneManager();
-    AbstractEngine.EnginePaths getEnginePaths();
 }

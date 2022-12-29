@@ -11,11 +11,15 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MenuScene sceneinicial = new MenuScene(450,800);
         _myEngine = new AndroidEngine(this);
         //manejo de errores: si se crea mal algo, para antes de empezar.
-        if(!_myEngine.init() || !_myEngine.getSceneManager().push(sceneinicial)){
-            _myEngine.stop();
+        if(!_myEngine.init()){
+            _myEngine.close();
+        }
+        _myEngine.getSceneManager().setGameSize(450,800);
+        MenuScene sceneinicial = new MenuScene();
+        if(!_myEngine.getSceneManager().push(sceneinicial)){
+            _myEngine.close();
         }
     }
 
@@ -31,6 +35,27 @@ public class AndroidLauncher extends AppCompatActivity {
         // de lo que está pasando.
         super.onResume();
         _myEngine.resume();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        _myEngine.getSceneManager().pop();
+        if(_myEngine.getSceneManager().empty()){
+            _myEngine.stop();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        _myEngine.stop();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        _myEngine.pause();
+        super.onStop();
     }
 
     MenuScene sceneinicial;

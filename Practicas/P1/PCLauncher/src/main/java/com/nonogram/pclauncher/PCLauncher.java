@@ -6,11 +6,16 @@ import com.nonogram.pcengine.PCEngine;
 public class PCLauncher {
 
     PCLauncher(){
-        sceneinicial = new MenuScene(450,800);
-        _engine = new PCEngine("finestra",450,800, false);
+        sceneinicial = new MenuScene();
+        _engine = new PCEngine("Nonograma",450,800, false);
         //manejo de errores: si se crea mal algo, para antes de empezar.
-        if(!_engine.init() || !_engine.getSceneManager().push(sceneinicial)){
-            _engine.stop();
+        if(!_engine.init()){
+            _engine.close();
+        }
+        _engine.getSceneManager().setGameSize(450,800);
+        MenuScene sceneinicial = new MenuScene();
+        if(!_engine.getSceneManager().push(sceneinicial)){
+            _engine.close();
         }
     }
 

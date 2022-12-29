@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nonograma" >
     <activity
+        android:configChanges="orientation|screenSize"
         android:name=".AndroidLauncher"
         android:label="@string/app_name"
         android:exported="true">

@@ -9,9 +9,11 @@ import com.nonogram.engine.Sound;
 
 public class MenuScene extends AbstractScene {
 
-    public MenuScene(int gameWidth, int gameHeight) { super(gameWidth, gameHeight);}
+    public MenuScene() { super();}
     @Override
     public boolean init() {
+        super.init();
+
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
         _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
@@ -21,7 +23,7 @@ public class MenuScene extends AbstractScene {
         _h = getGameHeight();
         _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
-        Scene s = new DifficultyScene(getGameWidth(), getGameHeight());
+        Scene s = new DifficultyScene();
         _botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s, null);
         return true;
     }

@@ -7,9 +7,9 @@ import com.nonogram.engine.Input;
 
 public class GameScene extends AbstractScene {
 
-    public GameScene(int gameWidth, int gameHeight, int rows, int columns, int solvablePercentage)
+    public GameScene(int rows, int columns, int solvablePercentage)
     {
-        super(gameWidth,gameHeight);
+        super();
         _rows = rows;
         _columns = columns;
         _solvablePercentage = solvablePercentage;
@@ -17,6 +17,8 @@ public class GameScene extends AbstractScene {
 
     @Override
     public boolean init() {
+        super.init();
+
         _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         _resolverImage = _myEngine.getGraphics().newImage("Lupa.png");

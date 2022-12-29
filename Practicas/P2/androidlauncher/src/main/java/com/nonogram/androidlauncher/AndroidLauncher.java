@@ -122,8 +122,6 @@ public class AndroidLauncher extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        int w = gameView.getMeasuredWidth();
-        int h = gameView.getMeasuredHeight();
         _myEngine.pause();
         handleClosingNotifications();
         super.onStop();
