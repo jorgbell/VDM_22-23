@@ -44,7 +44,7 @@ public class ChangeSceneButton extends Button{
 
     @Override
     public void handleEvent(Input.TouchEvent e) {
-        if(_push) _engine.getSceneManager().push(_newScene);
+        if(_push) _engine.getSceneManager().push(_newScene, _engine);
         else _engine.getSceneManager().pop();
     }
 

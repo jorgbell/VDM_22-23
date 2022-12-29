@@ -21,7 +21,7 @@ public class AndroidLauncher extends AppCompatActivity {
         }
         _myEngine.getSceneManager().setGameSize(450,800);
         MenuScene sceneinicial = new MenuScene();
-        if(!_myEngine.getSceneManager().push(sceneinicial)){
+        if(!_myEngine.getSceneManager().push(sceneinicial, _myEngine)){
             _myEngine.close();
         }
         getSupportActionBar().hide();

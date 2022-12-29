@@ -87,7 +87,7 @@ public abstract class AbstractEngine implements Engine, Runnable {
         // Bucle de juego principal.
         while (_running) {
             _mySceneManager.update(getDeltaTime());
-            _mySceneManager.getInput();
+            _mySceneManager.getInput(_myInput.getTouchEvents());
             _myGraphics.render();
         }
 

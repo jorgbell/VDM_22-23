@@ -14,7 +14,7 @@ public class PCLauncher {
         }
         _engine.getSceneManager().setGameSize(450,800);
         MenuScene sceneinicial = new MenuScene();
-        if(!_engine.getSceneManager().push(sceneinicial)){
+        if(!_engine.getSceneManager().push(sceneinicial, _engine)){
             _engine.close();
         }
     }

@@ -6,7 +6,6 @@ import java.util.Stack;
 //Clase que controla las escenas que hay en partida, tiene los mismos métodos que las escenas individuales para así llamar a la escena que toque en el momento.
 public class SceneManager {
     public SceneManager(Engine e) {
-        _myEngine = e;
         sceneStack = new Stack<Scene>();
     }
 
@@ -20,8 +19,7 @@ public class SceneManager {
             sceneStack.peek().update(deltaTime);
     }
 
-    public void getInput() {
-        List<Input.TouchEvent> inputList = _myEngine.getInput().getTouchEvents();
+    public void getInput(List<Input.TouchEvent> inputList) {
         while (inputList.size() > 0) {//mientras haya input que procesar
             Input.TouchEvent aux = inputList.get(0); //cogemos el primero a procesar
             inputList.remove(0); //lo borramos de la lista
@@ -47,13 +45,13 @@ public class SceneManager {
         _gameHeight = h;
     }
 
-    public boolean push(Scene s) {
+    public boolean push(Scene s, Engine e) {
         if (s == null) {
             System.err.println("Error al pushear una nueva escena");
             return false;
         }
         sceneStack.push(s);
-        s.setEngine(_myEngine);
+        s.setEngine(e);
         //inicializamos la escena siempre que la añadamos
         if (!s.init()) {
             System.err.println("Error al inicializar la escena");
@@ -86,7 +84,6 @@ public class SceneManager {
     }
 
     Stack<Scene> sceneStack;
-    Engine _myEngine;
     static int _gameWidth = 0;
     static int _gameHeight = 0;
 }
