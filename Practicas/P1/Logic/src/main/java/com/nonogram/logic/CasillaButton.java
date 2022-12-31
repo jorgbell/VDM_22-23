@@ -51,5 +51,5 @@ public class CasillaButton extends Button{
 
     public void update(double deltaTime) {};
 
-    Tablero.Casilla _casilla;
+    private Tablero.Casilla _casilla;
 }

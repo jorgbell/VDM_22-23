@@ -70,11 +70,11 @@ public class DifficultyScene extends AbstractScene {
         return true;
     }
 
-    int _h;
-    int _w;
-    Font _f;
-    Image _volverImage;
-    String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
-    ChangeSceneButton _botonVolver;
-    ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
+    private int _h;
+    private int _w;
+    private Font _f;
+    private Image _volverImage;
+    private String[] _difficulties ={"Facil", "Normal", "Dificil"}; //el minimo es 5x5
+    private ChangeSceneButton _botonVolver;
+    private ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_difficulties.length];
 }

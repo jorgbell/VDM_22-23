@@ -31,6 +31,5 @@ public abstract class Button {
     public abstract void handleEvent(Input.TouchEvent e);
     public abstract void update(double deltaTime);
 
-    //Action action;
-    Rect _rect;
+    protected Rect _rect;
 }

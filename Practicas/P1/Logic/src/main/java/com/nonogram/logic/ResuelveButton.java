@@ -34,7 +34,7 @@ public class ResuelveButton extends Button{
     }
 
 
-    Image _image;
-    GameScene _g;
+    private Image _image;
+    private GameScene _g;
 
 }

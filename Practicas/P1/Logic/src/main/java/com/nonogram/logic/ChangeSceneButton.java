@@ -48,9 +48,9 @@ public class ChangeSceneButton extends Button{
         else _engine.getSceneManager().pop();
     }
 
-    Image _image;
-    String _text;
-    Engine _engine;
-    Scene _newScene;
-    Boolean _push = false;
+    private Image _image;
+    private String _text;
+    private Engine _engine;
+    private Scene _newScene;
+    private Boolean _push = false;
 }

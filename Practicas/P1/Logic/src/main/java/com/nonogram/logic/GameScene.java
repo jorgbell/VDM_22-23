@@ -185,33 +185,33 @@ public class GameScene extends AbstractScene {
         return true;
     }
 
-    Tablero _t;
-    int _gameHeight;
-    int _gameWidth;
-    boolean _showErrors = false;
-    boolean _won = false;
-    float _showTime = 0;
-    int _rows;
-    int _columns;
-    int _maxDimension;
+    private Tablero _t;
+    private int _gameHeight;
+    private int _gameWidth;
+    private boolean _showErrors = false;
+    private boolean _won = false;
+    private float _showTime = 0;
+    private int _rows;
+    private int _columns;
+    private int _maxDimension;
 
-    int _solvablePercentage;
+    private int _solvablePercentage;
 
-    int _tableroSize;
-    int _tileSize;
-    int _tableroX;
-    int _tableroY;
+    private int _tableroSize;
+    private int _tileSize;
+    private int _tableroX;
+    private int _tableroY;
 
-    Font _f;
-    Image _volverImage;
-    Image _resolverImage;
-    int _numberFontSize;
+    private Font _f;
+    private Image _volverImage;
+    private Image _resolverImage;
+    private int _numberFontSize;
 
-    int _wrongs = 0;
-    int _remaining = 0;
+    private int _wrongs = 0;
+    private int _remaining = 0;
 
-    CasillaButton[][] _casillas;
-    ResuelveButton _botonResolver;
-    ChangeSceneButton _botonFF;
-    ChangeSceneButton _botonVictoria;
+    private CasillaButton[][] _casillas;
+    private ResuelveButton _botonResolver;
+    private ChangeSceneButton _botonFF;
+    private ChangeSceneButton _botonVictoria;
 }

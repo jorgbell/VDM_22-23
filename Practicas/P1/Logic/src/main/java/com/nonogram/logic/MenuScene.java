@@ -55,10 +55,10 @@ public class MenuScene extends AbstractScene {
     @Override
     public boolean release() {return true;}
 
-    int _h;
-    int _w;
-    Font _f1;
-    Font _f2;
-    ChangeSceneButton _botonJugar;
+    private int _h;
+    private int _w;
+    private Font _f1;
+    private Font _f2;
+    private ChangeSceneButton _botonJugar;
 
 }

@@ -76,12 +76,12 @@ public class SizeScene extends AbstractScene {
         return true;
     }
 
-    int _h;
-    int _w;
-    Font _f;
-    Image _volverImage;
-    int[][] _sizes = {{5, 5}, {8, 8}, {10, 5}, {10, 8}, {10, 10}, {15, 15}}; //el minimo es 5x5
-    int _solvablePercentage;
-    ChangeSceneButton _botonVolver;
-    ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
+    private int _h;
+    private int _w;
+    private Font _f;
+    private Image _volverImage;
+    private int[][] _sizes = {{5, 5}, {8, 8}, {10, 5}, {10, 8}, {10, 10}, {15, 15}}; //el minimo es 5x5
+    private int _solvablePercentage;
+    private ChangeSceneButton _botonVolver;
+    private ChangeSceneButton[] _botonesSizes = new ChangeSceneButton[_sizes.length];
 }

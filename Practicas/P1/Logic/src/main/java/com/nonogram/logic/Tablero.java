@@ -321,14 +321,14 @@ public class Tablero {
         for(int j = 0; j < _rowNumber; j++) System.out.print("Column " + j + ": " + _columnas[j].numbers + "\n");
     }
 
-    Random _r;
-    Casilla _tablero[][];
-    Vector<Casilla> _blues;
-    Vector<Casilla> _wrongs;
+    private Random _r;
+    private Casilla _tablero[][];
+    private Vector<Casilla> _blues;
+    private Vector<Casilla> _wrongs;
     private boolean _solucion[][];
-    Linea _filas[];
-    Linea _columnas[];
-    int _lineasResolubles;
-    int _rowNumber;
-    int _columnNumber;
+    public Linea _filas[];
+    public Linea _columnas[];
+    private int _lineasResolubles;
+    private int _rowNumber;
+    private int _columnNumber;
 }
