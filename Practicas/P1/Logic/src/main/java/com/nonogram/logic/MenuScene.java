@@ -14,14 +14,15 @@ public class MenuScene extends AbstractScene {
     public boolean init() {
         super.init();
 
+        _h = getGameHeight();
+        _w = getGameWidth();
+
         Sound sound =_myEngine.getAudio().newSound("bgm.wav");
-        _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
-        _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", 40, true);
+        _f1 = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 22, false);
+        _f2 = _myEngine.getGraphics().newFont("Molle-Regular.ttf", _w / 11, true);
         if(sound == null || _f1 == null || _f2 == null)
             return false;
 
-        _h = getGameHeight();
-        _w = getGameWidth();
         _myEngine.getAudio().playSound("bgm.wav");
         Scene s = new DifficultyScene();
         _botonJugar = new ChangeSceneButton(_w/5*2, _h/2, _w / 7, _w / 7, "Jugar", _myEngine, s, null);

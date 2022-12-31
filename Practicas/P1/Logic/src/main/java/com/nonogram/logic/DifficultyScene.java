@@ -15,13 +15,14 @@ public class DifficultyScene extends AbstractScene {
     public boolean init() {
         super.init();
 
-        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", 20, false);
+        _h = getGameHeight();
+        _w = getGameWidth();
+
+        _f = _myEngine.getGraphics().newFont("JosefinSans-Bold.ttf", _w / 21, false);
         _volverImage = _myEngine.getGraphics().newImage("Arrow.png");
         if(_f == null || _volverImage == null)
             return false;
 
-        _h = getGameHeight();
-        _w = getGameWidth();
         //Crea los botones de los diferentes tableros
         for (int i = 0; i < _botonesSizes.length; i++)
         {

@@ -34,13 +34,14 @@ public class GameScene extends AbstractScene {
 
         //init tamaño del tablero
         _tableroSize = (_gameWidth / 20) * 14;
-        _tileSize =  _tableroSize / _maxDimension;
-        _tableroX = (_gameWidth / 20) * 5;
-        _tableroY = (_gameHeight / 20) * 8;
+        _tileSize = _tableroSize / _maxDimension;
+        if(_rows != _columns) _tileSize =  (int)((_tableroSize / _maxDimension) * 1.2);
+        _tableroX = _gameWidth / 2 - (int)((float)_tileSize * ((float)_columns / 2));
+        _tableroY = _gameHeight / 2 - (int)((float)_tileSize * ((float)_rows / 2));
         _t = new Tablero();
         _t.init(_rows, _columns, _solvablePercentage);
 
-        _numberFontSize = 45 - (int)(5.7 * (Math.log(_maxDimension) / Math.log(1.595)));
+        _numberFontSize = (int)(_gameWidth / 10.4) - (int)((_gameWidth / 90) * (Math.log(_maxDimension) / Math.log(1.595)));
         _myEngine.getGraphics().setActualFont(_f);
 
         for (int i = 0; i < _columns; i++) //se crean las casillas "fisicas"
@@ -65,12 +66,8 @@ public class GameScene extends AbstractScene {
 
         if(!_won) //durante la partida
         {
-            //Rectagulos para poner los numeros y el tablero
-            _myEngine.getGraphics().drawRect((_tableroX - _gameWidth / 5) + 5, _tableroY - 3, (_tileSize * _columns) + 5 + _tableroX - (_gameWidth / 16), _tableroSize);
-            _myEngine.getGraphics().drawRect(_tableroX - 3, _tableroY - _gameHeight / 10, (_tileSize * _columns) + 5, _tableroY + _tableroSize - (_gameHeight * 76 / 250) );
-
             //UI
-            _f.setSize(20);
+            _f.setSize(_gameWidth / 22);
             _botonResolver.render(_myEngine.getGraphics());
             _botonFF.render(_myEngine.getGraphics());
 
@@ -82,7 +79,7 @@ public class GameScene extends AbstractScene {
             int columnaYMargin =  _tableroSize / 30;
             int columnaInterSpace = _numberFontSize * 10 / 9;
 
-            int filaSpace = _numberFontSize * 10 / 9;
+            int filaSpace = _numberFontSize * 8 / 9;
             int filaXMargin = _tableroSize / 30;
             int filaYMargin = _tileSize / 5;
             int filaInterSpace =_tileSize;
@@ -102,18 +99,18 @@ public class GameScene extends AbstractScene {
 
             if(_showErrors) //texto al pulsar comprobar
             {
-                _f.setSize(20);
+                _f.setSize(_gameWidth / 22);
                 _myEngine.getGraphics().setColor(0XFFFF0000);
-                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 3, _gameHeight * 4 / 20);
-                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 3, _gameHeight * 5 / 20);
+                _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _gameWidth / 3, _gameHeight * 16 / 20);
+                _myEngine.getGraphics().drawText("Tienes mal " + _wrongs + " casillas", _gameWidth / 3, _gameHeight * 17 / 20);
             }
         }
         else //fin de la partida
         {
-            _f.setSize(40);
+            _f.setSize(_gameWidth / 11);
             _myEngine.getGraphics().setColor(0XFF000000);
             _myEngine.getGraphics().drawText("ENHORABUENA", _gameWidth / 6, _gameHeight * 4 / 20);
-            _f.setSize(20);
+            _f.setSize(_gameWidth / 22);
             _botonVictoria.render(_myEngine.getGraphics());
         }
 
