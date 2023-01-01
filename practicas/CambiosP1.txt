@@ -1,0 +1,19 @@
+Cambios realizados en la práctica 1:
+- Las escenas ahora no reciben el tamaño mediante el constructor, para mantener un tamaño de juego fijo.
+- Hemos quitado la barra de acción de Android. Ahora, la aplicación está en pantalla completa.
+- Hemos centrado los botones y tablero.
+- A su vez, también hemos centrado los niveles no cuadrados, y aprovechan el tamaño en pantalla al máximo.
+- Ahora AndroidGraphics ya no recibe toda la actividad. Ahora, no reciben nada en la constructora, y en el método init() se crea la SurfaceView de juego, y accede a la carpeta de Assets haciendo una llamada a _myEngine:
+	public boolean init() {
+        assetManager = ((AndroidEngine)_myEngine).activity.getAssets();
+        _renderView = new SurfaceView(((AndroidEngine)_myEngine).activity);
+        ((AndroidEngine)_myEngine).activity.setContentView(_renderView);
+        _paint = new Paint();
+        _holder = _renderView.getHolder();
+        return true;
+    }
+- Mejorado el uso del ciclo de vida de Android (ahora utilizamos los métodos OnDestroy, OnStop, OnPause, OnBackPressed, etc) y los diferenciamos para que el ciclo de vida funcione correctamente.
+También ahora para cerrar la aplicación en Android utilizamos activity.finishAndRemoveTask(); en lugar de utilizar System.Exit(), para tener un correcto cierre de la aplicación utilizando los métodos que nos ofrece Android.
+
+- SceneManager ha pasado a ser AbstractSceneManager, teniendo por encima una interfaz llamada SceneManager. Ahora mismo, tanto PC como Android lo utilizan de la misma manera por lo que no se ha creado implementaciones dedicadas y sólo se usa AbstractSceneManager, pero existe la posibilidad de crear un PCSceneManager y AndroidSceneManager.
+
