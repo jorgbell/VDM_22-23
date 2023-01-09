@@ -119,12 +119,16 @@ public class GameScene extends AbstractScene {
                     _myEngine.getGraphics().drawText(sf[(sf.length - 1) - j], (_tableroX - filaXMargin) - filaSpace * (j + 1), _tableroY + filaYMargin + _tileSize / 2 + filaInterSpace * i);
             }
 
+            _myEngine.getGraphics().setActualFont(_messageFont);
+            _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
+
+            String lifeText;
+            if (_currentLifes != 1) lifeText = " vidas"; else lifeText = " vida";
+            _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes - 1) + lifeText, _messageX , _messageY + _messageFont.getSize() * 2);
+
             if (_showErrors) //texto al pulsar comprobar
             {
-                _myEngine.getGraphics().setActualFont(_messageFont);
-                _myEngine.getGraphics().setColor(LogicJSON.Palette.toInt(_preferences.unlockedPalettes.get(_preferences.actualPalette).hlColor));
                 _myEngine.getGraphics().drawText("Te faltan " + _remaining + " casillas", _messageX, _messageY);
-                _myEngine.getGraphics().drawText("Te quedan " + Integer.toString(_currentLifes - 1) + " vidas", _messageX , _messageY + _messageFont.getSize() * 2);
                 _myEngine.getGraphics().setActualFont(_f);
             }
         } else //fin de la partida

@@ -60,7 +60,12 @@ public class AndroidLauncher extends AppCompatActivity {
         ((AndroidAdManager)_myEngine.getAdManager()).setAdView(_mAdView, c);
         _myEngine.getAdManager().loadAds();
         //creamos e inicializamos la escena principal
-        _myEngine.getSceneManager().setGameSize(450,800);
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_PORTRAIT)
+            _myEngine.getSceneManager().setGameSize(450,800);
+        else if(orientation == Configuration.ORIENTATION_LANDSCAPE)
+            _myEngine.getSceneManager().setGameSize(800,450);
+
         //inicializamos la primera escena
         MenuScene sceneinicial = new MenuScene();
         if(!_myEngine.getSceneManager().push(sceneinicial)){
